@@ -22,7 +22,7 @@ MACRO door_tiles
 ENDM
 
 .OverworldDoorTileIDs:
-	door_tiles $1B
+	door_tiles $1B, $58
 
 .ForestDoorTileIDs:
 	door_tiles $3a

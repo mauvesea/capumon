@@ -34,7 +34,7 @@ MACRO warp_tiles
 ENDM
 
 .OverworldWarpTileIDs:
-	warp_tiles $13, $1b
+	warp_tiles $1B, $58
 
 .ForestGateWarpTileIDs:
 .MuseumWarpTileIDs:
