@@ -390,9 +390,9 @@ FishingAnim:
 	ld a, [wPlayerGender] ; added gender check
 	and a      ; added gender check
 	jr z, .BoySpriteLoad
-	ld de, RedFSprite
+	ld de, BlueSprite
 	ld hl, vNPCSprites
-	ld bc, (BANK(RedFSprite) << 8) + $0c
+	ld bc, (BANK(BlueSprite) << 8) + $0c
 	jr .KeepLoadingSpriteStuff
 .BoySpriteLoad
 	ld de, RedSprite

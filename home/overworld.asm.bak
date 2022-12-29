@@ -1980,7 +1980,6 @@ LoadWalkingPlayerSpriteGraphics::
 	ld de, RedSprite
 ;	ld hl, vNPCSprites
 ;	jr LoadPlayerSpriteGraphicsCommon
-	ld a, [wPlayerGender]
 	and a
 	jr z, .AreGuy1
 	ld de, RedFSprite

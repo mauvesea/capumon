@@ -249,7 +249,7 @@ BoyGirlChoice::
 InitBoyGirlTextBoxParameters::
 	ld a, $1 ; loads the value for the unused North/West choice, that was changed to say Boy/Girl
 	ld [wTwoOptionMenuID], a
-	coord hl, 12, 7 
+	coord hl, 13, 7 
 	ld bc, $80e
 	ret
 
