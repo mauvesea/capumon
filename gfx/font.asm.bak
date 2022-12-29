@@ -1,5 +1,4 @@
 PokemonLogoGraphics: INCBIN "gfx/title/pokemon_logo.2bpp"
-PokemonLogo2Graphics: INCBIN "gfx/title/pokemon_logo_2.2bpp"
 FontGraphics:: INCBIN "gfx/font/font.1bpp"
 FontGraphicsEnd::
 

@@ -241,7 +241,7 @@ LoadCopyrightTiles:
 	jp PlaceString
 
 CopyrightTextString: ; GAMEFREAK PRESENTS
-	db   $30,$31,$32,$33,$41,$34,$35,$36,$37,$38
+	db   $30,$31,$32,$33,$31,$34,$35,$36,$37,$38
 	next $41
 	next $41, $39, $3a, $3b, $3c, $3d, $3e, $3f, $40 
 	db   "@"

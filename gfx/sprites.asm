@@ -25,10 +25,7 @@ PaperSprite::            INCBIN "gfx/sprites/paper.2bpp"
 PokedexSprite::          INCBIN "gfx/sprites/pokedex.2bpp"
 ClipboardSprite::        INCBIN "gfx/sprites/clipboard.2bpp"
 SnorlaxSprite::          INCBIN "gfx/sprites/snorlax.2bpp"
-OldAmberSprite::         INCBIN "gfx/sprites/old_amber.2bpp"
-GamblerAsleepSprite::    INCBIN "gfx/sprites/gambler_asleep.2bpp"
-LoreleiSprite::          INCBIN "gfx/sprites/lorelei.2bpp"
-SeelSprite::             INCBIN "gfx/sprites/seel.2bpp"
+
 
 SECTION "NPC Sprites 2", ROMX
 
@@ -72,3 +69,11 @@ GameboyKidSprite::       INCBIN "gfx/sprites/gameboy_kid.2bpp"
 FairySprite::            INCBIN "gfx/sprites/fairy.2bpp"
 AgathaSprite::           INCBIN "gfx/sprites/agatha.2bpp"
 BrunoSprite::            INCBIN "gfx/sprites/bruno.2bpp"
+
+
+SECTION "NPC Sprites 3", ROMX
+
+OldAmberSprite::         INCBIN "gfx/sprites/old_amber.2bpp"
+GamblerAsleepSprite::    INCBIN "gfx/sprites/gambler_asleep.2bpp"
+LoreleiSprite::          INCBIN "gfx/sprites/lorelei.2bpp"
+SeelSprite::             INCBIN "gfx/sprites/seel.2bpp"
