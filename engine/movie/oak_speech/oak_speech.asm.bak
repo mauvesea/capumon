@@ -97,8 +97,16 @@ OakSpeech:
 	call GBFadeOutToWhite
    	call ClearScreen
 
+   	ld a, [wPlayerGender]
+	and a
+	jr z, .BoyFrontPic1
+	ld de, RedFPicFront
+	lb bc, BANK(RedFPicFront), $00
+	jr .FrontPicSelected
+.BoyFrontPic1
 	ld de, RedPicFront
 	lb bc, BANK(RedPicFront), $00
+.FrontPicSelected
 	call IntroDisplayPicCenteredOrUpperRight
 	call FadeInIntroPic
 	
@@ -173,8 +181,16 @@ OakSpeech:
 	call GBFadeOutToWhite
 	call ClearScreen
 
+   	ld a, [wPlayerGender]
+	and a
+	jr z, .BoyFrontPic2
+	ld de, RedFPicFront
+	lb bc, BANK(RedFPicFront), $00
+	jr .FrontPicSelected2
+.BoyFrontPic2	
 	ld de, RedPicFront
 	lb bc, BANK(RedPicFront), $00
+.FrontPicSelected2	
 	call IntroDisplayPicCenteredOrUpperRight
 	call GBFadeInFromWhite
 	ld a, [wd72d]
@@ -247,7 +263,7 @@ OakSpeechText3:
 	text_far _OakSpeechText3
 	text_end
 OakSpeechText4:
-	text_far _OakSpeechText3
+	text_far _OakSpeechText4
 	text_end	
 BoyGirlText:
     text_far _BoyGirlText

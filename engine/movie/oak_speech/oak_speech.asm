@@ -97,8 +97,16 @@ OakSpeech:
 	call GBFadeOutToWhite
    	call ClearScreen
 
+   	ld a, [wPlayerGender]
+	and a
+	jr z, .BoyFrontPic1
+	ld de, RedFPicFront
+	lb bc, BANK(RedFPicFront), $00
+	jr .FrontPicSelected
+.BoyFrontPic1
 	ld de, RedPicFront
 	lb bc, BANK(RedPicFront), $00
+.FrontPicSelected
 	call IntroDisplayPicCenteredOrUpperRight
 	call FadeInIntroPic
 	
@@ -173,8 +181,16 @@ OakSpeech:
 	call GBFadeOutToWhite
 	call ClearScreen
 
+   	ld a, [wPlayerGender]
+	and a
+	jr z, .BoyFrontPic2
+	ld de, RedFPicFront
+	lb bc, BANK(RedFPicFront), $00
+	jr .FrontPicSelected2
+.BoyFrontPic2	
 	ld de, RedPicFront
 	lb bc, BANK(RedPicFront), $00
+.FrontPicSelected2	
 	call IntroDisplayPicCenteredOrUpperRight
 	call GBFadeInFromWhite
 	ld a, [wd72d]
@@ -192,9 +208,19 @@ OakSpeech:
 	ld [MBC1RomBank], a
 	ld c, 4
 	call DelayFrames
+
+   	ld a, [wPlayerGender]
+	and a
+	jr z, .BoySpriteSelected
+	ld de, RedFSprite
+	ld hl, vSprites
+	lb bc, BANK(RedFSprite), $0C	
+	jr .SpriteSelected
+.BoySpriteSelected	
 	ld de, RedSprite
 	ld hl, vSprites
 	lb bc, BANK(RedSprite), $0C
+.SpriteSelected
 	call CopyVideoData
 	ld de, ShrinkPic1
 	lb bc, BANK(ShrinkPic1), $00

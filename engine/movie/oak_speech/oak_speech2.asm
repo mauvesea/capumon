@@ -9,8 +9,17 @@ ChoosePlayerName:
 	jr z, .customName
 	call ClearScreen
 	call Delay3
+	
+   	ld a, [wPlayerGender]
+	and a
+	jr z, .BoyFrontPic1	
+	ld de, RedFPicFront
+	ld b, BANK(RedFPicFront)
+	jr .FrontPicSelected
+.BoyFrontPic1
 	ld de, RedPicFront
 	ld b, BANK(RedPicFront)
+.FrontPicSelected	
 	call IntroDisplayPicCenteredOrUpperRight
 .done
 	ld hl, YourNameIsText
