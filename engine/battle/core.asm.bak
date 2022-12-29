@@ -1729,6 +1729,8 @@ SendOutMon:
 .skipDrawingEnemyHUDAndHPBar
 	call DrawPlayerHUDAndHPBar
 	predef LoadMonBackPic
+	ld a, 0
+	ld [wSpriteFlipped], a	
 	xor a
 	ldh [hStartTileID], a
 	ld hl, wBattleAndStartSavedMenuItem
@@ -1762,8 +1764,6 @@ SendOutMon:
 	ld a, [wcf91]
 	call PlayCry
 	call PrintEmptyString
-	ld a, 0
-	ld [wSpriteFlipped], a		
 	jp SaveScreenTilesToBuffer1
 
 ; show 2 stages of the player mon getting smaller before disappearing
