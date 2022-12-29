@@ -21,18 +21,12 @@ SetIshiharaTeam:
 	jr .loop
 
 IshiharaTeam:
-	db EXEGGUTOR, 90
-IF DEF(_DEBUG)
-	db MEW, 5
-ELSE
-	db MEW, 20
-ENDC
-	db JOLTEON, 56
-	db DUGTRIO, 56
-	db ARTICUNO, 57
-IF DEF(_DEBUG)
-	db PIKACHU, 5
-ENDC
+	db VENUSAUR, 50
+	db RHYDON, 50
+	db BULBASAUR, 50
+	db LAPRAS, 50
+	db CLEFAIRY, 50
+	db ARCANINE, 50
 	db -1 ; end
 
 DebugStart:
