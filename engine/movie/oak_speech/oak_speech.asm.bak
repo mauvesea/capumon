@@ -56,50 +56,123 @@ OakSpeech:
 	ld a, [wd732]
 	bit 1, a ; possibly a debug mode bit
 	jp nz, .skipChoosingNames
-	ld hl, BoyGirlText  ; added to the same file as the other oak text
-  	call PrintText     ; show this text
-  	call BoyGirlChoice ; added routine at the end of this file
-   	ld a, [wCurrentMenuItem]
-   	ld [wPlayerGender], a ; store player's gender. 00 for boy, 01 for girl
-   	call ClearScreen ; clear the screen before resuming normal intro	
-	ld de, ProfOakPic
-	lb bc, BANK(ProfOakPic), $00
-	call IntroDisplayPicCenteredOrUpperRight
+
+
+;	ld de, ProfOakPic
+;	lb bc, BANK(ProfOakPic), $00
+;	call IntroDisplayPicCenteredOrUpperRight
 	call FadeInIntroPic
 	ld hl, OakSpeechText1
 	call PrintText
 	call GBFadeOutToWhite
 	call ClearScreen
-	ld a, NIDORINO
+	
+;	ld a, NIDORINO
+;	ld [wd0b5], a
+;	ld [wcf91], a
+;	call GetMonHeader
+;	hlcoord 6, 4
+;	call LoadFlippedFrontSpriteByMonIndex
+;	call MovePicLeft
+;	ld hl, OakSpeechText2
+;	call PrintText
+;	call GBFadeOutToWhite
+;	call ClearScreen
+
+	call FadeInIntroPic
+	ld hl, BoyGirlText
+  	call PrintText
+  	call BoyGirlChoice
+   	ld a, [wCurrentMenuItem]
+   	ld [wPlayerGender], a
+	and a
+	jr z, .ChoseBoy
+	ld hl, OakSpeechGirlText
+  	call PrintText
+	jr .ChooseYourNameTransition
+.ChoseBoy
+	ld hl, OakSpeechBoyText
+  	call PrintText
+.ChooseYourNameTransition	
+	call GBFadeOutToWhite
+   	call ClearScreen
+
+	ld de, RedPicFront
+	lb bc, BANK(RedPicFront), $00
+	call IntroDisplayPicCenteredOrUpperRight
+	call FadeInIntroPic
+	
+	ld hl, IntroducePlayerText
+	call PrintText
+	call ChoosePlayerName
+.skipChoosingNames
+	call GBFadeOutToWhite
+	call ClearScreen
+	
+;	ld de, Rival1Pic
+;	lb bc, BANK(Rival1Pic), $00
+;	call IntroDisplayPicCenteredOrUpperRight
+;	call FadeInIntroPic
+;	ld hl, IntroduceRivalText
+;	call PrintText
+;	call ChooseRivalName
+
+;	call GBFadeOutToWhite
+;	call ClearScreen
+
+   	ld a, [wPlayerGender]
+	and a
+	jr z, .ChoseBoyStarter
+	ld a, NIDORAN_F
 	ld [wd0b5], a
 	ld [wcf91], a
 	call GetMonHeader
 	hlcoord 6, 4
-	call LoadFlippedFrontSpriteByMonIndex
-	call MovePicLeft
+	call LoadFrontSpriteByMonIndex
+	call FadeInIntroPic
 	ld hl, OakSpeechText2
 	call PrintText
-	call GBFadeOutToWhite
-	call ClearScreen
-	ld de, RedPicFront
-	lb bc, BANK(RedPicFront), $00
-	call IntroDisplayPicCenteredOrUpperRight
-	call MovePicLeft
-	ld hl, IntroducePlayerText
-	call PrintText
-	call ChoosePlayerName
-	call GBFadeOutToWhite
-	call ClearScreen
-	ld de, Rival1Pic
-	lb bc, BANK(Rival1Pic), $00
-	call IntroDisplayPicCenteredOrUpperRight
+
+	ld de, StarterMonF ; add starter
+	ld a, [de]
+	cp -1
+	ret z
+	ld [wcf91], a
+	inc de
+	ld a, [de]
+	ld [wCurEnemyLVL], a
+	inc de	
+	call AddPartyMon
+	jr .StarterSceneFinish
+	
+.ChoseBoyStarter
+	ld a, NIDORAN_M
+	ld [wd0b5], a
+	ld [wcf91], a
+	call GetMonHeader
+	hlcoord 6, 4
+	call LoadFrontSpriteByMonIndex
 	call FadeInIntroPic
-	ld hl, IntroduceRivalText
+	ld hl, OakSpeechText2
 	call PrintText
-	call ChooseRivalName
-.skipChoosingNames
+
+	ld de, StarterMonM ; add starter
+	ld a, [de]
+	cp -1
+	ret z
+	ld [wcf91], a
+	inc de
+	ld a, [de]
+	ld [wCurEnemyLVL], a
+	inc de	
+	call AddPartyMon
+	
+.StarterSceneFinish	
+	ld hl, OakSpeechText3
+	call PrintText
 	call GBFadeOutToWhite
 	call ClearScreen
+
 	ld de, RedPicFront
 	lb bc, BANK(RedPicFront), $00
 	call IntroDisplayPicCenteredOrUpperRight
@@ -107,7 +180,7 @@ OakSpeech:
 	ld a, [wd72d]
 	and a
 	jr nz, .next
-	ld hl, OakSpeechText3
+	ld hl, OakSpeechText4
 	call PrintText
 .next
 	ldh a, [hLoadedROMBank]
@@ -162,9 +235,7 @@ OakSpeechText1:
 	text_far _OakSpeechText1
 	text_end
 OakSpeechText2:
-	text_far _OakSpeechText2A
-	sound_cry_nidorina
-	text_far _OakSpeechText2B
+	text_far _OakSpeechText2
 	text_end
 IntroducePlayerText:
 	text_far _IntroducePlayerText
@@ -175,10 +246,19 @@ IntroduceRivalText:
 OakSpeechText3:
 	text_far _OakSpeechText3
 	text_end
-BoyGirlText: ; This is new so we had to add a reference to get it to compile
+OakSpeechText4:
+	text_far _OakSpeechText3
+	text_end	
+BoyGirlText:
     text_far _BoyGirlText
-    text_end	
-
+    text_end
+OakSpeechBoyText:
+    text_far _OakSpeechBoyText
+    text_end
+OakSpeechGirlText:
+    text_far _OakSpeechGirlText
+    text_end
+	
 FadeInIntroPic:
 	ld hl, IntroFadePalettes
 	ld b, 6
@@ -249,7 +329,7 @@ BoyGirlChoice::
 InitBoyGirlTextBoxParameters::
 	ld a, $1 ; loads the value for the unused North/West choice, that was changed to say Boy/Girl
 	ld [wTwoOptionMenuID], a
-	coord hl, 13, 7 
+	coord hl, 13, 7
 	ld bc, $80e
 	ret
 
@@ -258,3 +338,12 @@ DisplayBoyGirlChoice::
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
 	jp LoadScreenTilesFromBuffer1
+
+StarterMonM:
+	db NIDORAN_M, 5
+	db -1 ; end
+
+StarterMonF:
+	db NIDORAN_F, 5
+	db -1 ; end	
+	

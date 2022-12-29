@@ -1,5 +1,4 @@
 ChoosePlayerName:
-.customName
 	ld hl, wPlayerName
 	xor a ; NAME_PLAYER_SCREEN
 	ld [wNamingScreenType], a
@@ -12,7 +11,6 @@ ChoosePlayerName:
 	ld de, RedPicFront
 	ld b, BANK(RedPicFront)
 	call IntroDisplayPicCenteredOrUpperRight
-.done
 	ld hl, YourNameIsText
 	jp PrintText
 

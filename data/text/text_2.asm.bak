@@ -1692,36 +1692,47 @@ _LinkCanceledText::
 	text "The link was"
 	line "canceled."
 	done
-
+	
 _OakSpeechText1::
-	text "Hello there!"
-	line "Welcome to the"
-	cont "world of #MON!"
+	text "Welcome to the"
+	line "world of Capsule"
+	para "Monsters!"
 
-	para "My name is OAK!"
-	line "People call me"
-	cont "the #MON PROF!"
+	para "This world is in-"
+	line "habited by crea-"
+	para "tures we call"
+	line "Capsule Monsters,"
+	para "or CAPMON, for"
+	line "short!"
+	
+	para "People and CAPMON"
+	line "live together in"
+	para "this world."
+
+	para "Some people think"
+	line "CAPMON are just"
+	para "pets, but others"
+	line "actually use them"
+	para "to fight. They are"
+	line "known as Tamers."
+	
+	para "Now, let's get"
+	line "started!"		
 	prompt
 
-_OakSpeechText2A::
-	text "This world is"
-	line "inhabited by"
-	cont "creatures called"
-	cont "#MON!@"
-	text_end
-
-_OakSpeechText2B::
-	text_start
-
-	para "For some people,"
-	line "#MON are"
-	cont "pets. Others use"
-	cont "them for fights."
-
-	para "Myself..."
-
-	para "I study #MON"
-	line "as a profession."
+_OakSpeechText2::
+	text "CAPMON are such"
+	line "mysterious crea-"
+	para "tures, don't you"
+	line "think?"
+	
+	para "This one has been"
+	line "your partner"
+	para "since you were"
+	line "little."
+	
+	para "It's known as"
+	line "HARISAGI!"
 	prompt
 
 _IntroducePlayerText::
@@ -1740,16 +1751,22 @@ _IntroduceRivalText::
 	prompt
 
 _OakSpeechText3::
-	text "<PLAYER>!"
+	text "<PLAYER>, are"
+	line "you ready?"
 
 	para "Your very own"
-	line "#MON legend is"
-	cont "about to unfold!"
+	line "CAPMON story is"
+	cont "about to unfold."
+
+	para "You'll face fun"
+	line "times and tough"
+	cont "challenges."
 
 	para "A world of dreams"
 	line "and adventures"
-	cont "with #MON"
-	cont "awaits! Let's go!"
+
+	para "with CAPMON"
+	line "awaits! Let's go!"
 	done
 
 _DoYouWantToNicknameText::
@@ -1788,3 +1805,18 @@ _TextIDErrorText::
 _ContCharText::
 	text "<_CONT>@"
 	text_end
+
+_BoyGirlText::
+    text "Are you a boy or"
+    line "a girl?"
+    done
+	
+_OakSpeechBoyText::
+	text "I see! So you're"
+	line "a boy!"
+	prompt
+	
+_OakSpeechGirlText::
+	text "I see! So you're"
+	line "a girl!"
+	prompt
