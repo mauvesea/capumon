@@ -25,7 +25,7 @@ TryDoWildEncounter:
 .next
 ; determine if wild pokemon can appear in the half-block we're standing in
 ; is the bottom right tile (9,9) of the half-block we're standing in a grass/water tile?
-	hlcoord 9, 9
+	hlcoord 8, 9
 	ld c, [hl]
 	ld a, [wGrassTile]
 	cp c
@@ -64,7 +64,7 @@ TryDoWildEncounter:
 ; determine which wild pokemon (grass or water) can appear in the half-block we're standing in
 	ld c, [hl]
 	ld hl, wGrassMons
-	lda_coord 9, 9
+	lda_coord 8, 9
 	cp $14 ; is the bottom left tile (8,9) of the half-block we're standing in a water tile?
 	jr nz, .gotWildEncounterType ; else, it's treated as a grass tile by default
 	ld hl, wWaterMons
