@@ -1249,18 +1249,18 @@ _StarmieDexEntry::
 	dex
 
 _BulbasaurDexEntry::
-	text "Named after its"
-	next "deafening roar."
-	next "You will hear it"
-	
-	page "before it appears." 
-	next "if you see it, it"
-	next "is too late"
+	text "A strange seed was"
+	next "planted on its"
+	next "back at birth."
+
+	page "The plant sprouts"
+	next "and grows with"
+	next "this #MON"
 	dex
 
 _VenusaurDexEntry::
 	text "Artificially crea-"
-	next "ted by SYLPH CO.,"
+	next "ted in SYLPH CO.,"
 	next "this CAPMON has"
 	
 	page "almost unlimited"

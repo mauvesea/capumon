@@ -481,7 +481,7 @@ ShowPokedexDataInternal:
 	ld a, "<DOT>"
 	ld [hli], a
 	ld de, wd11e
-	lb bc, LEADING_ZEROES | 1, 2
+	lb bc, LEADING_ZEROES | 1, 3
 	call PrintNumber ; print pokedex number
 
 	ld hl, wPokedexOwned

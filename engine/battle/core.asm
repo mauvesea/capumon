@@ -7,7 +7,7 @@ INCLUDE "data/battle/always_happen_effects.asm"
 INCLUDE "data/battle/special_effects.asm"
 
 SlidePlayerAndEnemySilhouettesOnScreen:
-	call LoadPlayerBackPic
+;	call LoadPlayerBackPic
 	ld a, MESSAGE_BOX ; the usual text box at the bottom of the screen
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
@@ -67,27 +67,27 @@ SlidePlayerAndEnemySilhouettesOnScreen:
 	ldh [rBGP], a
 	ldh [rOBP0], a
 	ldh [rOBP1], a
-;.slideSilhouettesLoop ; slide silhouettes of the player's pic and the enemy's pic onto the screen
-;	ld h, b
-;	ld l, $40
-;	call SetScrollXForSlidingPlayerBodyLeft ; begin background scrolling on line $40
-;	inc b
-;	inc b
-;	ld h, $0
-;	ld l, $60
-;	call SetScrollXForSlidingPlayerBodyLeft ; end background scrolling on line $60
-;	call SlidePlayerHeadLeft
-;	ld a, c
-;	ldh [hSCX], a
-;	dec c
-;	dec c
-;	jr nz, .slideSilhouettesLoop
+.slideSilhouettesLoop ; slide silhouettes of the player's pic and the enemy's pic onto the screen
+	ld h, $0
+	ld l, $60
+	call SetScrollXForSlidingPlayerBodyLeft ; begin background scrolling on line $40
+	inc b
+	inc b
+	ld h, $0
+	ld l, $60
+	call SetScrollXForSlidingPlayerBodyLeft ; end background scrolling on line $60
+	call SlidePlayerHeadLeft
+	ld a, c
+	ldh [hSCX], a
+	dec c
+	dec c
+	jr nz, .slideSilhouettesLoop
 	ld a, $1
 	ldh [hAutoBGTransferEnabled], a
-	ld a, $31
-	ldh [hStartTileID], a
-	hlcoord 1, 5
-	predef CopyUncompressedPicToTilemap
+;	ld a, $31
+;	ldh [hStartTileID], a
+;	hlcoord 1, 5
+;	predef CopyUncompressedPicToTilemap
 	xor a
 	ldh [hWY], a
 	ldh [rWY], a
