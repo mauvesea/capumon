@@ -6920,7 +6920,7 @@ _InitBattleCommon:
 	hlcoord 0, 0
 	lb bc, 4, 10
 	call ClearScreenArea
-	hlcoord 0, 10
+	hlcoord 10, 0
 	lb bc, 4, 10
 	call ClearScreenArea
 	call ClearSprites
@@ -7069,7 +7069,7 @@ LoadMonBackPic:
 	ld c, 8
 	call ClearScreenArea
 	ld de, vBackPic
-	ld a, 1
+	ld a, 0
 	ld [wSpriteFlipped], a
 	jp LoadMonFrontSprite
 

@@ -265,6 +265,8 @@ PlayAnimation:
 	vc_hook Stop_reducing_move_anim_flashing_Guillotine
 	jr .animationLoop
 .AnimationOver
+	ld a, 1
+	ld [wSpriteFlipped], a	
 	ret
 
 LoadSubanimation:
