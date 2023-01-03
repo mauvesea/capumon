@@ -1,5 +1,5 @@
 Route1WildMons:
-	def_grass_wildmons 50 ; encounter rate
+	def_grass_wildmons 25 ; encounter rate
 	db  3, GRIMER
 	db  3, EXEGGCUTE
 	db  3, GRIMER

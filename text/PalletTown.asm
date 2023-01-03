@@ -1,56 +1,37 @@
-_OakAppearsText::
-	text "OAK: Hey! Wait!"
-	line "Don't go out!@"
-	text_end
-
-_OakWalksUpText::
-	text "OAK: It's unsafe!"
-	line "Wild #MON live"
-	cont "in tall grass!"
-
-	para "You need your own"
-	line "#MON for your"
-	cont "protection."
-	cont "I know!"
-
-	para "Here, come with"
-	line "me!"
-	done
-
-_PalletTownText2::
+_MasaraTown_WomanNPCText::
 	text "I'm raising"
-	line "#MON too!"
+	line "CAPMON too!"
 
 	para "When they get"
 	line "strong, they can"
 	cont "protect me!"
 	done
 
-_PalletTownText3::
+_MasaraTown_ManNPCText::
 	text "Technology is"
 	line "incredible!"
 
-	para "You can now store"
-	line "and recall items"
-	cont "and #MON as"
-	cont "data via PC!"
+	para "I heard DR.CAPMON"
+	line "developed a de-"
+	cont "vice called"
+	cont "CAPMON FILE!"
+	
+	para "It stores data"
+	line "about all CAPMON"
+	cont "in the world."
 	done
 
-_PalletTownText4::
-	text "OAK #MON"
-	line "RESEARCH LAB"
+_MasaraTown_SignPostText::
+	text "MASARA TOWN"
+	line "Masara is the"
+	cont "color of pure-"
+	cont "white beginnings."
 	done
 
-_PalletTownText5::
-	text "PALLET TOWN"
-	line "Shades of your"
-	cont "journey await!"
+_MasaraTown_PlayerHouseSignText::
+	text "<PLAYER>'s house"
 	done
 
-_PalletTownText6::
-	text "<PLAYER>'s house "
-	done
-
-_PalletTownText7::
-	text "<RIVAL>'s house "
+_MasaraTown_JuniorHouseSignText::
+	text "UMEZOU's house"
 	done
