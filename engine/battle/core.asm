@@ -1823,11 +1823,11 @@ DrawHUDsAndHPBars:
 DrawPlayerHUDAndHPBar: ; Player HP Bar
 	xor a
 	ldh [hAutoBGTransferEnabled], a
-	hlcoord 9, 7
-	lb bc, 5, 11
+	hlcoord 0, 0
+	lb bc, 4, 10
 	call ClearScreenArea
 	
-	hlcoord 9, 7
+	hlcoord 0, 0
 	lb bc, 2, 8
 	call TextBoxBorder
 	
@@ -1835,16 +1835,16 @@ DrawPlayerHUDAndHPBar: ; Player HP Bar
 ;	hlcoord 18, 9
 ;	ld [hl], $73
 	ld de, wBattleMonNick
-	hlcoord 10, 7
+	hlcoord 1, 0
 	call CenterMonName
 	call PlaceString
 
 	ld de, HitPointText
-	hlcoord 10, 8
+	hlcoord 1, 1
 	call PlaceString
 	
 	ld de, TechPointText
-	hlcoord 10, 9
+	hlcoord 1, 2
 	call PlaceString	
 	
 	ld hl, wBattleMonSpecies
@@ -1866,7 +1866,7 @@ DrawPlayerHUDAndHPBar: ; Player HP Bar
 ;.doNotPrintLevel
 	ld a, [wLoadedMonSpecies]
 	ld [wcf91], a
-	hlcoord 15, 7
+	hlcoord 6, 0
 	call DrawPlayerHP
 	ld a, $1
 	ldh [hAutoBGTransferEnabled], a
@@ -1898,25 +1898,25 @@ DrawPlayerHUDAndHPBar: ; Player HP Bar
 DrawEnemyHUDAndHPBar:
 	xor a
 	ldh [hAutoBGTransferEnabled], a
-	hlcoord 0, 0
-	lb bc, 4, 12
+	hlcoord 10, 0
+	lb bc, 4, 10
 	call ClearScreenArea
 
-	hlcoord 0, 0
+	hlcoord 10, 0
 	lb bc, 2, 8
 	call TextBoxBorder
 
 	ld de, HitPointText
-	hlcoord 1, 1
+	hlcoord 11, 1
 	call PlaceString
 	
 	ld de, TechPointText
-	hlcoord 1, 2
+	hlcoord 11, 2
 	call PlaceString
 	
 ;	callfar PlaceEnemyHUDTiles
 	ld de, wEnemyMonNick
-	hlcoord 1, 0
+	hlcoord 11, 0
 	call CenterMonName
 	call PlaceString
 	hlcoord 4, 1
@@ -1996,7 +1996,7 @@ DrawEnemyHUDAndHPBar:
 ;	call DrawHPBar
 ;	ld a, [wEnemyMonSpecies]
 ;	ld [wcf91], a
-	hlcoord  2, 2
+	hlcoord 15, 0
 	call DrawEnemyHP
 	ld a, $1
 	ldh [hAutoBGTransferEnabled], a
