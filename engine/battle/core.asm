@@ -767,8 +767,8 @@ FaintEnemyPokemon:
 	ld hl, wPlayerUsedMove
 	ld [hli], a
 	ld [hl], a
-	hlcoord 12, 5
-	decoord 12, 6
+	hlcoord 12, 10
+	decoord 12, 11
 	call SlideDownFaintedMonPic
 	hlcoord 0, 0
 	lb bc, 4, 11
@@ -893,7 +893,7 @@ ReplaceFaintedEnemyMon:
 	ld hl, wEnemyHPBarColor
 	ld e, $30
 	call GetBattleHealthBarColor
-	callfar DrawEnemyPokeballs
+;	callfar DrawEnemyPokeballs
 	ld a, [wLinkState]
 	cp LINK_STATE_BATTLING
 	jr nz, .notLinkBattle
@@ -6841,7 +6841,7 @@ InitBattleCommon:
 	ldh [hStartTileID], a
 	dec a
 	ld [wAICount], a
-	hlcoord 12, 0
+	hlcoord 12, 5
 	predef CopyUncompressedPicToTilemap
 	ld a, $ff
 	ld [wEnemyMonPartyPos], a
@@ -6895,7 +6895,7 @@ InitWildBattle:
 	xor a
 	ld [wTrainerClass], a
 	ldh [hStartTileID], a
-	hlcoord 12, 0
+	hlcoord 12, 5 ; enemy position
 	predef CopyUncompressedPicToTilemap
 
 ; common code that executes after init battle code specific to trainer or wild battles
@@ -6917,10 +6917,10 @@ _InitBattleCommon:
 	ld a, $9c
 	ldh [hAutoBGTransferDest + 1], a
 	call LoadScreenTilesFromBuffer1
-	hlcoord 9, 7
-	lb bc, 5, 10
+	hlcoord 0, 0
+	lb bc, 4, 10
 	call ClearScreenArea
-	hlcoord 1, 0
+	hlcoord 10, 0
 	lb bc, 4, 10
 	call ClearScreenArea
 	call ClearSprites
