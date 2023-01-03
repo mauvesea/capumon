@@ -53,11 +53,11 @@ DrawHP_:
 	ld de, wLoadedMonHP
 	lb bc, 2, 3
 	call PrintNumber
-	ld a, "/"
-	ld [hli], a
-	ld de, wLoadedMonMaxHP
-	lb bc, 2, 3
-	call PrintNumber
+;	ld a, "/"
+;	ld [hli], a
+;	ld de, wLoadedMonMaxHP
+;	lb bc, 2, 3
+;	call PrintNumber
 	pop hl
 	pop de
 	ret

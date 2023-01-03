@@ -1820,19 +1820,33 @@ DrawHUDsAndHPBars:
 	call DrawPlayerHUDAndHPBar
 	jp DrawEnemyHUDAndHPBar
 
-DrawPlayerHUDAndHPBar:
+DrawPlayerHUDAndHPBar: ; Player HP Bar
 	xor a
 	ldh [hAutoBGTransferEnabled], a
 	hlcoord 9, 7
 	lb bc, 5, 11
 	call ClearScreenArea
-	callfar PlacePlayerHUDTiles
-	hlcoord 18, 9
-	ld [hl], $73
+	
+	hlcoord 9, 7
+	lb bc, 2, 8
+	call TextBoxBorder
+	
+;	callfar PlacePlayerHUDTiles
+;	hlcoord 18, 9
+;	ld [hl], $73
 	ld de, wBattleMonNick
 	hlcoord 10, 7
 	call CenterMonName
 	call PlaceString
+
+	ld de, HitPointText
+	hlcoord 10, 8
+	call PlaceString
+	
+	ld de, TechPointText
+	hlcoord 10, 9
+	call PlaceString	
+	
 	ld hl, wBattleMonSpecies
 	ld de, wLoadedMon
 	ld bc, wBattleMonDVs - wBattleMonSpecies
@@ -1847,13 +1861,13 @@ DrawPlayerHUDAndHPBar:
 	ld de, wLoadedMonStatus
 	call PrintStatusConditionNotFainted
 	pop hl
-	jr nz, .doNotPrintLevel
-	call PrintLevel
-.doNotPrintLevel
+;	jr nz, .doNotPrintLevel
+;	call PrintLevel
+;.doNotPrintLevel
 	ld a, [wLoadedMonSpecies]
 	ld [wcf91], a
-	hlcoord 10, 9
-	predef DrawHP
+	hlcoord 15, 7
+	call DrawPlayerHP
 	ld a, $1
 	ldh [hAutoBGTransferEnabled], a
 	ld hl, wPlayerHPBarColor
@@ -1887,7 +1901,20 @@ DrawEnemyHUDAndHPBar:
 	hlcoord 0, 0
 	lb bc, 4, 12
 	call ClearScreenArea
-	callfar PlaceEnemyHUDTiles
+
+	hlcoord 0, 0
+	lb bc, 2, 8
+	call TextBoxBorder
+
+	ld de, HitPointText
+	hlcoord 1, 1
+	call PlaceString
+	
+	ld de, TechPointText
+	hlcoord 1, 2
+	call PlaceString
+	
+;	callfar PlaceEnemyHUDTiles
 	ld de, wEnemyMonNick
 	hlcoord 1, 0
 	call CenterMonName
@@ -1898,11 +1925,11 @@ DrawEnemyHUDAndHPBar:
 	ld de, wEnemyMonStatus
 	call PrintStatusConditionNotFainted
 	pop hl
-	jr nz, .skipPrintLevel ; if the mon has a status condition, skip printing the level
-	ld a, [wEnemyMonLevel]
-	ld [wLoadedMonLevel], a
-	call PrintLevel
-.skipPrintLevel
+;	jr nz, .skipPrintLevel ; if the mon has a status condition, skip printing the level
+;	ld a, [wEnemyMonLevel]
+;	ld [wLoadedMonLevel], a
+;	call PrintLevel
+;.skipPrintLevel
 	ld hl, wEnemyMonHP
 	ld a, [hli]
 	ldh [hMultiplicand + 1], a
@@ -1965,8 +1992,12 @@ DrawEnemyHUDAndHPBar:
 .drawHPBar
 	xor a
 	ld [wHPBarType], a
-	hlcoord 2, 2
-	call DrawHPBar
+;	hlcoord 2, 2
+;	call DrawHPBar
+;	ld a, [wEnemyMonSpecies]
+;	ld [wcf91], a
+	hlcoord  2, 2
+	call DrawEnemyHP
 	ld a, $1
 	ldh [hAutoBGTransferEnabled], a
 	ld hl, wEnemyHPBarColor
@@ -7041,3 +7072,115 @@ LoadMonBackPic:
 	ld a, 1
 	ld [wSpriteFlipped], a
 	jp LoadMonFrontSprite
+
+DrawPlayerHP:
+	ld [wHPBarType], a
+	push hl
+	ld a, [wLoadedMonHP]
+	ld b, a
+	ld a, [wLoadedMonHP + 1]
+	ld c, a
+	or b
+	jr nz, .nonzeroHP
+	xor a
+	ld c, a
+	ld e, a
+	ld a, $6
+	ld d, a
+	jp .drawHPBarAndPrintFraction
+.nonzeroHP
+	ld a, [wLoadedMonMaxHP]
+	ld d, a
+	ld a, [wLoadedMonMaxHP + 1]
+	ld e, a
+	predef HPBarLength
+	ld a, $6
+	ld d, a
+	ld c, a
+.drawHPBarAndPrintFraction
+	pop hl
+	push de
+	push hl
+;	push hl
+;	call DrawHPBar
+;	pop hl
+	ldh a, [hUILayoutFlags]
+	bit 0, a
+	jr z, .printFractionBelowBar
+	ld bc, $9 ; right of bar
+	jr .printFraction
+.printFractionBelowBar
+	ld bc, SCREEN_WIDTH ; + 1 ; below bar
+.printFraction
+;	lb bc, 3, 8
+	add hl, bc
+	ld de, wLoadedMonHP
+	lb bc, 2, 3
+	call PrintNumber
+;	ld a, "/"
+;	ld [hli], a
+;	ld de, wLoadedMonMaxHP
+;	lb bc, 2, 3
+;	call PrintNumber
+	pop hl
+	pop de
+	ret
+
+DrawEnemyHP:
+	ld [wHPBarType], a
+	push hl
+	ld a, [wEnemyMonHP]
+	ld b, a
+	ld a, [wEnemyMonHP + 1]
+	ld c, a
+	or b
+	jr nz, .nonzeroHP
+	xor a
+	ld c, a
+	ld e, a
+	ld a, $6
+	ld d, a
+	jp .drawHPBarAndPrintFraction
+.nonzeroHP
+	ld a, [wEnemyMonMaxHP]
+	ld d, a
+	ld a, [wEnemyMonMaxHP + 1]
+	ld e, a
+	predef HPBarLength
+	ld a, $6
+	ld d, a
+	ld c, a
+.drawHPBarAndPrintFraction
+	pop hl
+	push de
+	push hl
+;	push hl
+;	call DrawHPBar
+;	pop hl
+	ldh a, [hUILayoutFlags]
+	bit 0, a
+	jr z, .printFractionBelowBar
+	ld bc, $9 ; right of bar
+	jr .printFraction
+.printFractionBelowBar
+	ld bc, SCREEN_WIDTH + 1 ; below bar
+.printFraction
+;	lb bc, 3, 8
+	add hl, bc
+	ld de, wEnemyMonHP
+	lb bc, 2, 3
+	call PrintNumber
+;	ld a, "/"
+;	ld [hli], a
+;	ld de, wEnemyMonMaxHP
+;	lb bc, 2, 3
+;	call PrintNumber
+	pop hl
+	pop de
+	ret
+	
+HitPointText:
+	db "HP@"
+	
+TechPointText:
+	db "TP@"

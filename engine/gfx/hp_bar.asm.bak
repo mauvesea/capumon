@@ -107,7 +107,7 @@ UpdateHPBar2:
 	ld a, d
 	sub e         ; calc pixel difference
 .ok
-;	call UpdateHPBar_PrintHPNumber
+	call UpdateHPBar_PrintHPNumber
 	and a
 	jr z, .noPixelDifference
 ;	call UpdateHPBar_AnimateHPBar
@@ -129,7 +129,7 @@ UpdateHPBar2:
 	call UpdateHPBar_CalcOldNewHPBarPixels
 	ld d, e
 .monFainted
-;	call UpdateHPBar_PrintHPNumber
+	call UpdateHPBar_PrintHPNumber
 	ld a, $1
 ;	call UpdateHPBar_AnimateHPBar
 	jp Delay3
