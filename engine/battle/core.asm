@@ -770,8 +770,8 @@ FaintEnemyPokemon:
 	hlcoord 12, 10
 	decoord 12, 11
 	call SlideDownFaintedMonPic
-	hlcoord 0, 0
-	lb bc, 4, 11
+	hlcoord 10, 0
+	lb bc, 4, 10
 	call ClearScreenArea
 	ld a, [wIsInBattle]
 	dec a
@@ -1021,8 +1021,8 @@ RemoveFaintedPlayerMon:
 	ld [hl], a
 	ld [wBattleMonStatus], a
 	call ReadPlayerMonCurHPAndStatus
-	hlcoord 9, 7
-	lb bc, 5, 11
+	hlcoord 0, 0
+	lb bc, 4, 10
 	call ClearScreenArea
 	hlcoord 1, 10
 	decoord 1, 11
