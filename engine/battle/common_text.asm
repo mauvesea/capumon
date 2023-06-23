@@ -21,11 +21,39 @@ PrintBeginningBattleText:
 	call .playSFX
 	ld c, 20
 	call DelayFrames
+	
+;	xor a
+;	ldh [hAutoBGTransferEnabled], a
+	hlcoord 10, 0
+	lb bc, 4, 10
+	call ClearScreenArea
+
+	hlcoord 10, 0
+	lb bc, 2, 8
+	call TextBoxBorder
+
+	ld de, wTrainerName
+	hlcoord 11, 0
+	call PlaceString
+
+	ld de, BattlePartyText
+	hlcoord 11, 2
+	call PlaceString
+	
+	hlcoord 18, 2
+	ld de, wEnemyPartyCount
+	ld c, $C1
+	call PrintBCDNumber
+	
+;	ld de, TechPointText
+;	hlcoord 11, 2
+;	call PlaceString	
+	
 	ld hl, TrainerWantsToFightText
 .wildBattle
-	push hl
-	callfar DrawAllPokeballs
-	pop hl
+;	push hl
+;	callfar DrawAllPokeballs
+;	pop hl
 	call PrintText
 	jr .done
 .pokemonTower
@@ -241,3 +269,6 @@ PrintComeBackText:
 ComeBackText:
 	text_far _ComeBackText
 	text_end
+
+BattlePartyText:
+	db "PARTY:@"
