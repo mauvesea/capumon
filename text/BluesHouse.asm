@@ -1,15 +1,15 @@
-_DaisyInitialText::
-	text "Hi <PLAYER>!"
-	line "<RIVAL> is out at"
-	cont "Grandpa's lab."
+_NanamiText1::
+	text "NANAMI: Hello,"
+	line "<PLAYER>!"
+	para "To go on a"
+	line "journey..."
+	para "You make me"
+	line "proud!"
+	para "Here, this is"
+	line "a gift from"
+	para "this big"
+	line "sister!"
 	done
-
-_DaisyOfferMapText::
-	text "Grandpa asked you"
-	line "to run an errand?"
-	cont "Here, this will"
-	cont "help you!"
-	prompt
 
 _GotMapText::
 	text "<PLAYER> got a"
@@ -18,25 +18,35 @@ _GotMapText::
 	text "!@"
 	text_end
 
-_DaisyBagFullText::
-	text "You have too much"
-	line "stuff with you."
+_NanamiBagFullText::
+	text "NANAMI: Oh!"
+	line "You're carrying"
+	para "too much stuff,"
+	line "right?"
+	para "Come back when"
+	line "you got some"	
+	para "space in your"
+	cont "bag!"
 	done
 
-_DaisyUseMapText::
-	text "Use the TOWN MAP"
-	line "to find out where"
-	cont "you are."
+_NanamiText2::
+	text "NANAMI: You"
+	line "can use the"
+	para "TOWN MAP to"
+	line "find out where"
+	para "you are at any"
+	line "moment."
 	done
 
-_BluesHouseDaisyWalkingText::
-	text "#MON are living"
-	line "things! If they"
-	cont "get tired, give"
-	cont "them a rest!"
-	done
-
-_BluesHouseTownMapText::
-	text "It's a big map!"
-	line "This is useful!"
+_NanamiText3::
+	text "NANAMI: Hey!"
+	line "Never forget that"
+	para "CAPMON are living"
+	line "things, okay?"
+	para "You must take care"
+	line "of them, just"
+	para "like I used to"
+	line "take care of you"
+	para "when you were"
+	line "little!"
 	done

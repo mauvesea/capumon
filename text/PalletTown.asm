@@ -33,5 +33,5 @@ _MasaraTown_PlayerHouseSignText::
 	done
 
 _MasaraTown_JuniorHouseSignText::
-	text "UMEZOU's house"
+	text "NANAMI's house"
 	done
