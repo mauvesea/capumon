@@ -53,11 +53,11 @@ DrawHP_:
 	ld de, wLoadedMonHP
 	lb bc, 2, 3
 	call PrintNumber
-	ld a, "/"
-	ld [hli], a
-	ld de, wLoadedMonMaxHP
-	lb bc, 2, 3
-	call PrintNumber
+;	ld a, "/"
+;	ld [hli], a
+;	ld de, wLoadedMonMaxHP
+;	lb bc, 2, 3
+;	call PrintNumber
 	pop hl
 	pop de
 	ret
@@ -107,20 +107,18 @@ StatusScreen:
 	ldh [hTileAnimations], a
 	hlcoord 19, 1
 	lb bc, 6, 10
-	call DrawLineBox ; Draws the box around name, HP and status
+;	call DrawLineBox ; Draws the box around name, HP and status
 	ld de, -6
 	add hl, de
 	ld [hl], "<DOT>"
 	dec hl
 	ld [hl], "№"
-	hlcoord 19, 9
-	lb bc, 8, 6
-	call DrawLineBox ; Draws the box around types, ID No. and OT
-	hlcoord 10, 9
-	ld de, Type1Text
-	call PlaceString ; "TYPE1/"
-	hlcoord 11, 3
-	predef DrawHP
+;	hlcoord 19, 9
+;	lb bc, 8, 6
+;	call DrawLineBox ; Draws the box around types, ID No. and OT
+;	hlcoord 10, 9
+;	ld de, Type1Text
+;	call PlaceString ; "TYPE1/"
 	ld hl, wStatusScreenHPBarColor
 	call GetHealthBarColor
 	ld b, SET_PAL_STATUS_SCREEN
@@ -136,40 +134,76 @@ StatusScreen:
 	hlcoord 9, 6
 	ld de, StatusText
 	call PlaceString ; "STATUS/"
-	hlcoord 14, 2
-	call PrintLevel ; Pokémon level
+;	hlcoord 14, 2
+;	call PrintLevel ; Pokémon level
 	ld a, [wMonHIndex]
 	ld [wd11e], a
 	ld [wd0b5], a
 	predef IndexToPokedex
-	hlcoord 3, 7
+	hlcoord 4, 1
 	ld de, wd11e
 	lb bc, LEADING_ZEROES | 1, 3
 	call PrintNumber ; Pokémon no.
-	hlcoord 11, 10
-	predef PrintMonType
+	
+	ld de, -3
+	add hl, de
+	ld [hl], "<DOT>"
+	dec hl
+	ld [hl], "№"	
+	
+;	hlcoord 11, 10
+;	predef PrintMonType
+
+	hlcoord 0, 10
+	lb bc, 2, 8
+	call TextBoxBorder
+
 	ld hl, NamePointers2
 	call .GetStringPointer
 	ld d, h
 	ld e, l
-	hlcoord 9, 1
+	hlcoord 1, 10
 	call PlaceString ; Pokémon name
-	ld hl, OTPointers
-	call .GetStringPointer
-	ld d, h
-	ld e, l
-	hlcoord 12, 16
-	call PlaceString ; OT
-	hlcoord 12, 14
-	ld de, wLoadedMonOTID
-	lb bc, LEADING_ZEROES | 2, 5
-	call PrintNumber ; ID Number
+
+	hlcoord 1, 11
+	ld de, PartyMenuHPText
+	call PlaceString
+	
+	hlcoord 1, 12
+	ld de, PartyMenuTPText
+	call PlaceString
+	
+	hlcoord 6, 10
+	predef DrawHP
+	
+	hlcoord 1, 14
+	ld de, PartyMenuValueText
+	call PlaceString
+	
+	hlcoord 10, 12
+	lb bc, 4, 8
+	call TextBoxBorder	
+
+	hlcoord 11, 13
+	ld de, PartyMenuSpecialMoveText
+	call PlaceString
+
+;	ld hl, OTPointers
+;	call .GetStringPointer
+;	ld d, h
+;	ld e, l
+;	hlcoord 12, 16
+;	call PlaceString ; OT
+;	hlcoord 12, 14
+;	ld de, wLoadedMonOTID
+;	lb bc, LEADING_ZEROES | 2, 5
+;	call PrintNumber ; ID Number
 	ld d, $0
 	call PrintStatsBox
 	call Delay3
 	call GBPalNormal
-	hlcoord 1, 0
-	call LoadFlippedFrontSpriteByMonIndex ; draw Pokémon picture
+	hlcoord 1, 2
+	call LoadFrontSpriteByMonIndex ; draw Pokémon picture
 	ld a, [wcf91]
 	call PlayCry ; play Pokémon cry
 	call WaitForTextScrollButtonPress ; wait for button
@@ -225,6 +259,18 @@ StatusText:
 
 OKText:
 	db "OK@"
+	
+PartyMenuHPText:
+	db "HP@"
+	
+PartyMenuTPText:
+	db "TP@"
+	
+PartyMenuValueText:
+	db "VALUE@"
+
+PartyMenuSpecialMoveText:
+	db "SPECIAL@"
 
 ; Draws a line starting from hl high b and wide c
 DrawLineBox:
@@ -250,19 +296,19 @@ PrintStatsBox:
 	ld a, d
 	and a ; a is 0 from the status screen
 	jr nz, .DifferentBox
-	hlcoord 0, 8
-	ld b, 8
+	hlcoord 10, 0
+	ld b, 10
 	ld c, 8
 	call TextBoxBorder ; Draws the box
-	hlcoord 1, 9 ; Start printing stats from here
+	hlcoord 11, 1 ; Start printing stats from here
 	ld bc, $19 ; Number offset
 	jr .PrintStats
 .DifferentBox
-	hlcoord 9, 2
-	ld b, 8
-	ld c, 9
+	hlcoord 10, 0
+	ld b, 10
+	ld c, 8
 	call TextBoxBorder
-	hlcoord 11, 3
+	hlcoord 11, 1
 	ld bc, $18
 .PrintStats
 	push bc
@@ -271,15 +317,20 @@ PrintStatsBox:
 	call PlaceString
 	pop hl
 	pop bc
-	add hl, bc
+
+	hlcoord 17, 1
+	call PrintLevel ; Pokémon level	
+	
+;	add hl, bc
+	hlcoord 16, 3
 	ld de, wLoadedMonAttack
 	lb bc, 2, 3
-	call PrintStat
-	ld de, wLoadedMonDefense
 	call PrintStat
 	ld de, wLoadedMonSpeed
 	call PrintStat
 	ld de, wLoadedMonSpecial
+	call PrintStat
+	ld de, wLoadedMonDefense
 	jp PrintNumber
 PrintStat:
 	push hl
@@ -290,10 +341,11 @@ PrintStat:
 	ret
 
 StatsText:
-	db   "ATTACK"
-	next "DEFENSE"
-	next "SPEED"
-	next "SPECIAL@"
+	db   "LEVEL"
+	next "ATK"
+	next "SPD"
+	next "INT"
+	next "DEF@"
 
 StatusScreen2:
 	ldh a, [hTileAnimations]

@@ -11,7 +11,7 @@ RedrawPartyMenu_::
 	jp z, .printMessage
 	call ErasePartyMenuCursors
 	farcall InitPartyMenuBlkPacket
-	hlcoord 3, 0
+	hlcoord 1, 1
 	ld de, wPartySpecies
 	xor a
 	ld c, a
@@ -30,7 +30,7 @@ RedrawPartyMenu_::
 	call GetPartyMonName
 	pop hl
 	call PlaceString ; print the pokemon's name
-	farcall WriteMonPartySpriteOAMByPartyIndex ; place the appropriate pokemon icon
+;	farcall WriteMonPartySpriteOAMByPartyIndex ; place the appropriate pokemon icon
 	ldh a, [hPartyMonIndex]
 	ld [wWhichPokemon], a
 	inc a
@@ -62,7 +62,7 @@ RedrawPartyMenu_::
 	cp EVO_STONE_PARTY_MENU
 	jr z, .evolutionStoneMenu
 	push hl
-	ld bc, 14 ; 14 columns to the right
+	ld bc, -20 ; 14 columns to the right
 	add hl, bc
 	ld de, wLoadedMonStatus
 	call PrintStatusCondition
@@ -72,8 +72,8 @@ RedrawPartyMenu_::
 	ldh a, [hUILayoutFlags]
 	set 0, a
 	ldh [hUILayoutFlags], a
-	add hl, bc
-	predef DrawHP2 ; draw HP bar and prints current / max HP
+;	add hl, bc
+;	predef DrawHP2 ; draw HP bar and prints current / max HP
 	ldh a, [hUILayoutFlags]
 	res 0, a
 	ldh [hUILayoutFlags], a
@@ -97,6 +97,10 @@ RedrawPartyMenu_::
 	pop hl
 .printLevel
 	ld bc, 10 ; move 10 columns to the right
+	add hl, bc
+	ld de, PartyMenuLevelText2
+	call PlaceString
+	ld bc, 6
 	add hl, bc
 	call PrintLevel
 	pop hl
@@ -163,7 +167,7 @@ RedrawPartyMenu_::
 	add hl, bc
 	call PlaceString
 	pop hl
-	jr .printLevel
+	jp .printLevel
 .ableToEvolveText
 	db "ABLE@"
 .notAbleToEvolveText
@@ -291,6 +295,12 @@ RareCandyText:
 	sound_get_item_1 ; probably supposed to play SFX_LEVEL_UP but the wrong music bank is loaded
 	text_promptbutton
 	text_end
+
+PartyMenuHPText2:
+	db "HP@"
+
+PartyMenuLevelText2:
+	db "LEVEL@"
 
 SetPartyMenuHPBarColor:
 	ld hl, wPartyMenuHPBarColors

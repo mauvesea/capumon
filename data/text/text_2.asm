@@ -1358,7 +1358,7 @@ _WhichFloorText::
 	done
 
 _PartyMenuNormalText::
-	text "Choose a #MON."
+	text "Choose a CAPMON."
 	done
 
 _PartyMenuItemUseText::
@@ -1368,7 +1368,7 @@ _PartyMenuItemUseText::
 
 _PartyMenuBattleText::
 	text "Bring out which"
-	line "#MON?"
+	line "CAPMON?"
 	done
 
 _PartyMenuUseTMText::

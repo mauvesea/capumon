@@ -333,8 +333,8 @@ PrintStatusConditionNotFainted::
 ; hl = destination address
 ; [wLoadedMonLevel] = level
 PrintLevel::
-	ld a, "<LV>" ; ":L" tile ID
-	ld [hli], a
+;	ld a, "<LV>" ; ":L" tile ID
+;	ld [hli], a
 	ld c, 2 ; number of digits
 	ld a, [wLoadedMonLevel] ; level
 	cp 100
@@ -349,8 +349,8 @@ PrintLevel::
 ; hl = destination address
 ; [wLoadedMonLevel] = level
 PrintLevelFull::
-	ld a, "<LV>" ; ":L" tile ID
-	ld [hli], a
+;	ld a, "<LV>" ; ":L" tile ID
+;	ld [hli], a
 	ld c, 3 ; number of digits
 	ld a, [wLoadedMonLevel] ; level
 
