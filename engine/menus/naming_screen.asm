@@ -384,7 +384,7 @@ PrintNicknameAndUnderscores:
 	ld b, 7 ; player or rival max name length
 	jr .playerOrRival1
 .pokemon1
-	ld b, 10 ; pokemon max name length
+	ld b, 8 ; pokemon max name length
 .playerOrRival1
 	ld a, $76 ; underscore tile id
 .placeUnderscoreLoop
@@ -398,7 +398,7 @@ PrintNicknameAndUnderscores:
 	cp 7 ; player or rival max name length
 	jr .playerOrRival2
 .pokemon2
-	cp 10 ; pokemon max name length
+	cp 8 ; pokemon max name length
 .playerOrRival2
 	jr nz, .emptySpacesRemaining
 	; when all spaces are filled, force the cursor onto the ED tile
@@ -409,7 +409,7 @@ PrintNicknameAndUnderscores:
 	ld [wCurrentMenuItem], a
 	ld a, [wNamingScreenType]
 	cp NAME_MON_SCREEN
-	ld a, 9 ; keep the last underscore raised
+	ld a, 7 ; keep the last underscore raised
 	jr nc, .pokemon3
 	ld a, 6 ; keep the last underscore raised
 .pokemon3
