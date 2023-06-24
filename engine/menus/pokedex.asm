@@ -627,7 +627,7 @@ ShowPokedexDataInternal:
 
 HeightWeightText1:
 	db   "Height"
-	next "Width@"
+	next "Weight@"
 
 HeightWeightText2:
 	db   "?′??″"

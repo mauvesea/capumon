@@ -189,13 +189,13 @@ _LaprasDexEntry::
 	dex
 
 _ArcanineDexEntry::
-	text "A #MON that"
-	next "has been admired"
-	next "since the past"
-
-	page "for its beauty."
-	next "It runs agilely"
-	next "as if on wings"
+	text "Got it's name from"
+	next "the fact it's hair"
+	next "looks like wings"
+	
+	page "when it runs. It's"
+	next "regarded as a"
+	next "legendary CAPMON"
 	dex
 
 _MewDexEntry::
@@ -1254,7 +1254,7 @@ _BulbasaurDexEntry::
 	next "You will hear it"
 	
 	page "before it appears." 
-	next "if you see it, it"
+	next "If you see it, it"
 	next "is too late"
 	dex
 
