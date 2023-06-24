@@ -105,6 +105,9 @@ INCLUDE "engine/overworld/map_sprites.asm"
 INCLUDE "engine/overworld/emotion_bubbles.asm"
 INCLUDE "engine/events/evolve_trade.asm"
 INCLUDE "engine/battle/move_effects/substitute.asm"
+
+SECTION "Battle Engine - PC", ROMX
+
 INCLUDE "engine/menus/pc.asm"
 
 

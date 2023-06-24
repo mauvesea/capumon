@@ -123,17 +123,6 @@ StatusScreen:
 	call GetHealthBarColor
 	ld b, SET_PAL_STATUS_SCREEN
 	call RunPaletteCommand
-	hlcoord 16, 6
-	ld de, wLoadedMonStatus
-	call PrintStatusCondition
-	jr nz, .StatusWritten
-	hlcoord 16, 6
-	ld de, OKText
-	call PlaceString ; "OK"
-.StatusWritten
-	hlcoord 9, 6
-	ld de, StatusText
-	call PlaceString ; "STATUS/"
 ;	hlcoord 14, 2
 ;	call PrintLevel ; Pokémon level
 	ld a, [wMonHIndex]
@@ -255,7 +244,7 @@ OTText:
 	next "@"
 
 StatusText:
-	db "STATUS/@"
+	db "STATUS@"
 
 OKText:
 	db "OK@"
@@ -348,6 +337,13 @@ StatsText:
 	next "DEF@"
 
 StatusScreen2:
+	hlcoord 0, 0
+	lb bc, 20, 10
+	call ClearScreenArea ; Clear under name
+	hlcoord 6, 0
+	ld b, 6
+	ld c, 12
+	call TextBoxBorder ; Draw move container	
 	ldh a, [hTileAnimations]
 	push af
 	xor a
@@ -361,11 +357,11 @@ StatusScreen2:
 	ld bc, NUM_MOVES
 	call CopyData
 	callfar FormatMovesString
-	hlcoord 9, 2
-	lb bc, 5, 10
-	call ClearScreenArea ; Clear under name
-	hlcoord 19, 3
-	ld [hl], $78
+;	hlcoord 9, 2
+;	lb bc, 5, 10
+;	call ClearScreenArea ; Clear under name
+;	hlcoord 19, 3
+;	ld [hl], $78
 	hlcoord 0, 8
 	ld b, 8
 	ld c, 18
@@ -379,9 +375,9 @@ StatusScreen2:
 	ld a, $4
 	sub c
 	ld b, a ; Number of moves ?
-	hlcoord 11, 10
+	hlcoord 14, 9
 	ld de, SCREEN_WIDTH * 2
-	ld a, "<BOLD_P>"
+	ld a, "P"
 	call StatusScreen_PrintPP ; Print "PP"
 	ld a, b
 	and a
@@ -391,7 +387,7 @@ StatusScreen2:
 	call StatusScreen_PrintPP ; Fill the rest with --
 .InitPP
 	ld hl, wLoadedMonMoves
-	decoord 14, 10
+	decoord 17, 9
 	ld b, 0
 .PrintPP
 	ld a, [hli]
@@ -421,11 +417,11 @@ StatusScreen2:
 	ld h, d
 	ld l, e
 	push hl
-	ld de, wStatusScreenCurrentPP
-	lb bc, 1, 2
-	call PrintNumber
-	ld a, "/"
-	ld [hli], a
+;	ld de, wStatusScreenCurrentPP
+;	lb bc, 1, 2
+;	call PrintNumber
+;	ld a, "/"
+;	ld [hli], a
 	ld de, wMaxPP
 	lb bc, 1, 2
 	call PrintNumber
@@ -441,7 +437,7 @@ StatusScreen2:
 	cp $4
 	jr nz, .PrintPP
 .PPDone
-	hlcoord 9, 3
+	hlcoord 7, 1
 	ld de, StatusScreenExpText
 	call PlaceString
 	ld a, [wLoadedMonLevel]
@@ -451,31 +447,44 @@ StatusScreen2:
 	inc a
 	ld [wLoadedMonLevel], a ; Increase temporarily if not 100
 .Level100
-	hlcoord 14, 6
-	ld [hl], "<to>"
-	inc hl
-	inc hl
-	call PrintLevel
+;	hlcoord 14, 6
+;	ld [hl], "<to>"
+;	inc hl
+;	inc hl
+;	call PrintLevel
 	pop af
 	ld [wLoadedMonLevel], a
 	ld de, wLoadedMonExp
-	hlcoord 12, 4
+	hlcoord 12, 1
 	lb bc, 3, 7
 	call PrintNumber ; exp
 	call CalcExpToLevelUp
 	ld de, wLoadedMonExp
-	hlcoord 7, 6
+	hlcoord 12, 3
 	lb bc, 3, 7
 	call PrintNumber ; exp needed to level up
-	hlcoord 9, 0
-	call StatusScreen_ClearName
-	hlcoord 9, 1
-	call StatusScreen_ClearName
-	ld a, [wMonHIndex]
-	ld [wd11e], a
-	call GetMonName
-	hlcoord 9, 1
-	call PlaceString
+
+	hlcoord 16, 5
+	ld de, wLoadedMonStatus
+	call PrintStatusCondition
+	jr nz, .StatusWritten
+	hlcoord 17, 5
+	ld de, OKText
+	call PlaceString ; "OK"
+.StatusWritten
+	hlcoord 7, 5
+	ld de, StatusText
+	call PlaceString ; "STATUS/"
+
+;	hlcoord 9, 0
+;	call StatusScreen_ClearName
+;	hlcoord 9, 1
+;	call StatusScreen_ClearName
+;	ld a, [wMonHIndex]
+;	ld [wd11e], a
+;	call GetMonName
+;	hlcoord 9, 1
+;	call PlaceString
 	ld a, $1
 	ldh [hAutoBGTransferEnabled], a
 	call Delay3
@@ -516,8 +525,8 @@ CalcExpToLevelUp:
 	ret
 
 StatusScreenExpText:
-	db   "EXP POINTS"
-	next "LEVEL UP@"
+	db   "EXP."
+	next "NEXT@"
 
 StatusScreen_ClearName:
 	ld bc, 10

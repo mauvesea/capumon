@@ -1,11 +1,11 @@
 _Route1ViridianMartSampleText::
 	text "Hi! I work at a"
-	line "#MON MART."
+	line "FRIENDLY SHOP."
 
 	para "It's a convenient"
 	line "shop, so please"
 	cont "visit us in"
-	cont "VIRIDIAN CITY."
+	cont "TOKIWA CITY."
 
 	para "I know, I'll give"
 	line "you a sample!"
@@ -21,8 +21,8 @@ _Route1Text_1cae8::
 
 _Route1Text_1caee::
 	text "We also carry"
-	line "# BALLs for"
-	cont "catching #MON!"
+	line "MONSTER BALLs for"
+	cont "catching CAPMON!"
 	done
 
 _Route1Text_1caf3::
@@ -31,20 +31,25 @@ _Route1Text_1caf3::
 	done
 
 _Route1Text2::
-	text "See those ledges"
-	line "along the road?"
-
-	para "It's a bit scary,"
-	line "but you can jump"
-	cont "from them."
-
-	para "You can get back"
-	line "to PALLET TOWN"
-	cont "quicker that way."
+	text "Wild CAPMON live"
+	line "in the tall "
+	cont "grass..."
+	para "So I always take"
+	line "this path when"
+	para "I got to"
+	line "TOKIWA CITY!"
 	done
 
 _Route1Text3::
-	text "ROUTE 1"
-	line "PALLET TOWN -"
-	cont "VIRIDIAN CITY"
+	text "It's written..."
+	para "'Beware! Wild"
+	line "CAPMON live in"
+	para "the tall grass.'"
+	done
+
+_Route1Text4::
+	text "This is..."
+	line "ROUTE 1!"
+	para "MASARA TOWN (S)"
+	line "TOKIWA CITY (N)"
 	done
