@@ -198,140 +198,140 @@ PokedexEntryPointers:
 ; text entry
 
 RhydonDexEntry:
-	db "DRILL@"
+	db " GAGARTH@"
 	db 6,3
 	dw 2650
 	text_far _RhydonDexEntry
 	text_end
 
 KangaskhanDexEntry:
-	db "PARENT@"
+	db "  GARURA@"
 	db 7,3
 	dw 1760
 	text_far _KangaskhanDexEntry
 	text_end
 
 NidoranMDexEntry:
-	db "POISON PIN@"
+	db "HARISAGI@"
 	db 1,8
 	dw 200
 	text_far _NidoranMDexEntry
 	text_end
 
 ClefairyDexEntry:
-	db "FAIRY@"
+	db "     PIP@"
 	db 2,0
 	dw 170
 	text_far _ClefairyDexEntry
 	text_end
 
 SpearowDexEntry:
-	db "TINY BIRD@"
+	db "    OMOM@"
 	db 1,0
 	dw 40
 	text_far _SpearowDexEntry
 	text_end
 
 VoltorbDexEntry:
-	db "BALL@"
+	db "BIRIDAMA@"
 	db 1,8
 	dw 230
 	text_far _VoltorbDexEntry
 	text_end
 
 NidokingDexEntry:
-	db "DRILL@"
+	db "   MYCOR@"
 	db 4,7
 	dw 1370
 	text_far _NidokingDexEntry
 	text_end
 
 SlowbroDexEntry:
-	db "HERMITCRAB@"
+	db "  YADDON@"
 	db 5,3
 	dw 1730
 	text_far _SlowbroDexEntry
 	text_end
 
 IvysaurDexEntry:
-	db "SEED@"
+	db "FUSIGISO@"
 	db 3,3
 	dw 290
 	text_far _IvysaurDexEntry
 	text_end
 
 ExeggutorDexEntry:
-	db "COCONUT@"
+	db "   NASSY@"
 	db 6,7
 	dw 2650
 	text_far _ExeggutorDexEntry
 	text_end
 
 LickitungDexEntry:
-	db "LICKING@"
+	db " BELINGA@"
 	db 3,11
 	dw 1440
 	text_far _LickitungDexEntry
 	text_end
 
 ExeggcuteDexEntry:
-	db "EGG@"
+	db "TAMATAMA@"
 	db 1,4
 	dw 60
 	text_far _ExeggcuteDexEntry
 	text_end
 
 GrimerDexEntry:
-	db "SLUDGE@"
+	db "BETBETER@"
 	db 2,11
 	dw 660
 	text_far _GrimerDexEntry
 	text_end
 
 GengarDexEntry:
-	db "SHADOW@"
+	db "  GENGAR@"
 	db 4,11
 	dw 890
 	text_far _GengarDexEntry
 	text_end
 
 NidoranFDexEntry:
-	db "POISON PIN@"
+	db "HARISAGI@"
 	db 1,4
 	dw 150
 	text_far _NidoranFDexEntry
 	text_end
 
 NidoqueenDexEntry:
-	db "DRILL@"
+	db "   MYCOR@"
 	db 4,3
 	dw 1320
 	text_far _NidoqueenDexEntry
 	text_end
 
 CuboneDexEntry:
-	db "LONELY@"
+	db "KARAKARA@"
 	db 1,4
 	dw 140
 	text_far _CuboneDexEntry
 	text_end
 
 RhyhornDexEntry:
-	db "SPIKES@"
+	db "  CYHORN@"
 	db 3,3
 	dw 2540
 	text_far _RhyhornDexEntry
 	text_end
 
 LaprasDexEntry:
-	db "TRANSPORT@"
+	db " RAPRUTH@"
 	db 8,2
 	dw 4850
 	text_far _LaprasDexEntry
 	text_end
 
 ArcanineDexEntry:
-	db "LEGENDARY@"
+	db "   WING@"
 	db 6,3
 	dw 3420
 	text_far _ArcanineDexEntry
@@ -345,7 +345,7 @@ MewDexEntry:
 	text_end
 
 GyaradosDexEntry:
-	db "ATROCIOUS@"
+	db "GYARADOS@"
 	db 21,4
 	dw 5180
 	text_far _GyaradosDexEntry
@@ -359,49 +359,49 @@ ShellderDexEntry:
 	text_end
 
 TentacoolDexEntry:
-	db "JELLYFISH@"
+	db "  AMBLER@"
 	db 2,11
 	dw 1000
 	text_far _TentacoolDexEntry
 	text_end
 
 GastlyDexEntry:
-	db "GAS@"
+	db "   GOUTH@"
 	db 4,3
 	dw 2
 	text_far _GastlyDexEntry
 	text_end
 
 ScytherDexEntry:
-	db "MANTIS@"
+	db "  STRIKE@"
 	db 4,11
 	dw 1230
 	text_far _ScytherDexEntry
 	text_end
 
 StaryuDexEntry:
-	db "STARSHAPE@"
+	db "    MIMI@"
 	db 2,7
 	dw 760
 	text_far _StaryuDexEntry
 	text_end
 
 BlastoiseDexEntry:
-	db "SHELLFISH@"
+	db "KARABATH@"
 	db 5,3
 	dw 1890
 	text_far _BlastoiseDexEntry
 	text_end
 
 PinsirDexEntry:
-	db "STAGBEETLE@"
+	db " CAIROSS@"
 	db 4,11
 	dw 1210
 	text_far _PinsirDexEntry
 	text_end
 
 TangelaDexEntry:
-	db "VINE@"
+	db " MONJARA@"
 	db 3,3
 	dw 770
 	text_far _TangelaDexEntry
@@ -989,7 +989,7 @@ KinglerDexEntry:
 	text_end
 
 CloysterDexEntry:
-	db "BIVALVE@"
+	db "SHELLDER@"
 	db 4,11
 	dw 2920
 	text_far _CloysterDexEntry
@@ -1073,14 +1073,14 @@ StarmieDexEntry:
 	text_end
 
 BulbasaurDexEntry:
-	db "SEED@"
+	db "   GYACE@"
 	db 2,4
 	dw 150
 	text_far _BulbasaurDexEntry
 	text_end
 
 VenusaurDexEntry:
-	db "SEED@"
+	db "   OMEGA@"
 	db 6,7
 	dw 2210
 	text_far _VenusaurDexEntry

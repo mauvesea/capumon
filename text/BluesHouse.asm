@@ -9,7 +9,7 @@ _NanamiText1::
 	line "a gift from"
 	para "this big"
 	line "sister!"
-	done
+	prompt
 
 _GotMapText::
 	text "<PLAYER> got a"

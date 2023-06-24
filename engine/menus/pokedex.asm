@@ -81,7 +81,7 @@ HandlePokedexSideMenu:
 	ld hl, wTopMenuItemY
 	ld a, 10
 	ld [hli], a ; top menu item Y
-	ld a, 15
+	ld a, 14
 	ld [hli], a ; top menu item X
 	xor a
 	ld [hli], a ; current menu item ID
@@ -158,19 +158,26 @@ HandlePokedexListMenu:
 	xor a
 	ldh [hAutoBGTransferEnabled], a
 ; draw the horizontal line separating the seen and owned amounts from the menu
-	hlcoord 15, 8
-	ld a, "─"
-	ld [hli], a
-	ld [hli], a
-	ld [hli], a
-	ld [hli], a
-	ld [hli], a
-	hlcoord 14, 0
-	ld [hl], $71 ; vertical line tile
-	hlcoord 14, 1
-	call DrawPokedexVerticalLine
-	hlcoord 14, 9
-	call DrawPokedexVerticalLine
+;	hlcoord 15, 8
+;	ld a, "─"
+;	ld [hli], a
+;	ld [hli], a
+;	ld [hli], a
+;	ld [hli], a
+;	ld [hli], a
+;	hlcoord 14, 0
+;	ld [hl], $71 ; vertical line tile
+;	hlcoord 14, 1
+;	call DrawPokedexVerticalLine
+;	hlcoord 14, 9
+;	call DrawPokedexVerticalLine
+
+
+	hlcoord 13, 0
+	ld b, 7
+	ld c, 5
+	call TextBoxBorder
+
 	ld hl, wPokedexSeen
 	ld b, wPokedexSeenEnd - wPokedexSeen
 	call CountSetBits
@@ -185,16 +192,28 @@ HandlePokedexListMenu:
 	hlcoord 16, 6
 	lb bc, 1, 3
 	call PrintNumber ; print number of owned pokemon
-	hlcoord 16, 2
+	hlcoord 14, 2
 	ld de, PokedexSeenText
 	call PlaceString
-	hlcoord 16, 5
+	hlcoord 14, 5
 	ld de, PokedexOwnText
 	call PlaceString
+
+	hlcoord 0, 0
+	ld b, 1
+	ld c, 11
+	call TextBoxBorder	
+	
 	hlcoord 1, 1
 	ld de, PokedexContentsText
 	call PlaceString
-	hlcoord 16, 10
+
+	hlcoord 13, 9
+	ld b, 7
+	ld c, 5
+	call TextBoxBorder	
+		
+	hlcoord 15, 10
 	ld de, PokedexMenuItemsText
 	call PlaceString
 ; find the highest pokedex number among the pokemon the player has seen
@@ -217,8 +236,8 @@ HandlePokedexListMenu:
 .loop
 	xor a
 	ldh [hAutoBGTransferEnabled], a
-	hlcoord 4, 2
-	lb bc, 14, 10
+	hlcoord 0, 3
+	lb bc, 14, 12
 	call ClearScreenArea
 	hlcoord 1, 3
 	ld a, [wListScrollOffset]
@@ -239,13 +258,12 @@ HandlePokedexListMenu:
 	push af
 	push de
 	push hl
-	ld de, -SCREEN_WIDTH
-	add hl, de
 	ld de, wd11e
-	lb bc, LEADING_ZEROES | 1, 3
+	lb bc, LEADING_ZEROES | 1, 2
 	call PrintNumber ; print the pokedex number
-	ld de, SCREEN_WIDTH
-	add hl, de
+;	ld de, SCREEN_WIDTH
+;	add hl, de
+	inc hl
 	dec hl
 	push hl
 	ld hl, wPokedexOwned
@@ -366,7 +384,7 @@ PokedexOwnText:
 	db "OWN@"
 
 PokedexContentsText:
-	db "CONTENTS@"
+	db "FIELD GUIDE@"
 
 PokedexMenuItemsText:
 	db   "DATA"
@@ -415,44 +433,62 @@ ShowPokedexDataInternal:
 	xor a
 	ldh [hTileAnimations], a
 
-	hlcoord 0, 0
-	ld de, 1
-	lb bc, $64, SCREEN_WIDTH
-	call DrawTileLine ; draw top border
+;	hlcoord 0, 0
+;	ld de, 1
+;	lb bc, $64, SCREEN_WIDTH
+;	call DrawTileLine ; draw top border
 
-	hlcoord 0, 17
-	ld b, $6f
-	call DrawTileLine ; draw bottom border
+;	hlcoord 0, 17
+;	ld b, $6f
+;	call DrawTileLine ; draw bottom border
 
-	hlcoord 0, 1
-	ld de, 20
-	lb bc, $66, $10
-	call DrawTileLine ; draw left border
+;	hlcoord 0, 1
+;	ld de, 20
+;	lb bc, $66, $10
+;	call DrawTileLine ; draw left border
 
-	hlcoord 19, 1
-	ld b, $67
-	call DrawTileLine ; draw right border
+;	hlcoord 19, 1
+;	ld b, $67
+;	call DrawTileLine ; draw right border
 
-	ld a, $63 ; upper left corner tile
-	ldcoord_a 0, 0
-	ld a, $65 ; upper right corner tile
-	ldcoord_a 19, 0
-	ld a, $6c ; lower left corner tile
-	ldcoord_a 0, 17
-	ld a, $6e ; lower right corner tile
-	ldcoord_a 19, 17
+;	ld a, $63 ; upper left corner tile
+;	ldcoord_a 0, 0
+;	ld a, $65 ; upper right corner tile
+;	ldcoord_a 19, 0
+;	ld a, $6c ; lower left corner tile
+;	ldcoord_a 0, 17
+;	ld a, $6e ; lower right corner tile
+;	ldcoord_a 19, 17
+
+;	hlcoord 0, 9
+;	ld de, PokedexDataDividerLine
+;	call PlaceString ; draw horizontal divider line
+
+	hlcoord 10, 0
+	ld b, 7
+	ld c, 8
+	call TextBoxBorder	
+
+	hlcoord 11, 4
+	ld de, HeightWeightText1
+	call PlaceString
+	
+	hlcoord 14, 5
+	ld de, HeightWeightText2
+	call PlaceString
+	
+	hlcoord 11, 1
+	ld de, PokedexNameText
+	call PlaceString
+
+;	call GetMonName
+;	hlcoord 11, 1
+;	call PlaceString
 
 	hlcoord 0, 9
-	ld de, PokedexDataDividerLine
-	call PlaceString ; draw horizontal divider line
-
-	hlcoord 9, 6
-	ld de, HeightWeightText
-	call PlaceString
-
-	call GetMonName
-	hlcoord 9, 2
-	call PlaceString
+	ld b, 7
+	ld c, 18
+	call TextBoxBorder	
 
 	ld hl, PokedexEntryPointers
 	ld a, [wd11e]
@@ -465,7 +501,7 @@ ShowPokedexDataInternal:
 	ld e, a
 	ld d, [hl] ; de = address of pokedex entry
 
-	hlcoord 9, 4
+	hlcoord 11, 2
 	call PlaceString ; print species name
 
 	ld h, b
@@ -475,7 +511,7 @@ ShowPokedexDataInternal:
 	push af
 	call IndexToPokedex
 
-	hlcoord 9, 1
+	hlcoord 13, 0
 	ld a, "№"
 	ld [hli], a
 	ld a, "<DOT>"
@@ -515,14 +551,14 @@ ShowPokedexDataInternal:
 	jp z, .waitForButtonPress ; if the pokemon has not been owned, don't print the height, weight, or description
 	inc de ; de = address of feet (height)
 	ld a, [de] ; reads feet, but a is overwritten without being used
-	hlcoord 12, 6
+	hlcoord 13, 5
 	lb bc, 1, 2
 	call PrintNumber ; print feet (height)
 	ld a, "′"
 	ld [hl], a
 	inc de
 	inc de ; de = address of inches (height)
-	hlcoord 15, 6
+	hlcoord 16, 5
 	lb bc, LEADING_ZEROES | 1, 2
 	call PrintNumber ; print inches (height)
 	ld a, "″"
@@ -544,10 +580,10 @@ ShowPokedexDataInternal:
 	ld a, [de] ; a = lower byte of weight
 	ld [hl], a ; store lower byte of weight in [hDexWeight + 1]
 	ld de, hDexWeight
-	hlcoord 11, 8
+	hlcoord 11, 7
 	lb bc, 2, 5 ; 2 bytes, 5 digits
 	call PrintNumber ; print weight
-	hlcoord 14, 8
+	hlcoord 14, 7
 	ldh a, [hDexWeight + 1]
 	sub 10
 	ldh a, [hDexWeight]
@@ -589,9 +625,16 @@ ShowPokedexDataInternal:
 	ldh [rNR50], a
 	ret
 
-HeightWeightText:
-	db   "HT  ?′??″"
-	next "WT   ???lb@"
+HeightWeightText1:
+	db   "Height"
+	next "Width@"
+
+HeightWeightText2:
+	db   "?′??″"
+	next "???lb@"
+	
+PokedexNameText:
+	db "Name@"	
 
 ; XXX does anything point to this?
 PokeText:
