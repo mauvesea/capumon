@@ -142,8 +142,13 @@ LoadSAVIgnoreBadCheckSum:
 
 SaveSAV:
 	farcall PrintSaveScreenText
-
-;	call WaitForTextScrollButtonPress
+;	ld hl, WouldYouLikeToSaveText
+;	call PrintText
+	hlcoord 1, 14
+	ld de, ButtonToSaveString
+	call PlaceString
+	ld c, 110
+	call DelayFrames
 .inputLoop
 	xor a
 	ldh [hJoyPressed], a
@@ -157,21 +162,19 @@ SaveSAV:
 	jp nz, .PressedB ; pressed B
 	jr .inputLoop
 .pressedA
-
-	ld hl, WouldYouLikeToSaveText
-	call SaveSAVConfirm
-	and a   ;|0 = Yes|1 = No|
-	ret nz
-	ld a, [wSaveFileStatus]
-	dec a
-	jr z, .save
-	call SAVCheckRandomID
-	jr z, .save
-	ld hl, OlderFileWillBeErasedText
-	call SaveSAVConfirm
-	and a
-	ret nz
-.save
+;	call SaveSAVConfirm
+;	and a   ;|0 = Yes|1 = No|
+;	ret nz
+;	ld a, [wSaveFileStatus]
+;	dec a
+;	jr z, .save
+;	call SAVCheckRandomID
+;	jr z, .save
+;	ld hl, OlderFileWillBeErasedText
+;	call SaveSAVConfirm
+;	and a
+;	ret nz
+;.save
 	call SaveSAVtoSRAM
 	hlcoord 1, 13
 	lb bc, 4, 18
@@ -181,8 +184,11 @@ SaveSAV:
 	call PlaceString
 	ld c, 120
 	call DelayFrames
-	ld hl, GameSavedText
-	call PrintText
+;	ld hl, GameSavedText
+;	call PrintText
+	hlcoord 1, 14
+	ld de, GameSavedString
+	call PlaceString
 	ld a, SFX_SAVE
 	call PlaySoundWaitForCurrent
 	call WaitForSoundToFinish
@@ -195,6 +201,14 @@ SaveSAV:
 
 NowSavingString:
 	db "Now saving...@"
+	
+ButtonToSaveString:
+	db "Press A to Save."
+	next "Press B to Leave.@"
+
+GameSavedString:
+	db "<PLAYER> saved    "
+	next "the game!@"
 
 SaveSAVConfirm:
 	call PrintText

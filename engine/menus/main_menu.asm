@@ -374,29 +374,31 @@ DisplayContinueGameInfo:
 PrintSaveScreenText:
 	xor a
 	ldh [hAutoBGTransferEnabled], a
-	hlcoord 4, 0
-	ld b, 10
-	ld c, 14
+	hlcoord 0, 0
+	ld b, 16
+	ld c, 18
 	call TextBoxBorder
 	call LoadTextBoxTilePatterns
 	call UpdateSprites
-	hlcoord 5, 2
+	ld c, 10
+	call DelayFrames
+	hlcoord 2, 2
 	ld de, SaveScreenInfoText
 	call PlaceString
-	hlcoord 12, 2
+	hlcoord 10, 2
 	ld de, wPlayerName
 	call PlaceString
-	hlcoord 17, 4
+	hlcoord 15, 4
 	call PrintNumBadges
-	hlcoord 16, 6
+	hlcoord 14, 6
 	call PrintNumOwnedMons
-	hlcoord 12, 8
+	hlcoord 10, 8
 	call PrintMoney
-	hlcoord 13, 10
+	hlcoord 11, 10
 	call PrintPlayTime
 	ld a, $1
 	ldh [hAutoBGTransferEnabled], a
-	ld c, 30
+	ld c, 10
 	jp DelayFrames
 
 PrintNumBadges:
@@ -435,11 +437,11 @@ PrintMoney:
 	jp PrintBCDNumber
 
 SaveScreenInfoText:
-	db   "Dealer"
-	next "Charisma"
-	next "Field Guide"
-	next "Gold"
-	next "Time@"
+	db   "Dealer:"
+	next "Charisma:"
+	next "Field Guide:"
+	next "Gold:"
+	next "Time:@"
 
 DisplayOptionMenu:
 	hlcoord 0, 0
