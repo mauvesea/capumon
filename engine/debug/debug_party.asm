@@ -21,7 +21,7 @@ SetIshiharaTeam:
 	jr .loop
 
 IshiharaTeam:
-	db VENUSAUR, 50
+	db VENUSAUR, 100
 	db RHYDON, 50
 	db BULBASAUR, 50
 	db LAPRAS, 50
@@ -144,6 +144,7 @@ DebugItemsList:
 	db CARD_KEY, 1
 	db S_S_TICKET, 1
 	db LIFT_KEY, 1
+	db NUGGET, 99
 	db -1 ; end
 
 DebugUnusedList:

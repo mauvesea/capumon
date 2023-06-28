@@ -142,6 +142,22 @@ LoadSAVIgnoreBadCheckSum:
 
 SaveSAV:
 	farcall PrintSaveScreenText
+
+;	call WaitForTextScrollButtonPress
+.inputLoop
+	xor a
+	ldh [hJoyPressed], a
+	ldh [hJoyReleased], a
+	ldh [hJoyHeld], a
+	call Joypad
+	ldh a, [hJoyHeld]
+	bit 0, a
+	jr nz, .pressedA
+	bit 1, a
+	jp nz, .PressedB ; pressed B
+	jr .inputLoop
+.pressedA
+
 	ld hl, WouldYouLikeToSaveText
 	call SaveSAVConfirm
 	and a   ;|0 = Yes|1 = No|
@@ -172,6 +188,10 @@ SaveSAV:
 	call WaitForSoundToFinish
 	ld c, 30
 	jp DelayFrames
+.PressedB
+	ld c, 1
+	jp DelayFrames
+;	call LoadScreenTilesFromBuffer2 ; restore saved screen
 
 NowSavingString:
 	db "Now saving...@"
