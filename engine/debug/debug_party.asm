@@ -133,18 +133,26 @@ DebugSetPokedexEntries:
 	ret
 
 DebugItemsList:
-	db BICYCLE, 1
-	db FULL_RESTORE, 99
-	db FULL_HEAL, 99
-	db ESCAPE_ROPE, 99
-	db RARE_CANDY, 99
 	db MASTER_BALL, 99
+	db ULTRA_BALL, 99
+	db GREAT_BALL, 99
+	db POKE_BALL, 99
 	db TOWN_MAP, 1
-	db SECRET_KEY, 1
-	db CARD_KEY, 1
-	db S_S_TICKET, 1
-	db LIFT_KEY, 1
-	db NUGGET, 99
+	db BICYCLE, 1 
+	db SURFBOARD, 1  
+	db SAFARI_BALL, 99 
+	db POKEDEX, 1
+	db MOON_STONE, 99
+	db ANTIDOTE, 99
+	db BURN_HEAL, 99
+	db ICE_HEAL, 99
+	db AWAKENING, 99
+	db PARLYZ_HEAL, 99
+	db FULL_RESTORE, 99
+	db MAX_POTION, 99  
+	db HYPER_POTION, 99
+	db SUPER_POTION, 99
+	db POTION, 99
 	db -1 ; end
 
 DebugUnusedList:
