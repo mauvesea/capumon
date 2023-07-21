@@ -2176,21 +2176,6 @@ DisplayBattleMenu::
 	cp BATTLE_TYPE_SAFARI
 	ld a, [wCurrentMenuItem]
 	ld [wBattleAndStartSavedMenuItem], a
-	jr z, .handleMenuSelection
-; not Safari battle
-; swap the IDs of the item menu and party menu (this is probably because they swapped the positions
-; of these menu items in first generation English versions)
-	cp $1 ; was the item menu selected?
-	jr nz, .notItemMenu
-; item menu was selected
-	inc a ; increment a to 2
-	jr .handleMenuSelection
-.notItemMenu
-	cp $2 ; was the party menu selected?
-	jr nz, .handleMenuSelection
-; party menu selected
-	dec a ; decrement a to 1
-.handleMenuSelection
 	and a
 	jr nz, .upperLeftMenuItemWasNotSelected
 ; the upper left menu item was selected
