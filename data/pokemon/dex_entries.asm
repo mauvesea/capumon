@@ -212,7 +212,7 @@ KangaskhanDexEntry:
 	text_end
 
 NidoranMDexEntry:
-	db "HARISAGI@"
+	db "HARIUSA♂@"
 	db 1,8
 	dw 200
 	text_far _NidoranMDexEntry
@@ -240,7 +240,7 @@ VoltorbDexEntry:
 	text_end
 
 NidokingDexEntry:
-	db "   MYCOR@"
+	db "  MYCOR♂@"
 	db 4,7
 	dw 1370
 	text_far _NidokingDexEntry
@@ -296,14 +296,14 @@ GengarDexEntry:
 	text_end
 
 NidoranFDexEntry:
-	db "HARISAGI@"
+	db "HARIUSA♀@"
 	db 1,4
 	dw 150
 	text_far _NidoranFDexEntry
 	text_end
 
 NidoqueenDexEntry:
-	db "   MYCOR@"
+	db "  MYCOR♀@"
 	db 4,3
 	dw 1320
 	text_far _NidoqueenDexEntry
