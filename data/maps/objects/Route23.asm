@@ -1,5 +1,5 @@
 Route23_Object:
-	db $f ; border block
+	db $12 ; border block
 
 	def_warp_events
 	warp_event  7, 139, ROUTE_22_GATE, 3
