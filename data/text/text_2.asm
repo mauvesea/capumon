@@ -1234,11 +1234,21 @@ _GrewLevelText::
 	text_end
 
 _WildMonAppearedText::
-	text "Wild @"
+	text "NO.@"
+	text_decimal wd11e, 1, 3 ; text_ram wLoadedMonLevel ;wEnemyMonNick
+	text " @"
 	text_ram wEnemyMonNick
 	text_start
 	line "appeared!"
 	prompt
+
+;	text_ram wcd6d
+;	text " grew"
+;	line "to level @"
+;	text_decimal wCurEnemyLVL, 1, 3
+;	text "!@"
+;	text_end
+
 
 _HookedMonAttackedText::
 	text "The hooked"

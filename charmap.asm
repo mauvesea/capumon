@@ -156,6 +156,8 @@
 	charmap "'s",        $bd
 	charmap "'t",        $be
 	charmap "'v",        $bf
+	
+	charmap "<no>",      $c0
 
 	charmap "'",         $e0
 	charmap "<PK>",      $e1

@@ -10,6 +10,10 @@ PrintBeginningBattleText:
 .notPokemonTower
 	ld a, [wEnemyMonSpecies2]
 	call PlayCry
+	ld a, [wMonHIndex]
+	ld [wd11e], a
+	ld [wd0b5], a
+	predef IndexToPokedex	
 	ld hl, WildMonAppearedText
 	ld a, [wMoveMissed]
 	and a

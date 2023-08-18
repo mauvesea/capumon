@@ -59,7 +59,7 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	map_const REDS_HOUSE_1F,                  4,  4 ; $25
 	map_const REDS_HOUSE_2F,                  4,  4 ; $26
 	map_const BLUES_HOUSE,                    4,  4 ; $27
-	map_const OAKS_LAB,                       5,  6 ; $28
+	map_const OAKS_LAB,                       4,  4 ; $28
 	map_const VIRIDIAN_POKECENTER,            7,  4 ; $29
 	map_const VIRIDIAN_MART,                  4,  4 ; $2A
 	map_const VIRIDIAN_SCHOOL_HOUSE,          4,  4 ; $2B

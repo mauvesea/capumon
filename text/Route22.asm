@@ -1,104 +1,145 @@
-_Route22RivalBeforeBattleText1::
-	text "<RIVAL>: Hey!"
-	line "<PLAYER>!"
+_Route22Text1::
+	text "Whew... I better"
+	line "take a rest..."
+	cont "Groan..."
 
-	para "You're going to"
-	line "#MON LEAGUE?"
-
-	para "Forget it! You"
-	line "probably don't"
-	cont "have any BADGEs!"
-
-	para "The guard won't"
-	line "let you through!"
-
-	para "By the way, did"
-	line "your #MON"
-	cont "get any stronger?"
+	para "That tunnel from"
+	line "CERULEAN takes a"
+	cont "lot out of you!"
 	done
 
-_Route22RivalAfterBattleText1::
-	text "I heard #MON"
-	line "LEAGUE has many"
-	cont "tough trainers!"
-
-	para "I have to figure"
-	line "out how to get"
-	cont "past them!"
-
-	para "You should quit"
-	line "dawdling and get"
-	cont "a move on!"
+_Route22BattleText1::
+	text "Hey! I met you in"
+	line "VIRIDIAN FOREST!"
 	done
 
-_Route22RivalDefeatedText1::
-	text "Awww!"
-	line "You just lucked"
-	cont "out!"
+_Route22EndBattleText1::
+	text "You"
+	line "beat me again!"
 	prompt
 
-_Route22Text_511bc::
-	text "<RIVAL>: What?"
-	line "Why do I have 2"
-	cont "#MON?"
-
-	para "You should catch"
-	cont "some more too!"
-	prompt
-
-_Route22RivalBeforeBattleText2::
-	text "<RIVAL>: What?"
-	line "<PLAYER>! What a"
-	cont "surprise to see"
-	cont "you here!"
-
-	para "So you're going to"
-	line "#MON LEAGUE?"
-
-	para "You collected all"
-	line "the BADGEs too?"
-	cont "That's cool!"
-
-	para "Then I'll whip you"
-	line "<PLAYER> as a"
-	cont "warm up for"
-	cont "#MON LEAGUE!"
-
-	para "Come on!"
+_Route22AfterBattleText1::
+	text "There are other"
+	line "kinds of #MON"
+	cont "than those found"
+	cont "in the forest!"
 	done
 
-_Route22RivalAfterBattleText2::
-	text "That loosened me"
-	line "up! I'm ready for"
-	cont "#MON LEAGUE!"
-
-	para "<PLAYER>, you need"
-	line "more practice!"
-
-	para "But hey, you know"
-	line "that! I'm out of"
-	cont "here. Smell ya!"
+_Route22BattleText2::
+	text "Hi! I like shorts!"
+	line "They're comfy and"
+	cont "easy to wear!"
 	done
 
-_Route22RivalDefeatedText2::
-	text "What!?"
-
-	para "I was just"
-	line "careless!"
+_Route22EndBattleText2::
+	text "I don't"
+	line "believe it!"
 	prompt
 
-_Route22Text_511d0::
-	text "<RIVAL>: Hahaha!"
-	line "<PLAYER>! That's"
-	cont "your best? You're"
-	cont "nowhere near as"
-	cont "good as me, pal!"
+_Route22AfterBattleText2::
+	text "Are you storing"
+	line "your #MON on"
+	cont "PC? Each BOX can"
+	cont "hold 20 #MON!"
+	done
 
-	para "Go train some"
-	line "more! You loser!"
+_Route22BattleText3::
+	text "You looked at me,"
+	line "didn't you?"
+	done
+
+_Route22EndBattleText3::
+	text "You're"
+	line "mean!"
 	prompt
 
-_Route22FrontGateText::
-	text "#MON LEAGUE"
-	line "Front Gate"
+_Route22AfterBattleText3::
+	text "Quit staring if"
+	line "you don't want to"
+	cont "fight!"
+	done
+
+_Route22BattleText4::
+	text "Are you a trainer?"
+	line "Let's fight!"
+	done
+
+_Route22EndBattleText4::
+	text "If I"
+	line "had new #MON I"
+	cont "would've won!"
+	prompt
+
+_Route22AfterBattleText4::
+	text "If a #MON BOX"
+	line "on the PC gets"
+	cont "full, just switch"
+	cont "to another BOX!"
+	done
+
+_Route22BattleText5::
+	text "That look you"
+	line "gave me, it's so"
+	cont "intriguing!"
+	done
+
+_Route22EndBattleText5::
+	text "Be nice!"
+	prompt
+
+_Route22AfterBattleText5::
+	text "Avoid fights by"
+	line "not letting"
+	cont "people see you!"
+	done
+
+_Route22BattleText6::
+	text "Hey! You're not"
+	line "wearing shorts!"
+	done
+
+_Route22EndBattleText6::
+	text "Lost!"
+	line "Lost! Lost!"
+	prompt
+
+_Route22AfterBattleText6::
+	text "I always wear"
+	line "shorts, even in"
+	cont "winter!"
+	done
+
+_Route22BattleText7::
+	text "You can fight my"
+	line "new #MON!"
+	done
+
+_Route22EndBattleText7::
+	text "Done"
+	line "like dinner!"
+	prompt
+
+_Route22AfterBattleText7::
+	text "Trained #MON"
+	line "are stronger than"
+	cont "the wild ones!"
+	done
+
+_Route22BattleText8::
+	text "Eek! Did you"
+	line "touch me?"
+	done
+
+_Route22EndBattleText8::
+	text "That's it?"
+	prompt
+
+_Route22AfterBattleText8::
+	text "ROUTE 4 is at the"
+	line "foot of MT.MOON."
+	done
+
+_Route22Text10::
+	text "ROUTE 3"
+	line "MT.MOON AHEAD"
 	done
