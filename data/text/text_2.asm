@@ -280,8 +280,8 @@ _CeladonCityHotelText::
 	done
 
 _BookcaseText::
-	text "Crammed full of"
-	line "#MON books!"
+	text "There's a lot of"
+	line "CAPMON books!"
 	done
 
 _NewBicycleText::
@@ -290,14 +290,17 @@ _NewBicycleText::
 	done
 
 _PushStartText::
-	text "Push START to"
-	line "open the MENU!"
+	text "Test"
 	done
 
 _SaveOptionText::
-	text "The SAVE option is"
-	line "on the MENU"
+	text "The RECORD option"
+	line "is on the MENU"
 	cont "screen."
+	
+	para "You can use it to"
+	line "check and save"
+	cont "your progress."
 	done
 
 _StrengthsAndWeaknessesText::
@@ -419,25 +422,29 @@ _OakLabEmailText::
 
 	para "..."
 
-	para "Calling all"
-	line "#MON trainers!"
-
-	para "The elite trainers"
-	line "of #MON LEAGUE"
-	cont "are ready to take"
-	cont "on all comers!"
-
-	para "Bring your best"
-	line "#MON and see"
-	cont "how you rate as a"
-	cont "trainer!"
-
-	para "#MON LEAGUE HQ"
-	line "INDIGO PLATEAU"
-
-	para "PS: PROF.OAK,"
-	line "please visit us!"
-	cont "..."
+	para "It's talking about"
+	line "the RANKs that a"
+	cont "DEALER can climb"
+	cont "to."
+	
+	para "Every DEALER"
+	line "starts as an"
+	cont "EGG RANK."
+	
+	para "As they battle"
+	line "and win against"
+	cont "the CHAMPs, they"
+	
+	para "can become a"
+	line "CAPTAIN or even"
+	cont "a MASTER!"
+	
+	para "To this day,"
+	line "the only person"
+	cont "that achieved the"
+	cont "title of"
+	cont "EXCELLENT DEALER"
+	cont "was DR.CAPMON!"	
 	done
 
 _GameCornerCoinCaseText::
@@ -798,8 +805,8 @@ _IndigoPlateauStatuesText3::
 	done
 
 _PokemonBooksText::
-	text "Crammed full of"
-	line "#MON books!"
+	text "It's full of"
+	line "CAPMON books!"
 	done
 
 _DiglettSculptureText::

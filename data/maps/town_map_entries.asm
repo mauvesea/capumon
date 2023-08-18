@@ -56,7 +56,7 @@ ENDM
 ; the appearance of buildings and dungeons in the town map
 InternalMapEntries:
 	; maximum map id subject to this rule, x, y, name
-	internal_map OAKS_LAB,                       2, 11, PalletTownName
+	internal_map BLUES_HOUSE,                    2, 11, PalletTownName
 	internal_map VIRIDIAN_GYM,                   2,  8, ViridianCityName
 	internal_map VIRIDIAN_FOREST_SOUTH_GATE,     2,  6, Route2Name
 	internal_map VIRIDIAN_FOREST,                2,  4, ViridianForestName

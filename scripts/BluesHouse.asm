@@ -1,5 +1,5 @@
 BluesHouse_Script:
-	call EnableAutoTextBoxDrawing
+	jp EnableAutoTextBoxDrawing
 
 BluesHouse_TextPointers:
 	dw NanamiScript
