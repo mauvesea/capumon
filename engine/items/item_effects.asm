@@ -23,8 +23,8 @@ ItemUsePtrTable:
 	dw ItemUseBall       ; POKE_BALL
 	dw ItemUseTownMap    ; TOWN_MAP
 	dw ItemUseBicycle    ; BICYCLE
-	dw ItemUseSurfboard  ; out-of-battle Surf effect
-	dw ItemUseBall       ; SAFARI_BALL
+	dw ItemUseSurfboard  ; RAPRUTH_SURF
+	dw ItemUseFly        ; OMOM_PLUME
 	dw ItemUsePokedex    ; POKEDEX
 	dw ItemUseEvoStone   ; MOON_STONE
 	dw ItemUseMedicine   ; ANTIDOTE
@@ -756,6 +756,35 @@ SurfingGotOnText:
 
 SurfingNoPlaceToGetOffText:
 	text_far _SurfingNoPlaceToGetOffText
+	text_end
+	
+ItemUseFly:
+	ld a, [wIsInBattle]
+	and a
+	jp nz, ItemUseNotTime
+	call CheckIfInOutsideMap
+	jr z, .canFly
+	jp NoFlyingAllowedHere
+	call ItemUseReloadOverworldData
+	call PrintText
+	jr .FinishFly
+.canFly
+	call ChooseFlyDestination
+	ld a, [wd732]
+	bit 3, a ; did the player decide to fly?
+	jp nz, .FinishFly
+	call LoadFontTilePatterns
+;	ld hl, NoFlyingAllowedHereText
+;	call PrintText	
+	ld hl, wd72e
+	set 1, [hl]
+;	jp StartMenu_Pokemon
+.FinishFly:
+;	call ItemUseReloadOverworldData
+	ret	
+	
+NoFlyingAllowedHereText:
+	text_far _CannotFlyHereText
 	text_end
 
 ItemUsePokedex:
@@ -2303,6 +2332,10 @@ ThrowBallAtTrainerMon:
 
 NoCyclingAllowedHere:
 	ld hl, NoCyclingAllowedHereText
+	jr ItemUseFailed
+	
+NoFlyingAllowedHere:
+	ld hl, NoFlyingAllowedHereText
 	jr ItemUseFailed
 
 BoxFullCannotThrowBall:

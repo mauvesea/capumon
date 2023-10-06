@@ -130,8 +130,8 @@ StartMenu_Pokemon::
 	dw .teleport
 	dw .softboiled
 .fly
-	bit BIT_THUNDERBADGE, a
-	jp z, .newBadgeRequired
+;	bit BIT_THUNDERBADGE, a
+;	jp z, .newBadgeRequired
 	call CheckIfInOutsideMap
 	jr z, .canFly
 	ld a, [wWhichPokemon]

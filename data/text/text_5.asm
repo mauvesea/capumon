@@ -47,8 +47,7 @@ _CannotUseTeleportNowText::
 	prompt
 
 _CannotFlyHereText::
-	text_ram wcd6d
-	text " can't"
+	text "You can't"
 	line "FLY here."
 	prompt
 

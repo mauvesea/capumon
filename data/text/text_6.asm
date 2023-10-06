@@ -58,9 +58,7 @@ _ItemUseBallText06::
 
 _SurfingGotOnText::
 	text "<PLAYER> got on"
-	line "@"
-	text_ram wcd6d
-	text "!"
+	line "RAPRUTH!@"
 	prompt
 
 _SurfingNoPlaceToGetOffText::
@@ -219,9 +217,7 @@ _NoCyclingAllowedHereText::
 
 _NoSurfingHereText::
 	text "No SURFing on"
-	line "@"
-	text_ram wcd6d
-	text " here!"
+	line "RAPRUTH here!"
 	prompt
 
 _BoxFullCannotThrowBallText::
