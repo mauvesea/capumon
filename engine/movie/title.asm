@@ -283,5 +283,5 @@ DrawPlayerCharacter:
 	jr nz, .loop
 	ret
 	
-NintenText: db "Ninten@"
+NintenText: db "YUUICHI@"
 SonyText:   db "Sony@"

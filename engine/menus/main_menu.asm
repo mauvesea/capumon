@@ -359,7 +359,10 @@ DisplayContinueGameInfo:
 	ld de, wPlayerName
 	call PlaceString
 	hlcoord 17, 11
-	call PrintNumBadges
+	;call PrintNumBadges
+	ld de, wCharisma
+	lb bc, 1, 2
+	call PrintNumber
 	hlcoord 16, 13
 	call PrintNumOwnedMons
 	hlcoord 11, 15
@@ -388,13 +391,17 @@ PrintSaveScreenText:
 	hlcoord 10, 2
 	ld de, wPlayerName
 	call PlaceString
-	hlcoord 15, 4
-	call PrintNumBadges
+	hlcoord 8, 4
+	call PrintRank	
 	hlcoord 14, 6
+	ld de, wCharisma
+	lb bc, 1, 3
+	call PrintNumber	
+	hlcoord 14, 8
 	call PrintNumOwnedMons
-	hlcoord 10, 8
+	hlcoord 10, 10
 	call PrintMoney
-	hlcoord 11, 10
+	hlcoord 11, 12
 	call PrintPlayTime
 	ld a, $1
 	ldh [hAutoBGTransferEnabled], a
@@ -410,6 +417,65 @@ PrintNumBadges:
 	ld de, wNumSetBits
 	lb bc, 1, 2
 	jp PrintNumber
+
+PrintRank:
+	ld a, [wCharisma]
+	cp 10
+	jr nz, .Charisma9
+	ld de, CharismaRank10
+	jr .next
+.Charisma9
+	ld a, [wCharisma]
+	cp 9
+	jr nz, .Charisma8
+	ld de, CharismaRank9
+	jr .next
+.Charisma8
+	ld a, [wCharisma]
+	cp 8
+	jr nz, .Charisma7
+	ld de, CharismaRank8
+	jr .next
+.Charisma7
+	ld a, [wCharisma]
+	cp 7
+	jr nz, .Charisma6
+	ld de, CharismaRank7
+	jr .next
+.Charisma6
+	ld a, [wCharisma]
+	cp 6
+	jr nz, .Charisma5
+	ld de, CharismaRank6
+	jr .next
+.Charisma5
+	ld a, [wCharisma]
+	cp 5
+	jr nz, .Charisma4
+	ld de, CharismaRank5
+	jr .next
+.Charisma4
+	ld a, [wCharisma]
+	cp 4
+	jr nz, .Charisma3
+	ld de, CharismaRank4
+	jr .next
+.Charisma3
+	ld a, [wCharisma]
+	cp 3
+	jr nz, .Charisma2
+	ld de, CharismaRank3
+	jr .next
+.Charisma2
+	ld a, [wCharisma]
+	cp 2
+	jr nz, .Charisma1
+	ld de, CharismaRank2
+	jr .next
+.Charisma1	
+	ld de, CharismaRank1
+.next	
+	jp PlaceString
 
 PrintNumOwnedMons:
 	push hl
@@ -437,11 +503,42 @@ PrintMoney:
 	jp PrintBCDNumber
 
 SaveScreenInfoText:
-	db   "Dealer:"
-	next "Charisma:"
-	next "Field Guide:"
-	next "Gold:"
-	next "Time:@"
+	db   "DEALER:"
+	next "RANK:"
+	next "CHARISMA:"
+	next "ENCYCLOPEDIA:"
+	next "GOLD:"
+	next "TIME:@"
+
+CharismaRank1:
+	db "EGG@"
+	
+CharismaRank2:
+	db "CHICK@"
+	
+CharismaRank3:
+	db "BRONZE@"
+	
+CharismaRank4:
+	db "SILVER@"
+	
+CharismaRank5:
+	db "GOLD@"
+	
+CharismaRank6:
+	db "P.CAPTAIN@"
+	
+CharismaRank7:
+	db "CAPTAIN@"
+
+CharismaRank8:
+	db "P.MASTER@"
+	
+CharismaRank9:
+	db "MASTER@"
+	
+CharismaRank10:
+	db "EXCELLENT@"
 
 DisplayOptionMenu:
 	hlcoord 0, 0

@@ -7,6 +7,8 @@
 ; http://www.ign.com/articles/2000/02/09/abc-news-pokamon-chat-transcript
 
 SetIshiharaTeam:
+
+
 	ld de, IshiharaTeam
 .loop
 	ld a, [de]
@@ -38,10 +40,10 @@ IF DEF(_DEBUG)
 	dec a ; $ff
 	ld [wTownVisitedFlag], a
 	ld [wTownVisitedFlag + 1], a
-
-	; Get all badges except Earth Badge.
-	ld a, ~(1 << BIT_EARTHBADGE)
-	ld [wObtainedBadges], a
+	
+	; Max Charisma
+	ld a, 10
+	ld [wCharisma], a
 
 	call SetIshiharaTeam
 

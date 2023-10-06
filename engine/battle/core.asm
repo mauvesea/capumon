@@ -3992,28 +3992,75 @@ CheckForDisobedience:
 	ld a, [wPlayerMonNumber]
 	call AddNTimes
 	ld a, [wPlayerID]
-	cp [hl]
-	jr nz, .monIsTraded
-	inc hl
-	ld a, [wPlayerID + 1]
-	cp [hl]
-	jp z, .canUseMove
+;	cp [hl]
+;	jr nz, .monIsTraded
+;	inc hl
+;	ld a, [wPlayerID + 1]
+;	cp [hl]
+;	jp z, .canUseMove
 ; it was traded
-.monIsTraded
+;.monIsTraded
 ; what level might disobey?
-	ld hl, wObtainedBadges
-	bit BIT_EARTHBADGE, [hl]
+	ld a, [wCharisma]
+	cp 10
+	jr nz, .Charisma9
 	ld a, 101
-	jr nz, .next
-	bit BIT_MARSHBADGE, [hl]
-	ld a, 70
-	jr nz, .next
-	bit BIT_RAINBOWBADGE, [hl]
+	jr .next
+.Charisma9
+	ld a, [wCharisma]
+	cp 9
+	jr nz, .Charisma8
+	ld a, 55
+	jr .next
+.Charisma8
+	ld a, [wCharisma]
+	cp 8
+	jr nz, .Charisma7
 	ld a, 50
-	jr nz, .next
-	bit BIT_CASCADEBADGE, [hl]
+	jr .next
+.Charisma7
+	ld a, [wCharisma]
+	cp 7
+	jr nz, .Charisma6
+	ld a, 45
+	jr .next
+.Charisma6
+	ld a, [wCharisma]
+	cp 6
+	jr nz, .Charisma5
+	ld a, 40
+	jr .next
+.Charisma5
+	ld a, [wCharisma]
+	cp 5
+	jr nz, .Charisma4
+	ld a, 35
+	jr .next
+.Charisma4
+	ld a, [wCharisma]
+	cp 4
+	jr nz, .Charisma3
 	ld a, 30
-	jr nz, .next
+	jr .next
+.Charisma3
+	ld a, [wCharisma]
+	cp 3
+	jr nz, .Charisma2
+	ld a, 25
+	jr .next
+.Charisma2
+	ld a, [wCharisma]
+	cp 2
+	jr nz, .Charisma1
+	ld a, 20
+	jr .next
+.Charisma1
+	ld a, [wCharisma]
+	cp 1
+	jr nz, .Charisma0
+	ld a, 15
+	jr .next
+.Charisma0
 	ld a, 10
 .next
 	ld b, a
