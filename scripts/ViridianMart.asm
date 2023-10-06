@@ -1,84 +1,14 @@
 ViridianMart_Script:
-	call ViridianMartScript_1d47d
-	call EnableAutoTextBoxDrawing
-	ld hl, ViridianMart_ScriptPointers
-	ld a, [wViridianMartCurScript]
-	jp CallFunctionInTable
-
-ViridianMartScript_1d47d:
-	CheckEvent EVENT_OAK_GOT_PARCEL
-	jr nz, .delivered_parcel
-	ld hl, ViridianMart_TextPointers
-	jr .done
-.delivered_parcel
-	ld hl, ViridianMart_TextPointers2
-.done
-	ld a, l
-	ld [wMapTextPtr], a
-	ld a, h
-	ld [wMapTextPtr+1], a
-	ret
-
-ViridianMart_ScriptPointers:
-	dw ViridianMartScript0
-	dw ViridianMartScript1
-	dw ViridianMartScript2
-
-ViridianMartScript0:
-	call UpdateSprites
-	ld a, $4
-	ldh [hSpriteIndexOrTextID], a
-	call DisplayTextID
-	ld hl, wSimulatedJoypadStatesEnd
-	ld de, RLEMovement1d4bb
-	call DecodeRLEList
-	dec a
-	ld [wSimulatedJoypadStatesIndex], a
-	call StartSimulatingJoypadStates
-	ld a, $1
-	ld [wViridianMartCurScript], a
-	ret
-
-RLEMovement1d4bb:
-	db D_LEFT, 1
-	db D_UP, 2
-	db -1 ; end
-
-ViridianMartScript1:
-	ld a, [wSimulatedJoypadStatesIndex]
-	and a
-	ret nz
-	call Delay3
-	ld a, $5
-	ldh [hSpriteIndexOrTextID], a
-	call DisplayTextID
-	lb bc, OAKS_PARCEL, 1
-	call GiveItem
-	SetEvent EVENT_GOT_OAKS_PARCEL
-	ld a, $2
-	ld [wViridianMartCurScript], a
-	; fallthrough
-ViridianMartScript2:
-	ret
+	jp EnableAutoTextBoxDrawing
 
 ViridianMart_TextPointers:
-	dw ViridianMartText1
-	dw ViridianMartText2
-	dw ViridianMartText3
-	dw ViridianMartText4
-	dw ViridianMartText5
-
-ViridianMart_TextPointers2:
 	dw ViridianCashierText
 	dw ViridianMartText2
 	dw ViridianMartText3
+	dw ViridianMartText4
 
 ViridianMartText1:
 	text_far _ViridianMartText1
-	text_end
-
-ViridianMartText4:
-	text_far _ViridianMartText4
 	text_end
 
 ViridianMartText5:
@@ -92,4 +22,69 @@ ViridianMartText2:
 
 ViridianMartText3:
 	text_far _ViridianMartText3
+	text_end
+
+ViridianMartText4:
+	text_asm
+	CheckEvent EVENT_BOUGHT_MAGIKARP, 1
+	jp c, .alreadyBoughtMagikarp
+	ld hl, .Text1
+	call PrintText
+	ld a, MONEY_BOX
+	ld [wTextBoxID], a
+	call DisplayTextBoxID
+	call YesNoChoice
+	ld a, [wCurrentMenuItem]
+	and a
+	jp nz, .choseNo
+	ldh [hMoney], a
+	ldh [hMoney + 2], a
+	ld a, $5
+	ldh [hMoney + 1], a
+	call HasEnoughMoney
+	jr nc, .enoughMoney
+	ld hl, .NoMoneyText
+	jr .printText
+.enoughMoney
+	lb bc, MAGIKARP, 5
+	call GivePokemon
+	jr nc, .done
+	xor a
+	ld [wPriceTemp], a
+	ld [wPriceTemp + 2], a
+	ld a, $5
+	ld [wPriceTemp + 1], a
+	ld hl, wPriceTemp + 2
+	ld de, wPlayerMoney + 2
+	ld c, $3
+	predef SubBCDPredef
+	ld a, MONEY_BOX
+	ld [wTextBoxID], a
+	call DisplayTextBoxID
+	SetEvent EVENT_BOUGHT_MAGIKARP
+	jr .done
+.choseNo
+	ld hl, .RefuseText
+	jr .printText
+.alreadyBoughtMagikarp
+	ld hl, .Text2
+.printText
+	call PrintText
+.done
+	jp TextScriptEnd
+
+.Text1
+	text_far _MagikarpSalesmanText1
+	text_end
+
+.RefuseText
+	text_far _MagikarpSalesmanNoText
+	text_end
+
+.NoMoneyText
+	text_far _MagikarpSalesmanNoMoneyText
+	text_end
+
+.Text2
+	text_far _MagikarpSalesmanText2
 	text_end
