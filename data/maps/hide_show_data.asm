@@ -4,7 +4,7 @@ MapHSPointers:
 ; entries correspond to map ids
 	table_width 2, MapHSPointers
 	dw NoHS
-	dw ViridianCityHS
+	dw NoHS
 	dw PewterCityHS
 	dw CeruleanCityHS
 	dw NoHS

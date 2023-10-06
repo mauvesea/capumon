@@ -15,38 +15,16 @@ ViridianCityScript0:
 	jp ViridianCityScript_1903d
 
 ViridianCityScript_1900b:
-	CheckEvent EVENT_VIRIDIAN_GYM_OPEN
-	ret nz
-	ld a, [wObtainedBadges]
-	cp ~(1 << BIT_EARTHBADGE)
-	jr nz, .gym_closed
-	SetEvent EVENT_VIRIDIAN_GYM_OPEN
-	ret
-.gym_closed
-	ld a, [wYCoord]
-	cp 8
-	ret nz
-	ld a, [wXCoord]
-	cp 32
-	ret nz
-	ld a, $e
-	ldh [hSpriteIndexOrTextID], a
-	call DisplayTextID
-	xor a
-	ldh [hJoyHeld], a
-	call ViridianCityScript_190cf
-	ld a, $3
-	ld [wViridianCityCurScript], a
 	ret
 
 ViridianCityScript_1903d:
 	CheckEvent EVENT_GOT_POKEDEX
 	ret nz
 	ld a, [wYCoord]
-	cp 9
+	cp 7
 	ret nz
 	ld a, [wXCoord]
-	cp 19
+	cp 15
 	ret nz
 	ld a, $5
 	ldh [hSpriteIndexOrTextID], a
@@ -146,17 +124,8 @@ ViridianCityText1:
 	text_end
 
 ViridianCityText2:
-	text_asm
-	ld a, [wObtainedBadges]
-	cp ~(1 << BIT_EARTHBADGE)
-	ld hl, ViridianCityText_19127
-	jr z, .done
-	CheckEvent EVENT_BEAT_VIRIDIAN_GYM_GIOVANNI
-	jr nz, .done
-	ld hl, ViridianCityText_19122
-.done
-	call PrintText
-	jp TextScriptEnd
+	text_far _ViridianCityText2
+	text_end
 
 ViridianCityText_19122:
 	text_far _ViridianCityText_19122
@@ -196,17 +165,8 @@ ViridianCityText_19157:
 	text_end
 
 ViridianCityText4:
-	text_asm
-	CheckEvent EVENT_GOT_POKEDEX
-	jr nz, .gotPokedex
-	ld hl, ViridianCityText_19175
-	call PrintText
-	jr .done
-.gotPokedex
-	ld hl, ViridianCityText_1917a
-	call PrintText
-.done
-	jp TextScriptEnd
+	text_far _ViridianCityText4
+	text_end
 
 ViridianCityText_19175:
 	text_far _ViridianCityText_19175
@@ -218,39 +178,32 @@ ViridianCityText_1917a:
 
 ViridianCityText5:
 	text_asm
+	CheckEvent EVENT_GOT_POKEDEX
+	jr nz, .GotDex
 	ld hl, ViridianCityText_19191
 	call PrintText
 	call ViridianCityScript_190cf
 	ld a, $3
 	ld [wViridianCityCurScript], a
+	jr .end
+.GotDex
+	ld hl, ViridianCityText_19191_2
+	call PrintText
+.end
 	jp TextScriptEnd
 
 ViridianCityText_19191:
 	text_far _ViridianCityText_19191
 	text_end
+	
+ViridianCityText_19191_2:
+	text_far _ViridianCityText_19191_2
+	text_end
 
 ViridianCityText6:
-	text_asm
-	CheckEvent EVENT_GOT_TM42
-	jr nz, .got_item
-	ld hl, ViridianCityText_191ca
-	call PrintText
-	lb bc, TM_DREAM_EATER, 1
-	call GiveItem
-	jr nc, .bag_full
-	ld hl, ReceivedTM42Text
-	call PrintText
-	SetEvent EVENT_GOT_TM42
-	jr .done
-.bag_full
-	ld hl, TM42NoRoomText
-	call PrintText
-	jr .done
-.got_item
-	ld hl, TM42Explanation
-	call PrintText
-.done
-	jp TextScriptEnd
+	text_far _ViridianCityText6
+	text_end
+
 
 ViridianCityText_191ca:
 	text_far _ViridianCityText_191ca
@@ -270,25 +223,8 @@ TM42NoRoomText:
 	text_end
 
 ViridianCityText7:
-	text_asm
-	ld hl, ViridianCityText_1920a
-	call PrintText
-	ld c, 2
-	call DelayFrames
-	call YesNoChoice
-	ld a, [wCurrentMenuItem]
-	and a
-	jr z, .refused
-	ld hl, ViridianCityText_1920f
-	call PrintText
-	ld a, $1
-	ld [wViridianCityCurScript], a
-	jr .done
-.refused
-	ld hl, ViridianCityText_19214
-	call PrintText
-.done
-	jp TextScriptEnd
+	text_far _ViridianCityText7
+	text_end
 
 ViridianCityText_1920a:
 	text_far _ViridianCityText_1920a

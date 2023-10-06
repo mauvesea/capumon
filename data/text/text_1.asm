@@ -47,14 +47,13 @@ _BoulderText::
 	done
 
 _MartSignText::
-	text "All your item"
-	line "needs fulfilled!"
-	cont "#MON MART"
+	text "Lots of tools!"
+	cont "FRIENDLY SHOP"
 	done
 
 _PokeCenterSignText::
-	text "Heal Your #MON!"
-	line "#MON CENTER"
+	text "Heal Your CAPMON!"
+	line "CAPMON INN"
 	done
 
 _FoundItemText::

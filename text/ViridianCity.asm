@@ -1,12 +1,79 @@
 _ViridianCityText1::
-	text "Those # BALLs"
-	line "at your waist!"
-	cont "You have #MON!"
+	text "Huh? You're a"
+	line "CAPMON DEALER,"
+	cont "aren't you?"
+	
+	para "I can see all"
+	line "those CAPSULEs"
+	cont "in your belt!"
 
-	para "It's great that"
-	line "you can carry and"
-	cont "use #MON any"
-	cont "time, anywhere!"
+	para "It must be great."
+	
+	para "I wanna become a"
+	line "CAPMON DEALER too"
+	cont "when I grow up!"
+	done
+
+_ViridianCityText2::
+	text "I work here with"
+	line "DR.CAPMON, but"
+	cont "I'm on my break"
+	cont "right now."
+	
+	para "Researching CAPMON"
+	line "is tough!"
+	done
+	
+_ViridianCityText4::
+	text "TOKIWA's CHAMP..."
+	
+	para "His name is"
+	line "YUJIROU!"
+	
+	para "He's the strongest"
+	line "CAPMON DEALER"
+	cont "I've ever seen!"
+	done	
+
+_ViridianCityText6::
+	text "SYLPH CO. is"
+	line "amazing!"
+	
+	para "Did you know they"
+	line "invented CAPSULEs"
+	cont "for CAPMON?"
+	
+	para "We can tame CAPMON"
+	line "now thanks to"
+	cont "them!"
+	
+	para "I'm planning on"
+	line "going to YAMABUKI"
+	cont "to visit their"
+	cont "OFFICE."
+	done
+	
+_ViridianCityText7::
+	text "I want to see"
+	line "my boyfriend"
+	cont "in NIBI."
+	
+	para "But I'm too"
+	line "scared to walk"
+	cont "through TOKIWA"
+	cont "FOREST!"
+	done
+	
+_ViridianCityText_19191_2::
+	text "If your CAPMON"
+	line "aren't listening"
+	cont "to you, it means"
+	cont "you gotta be more"
+	cont "CHARISMAtic."
+	
+	para "You can increase"
+	line "your CHARISMA by"
+	cont "defeating CHAMPs."
 	done
 
 _ViridianCityText_19122::
@@ -23,23 +90,34 @@ _ViridianCityText_19127::
 	done
 
 _ViridianCityText_1914d::
-	text "You want to know"
-	line "about the 2 kinds"
-	cont "of caterpillar"
-	cont "#MON?"
+	text "Hello big bro!"
+	
+	para "Have you ever"
+	line "heard about"
+	cont "PIP?"
 	done
 
 _ViridianCityText_19152::
-	text "Oh, OK then!"
+	text "Waah... Really?"
+	
+	para "PIP is a very"
+	line "cute CAPMON."
+	
+	para "I want one as"
+	line "a pet!"
+	
+	para "But I heard"
+	line "they're pretty"
+	cont "rare..."
+	
+	para "Hmm... Maybe that's"
+	line "why you haven't"
+	cont "heard of it."
 	done
 
 _ViridianCityText_19157::
-	text "CATERPIE has no"
-	line "poison, but"
-	cont "WEEDLE does."
-
-	para "Watch out for its"
-	line "POISON STING!"
+	text "Tee-hee..."
+	line "PIP is the cutest!"
 	done
 
 _ViridianCityText_19175::
@@ -58,11 +136,22 @@ _ViridianCityText_1917a::
 	done
 
 _ViridianCityText_19191::
-	text "You can't go"
-	line "through here!"
-
-	para "This is private"
-	line "property!"
+	text "Excuse me..."
+	line "You're a fresh"
+	cont "CAPMON DEALER,"
+	cont "right?"
+	
+	para "I see you don't"
+	line "have much"
+	cont "CHARISMA."
+	
+	para "DR.CAPMON lives"
+	line "here in TOKIWA."
+	
+	para "You should talk"
+	line "to him to learn"
+	cont "more about"
+	cont "CAPMON."
 	done
 
 _ViridianCityText_191ca::
@@ -139,9 +228,9 @@ _ViridianCityText_19219::
 	done
 
 _ViridianCityText8::
-	text "VIRIDIAN CITY "
-	line "The Eternally"
-	cont "Green Paradise"
+	text "TOKIWA CITY "
+	line "The color of"
+	cont "green eternity"
 	done
 
 _ViridianCityText9::
@@ -157,22 +246,12 @@ _ViridianCityText9::
 	done
 
 _ViridianCityText10::
-	text "TRAINER TIPS"
-
-	para "The battle moves"
-	line "of #MON are"
-	cont "limited by their"
-	cont "POWER POINTs, PP."
-
-	para "To replenish PP,"
-	line "rest your tired"
-	cont "#MON at a"
-	cont "#MON CENTER!"
+	text "DR.CAPMON SCHOOL"
 	done
 
 _ViridianCityText13::
-	text "VIRIDIAN CITY"
-	line "#MON GYM"
+	text "TOKIWA CHAMP CUP"
+	line "CHAMP: YUJIROU"
 	done
 
 _ViridianCityText14::
