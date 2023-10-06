@@ -667,6 +667,9 @@ ItemUseBicycle:
 
 ; used for Surf out-of-battle effect
 ItemUseSurfboard:
+	ld a, [wIsInBattle]
+	and a
+	jp nz, ItemUseNotTime
 	ld a, [wWalkBikeSurfState]
 	ld [wWalkBikeSurfStateCopy], a
 	cp 2 ; is the player already surfing?
@@ -678,13 +681,14 @@ ItemUseSurfboard:
 	call CheckForTilePairCollisions
 	jp c, SurfingAttemptFailed
 .surf
+	call ItemUseReloadOverworldData
 	call .makePlayerMoveForward
 	ld hl, wd730
 	set 7, [hl]
 	ld a, 2
 	ld [wWalkBikeSurfState], a ; change player state to surfing
-	call PlayDefaultMusic ; play surfing music
 	ld hl, SurfingGotOnText
+	call PlayDefaultMusic ; play surfing music
 	jp PrintText
 .tryToStopSurfing
 	xor a
@@ -714,6 +718,7 @@ ItemUseSurfboard:
 	ld hl, SurfingNoPlaceToGetOffText
 	jp PrintText
 .stopSurfing
+	call ItemUseReloadOverworldData
 	call .makePlayerMoveForward
 	ld hl, wd730
 	set 7, [hl]
