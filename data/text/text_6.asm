@@ -58,7 +58,7 @@ _ItemUseBallText06::
 
 _SurfingGotOnText::
 	text "<PLAYER> got on"
-	line "RAPRUTH!@"
+	line "RAPRUTH!"
 	prompt
 
 _SurfingNoPlaceToGetOffText::
