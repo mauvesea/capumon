@@ -236,9 +236,12 @@ _ViridianCityText_19219::
 	done
 
 _ViridianCityText8::
-	text "TOKIWA CITY "
-	line "The color of"
-	cont "green eternity"
+	text "This is..."
+	line "TOKIWA CITY!"
+	
+	para "Tokiwa is the"
+	line "color of green"
+	cont "eternity."
 	done
 
 _ViridianCityText9::

@@ -137,7 +137,6 @@ ViridianCityText_19127:
 
 ViridianCityText3:
 	text_asm
-
    	ld a, [wPlayerGender]
 	and a
 	jr z, .BoyText
