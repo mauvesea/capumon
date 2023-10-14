@@ -96,7 +96,15 @@ _ViridianCityText_1914d::
 	line "heard about"
 	cont "PIP?"
 	done
-
+	
+_ViridianCityText_1914d2::	
+	text "Hello big sis!"
+	
+	para "Have you ever"
+	line "heard about"
+	cont "PIP?"
+	done
+	
 _ViridianCityText_19152::
 	text "Waah... Really?"
 	

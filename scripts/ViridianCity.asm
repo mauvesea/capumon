@@ -137,7 +137,15 @@ ViridianCityText_19127:
 
 ViridianCityText3:
 	text_asm
+
+   	ld a, [wPlayerGender]
+	and a
+	jr z, .BoyText
+	ld hl, ViridianCityText_1914d2
+	jr .next
+.BoyText	
 	ld hl, ViridianCityText_1914d
+.next
 	call PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
@@ -154,6 +162,10 @@ ViridianCityText3:
 
 ViridianCityText_1914d:
 	text_far _ViridianCityText_1914d
+	text_end
+	
+ViridianCityText_1914d2:
+	text_far _ViridianCityText_1914d2
 	text_end
 
 ViridianCityText_19152:
