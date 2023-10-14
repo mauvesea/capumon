@@ -43,7 +43,7 @@ Moves:
 	move HORN_ATTACK,  NO_ADDITIONAL_EFFECT,        65, NORMAL,       100, 25
 	move FURY_ATTACK,  TWO_TO_FIVE_ATTACKS_EFFECT,  15, NORMAL,        85, 20
 	move HORN_DRILL,   OHKO_EFFECT,                  1, NORMAL,        30,  5
-	move TACKLE,       NO_ADDITIONAL_EFFECT,        35, NORMAL,        95, 35
+	move TACKLE,       NO_ADDITIONAL_EFFECT,        40, NORMAL,        90, 30
 	move BODY_SLAM,    PARALYZE_SIDE_EFFECT2,       85, NORMAL,       100, 15
 	move WRAP,         TRAPPING_EFFECT,             15, NORMAL,        85, 20
 	move TAKE_DOWN,    RECOIL_EFFECT,               90, NORMAL,        85, 20
@@ -55,7 +55,7 @@ Moves:
 	move PIN_MISSILE,  TWO_TO_FIVE_ATTACKS_EFFECT,  14, NORMAL,        85, 20
 	move LEER,         DEFENSE_DOWN1_EFFECT,         0, NORMAL,       100, 30
 	move BITE,         FLINCH_SIDE_EFFECT1,         60, NORMAL,       100, 25
-	move GROWL,        ATTACK_DOWN1_EFFECT,          0, NORMAL,       100, 40
+	move GROWL,        ATTACK_DOWN1_EFFECT,          0, NORMAL,       100, 30
 	move ROAR,         SWITCH_AND_TELEPORT_EFFECT,   0, NORMAL,       100, 20
 	move SING,         SLEEP_EFFECT,                 0, NORMAL,        55, 15
 	move SUPERSONIC,   CONFUSION_EFFECT,             0, NORMAL,        55, 20
@@ -85,7 +85,7 @@ Moves:
 	move MEGA_DRAIN,   DRAIN_HP_EFFECT,             40, NORMAL,       100, 10
 	move LEECH_SEED,   LEECH_SEED_EFFECT,            0, NORMAL,        90, 10
 	move GROWTH,       SPECIAL_UP1_EFFECT,           0, NORMAL,       100, 40
-	move RAZOR_LEAF,   NO_ADDITIONAL_EFFECT,        55, NORMAL,        95, 25
+	move RAZOR_LEAF,   NO_ADDITIONAL_EFFECT,        70, NORMAL,        90, 30
 	move SOLARBEAM,    CHARGE_EFFECT,              120, NORMAL,       100, 10
 	move POISONPOWDER, POISON_EFFECT,                0, NORMAL,        75, 35
 	move STUN_SPORE,   PARALYZE_EFFECT,              0, NORMAL,        75, 30
@@ -147,10 +147,10 @@ Moves:
 	move KINESIS,      ACCURACY_DOWN1_EFFECT,        0, NORMAL,        80, 15
 	move SOFTBOILED,   HEAL_EFFECT,                  0, NORMAL,       100, 10
 	move HI_JUMP_KICK, JUMP_KICK_EFFECT,            85, NORMAL,        90, 20
-	move GLARE,        PARALYZE_EFFECT,              0, NORMAL,        75, 30
+	move GLARE,        DEFENSE_DOWN1_EFFECT,         0, NORMAL,       100, 30
 	move DREAM_EATER,  DREAM_EATER_EFFECT,         100, NORMAL,       100, 15
 	move POISON_GAS,   POISON_EFFECT,                0, NORMAL,        55, 40
-	move BARRAGE,      TWO_TO_FIVE_ATTACKS_EFFECT,  15, NORMAL,        85, 20
+	move BARRAGE,      TWO_TO_FIVE_ATTACKS_EFFECT,  10, NORMAL,        85, 20
 	move LEECH_LIFE,   DRAIN_HP_EFFECT,             20, NORMAL,       100, 15
 	move LOVELY_KISS,  SLEEP_EFFECT,                 0, NORMAL,        75, 10
 	move SKY_ATTACK,   CHARGE_EFFECT,              140, NORMAL,        90,  5

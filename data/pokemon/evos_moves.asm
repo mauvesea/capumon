@@ -213,6 +213,8 @@ NidoranMEvosMoves:
 ; Evolutions
 	db 0
 ; Learnset
+	db 12, GLARE
+	db 32, RAZOR_LEAF
 	db 0
 
 ClefairyEvosMoves:
@@ -255,6 +257,8 @@ ExeggutorEvosMoves:
 ; Evolutions
 	db 0
 ; Learnset
+	db 12, GLARE
+	db 32, BODY_SLAM
 	db 0
 
 LickitungEvosMoves:
@@ -267,6 +271,8 @@ ExeggcuteEvosMoves:
 ; Evolutions
 	db 0
 ; Learnset
+	db 12, GLARE
+	db 32, EXPLOSION
 	db 0
 
 GrimerEvosMoves:
@@ -285,6 +291,8 @@ NidoranFEvosMoves:
 ; Evolutions
 	db 0
 ; Learnset
+	db 12, GROWL
+	db 32, RAZOR_LEAF
 	db 0
 
 NidoqueenEvosMoves:
