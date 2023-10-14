@@ -8,6 +8,32 @@ _MomWakeUpText::
 	line "door, is looking"
 	cont "for you."
 	done
+	
+_RedsHouse1FDadText::
+	text "DAD: <PLAYER>!"
+	line "I hope you can"
+	cont "become a famous"
+	cont "CAPMON DEALER."
+	
+	para "When I was young,"
+	line "my friend PHILIP"
+	cont "and I used to"
+	cont "be pretty famous."
+	
+	para "Since I've met"
+	line "your MOM though,"
+	cont "I have decided"
+	cont "to take care of"
+	cont "our family"
+	cont "instead."
+	
+	para "PHILIP, on the"
+	line "other hand,"
+	cont "became a CHAMP!"
+	
+	para "I bet you'll"
+	line "meet him someday."
+	done
 
 _MomHealText1::
 	text "MOM: <PLAYER>!"
@@ -18,9 +44,10 @@ _MomHealText1::
 _MomHealText2::
 	text "MOM: Oh good!"
 	line "You and your"
-	cont "#MON are"
+	cont "CAPMON are"
 	cont "looking great!"
-	cont "Take care now!"
+	
+	para "Take care now!"
 	done
 
 _StandByMeText::

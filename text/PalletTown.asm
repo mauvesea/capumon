@@ -12,9 +12,9 @@ _MasaraTown_ManNPCText::
 	line "incredible!"
 
 	para "I heard DR.CAPMON"
-	line "developed a de-"
-	cont "vice called"
-	cont "CAPMON FILE!"
+	line "developed a di-"
+	cont "gital ENCYCLO-"
+	cont "PEDIA."
 	
 	para "It stores data"
 	line "about all CAPMON"
@@ -22,9 +22,10 @@ _MasaraTown_ManNPCText::
 	done
 
 _MasaraTown_SignPostText::
-	text "MASARA TOWN"
-	line "Masara is the"
-	cont "color of pure-"
+	text "This is..."
+	line "MASARA TOWN!"
+	para "Masara is the"
+	line "color of pure-"
 	cont "white beginnings."
 	done
 

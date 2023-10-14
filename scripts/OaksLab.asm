@@ -71,13 +71,20 @@ TokiwaOokidoSchoolDexScript1:
 	ld hl, TokiwaDexText
 	call PrintText
 	jr .ScriptEnd
-.GetDex	
+.GetDex
+	lb bc, POKEDEX, 1
+	call GiveItem
+	jr nc, .bag_full
 	ld a, HS_POKEDEX_1
 	ld [wMissableObjectIndex], a
 	predef HideObject
 	ld hl, TokiwaReceivedDexText
 	call PrintText
 	SetEvent EVENT_GOT_POKEDEX
+	jr .ScriptEnd
+.bag_full
+	ld hl, OokidoSchoolBagFull
+	call PrintText
 .ScriptEnd
 	jp TextScriptEnd
 
@@ -92,12 +99,19 @@ TokiwaOokidoSchoolDexScript2:
 	call PrintText
 	jr .ScriptEnd
 .GetDex	
+	lb bc, POKEDEX, 1
+	call GiveItem
+	jr nc, .bag_full
 	ld a, HS_POKEDEX_2
 	ld [wMissableObjectIndex], a
 	predef HideObject
 	ld hl, TokiwaReceivedDexText
 	call PrintText
 	SetEvent EVENT_GOT_POKEDEX
+	jr .ScriptEnd
+.bag_full
+	ld hl, OokidoSchoolBagFull
+	call PrintText
 .ScriptEnd
 	jp TextScriptEnd
 	
@@ -127,6 +141,10 @@ OokidoDexText3:
 	
 OaksLabText_1d31d:
 	text_far _OaksLabText_1d31d
+	text_end
+	
+OokidoSchoolBagFull:
+	text_far _OokidoSchoolBagFull
 	text_end
 
 TokiwaDexText:

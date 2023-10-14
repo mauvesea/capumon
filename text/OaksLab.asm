@@ -59,8 +59,15 @@ _OokidoDexText3::
 
 _TokiwaReceivedDexText::
 	text "<PLAYER> got the"
-	line "ENCYCLOPEDIA!"
-	prompt
+	line "@"
+	text_ram wStringBuffer
+	text "!@"
+	text_end
+	
+_OokidoSchoolBagFull::
+	text "You can't carry"
+	line "any more tools!"
+	done
 	
 _TokiwaOokidoSchoolScientistText::
 	text "I work here with"
