@@ -413,10 +413,10 @@ ChangeBox::
 	inc de
 	ld a, [hl]
 	ld [de], a
-	call RestoreMapTextPointer
+;	call RestoreMapTextPointer
 	call SaveSAVtoSRAM
 	ld hl, wChangeBoxSavedMapTextPointer
-	call SetMapTextPointer
+;	call SetMapTextPointer
 	ld a, SFX_SAVE
 	call PlaySoundWaitForCurrent
 	call WaitForSoundToFinish

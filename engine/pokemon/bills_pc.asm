@@ -106,8 +106,8 @@ BillsPC_::
 	bit 3, a ; accessing Bill's PC through another PC?
 	jr nz, BillsPCMenu
 ; accessing it directly
-	ld a, SFX_TURN_ON_PC
-	call PlaySound
+;	ld a, SFX_TURN_ON_PC
+;	call PlaySound
 	ld hl, SwitchOnText
 	call PrintText
 
@@ -339,11 +339,11 @@ DisplayMonListMenu:
 	ret
 
 BillsPCMenuText:
-	db   "WITHDRAW <PKMN>"
-	next "DEPOSIT <PKMN>"
-	next "RELEASE <PKMN>"
+	db   "WITHDRAW"
+	next "DEPOSIT"
+	next "RELEASE"
 	next "CHANGE BOX"
-	next "SEE YA!"
+	next "QUIT"
 	db "@"
 
 BoxNoPCText:

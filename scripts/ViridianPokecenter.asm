@@ -20,4 +20,5 @@ ViridianPokeCenterText3:
 	text_end
 
 ViridianTradeNurseText:
-	script_cable_club_receptionist
+	script_bills_pc
+	

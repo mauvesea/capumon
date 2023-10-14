@@ -8,7 +8,7 @@ ViridianPokecenter_Object:
 	def_bg_events
 
 	def_object_events
-	object_event  3,  1, SPRITE_NURSE, STAY, DOWN, 1 ; person
+	object_event  3,  1, SPRITE_GRANNY, STAY, DOWN, 1 ; person
 	object_event  2,  5, SPRITE_GENTLEMAN, WALK, UP_DOWN, 2 ; person
 	object_event  4,  3, SPRITE_COOLTRAINER_M, STAY, NONE, 3 ; person
 	object_event  6,  1, SPRITE_LINK_RECEPTIONIST, STAY, DOWN, 4 ; person

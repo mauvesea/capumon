@@ -1,16 +1,15 @@
 _ViridianPokeCenterText2::
-	text "You can use that"
-	line "PC in the corner."
-
-	para "The receptionist"
-	line "told me. So kind!"
+	text "The receptionist"
+	line "in the right can"
+	cont "store your"
+	cont "CAPMON."
+	
+	para "She is so kind!"
 	done
 
 _ViridianPokeCenterText3::
-	text "There's a #MON"
-	line "CENTER in every"
-	cont "town ahead."
-
-	para "They don't charge"
-	line "any money either!"
+	text "There's an INN"
+	line "in every CITY."
+	para "They heal your"
+	line "CAPMON for free!"
 	done

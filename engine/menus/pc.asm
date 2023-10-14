@@ -71,16 +71,16 @@ PKMNLeague:
 	farcall PKMNLeaguePC
 	jr ReloadMainMenu
 BillsPC:
-	ld a, SFX_ENTER_PC
-	call PlaySound
-	call WaitForSoundToFinish
-	CheckEvent EVENT_MET_BILL
-	jr nz, .billsPC ;if you've met bill, use that bill's instead of someone's
-	ld hl, AccessedSomeonesPCText
-	jr .printText
-.billsPC
+;	ld a, SFX_ENTER_PC
+;	call PlaySound
+;	call WaitForSoundToFinish
+;	CheckEvent EVENT_MET_BILL
+;	jr nz, .billsPC ;if you've met bill, use that bill's instead of someone's
+;	ld hl, AccessedSomeonesPCText
+;	jr .printText
+;.billsPC
 	ld hl, AccessedBillsPCText
-.printText
+;.printText
 	call PrintText
 	farcall BillsPC_
 ReloadMainMenu:

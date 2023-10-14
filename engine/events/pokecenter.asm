@@ -18,25 +18,22 @@ DisplayPokemonCenterDialogue_::
 	call LoadScreenTilesFromBuffer1 ; restore screen
 	ld hl, NeedYourPokemonText
 	call PrintText
-	ld a, $18
-	ld [wSprite01StateData1ImageIndex], a ; make the nurse turn to face the machine
-	call Delay3
+	call GBFadeOutToWhite
+	call ReloadMapData
 	predef HealParty
-	farcall AnimateHealingMachine ; do the healing machine animation
-	xor a
-	ld [wAudioFadeOutControl], a
-	ld a, [wAudioSavedROMBank]
-	ld [wAudioROMBank], a
-	ld a, [wMapMusicSoundID]
-	ld [wLastMusicSoundID], a
+	ld a, MUSIC_PKMN_HEALED
 	ld [wNewSoundID], a
 	call PlaySound
+.next
+	ld a, [wChannelSoundIDs]
+	cp MUSIC_PKMN_HEALED
+	jr z, .next
+	ld a, [wMapMusicSoundID]
+	ld [wNewSoundID], a
+	call PlaySound
+	call GBFadeInFromWhite
 	ld hl, PokemonFightingFitText
 	call PrintText
-	ld a, $14
-	ld [wSprite01StateData1ImageIndex], a ; make the nurse bow
-	ld c, a
-	call DelayFrames
 	jr .done
 .declinedHealing
 	call LoadScreenTilesFromBuffer1 ; restore screen
