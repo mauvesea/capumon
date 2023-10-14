@@ -1,7 +1,7 @@
 TrainerNames::
-	db "YOUNGSTER@"
+	db "SHRTSBOY@"
 	db "BUG CATCHER@"
-	db "LASS@"
+	db "MINISKRT@"
 	db "SAILOR@"
 	db "JR.TRAINER♂@"
 	db "JR.TRAINER♀@"

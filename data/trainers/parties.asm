@@ -103,7 +103,7 @@ BugCatcherData:
 
 LassData:
 ; Route 3
-	db 9, PIDGEY, PIDGEY, 0
+	db 4, CLEFAIRY, CLEFAIRY, 0
 	db 10, RATTATA, NIDORAN_M, 0
 	db 3, RHYDON, RHYDON, RHYDON, RHYDON, 0
 ; Route 4

@@ -308,8 +308,8 @@ Route15HS:
 Route16HS:
 	db ROUTE_16, $07, SHOW
 Route22HS:
-	db ROUTE_22, $01, HIDE
-	db ROUTE_22, $02, HIDE
+	db ROUTE_22, $01, SHOW
+	db ROUTE_22, $02, SHOW
 Route24HS:
 	db ROUTE_24, $01, SHOW
 	db ROUTE_24, $08, SHOW

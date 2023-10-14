@@ -27,19 +27,19 @@ Route22_TextPointers:
 Route22TrainerHeaders:
 	def_trainers 2
 Route22TrainerHeader0:
-	trainer EVENT_BEAT_ROUTE_22_TRAINER_0, 2, Route22BattleText1, Route22EndBattleText1, Route22AfterBattleText1
+	trainer EVENT_BEAT_ROUTE_22_TRAINER_0, 3, Route22BattleText1, Route22EndBattleText1, Route22AfterBattleText1
 Route22TrainerHeader1:
 	trainer EVENT_BEAT_ROUTE_22_TRAINER_1, 3, Route22BattleText2, Route22EndBattleText2, Route22AfterBattleText2
 Route22TrainerHeader2:
-	trainer EVENT_BEAT_ROUTE_22_TRAINER_2, 2, Route22BattleText3, Route22EndBattleText3, Route22AfterBattleText3
+	trainer EVENT_BEAT_ROUTE_22_TRAINER_2, 3, Route22BattleText3, Route22EndBattleText3, Route22AfterBattleText3
 Route22TrainerHeader3:
-	trainer EVENT_BEAT_ROUTE_22_TRAINER_3, 1, Route22BattleText4, Route22EndBattleText4, Route22AfterBattleText4
+	trainer EVENT_BEAT_ROUTE_22_TRAINER_3, 3, Route22BattleText4, Route22EndBattleText4, Route22AfterBattleText4
 Route22TrainerHeader4:
-	trainer EVENT_BEAT_ROUTE_22_TRAINER_4, 4, Route22BattleText5, Route22EndBattleText5, Route22AfterBattleText5
+	trainer EVENT_BEAT_ROUTE_22_TRAINER_4, 3, Route22BattleText5, Route22EndBattleText5, Route22AfterBattleText5
 Route22TrainerHeader5:
-	trainer EVENT_BEAT_ROUTE_22_TRAINER_5, 3, Route22BattleText6, Route22EndBattleText6, Route22AfterBattleText6
+	trainer EVENT_BEAT_ROUTE_22_TRAINER_5, 2, Route22BattleText6, Route22EndBattleText6, Route22AfterBattleText6
 Route22TrainerHeader6:
-	trainer EVENT_BEAT_ROUTE_22_TRAINER_6, 3, Route22BattleText7, Route22EndBattleText7, Route22AfterBattleText7
+	trainer EVENT_BEAT_ROUTE_22_TRAINER_6, 2, Route22BattleText7, Route22EndBattleText7, Route22AfterBattleText7
 Route22TrainerHeader7:
 	trainer EVENT_BEAT_ROUTE_22_TRAINER_7, 2, Route22BattleText8, Route22EndBattleText8, Route22AfterBattleText8
 	db -1 ; end
