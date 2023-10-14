@@ -6,7 +6,7 @@ _ScrollTrainerPicAfterBattle:
 	ld b, SET_PAL_BATTLE
 	call RunPaletteCommand
 	callfar _LoadTrainerPic
-	hlcoord 19, 0
+	hlcoord 19, 5
 	ld c, $0
 .scrollLoop
 	inc c

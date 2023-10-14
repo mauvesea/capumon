@@ -105,7 +105,7 @@ LassData:
 ; Route 3
 	db 9, PIDGEY, PIDGEY, 0
 	db 10, RATTATA, NIDORAN_M, 0
-	db 14, JIGGLYPUFF, 0
+	db 3, RHYDON, RHYDON, RHYDON, RHYDON, 0
 ; Route 4
 	db 31, PARAS, PARAS, PARASECT, 0
 ; Mt. Moon 1F

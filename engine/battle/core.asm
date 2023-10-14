@@ -234,7 +234,7 @@ StartBattle:
 	call LoadScreenTilesFromBuffer1
 	hlcoord 1, 5
 	ld a, $9
-	call SlideTrainerPicOffScreen
+;	call SlideTrainerPicOffScreen
 	call SaveScreenTilesToBuffer1
 	ld a, [wWhichPokemon]
 	ld c, a
@@ -931,6 +931,9 @@ TrainerBattleVictory:
 	cp LINK_STATE_BATTLING
 	ld a, b
 	call nz, PlayBattleVictoryMusic
+	hlcoord 0, 0
+	lb bc, 12, 10
+	call ClearScreenArea
 	ld hl, TrainerDefeatedText
 	call PrintText
 	ld a, [wLinkState]
@@ -1237,7 +1240,7 @@ SlideTrainerPicOffScreen:
 .slideStepLoop ; each iteration, the trainer pic is slid one tile left/right
 	push bc
 	push hl
-	ld b, 7 ; number of rows
+	ld b, 12 ; number of rows
 .rowLoop
 	push hl
 	ldh a, [hSlideAmount]
@@ -1411,8 +1414,8 @@ EnemySendOutFirstMon:
 	call LoadScreenTilesFromBuffer1
 .next4
 	call ClearSprites
-	hlcoord 0, 0
-	lb bc, 4, 11
+	hlcoord 10, 0
+	lb bc, 4, 10
 	call ClearScreenArea
 	ld b, SET_PAL_BATTLE
 	call RunPaletteCommand
@@ -1427,7 +1430,7 @@ EnemySendOutFirstMon:
 	call LoadMonFrontSprite
 	ld a, -$31
 	ldh [hStartTileID], a
-	hlcoord 15, 6
+	hlcoord 15, 11
 	predef AnimateSendingOutMon
 	ld a, [wEnemyMonSpecies2]
 	call PlayCry
