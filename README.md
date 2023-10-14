@@ -1,8 +1,13 @@
 # Capsule Monsters
 
-This is a custom game based on [the Pokémon Red and Pokémon Blue disassembly](https://github.com/pret/pokered). It aims to create a new experience using the earliest assets available!
+**Capsule Monsters** was the initial proposal Game Freak made for a monster catching game, which was then renamed to the world-wide famous Pocket Monsters, Pokémon.
 
-![titles](screenshots/title.png)
+This is a custom game based on [the Pokémon Red and Pokémon Blue disassembly](https://github.com/pret/pokered). It aims to create a new experience using the earliest assets available.
+
+Keep in mind that it's supposed to be a simpler RPG, simpler than even the very first Pokémon games. It takes inspiration from early RPGs, such as Dragon Quest/Warrior, Final Fantasy Legend, etc.
+
+![title](screenshots/title.bmp) ![character](screenshots/character.bmp)
+![starter](screenshots/starter.bmp) ![battle](screenshots/battle.bmp)
 
 ## Links
 
