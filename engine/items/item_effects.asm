@@ -788,6 +788,9 @@ NoFlyingAllowedHereText:
 	text_end
 
 ItemUsePokedex:
+	ld a, [wIsInBattle]
+	and a
+	jp nz, ItemUseNotTime
 	predef_jump ShowPokedexMenu
 
 ItemUseEvoStone:

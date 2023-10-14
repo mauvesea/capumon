@@ -281,7 +281,7 @@ HandlePokedexListMenu:
 	ld de, .dashedLine ; print a dashed line in place of the name if the player hasn't seen the pokemon
 	jr .skipGettingName
 .dashedLine ; for unseen pokemon in the list
-	db "----------@"
+	db "--------@"
 .getPokemonName
 	call PokedexToIndex
 	call GetMonName
