@@ -7,8 +7,7 @@ _NanamiText1::
 	line "proud!"
 	para "Here, this is"
 	line "a gift from"
-	para "this big"
-	line "sister!"
+	cont "this big sister!"
 	prompt
 
 _GotMapText::
@@ -30,12 +29,11 @@ _NanamiBagFullText::
 	done
 
 _NanamiText2::
-	text "NANAMI: You"
-	line "can use the"
-	para "TOWN MAP to"
-	line "find out where"
-	para "you are at any"
-	line "moment."
+	text "NANAMI: You can"
+	line "use the TOWN MAP"
+	cont "to find out where"
+	cont "you are at any"
+	cont "moment."
 	done
 
 _NanamiText3::
