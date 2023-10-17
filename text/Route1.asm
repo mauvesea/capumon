@@ -21,7 +21,7 @@ _Route1Text_1cae8::
 
 _Route1Text_1caee::
 	text "We also carry"
-	line "MONSTER BALLs for"
+	line "CAPSULEs for"
 	cont "catching CAPMON!"
 	done
 
@@ -36,8 +36,8 @@ _Route1Text2::
 	cont "grass..."
 	para "So I always take"
 	line "this path when"
-	para "I got to"
-	line "TOKIWA CITY!"
+	para "I go to TOKIWA"
+	line "CITY!"
 	done
 
 _Route1Text3::

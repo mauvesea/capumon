@@ -1731,7 +1731,7 @@ _OakSpeechText1::
 	para "pets, but others"
 	line "actually use them"
 	para "to fight. They are"
-	line "known as Tamers."
+	line "known as DEALERs."
 	
 	para "Now, let's get"
 	line "started!"		
@@ -1749,7 +1749,7 @@ _OakSpeechText2::
 	line "little."
 	
 	para "It's known as"
-	line "HARISAGI!"
+	line "HARIUSA!"
 	prompt
 
 _IntroducePlayerText::
