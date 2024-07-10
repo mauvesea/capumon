@@ -44,9 +44,10 @@ _Route3AfterBattleText2::
 	done
 
 _Route3BattleText3::
-	text "You looked at me,"
-	line "didn't you?"
-	done
+	text "You loo-"
+	line "ked at me, didn't"
+	cont "you?"
+	prompt
 
 _Route3EndBattleText3::
 	text "You're"

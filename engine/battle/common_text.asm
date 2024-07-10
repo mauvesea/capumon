@@ -54,11 +54,15 @@ PrintBeginningBattleText:
 ;	call PlaceString	
 	
 	ld hl, TrainerWantsToFightText
-.wildBattle
-;	push hl
-;	callfar DrawAllPokeballs
-;	pop hl
 	call PrintText
+	ld a, [wLinkState]
+	cp LINK_STATE_BATTLING
+	jr z, .LinkBattle
+	call DisplayPrebattleMenu
+	jr .done
+.wildBattle
+	call PrintText
+.LinkBattle
 	jr .done
 .pokemonTower
 	ld b, SILPH_SCOPE
@@ -71,7 +75,7 @@ PrintBeginningBattleText:
 	and a
 	jr z, .noSilphScope
 	callfar LoadEnemyMonData
-	jr .notPokemonTower
+	jp .notPokemonTower
 .noSilphScope
 	ld hl, EnemyAppearedText
 	call PrintText
@@ -276,3 +280,148 @@ ComeBackText:
 
 BattlePartyText:
 	db "PARTY:@"
+
+
+DisplayPrebattleMenu:
+	hlcoord 0, 12
+	lb bc, 6, 20
+	call ClearScreenArea
+	call SaveScreenTilesToBuffer1
+	ld a, PREBATTLE_MENU_TEMPLATE
+	ld [wTextBoxID], a
+	call DisplayTextBoxID
+.handleBattleMenuInput
+	ld a, [wBattleAndStartSavedMenuItem]
+	ld [wCurrentMenuItem], a
+	ld [wLastMenuItem], a
+	sub 2 ; check if the cursor is in the left column
+	jr c, .leftColumn
+; cursor is in the right column
+	ld [wCurrentMenuItem], a
+	ld [wLastMenuItem], a
+	jr .rightColumn
+.leftColumn ; put cursor in left column of menu
+	ld a, " "
+	ldcoord_a 7, 14 ; clear upper cursor position in right column
+	ldcoord_a 7, 16 ; clear lower cursor position in right column
+	ld b, $1 ; top menu item X
+	jr .leftColumn_WaitForInput
+.leftColumn_WaitForInput
+	ld hl, wTopMenuItemY
+	ld a, $e
+	ld [hli], a ; wTopMenuItemY
+	ld a, b
+	ld [hli], a ; wTopMenuItemX
+	inc hl
+	inc hl
+	ld a, $1
+	ld [hli], a ; wMaxMenuItem
+	ld [hl], D_RIGHT | A_BUTTON ; wMenuWatchedKeys
+	call HandleMenuInput
+	bit BIT_D_RIGHT, a
+	jr nz, .rightColumn
+	jr .AButtonPressed ; the A button was pressed
+.rightColumn ; put cursor in right column of menu
+	ld a, " "
+	ldcoord_a 1, 14 ; clear upper cursor position in left column
+	ldcoord_a 1, 16 ; clear lower cursor position in left column
+	ld b, $7 ; top menu item X
+	jr .rightColumn_WaitForInput
+.rightColumn_WaitForInput
+	ld hl, wTopMenuItemY
+	ld a, $e
+	ld [hli], a ; wTopMenuItemY
+	ld a, b
+	ld [hli], a ; wTopMenuItemX
+	inc hl
+	inc hl
+	ld a, $1
+	ld [hli], a ; wMaxMenuItem
+	ld a, D_LEFT | A_BUTTON
+	ld [hli], a ; wMenuWatchedKeys
+	call HandleMenuInput
+	bit 5, a ; check if left was pressed
+	jr nz, .leftColumn ; if left was pressed, jump
+	ld a, [wCurrentMenuItem]
+	add $2 ; if we're in the right column, the actual id is +2
+	ld [wCurrentMenuItem], a
+.AButtonPressed
+	call PlaceUnfilledArrowMenuCursor
+	ld a, [wBattleType]
+	cp BATTLE_TYPE_SAFARI
+	ld a, [wCurrentMenuItem]
+	ld [wBattleAndStartSavedMenuItem], a
+	and a
+	jr nz, .upperLeftMenuItemWasNotSelected
+	ret
+
+.upperLeftMenuItemWasNotSelected ; a menu item other than the upper left item was selected
+	cp $2
+	jp z, .Tools
+	dec a
+	jp nz, .Run
+
+;	push hl
+;	farcall SaveTrainerName
+;	ld hl, PreBattleTalkText
+;	call PrintText
+;	pop hl
+
+	call PrintStartBattleText
+	jp DisplayPrebattleMenu
+
+.Tools ; Can't be used in prebattle
+	ld hl, PreBattleCantUseItemsText
+	call PrintText
+	jp DisplayPrebattleMenu
+
+.Run
+	xor a
+	ld [wPartyGainExpFlags], a
+	ld [wPartyFoughtCurrentEnemyFlags], a
+	ld [wActionResultOrTookBattleTurn], a
+	inc a
+	ld [wFirstMonsNotOutYet], a
+	ld hl, wEnemyMon1HP
+	ld bc, wEnemyMon2 - wEnemyMon1 - 1
+	ld d, $3
+	farjp HandlePlayerBlackOut
+
+;	ld hl, PreBattleGiveUpText
+;	call PrintText
+;.displayYesNoBox
+;	hlcoord 13, 9
+;	lb bc, 10, 14
+;	ld a, TWO_OPTION_MENU
+;	ld [wTextBoxID], a
+;	call DisplayTextBoxID
+;	ld a, [wMenuExitMethod]
+;	cp CHOSE_SECOND_ITEM ; did the player choose NO?
+;	jr z, .tryRunning ; if the player chose NO, try running
+;	and a ; reset carry
+;	ret
+;.tryRunning
+;	ld a, [wCurrentMenuItem]
+;	and a
+;	jr z, .displayYesNoBox ; xxx when does this happen?
+;	ld hl, wPartyMon1Speed
+;	ld de, wEnemyMonSpeed
+;	jp TryRunningFromBattle
+
+
+PreBattleCantUseItemsText::
+	text_far _ItemsCantBeUsedHereText
+	text_end
+
+;PreBattleGiveUpText::
+;	text_far _PreBattleGiveUpText
+;	text_end
+
+PreBattleTalkText::
+	text_far _TrainerNameText
+	text_asm
+	ld a, $4
+	farcall ReadTrainerHeaderInfo     ; print before battle text
+	call PrintText
+	farcall TextCommandProcessor
+	jp TextScriptEnd

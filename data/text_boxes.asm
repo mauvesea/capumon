@@ -35,6 +35,7 @@ TextBoxTextAndCoordTable:
 	text_box_text MONEY_BOX_TEMPLATE,                11,  0, 19,  2, MoneyText,               13,  0
 	text_box_text JP_AH_MENU_TEMPLATE,                7,  6, 11, 10, JapaneseAhText,           8,  8
 	text_box_text JP_POKEDEX_MENU_TEMPLATE,          11,  8, 19, 17, JapanesePokedexMenu,     12, 10
+	text_box_text PREBATTLE_MENU_TEMPLATE,            0, 12, 13, 17, PrebattleMenuText,           2, 14
 
 BuySellQuitText:
 	db   "BUY"
@@ -68,6 +69,10 @@ JapaneseMainMenuText:
 BattleMenuText:
 	db   "FIGHT TOOL"
 	next "SWAP  RUN@"
+
+PrebattleMenuText:
+	db   "FIGHT TOOL"
+	next "TALK  RUN@"
 
 SafariZoneBattleMenuText:
 	db   "BALL×       BAIT"

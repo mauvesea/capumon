@@ -88,6 +88,7 @@ TrainerFlagAction::
 	predef_jump FlagActionPredef
 
 TalkToTrainer::
+	ld b,b
 	call StoreTrainerHeaderPointer
 	xor a
 	call ReadTrainerHeaderInfo     ; read flag's bit
@@ -106,6 +107,7 @@ TalkToTrainer::
 .trainerNotYetFought
 	ld a, $4
 	call ReadTrainerHeaderInfo     ; print before battle text
+	call SaveStartBattleTextPointers
 	call PrintText
 	ld a, $a
 	call ReadTrainerHeaderInfo     ; (?) does nothing apparently (maybe bug in ReadTrainerHeaderInfo)
@@ -320,6 +322,16 @@ SaveEndBattleTextPointers::
 	ld [wEndBattleLoseTextPointer + 1], a
 	ret
 
+SaveStartBattleTextPointers::
+	ldh a, [hLoadedROMBank]
+	ld [wEndBattleTextRomBank], a
+	ld a, h
+	ld [wStartBattleTextPointer], a
+	ld a, l
+	ld [wStartBattleTextPointer + 1], a
+	ld a, d
+	ret
+
 ; loads data of some trainer on the current map and plays pre-battle music
 ; [wSpriteIndex]: sprite ID of trainer who is engaged
 EngageMapTrainer::
@@ -359,6 +371,22 @@ PrintEndBattleText::
 	farcall FreezeEnemyTrainerSprite
 	jp WaitForSoundToFinish
 
+PrintStartBattleText::
+	ldh a, [hLoadedROMBank]
+	push af
+	ld a, [wEndBattleTextRomBank]
+	ldh [hLoadedROMBank], a
+	ld [MBC1RomBank], a
+	push hl
+	farcall SaveTrainerName
+	ld hl, TrainerStartBattleText
+	call PrintText
+	pop hl
+	pop af
+	ldh [hLoadedROMBank], a
+	ld [MBC1RomBank], a
+	ret
+
 GetSavedEndBattleTextPointer::
 	ld a, [wBattleResult]
 	and a
@@ -383,16 +411,15 @@ TrainerEndBattleText::
 	call TextCommandProcessor
 	jp TextScriptEnd
 
-; only engage with the trainer if the player is not already
-; engaged with another trainer
-; XXX unused?
-CheckIfAlreadyEngaged::
-	ld a, [wFlags_0xcd60]
-	bit 0, a
-	ret nz
-	call EngageMapTrainer
-	xor a
-	ret
+TrainerStartBattleText::
+	text_far _TrainerNameText
+	text_asm
+	ld a, [wStartBattleTextPointer]
+	ld h, a
+	ld a, [wStartBattleTextPointer + 1]
+	ld l, a
+	call TextCommandProcessor
+	jp TextScriptEnd
 
 PlayTrainerMusic::
 	ld a, [wEngagedTrainerClass]

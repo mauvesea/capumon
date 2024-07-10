@@ -52,7 +52,7 @@ TrainerNamePointers:
 
 .YoungsterName:     db "YOUNGSTER@"
 .BugCatcherName:    db "BUG CATCHER@"
-.LassName:          db "LASS@"
+.LassName:          db "MINISKRT@"
 .JrTrainerMName:    db "JR.TRAINER♂@"
 .JrTrainerFName:    db "JR.TRAINER♀@"
 .PokemaniacName:    db "POKéMANIAC@"
