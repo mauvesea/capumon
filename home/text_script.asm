@@ -1,9 +1,14 @@
 ; this function is used to display sign messages, sprite dialog, etc.
 ; INPUT: [hSpriteIndexOrTextID] = sprite ID or text ID
+DisplayTextIDNoBox::
+	ldh a, [hLoadedROMBank]
+	push af
+	jr ContinueTextID
 DisplayTextID::
 	ldh a, [hLoadedROMBank]
 	push af
 	farcall DisplayTextIDInit ; initialization
+ContinueTextID::
 	ld hl, wTextPredefFlag
 	bit 0, [hl]
 	res 0, [hl]

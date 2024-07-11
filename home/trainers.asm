@@ -88,7 +88,6 @@ TrainerFlagAction::
 	predef_jump FlagActionPredef
 
 TalkToTrainer::
-	ld b,b
 	call StoreTrainerHeaderPointer
 	xor a
 	call ReadTrainerHeaderInfo     ; read flag's bit
@@ -108,7 +107,13 @@ TalkToTrainer::
 	ld a, $4
 	call ReadTrainerHeaderInfo     ; print before battle text
 	call SaveStartBattleTextPointers
+	ld a, [wWalkOrTalkToTrainer]
+	cp $1
+	jr z, .DontPrintText
 	call PrintText
+.DontPrintText
+	xor a
+	ld [wWalkOrTalkToTrainer], a
 	ld a, $a
 	call ReadTrainerHeaderInfo     ; (?) does nothing apparently (maybe bug in ReadTrainerHeaderInfo)
 	push de
@@ -154,6 +159,10 @@ ENDC
 	xor a
 	ldh [hJoyHeld], a
 	call TrainerWalkUpToPlayer_Bank0
+	push af
+	ld a, 1
+	ld [wWalkOrTalkToTrainer],a
+	pop af
 	ld hl, wCurMapScript
 	inc [hl]      ; increment map script index (next script function is usually DisplayEnemyTrainerTextAndStartBattle)
 	ret
@@ -166,7 +175,12 @@ DisplayEnemyTrainerTextAndStartBattle::
 	ld [wJoyIgnore], a
 	ld a, [wSpriteIndex]
 	ldh [hSpriteIndexOrTextID], a
-	call DisplayTextID
+	ld a, 1
+	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
+	call DisplayTextIDNoBox
+	ld a, A_BUTTON
+	ldh [hJoyHeld], a
+
 	; fall through
 
 StartTrainerBattle::
