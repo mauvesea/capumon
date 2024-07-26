@@ -14,7 +14,7 @@ DecrementPP:
 	ld hl, wBattleMonPP  ; PP of first move (in battle)
 
 ; decrement PP in the battle struct
-	call .DecrementPP
+	jp .DecrementPP
 
 ; decrement PP in the party struct
 	ld a, [wPlayerBattleStatus3]
@@ -39,5 +39,18 @@ DecrementPP:
 	ld b, 0
 	add hl, bc           ; calculate the address in memory of the PP we need to decrement
 	                     ; based on the move chosen.
-	dec [hl]             ; Decrement PP
+	ld b,b
+	ld a, [hl] ; get PP (TP cost) into a
+	ld hl, wBattleMonHP
+	push bc
+	ld b, a
+	ld a, [wBattleMonHP+1]
+	sub a, b
+	ld [wBattleMonHP+1], a
+	jr nc, .noCarry
+	ld a, [wBattleMonHP]
+	sub a, 1
+	ld [wBattleMonHP], a
+.noCarry
+	pop bc
 	ret
