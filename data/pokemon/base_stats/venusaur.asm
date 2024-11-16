@@ -3,7 +3,7 @@
 	db  80,  82,  83,  80, 100
 	;   hp  atk  def  spd  spc
 
-	db GRASS, POISON ; type
+	db OMEGA_TYPE, OMEGA_TYPE ; type
 	db 45 ; catch rate
 	db 208 ; base exp
 

@@ -24,5 +24,36 @@ DEF SPECIAL EQU const_value
 	const PSYCHIC_TYPE ; $18
 	const ICE          ; $19
 	const DRAGON       ; $1A
+	const HARIUSAGIM_TYPE
+	const HARIUSAGIF_TYPE
+	const YADDON_TYPE
+	const GARURA_TYPE
+	const CYHORN_TYPE
+	const BETTOBETER_TYPE
+	const BIRIRIDAMA_TYPE
+	const GENGAR_TYPE
+	const FUSHIGISO_TYPE
+	const MYCORM_TYPE
+	const MYCORF_TYPE
+	const TAMATAMA_TYPE
+	const BELORINGA_TYPE
+	const NASSHII_TYPE
+	const PIP_TYPE
+	const GYACE_TYPE
+	const OMOM_TYPE
+	const GAGARTH_TYPE
+	const MONJARA_TYPE
+	const OMEGA_TYPE
+	const CAIROSS_TYPE
+	const WING_TYPE
+	const STRIKE_TYPE
+	const GYARADOSS_TYPE
+	const SHELLDER_TYPE
+	const KARAKARA_TYPE
+	const AMBLER_TYPE
+	const RAPRUTH_TYPE
+	const GOUTH_TYPE
+	const KARABATHEO_TYPE
+	const MIMI_TYPE
 
 DEF NUM_TYPES EQU const_value

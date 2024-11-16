@@ -158,6 +158,12 @@
 	charmap "'v",        $bf
 	
 	charmap "<no>",      $c0
+	charmap "<fire>",    $c1
+	charmap "<ice>",     $c2
+	charmap "<elec>",    $c3
+	charmap "<neut>",    $c4
+	charmap "<good>",    $c5
+	charmap "<bad>",     $c6
 
 	charmap "'",         $e0
 	charmap "<PK>",      $e1

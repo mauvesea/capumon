@@ -362,6 +362,20 @@ StatusScreen2:
 ;	call ClearScreenArea ; Clear under name
 ;	hlcoord 19, 3
 ;	ld [hl], $78
+
+	ld a, [wMonHIndex]
+	ld [wd11e], a
+	ld [wd0b5], a
+	predef IndexToPokedex
+
+	hlcoord 1, 2
+	predef PrintMonType
+
+	hlcoord 1, 1
+	ld de, WeakResText
+	call PlaceString
+
+
 	hlcoord 0, 8
 	ld b, 8
 	ld c, 18
@@ -527,6 +541,9 @@ CalcExpToLevelUp:
 StatusScreenExpText:
 	db   "EXP."
 	next "NEXT@"
+
+WeakResText:
+	db "<fire><ice><elec>@"
 
 StatusScreen_ClearName:
 	ld bc, 10
