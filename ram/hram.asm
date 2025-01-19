@@ -400,3 +400,5 @@ hJoyInput:: db
 hDisableJoypadPolling:: db
 
 	ds 5
+
+ENDSECTION
