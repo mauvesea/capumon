@@ -51,16 +51,16 @@ DisplayTitleScreen:
 	ld a, BANK(GamefreakLogoGraphics)
 	call FarCopyData2
 
-	ld hl, PokemonLogoGraphics
+	ld hl, Logo1GFX
 	ld de, vTitleLogo
 	ld bc, $70 tiles
-	ld a, BANK(PokemonLogoGraphics)
+	ld a, BANK(Logo1GFX)
 	call FarCopyData2
 	
-	ld hl, PokemonLogo2Graphics
+	ld hl, Logo2GFX
 	ld de, vTitleLogo tile 128
 	ld bc, $24 tiles
-	ld a, BANK(PokemonLogo2Graphics)
+	ld a, BANK(Logo2GFX)
 	call FarCopyData2	
 
 	call ClearBothBGMaps
@@ -101,7 +101,7 @@ DisplayTitleScreen:
 	dec c
 	jr nz, .pokemonLogo2TileLoop	
 
-	hlcoord 6, 14
+	hlcoord 6, 13
 	ld de, .PressStartTiles
 	ld b, $8
 .PressStartTilesLoop
@@ -114,7 +114,7 @@ DisplayTitleScreen:
 .PressStartTiles
 	db $46,$47,$48,$49,$4A,$4B,$4C,$4D
 
-	hlcoord 5, 16
+	hlcoord 5, 17
 	ld de, .NintendoCopyrightTiles
 	ld b, $a
 .NintendoCopyrightTilesLoop
@@ -127,34 +127,9 @@ DisplayTitleScreen:
 .NintendoCopyrightTiles
 	db $4e, $4f, $50, $51, $52, $53, $54, $55, $56, $57
 	
-	hlcoord 5, 17
-	ld de, .ApeCopyrightTiles
-	ld b, $a
-.ApeCopyrightTilesLoop
-	ld a, [de]
-	ld [hli], a
-	inc de
-	dec b
-	jr nz, .ApeCopyrightTilesLoop
-
-	jr .next
-
-.ApeCopyrightTiles	
-	db $58, $59, $5a, $5b, $5c, $5d, $5e, $5f, $60, $61
-
-.next
 	call SaveScreenTilesToBuffer2
 	call LoadScreenTilesFromBuffer2
 	call EnableLCD
-
-;	ld a, HIGH(vBGMap0 + $300)
-;	call TitleScreenCopyTileMapToVRAM
-;	call SaveScreenTilesToBuffer1
-;	ld a, $40
-;	ldh [hWY], a
-;	call LoadScreenTilesFromBuffer2
-;	ld a, HIGH(vBGMap0)
-;	call TitleScreenCopyTileMapToVRAM
 
 	ld b, SET_PAL_TITLE_SCREEN
 	call RunPaletteCommand
@@ -175,17 +150,23 @@ DisplayTitleScreen:
 
 .awaitUserInterruptionLoop
 	ld c, 200
-	call CheckForUserInterruption
-	jr c, .finishedWaiting
+	call Joypad
+	ldh a, [hJoyHeld]
+	bit BIT_START, a
+	jr nz, .finishedWaiting
+IF DEF(_DEBUG)
+	bit BIT_SELECT, a
+	jr nz, .finishedWaiting
+ENDC
 	jr .awaitUserInterruptionLoop
 
 .finishedWaiting
-;	ld a, GROWLITHE
-;	call PlayCry
-;	call WaitForSoundToFinish
-	ld a, SFX_CRY_25
-	ld [wNewSoundID], a
-	call PlaySound
+.randomLoop ; loop until a random number less than 5 is generated
+	call Random
+	cp 32
+	jr nc, .randomLoop
+	jr z, .randomLoop
+	call PlayCry
 	call WaitForSoundToFinish
 	call GBPalWhiteOutWithDelay3
 	call ClearSprites
@@ -246,42 +227,5 @@ CopyrightTextString: ; GAMEFREAK PRESENTS
 	next $41, $39, $3a, $3b, $3c, $3d, $3e, $3f, $40 
 	db   "@"
 
-DrawPlayerCharacter:
-	ld hl, PlayerCharacterTitleGraphics
-	ld de, vSprites
-	ld bc, PlayerCharacterTitleGraphicsEnd - PlayerCharacterTitleGraphics
-	ld a, BANK(PlayerCharacterTitleGraphics)
-	call FarCopyData2
-	call ClearSprites
-	xor a
-	ld [wPlayerCharacterOAMTile], a
-	ld hl, wShadowOAM
-	lb de, 96, 90 ;$60, $5a
-	ld b, 7
-.loop
-	push de
-	ld c, 5
-.innerLoop
-	ld a, d
-	ld [hli], a ; Y
-	ld a, e
-	ld [hli], a ; X
-	add 8
-	ld e, a
-	ld a, [wPlayerCharacterOAMTile]
-	ld [hli], a ; tile
-	inc a
-	ld [wPlayerCharacterOAMTile], a
-	inc hl
-	dec c
-	jr nz, .innerLoop
-	pop de
-	ld a, 8
-	add d
-	ld d, a
-	dec b
-	jr nz, .loop
-	ret
-	
 NintenText: db "YUUICHI@"
 SonyText:   db "Sony@"

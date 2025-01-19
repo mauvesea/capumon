@@ -26,9 +26,9 @@ CryData::
 	mon_cry SFX_CRY_04, $00, $80 ; CYHORN ;
 	mon_cry SFX_CRY_1B, $00, $80 ; RAPRUTH ;
 	mon_cry SFX_CRY_15, $00, $80 ; WING ;
-	mon_cry SFX_CRY_1E, $00, $80 ; UNKNOWN ????
+	mon_cry SFX_CRY_0F, $00, $80 ; GYACE
 	mon_cry SFX_CRY_17, $00, $80 ; GYARADOS ;
-	mon_cry SFX_CRY_18, $00, $80 ; UNKNOWN
+	mon_cry SFX_CRY_13, $00, $80 ; OMEGA
 	mon_cry SFX_CRY_1A, $00, $80 ; AMBLER ;
 	mon_cry SFX_CRY_1C, $00, $80 ; GOUTH ;
 	mon_cry SFX_CRY_16, $00, $80 ; STRIKE ;
@@ -36,7 +36,7 @@ CryData::
 	mon_cry SFX_CRY_1D, $00, $80 ; KARABATH ;
 	mon_cry SFX_CRY_14, $00, $80 ; CAIROSS ;
 	mon_cry SFX_CRY_12, $00, $80 ; MONJARA ;
-	mon_cry SFX_CRY_00, $00, $80 ; UNKNOWN
+	mon_cry SFX_CRY_18, $00, $80 ; SHELLDER
 	mon_cry SFX_CRY_00, $00, $80 ; UNKNOWN
 	mon_cry SFX_CRY_1F, $00, $80 ; UNKNOWN
 	mon_cry SFX_CRY_17, $00, $80 ; UNKNOWN

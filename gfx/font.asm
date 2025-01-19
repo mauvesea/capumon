@@ -1,5 +1,5 @@
-PokemonLogoGraphics: INCBIN "gfx/title/pokemon_logo.2bpp"
-PokemonLogo2Graphics: INCBIN "gfx/title/pokemon_logo_2.2bpp"
+Logo1GFX: INCBIN "gfx/title/logo1.2bpp"
+Logo2GFX: INCBIN "gfx/title/logo2.2bpp"
 FontGraphics:: INCBIN "gfx/font/font.1bpp"
 FontGraphicsEnd::
 
@@ -27,6 +27,3 @@ PokedexTileGraphicsEnd:
 
 WorldMapTileGraphics: INCBIN "gfx/town_map/town_map.2bpp"
 WorldMapTileGraphicsEnd:
-
-PlayerCharacterTitleGraphics: INCBIN "gfx/title/player.2bpp"
-PlayerCharacterTitleGraphicsEnd:
