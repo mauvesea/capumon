@@ -7,7 +7,6 @@ CableClub_DoBattleOrTrade:
 	call ClearScreen
 	call UpdateSprites
 	call LoadFontTilePatterns
-	call LoadHpBarAndStatusTilePatterns
 	call LoadTrainerInfoTextBoxTiles
 	hlcoord 3, 8
 	ld b, 2
@@ -837,7 +836,6 @@ TradeCenter_Trade:
 	ld c, 100
 	call DelayFrames
 	call ClearScreen
-	call LoadHpBarAndStatusTilePatterns
 	xor a
 	ld [wUnusedCC5B], a
 	ldh a, [hSerialConnectionStatus]

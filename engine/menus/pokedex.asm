@@ -617,7 +617,6 @@ ShowPokedexDataInternal:
 	call GBPalWhiteOut
 	call ClearScreen
 	call RunDefaultPaletteCommand
-	call LoadTextBoxTilePatterns
 	call GBPalNormal
 	ld hl, wd72c
 	res 1, [hl]

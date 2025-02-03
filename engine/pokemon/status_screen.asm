@@ -84,23 +84,6 @@ StatusScreen:
 	call GBPalWhiteOutWithDelay3
 	call ClearScreen
 	call UpdateSprites
-	call LoadHpBarAndStatusTilePatterns
-	ld de, BattleHudTiles1  ; source
-	ld hl, vChars2 tile $6d ; dest
-	lb bc, BANK(BattleHudTiles1), 3
-	call CopyVideoDataDouble ; ·│ :L and halfarrow line end
-	ld de, BattleHudTiles2
-	ld hl, vChars2 tile $78
-	lb bc, BANK(BattleHudTiles2), 1
-	call CopyVideoDataDouble ; │
-	ld de, BattleHudTiles3
-	ld hl, vChars2 tile $76
-	lb bc, BANK(BattleHudTiles3), 2
-	call CopyVideoDataDouble ; ─ ┘
-	ld de, PTile
-	ld hl, vChars2 tile $72
-	lb bc, BANK(PTile), 1
-	call CopyVideoDataDouble ; bold P (for PP)
 	ldh a, [hTileAnimations]
 	push af
 	xor a

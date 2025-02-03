@@ -99,7 +99,6 @@ BillsPC_::
 	ld [wParentMenuItem], a
 	inc a               ; MONSTER_NAME
 	ld [wNameListType], a
-	call LoadHpBarAndStatusTilePatterns
 	ld a, [wListScrollOffset]
 	push af
 	ld a, [wFlags_0xcd60]
@@ -190,7 +189,6 @@ ExitBillsPC:
 	bit 3, a ; accessing Bill's PC through another PC?
 	jr nz, .next
 ; accessing it directly
-	call LoadTextBoxTilePatterns
 	ld a, SFX_TURN_OFF_PC
 	call PlaySound
 	call WaitForSoundToFinish

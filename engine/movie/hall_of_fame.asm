@@ -4,7 +4,6 @@ AnimateHallOfFame:
 	ld c, 100
 	call DelayFrames
 	call LoadFontTilePatterns
-	call LoadTextBoxTilePatterns
 	call DisableLCD
 	ld hl, vBGMap0
 	ld bc, $800

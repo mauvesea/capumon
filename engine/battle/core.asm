@@ -16,7 +16,6 @@ SlidePlayerAndEnemySilhouettesOnScreen:
 	call ClearScreenArea
 	call DisableLCD
 	call LoadFontTilePatterns
-	call LoadHudAndHpBarAndStatusTilePatterns
 	ld hl, vBGMap0
 	ld bc, $400
 .clearBackgroundLoop
@@ -6360,7 +6359,6 @@ DoBattleTransitionAndInitBattleVariables:
 .next
 	call DelayFrame
 	predef BattleTransition
-	callfar LoadHudAndHpBarAndStatusTilePatterns
 	ld a, $1
 	ldh [hAutoBGTransferEnabled], a
 	ld a, $ff
@@ -6700,9 +6698,6 @@ ApplyBadgeStatBoosts:
 	ld a, LOW(MAX_STAT_VALUE)
 	ld [hld], a
 	ret
-
-LoadHudAndHpBarAndStatusTilePatterns:
-	call LoadHpBarAndStatusTilePatterns
 
 LoadHudTilePatterns:
 	ldh a, [rLCDC]

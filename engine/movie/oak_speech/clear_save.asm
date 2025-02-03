@@ -2,7 +2,6 @@ DoClearSaveDialogue:
 	call ClearScreen
 	call RunDefaultPaletteCommand
 	call LoadFontTilePatterns
-	call LoadTextBoxTilePatterns
 	ld hl, ClearSaveDataText
 	call PrintText
 	hlcoord 14, 7

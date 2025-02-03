@@ -127,7 +127,7 @@ _DexSeenOwnedText::
 	text_end
 
 _DexRatingText::
-	text "CAPDEX Rating<COLON>"
+	text "CAPDEX Rating:"
 	done
 
 _GymStatueText1::

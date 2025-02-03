@@ -3,7 +3,6 @@ LoadSAV:
 ;"the file data is destroyed")
 	call ClearScreen
 	call LoadFontTilePatterns
-	call LoadTextBoxTilePatterns
 	call LoadSAV0
 	jr c, .badsum
 	call LoadSAV1

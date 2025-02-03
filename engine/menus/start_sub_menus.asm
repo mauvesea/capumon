@@ -316,7 +316,6 @@ StartMenu_Item::
 	jr nc, .choseItem
 .exitMenu
 	call LoadScreenTilesFromBuffer2 ; restore saved screen
-	call LoadTextBoxTilePatterns
 	call UpdateSprites
 	jp RedisplayStartMenu
 .choseItem
@@ -449,7 +448,6 @@ StartMenu_SaveReset::
 	predef SaveSAV ; save the game
 	call LoadScreenTilesFromBuffer2 ; restore saved screen
 ;	jp HoldTextDisplayOpen
-	call LoadTextBoxTilePatterns
 	call UpdateSprites
 	jp RedisplayStartMenu
 
@@ -461,7 +459,6 @@ StartMenu_Option::
 	call UpdateSprites
 	callfar DisplayOptionMenu
 	call LoadScreenTilesFromBuffer2 ; restore saved screen
-	call LoadTextBoxTilePatterns
 	call UpdateSprites
 	jp RedisplayStartMenu
 

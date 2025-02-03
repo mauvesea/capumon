@@ -64,5 +64,4 @@ CloseStartMenu::
 	ldh a, [hJoyPressed]
 	bit BIT_A_BUTTON, a
 	jr nz, CloseStartMenu
-	call LoadTextBoxTilePatterns
 	jp CloseTextDisplay

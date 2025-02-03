@@ -90,7 +90,6 @@ DisplayNamingScreen:
 	call UpdateSprites
 	ld b, SET_PAL_GENERIC
 	call RunPaletteCommand
-	call LoadHpBarAndStatusTilePatterns
 	call LoadEDTile
 	farcall LoadMonPartySpriteGfx
 	hlcoord 0, 4
@@ -171,7 +170,6 @@ DisplayNamingScreen:
 	res 6, [hl]
 	ld a, [wIsInBattle]
 	and a
-	jp z, LoadTextBoxTilePatterns
 	jpfar LoadHudTilePatterns
 
 .namingScreenButtonFunctions

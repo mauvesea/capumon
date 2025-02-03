@@ -210,12 +210,11 @@ LoadCopyrightAndTextBoxTiles:
 	xor a
 	ldh [hWY], a
 	call ClearScreen
-	call LoadTextBoxTilePatterns
 
 LoadCopyrightTiles:
 	ld de, NintendoCopyrightLogoGraphics
 	ld hl, vChars2 tile $30
-	lb bc, BANK(NintendoCopyrightLogoGraphics), (NintendoCopyrightLogoGraphics) / $10
+	lb bc, BANK(NintendoCopyrightLogoGraphics), (NintendoCopyrightLogoGraphics) / 2
 	call CopyVideoData
 	hlcoord 5, 7
 	ld de, CopyrightTextString
@@ -227,5 +226,5 @@ CopyrightTextString: ; GAMEFREAK PRESENTS
 	next $41, $39, $3a, $3b, $3c, $3d, $3e, $3f, $40 
 	db   "@"
 
-NintenText: db "YUUICHI@"
-SonyText:   db "Sony@"
+NintenText: db "PLAYER@"
+SonyText:   db "RIVAL@"

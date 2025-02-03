@@ -41,7 +41,6 @@
 	charmap "<BOLD_S>",  $6a
 	charmap "<BOLD_L>",  $6b ; unused
 	charmap "<BOLD_M>",  $6c ; unused
-	charmap "<COLON>",   $6d ; colon with tinier dots than ":"
 	charmap "ぃ",         $6e ; hiragana small i, unused
 	charmap "ぅ",         $6f ; hiragana small u, unused
 	charmap "‘",         $70 ; opening single quote
@@ -54,12 +53,12 @@
 	charmap "ぇ",         $77 ; hiragana small e, unused
 	charmap "ぉ",         $78 ; hiragana small o, unused
 
-	charmap "┌",         $79
-	charmap "─",         $7a
-	charmap "┐",         $7b
-	charmap "│",         $7c
-	charmap "└",         $7d
-	charmap "┘",         $7e
+	charmap "┌",         $f9
+	charmap "─",         $fa
+	charmap "┐",         $fb
+	charmap "│",         $fc
+	charmap "└",         $fd
+	charmap "┘",         $fe
 	charmap " ",         $7f
 
 ; Actual characters (from gfx/font/font_battle_extra.png)
@@ -70,7 +69,7 @@
 
 	charmap "『",         $72 ; Japanese opening quote, unused
 	charmap "<ID>",      $73
-	charmap "№",         $74
+	charmap "№",         $f6
 
 ; Actual characters (from other graphics files)
 
@@ -156,9 +155,18 @@
 	charmap "'s",        $bd
 	charmap "'t",        $be
 	charmap "'v",        $bf
-	
-	charmap "<no>",      $c0
 
+	charmap "0",         $c0
+	charmap "1",         $c1
+	charmap "2",         $c2
+	charmap "3",         $c3
+	charmap "4",         $c4
+	charmap "5",         $c5
+	charmap "6",         $c6
+	charmap "7",         $c7
+	charmap "8",         $c8
+	charmap "9",         $c9
+	
 	charmap "'",         $e0
 	charmap "<PK>",      $e1
 	charmap "<MN>",      $e2
@@ -171,10 +179,6 @@
 	charmap "!",         $e7
 	charmap ".",         $e8
 
-	charmap "ァ",         $e9 ; katakana small a, unused
-	charmap "ゥ",         $ea ; katakana small u, unused
-	charmap "ェ",         $eb ; katakana small e, unused
-
 	charmap "▷",         $ec
 	charmap "▶",         $ed
 	charmap "▼",         $ee
@@ -185,17 +189,7 @@
 	charmap "/",         $f3
 	charmap ",",         $f4
 	charmap "♀",         $f5
-
-	charmap "0",         $f6
-	charmap "1",         $f7
-	charmap "2",         $f8
-	charmap "3",         $f9
-	charmap "4",         $fa
-	charmap "5",         $fb
-	charmap "6",         $fc
-	charmap "7",         $fd
-	charmap "8",         $fe
-	charmap "9",         $ff
+	charmap "<no>",      $f6
 
 
 ; Japanese kana, for those bits of text that were not translated to English

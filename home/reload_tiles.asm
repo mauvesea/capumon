@@ -5,7 +5,6 @@ ReloadMapData::
 	ld a, [wCurMap]
 	call SwitchToMapRomBank
 	call DisableLCD
-	call LoadTextBoxTilePatterns
 	call LoadCurrentMapView
 	call LoadTilesetTilePatternData
 	call EnableLCD

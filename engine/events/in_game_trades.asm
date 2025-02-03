@@ -120,7 +120,6 @@ InGameTrade_DoTrade:
 	push af
 	ld a, [wCurEnemyLVL]
 	push af
-	call LoadHpBarAndStatusTilePatterns
 	call InGameTrade_PrepareTradeData
 	predef InternalClockTradeAnim
 	pop af

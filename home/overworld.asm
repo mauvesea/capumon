@@ -876,7 +876,7 @@ LoadTilesetTilePatternData::
 	ld a, [wTilesetGfxPtr + 1]
 	ld h, a
 	ld de, vTileset
-	ld bc, $600
+	ld bc, $7f0
 	ld a, [wTilesetBank]
 	jp FarCopyData2
 
@@ -2325,7 +2325,6 @@ LoadMapData::
 	ld [wUnusedD119], a
 	ld [wWalkBikeSurfStateCopy], a
 	ld [wSpriteSetID], a
-	call LoadTextBoxTilePatterns
 	call LoadMapHeader
 	farcall InitMapSprites ; load tile pattern data for sprites
 	call LoadTileBlockMap

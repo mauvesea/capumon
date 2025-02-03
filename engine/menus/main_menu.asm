@@ -25,7 +25,6 @@ MainMenu:
 	res 6, [hl]
 	call ClearScreen
 	call RunDefaultPaletteCommand
-	call LoadTextBoxTilePatterns
 	call LoadFontTilePatterns
 	ld hl, wd730
 	set 6, [hl]
@@ -336,7 +335,6 @@ PrintSaveScreenText:
 	ld b, 16
 	ld c, 18
 	call TextBoxBorder
-	call LoadTextBoxTilePatterns
 	call UpdateSprites
 	ld c, 10
 	call DelayFrames
@@ -446,7 +444,7 @@ PrintPlayTime:
 	ld de, wPlayTimeHours
 	lb bc, 1, 3
 	call PrintNumber
-	ld [hl], $6d
+	ld [hl], $9c
 	inc hl
 	ld de, wPlayTimeMinutes
 	lb bc, LEADING_ZEROES | 1, 2
