@@ -20,6 +20,20 @@ DisplayTownMap:
 	ld de, wTileMapBackup
 	ld bc, $10
 	call CopyData
+
+	ld hl, vSprites tile $00
+	ld a, [wPlayerGender]
+	and a
+	jr z, .PlayerM_icon
+	ld de, PlayerFIcon
+	lb bc, BANK(PlayerFIcon), 12
+	jr .Continue
+.PlayerM_icon
+	ld de, PlayerMIcon
+	lb bc, BANK(PlayerMIcon), 12
+.Continue
+	call CopyVideoData
+
 	ld hl, vSprites tile $04
 	ld de, TownMapCursor
 	lb bc, BANK(TownMapCursor), (TownMapCursorEnd - TownMapCursor) / $8
@@ -141,6 +155,20 @@ LoadTownMap_Fly::
 	call LoadTownMap
 	call LoadPlayerSpriteGraphics
 	call LoadFontTilePatterns
+
+	ld hl, vSprites tile $00
+	ld a, [wPlayerGender]
+	and a
+	jr z, .PlayerM_icon
+	ld de, PlayerFIcon
+	lb bc, BANK(PlayerFIcon), 12
+	jr .Continue
+.PlayerM_icon
+	ld de, PlayerMIcon
+	lb bc, BANK(PlayerMIcon), 12
+.Continue
+	call CopyVideoData
+
 	ld de, BirdSprite
 	ld hl, vSprites tile $04
 	lb bc, BANK(BirdSprite), 12
@@ -618,3 +646,6 @@ TownMapSpriteBlinkingAnimation::
 .done
 	ld [wAnimCounter], a
 	jp DelayFrame
+
+PlayerMIcon::      INCBIN "gfx/player/playerm_icon.2bpp"
+PlayerFIcon::      INCBIN "gfx/player/playerf_icon.2bpp"

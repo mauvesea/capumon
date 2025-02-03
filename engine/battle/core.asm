@@ -6988,7 +6988,7 @@ _LoadTrainerPic:
 	and a
 	ld a, BANK("Pics 6") ; this is where all the trainer pics are (not counting Red's)
 	jr z, .loadSprite
-	ld a, BANK(RedPicFront)
+	ld a, BANK(PlayerMPicFront)
 .loadSprite
 	call UncompressSpriteFromDE
 	ld de, vFrontPic

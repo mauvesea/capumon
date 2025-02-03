@@ -13,12 +13,12 @@ ChoosePlayerName:
    	ld a, [wPlayerGender]
 	and a
 	jr z, .BoyFrontPic1	
-	ld de, RedFPicFront
-	ld b, BANK(RedFPicFront)
+	ld de, PlayerFPicFront
+	ld b, BANK(PlayerFPicFront)
 	jr .FrontPicSelected
 .BoyFrontPic1
-	ld de, RedPicFront
-	ld b, BANK(RedPicFront)
+	ld de, PlayerMPicFront
+	ld b, BANK(PlayerMPicFront)
 .FrontPicSelected	
 	call IntroDisplayPicCenteredOrUpperRight
 .done

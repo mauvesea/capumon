@@ -183,8 +183,8 @@ HoFMonInfoText:
 	next "TYPE2/@"
 
 HoFLoadPlayerPics:
-	ld de, RedPicFront
-	ld a, BANK(RedPicFront)
+	ld de, PlayerMPicFront
+	ld a, BANK(PlayerMPicFront)
 	call UncompressSpriteFromDE
 	ld hl, sSpriteBuffer1
 	ld de, sSpriteBuffer0
