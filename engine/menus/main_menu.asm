@@ -89,22 +89,6 @@ MainMenu:
 	ld [wOptionsInitialized], a
 	jp .mainMenuLoop
 .choseContinue
-	call DisplayContinueGameInfo
-	ld hl, wCurrentMapScriptFlags
-	set 5, [hl]
-.inputLoop
-	xor a
-	ldh [hJoyPressed], a
-	ldh [hJoyReleased], a
-	ldh [hJoyHeld], a
-	call Joypad
-	ldh a, [hJoyHeld]
-	bit 0, a
-	jr nz, .pressedA
-	bit 1, a
-	jp nz, .mainMenuLoop ; pressed B
-	jr .inputLoop
-.pressedA
 	call GBPalWhiteOutWithDelay3
 	call ClearScreen
 	ld a, PLAYER_DIR_DOWN
@@ -344,35 +328,6 @@ CableClubOptionsText:
 	db   "TRADE CENTER"
 	next "COLOSSEUM"
 	next "CANCEL@"
-
-DisplayContinueGameInfo:
-	xor a
-	ldh [hAutoBGTransferEnabled], a
-	hlcoord 4, 7
-	ld b, 10
-	ld c, 14
-	call TextBoxBorder
-	hlcoord 5, 9
-	ld de, SaveScreenInfoText
-	call PlaceString
-	hlcoord 12, 9
-	ld de, wPlayerName
-	call PlaceString
-	hlcoord 17, 11
-	;call PrintNumBadges
-	ld de, wCharisma
-	lb bc, 1, 2
-	call PrintNumber
-	hlcoord 16, 13
-	call PrintNumOwnedMons
-	hlcoord 11, 15
-	call PrintMoney	
-	hlcoord 13, 17
-	call PrintPlayTime
-	ld a, 1
-	ldh [hAutoBGTransferEnabled], a
-	ld c, 30
-	jp DelayFrames
 
 PrintSaveScreenText:
 	xor a
