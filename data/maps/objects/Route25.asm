@@ -2,10 +2,10 @@ Route25_Object:
 	db $2c ; border block
 
 	def_warp_events
-	warp_event 45,  3, BILLS_HOUSE, 1
+	warp_event 44,  5, BILLS_HOUSE, 1
 
 	def_bg_events
-	bg_event 43,  3, 11 ; Route25Text11
+	bg_event 41,  5, 11 ; Route25Text11
 
 	def_object_events
 	object_event 14,  2, SPRITE_YOUNGSTER, STAY, DOWN, 1, OPP_YOUNGSTER, 5

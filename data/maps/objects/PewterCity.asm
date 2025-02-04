@@ -4,16 +4,16 @@ PewterCity_Object:
 	def_warp_events
 	warp_event 16,  5, MUSEUM_1F, 1
 	warp_event  0,  0, MUSEUM_1F, 3
-	warp_event 10, 15, PEWTER_GYM, 1
+	warp_event 32, 19, PEWTER_GYM, 1
 	warp_event  0,  0, PEWTER_NIDORAN_HOUSE, 1
-	warp_event 24, 21, PEWTER_MART, 1
+	warp_event 12, 15, PEWTER_MART, 1
 	warp_event  0,  0, PEWTER_SPEECH_HOUSE, 1
 	warp_event 14, 23, PEWTER_POKECENTER, 1
 
 	def_bg_events
 	bg_event  0,  1,  6 ; PewterCityText6
 	bg_event  0,  1,  7 ; PewterCityText7
-	bg_event 23, 21,  8 ; MartSignText
+	bg_event 11, 15,  8 ; MartSignText
 	bg_event 13, 23,  9 ; PokeCenterSignText
 	bg_event  0,  1, 10 ; PewterCityText10
 	bg_event  0,  1, 11 ; PewterCityText11

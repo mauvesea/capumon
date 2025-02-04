@@ -2,10 +2,10 @@ VermilionCity_Object:
 	db $43 ; border block
 
 	def_warp_events
-	warp_event 11,  3, VERMILION_POKECENTER, 1
-	warp_event  9, 13, POKEMON_FAN_CLUB, 1
-	warp_event 23, 13, VERMILION_MART, 1
-	warp_event 12, 19, VERMILION_GYM, 1
+	warp_event 10, 27, VERMILION_POKECENTER, 1
+	warp_event 36,  5, POKEMON_FAN_CLUB, 1
+	warp_event 24, 29, VERMILION_MART, 1
+	warp_event 14, 11, VERMILION_GYM, 1
 	warp_event 23, 19, VERMILION_PIDGEY_HOUSE, 1
 	warp_event 18, 31, VERMILION_DOCK, 1
 	warp_event 19, 31, VERMILION_DOCK, 1
@@ -15,9 +15,9 @@ VermilionCity_Object:
 	def_bg_events
 	bg_event 27,  3,  7 ; VermilionCityText7
 	bg_event 37, 13,  8 ; VermilionCityText8
-	bg_event 24, 13,  9 ; MartSignText
-	bg_event 12,  3, 10 ; PokeCenterSignText
-	bg_event  7, 13, 11 ; VermilionCityText11
+	bg_event 23, 29,  9 ; MartSignText
+	bg_event  9, 27, 10 ; PokeCenterSignText
+	bg_event 29,  5, 11 ; VermilionCityText11
 	bg_event  7, 19, 12 ; VermilionCityText12
 	bg_event 29, 15, 13 ; VermilionCityText13
 
