@@ -34,7 +34,7 @@ MACRO warp_tiles
 ENDM
 
 .OverworldWarpTileIDs:
-	warp_tiles $13, $1b
+	warp_tiles $0d, $0e, $13, $1b
 
 .ForestGateWarpTileIDs:
 .MuseumWarpTileIDs:

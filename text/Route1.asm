@@ -1,6 +1,7 @@
 _Route1ViridianMartSampleText::
 	text "Hi! I work at a"
-	line "FRIENDLY SHOP."
+	line "CONVENIENCE"
+	cont "STORE."
 
 	para "It's a convenient"
 	line "shop, so please"

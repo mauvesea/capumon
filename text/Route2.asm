@@ -1,9 +1,10 @@
 _Route2Text3::
-	text "ROUTE 2"
-	line "VIRIDIAN CITY -"
-	cont "PEWTER CITY"
+	text "This is..."
+	line "ROUTE 2!"
+	para "TOKIWA CITY (S)"
+	line "NIBI CITY (N)"
 	done
 
 _Route2Text4::
-	text "DIGLETT's CAVE"
+	text "TOKIWA FOREST"
 	done

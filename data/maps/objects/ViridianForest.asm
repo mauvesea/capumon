@@ -1,21 +1,19 @@
 ViridianForest_Object:
-	db $3 ; border block
+	db $5 ; border block
 
 	def_warp_events
-	warp_event  1,  0, VIRIDIAN_FOREST_NORTH_GATE, 3
-	warp_event  2,  0, VIRIDIAN_FOREST_NORTH_GATE, 4
-	warp_event 15, 47, VIRIDIAN_FOREST_SOUTH_GATE, 2
-	warp_event 16, 47, VIRIDIAN_FOREST_SOUTH_GATE, 2
-	warp_event 17, 47, VIRIDIAN_FOREST_SOUTH_GATE, 2
-	warp_event 18, 47, VIRIDIAN_FOREST_SOUTH_GATE, 2
+	warp_event  2,  0, ROUTE_2, 3
+	warp_event  3,  0, ROUTE_2, 4
+	warp_event 16, 47, ROUTE_2, 5
+	warp_event 17, 47, ROUTE_2, 6
 
 	def_bg_events
-	bg_event 24, 40,  9 ; ViridianForestText9
-	bg_event 16, 32, 10 ; ViridianForestText10
-	bg_event 26, 17, 11 ; ViridianForestText11
-	bg_event  4, 24, 12 ; ViridianForestText12
+	bg_event 25, 41,  9 ; ViridianForestText9
+	bg_event 17, 33, 10 ; ViridianForestText10
+	bg_event 27, 17, 11 ; ViridianForestText11
+	bg_event  5, 25, 12 ; ViridianForestText12
 	bg_event 18, 45, 13 ; ViridianForestText13
-	bg_event  2,  1, 14 ; ViridianForestText14
+	bg_event  0,  0, 14 ; ViridianForestText14
 
 	def_object_events
 	object_event 16, 43, SPRITE_YOUNGSTER, STAY, NONE, 1 ; person
