@@ -12,8 +12,8 @@ NEXTU
 ; battle/menu
 vSprites::  ds $80 tiles
 vFont::     ds $80 tiles
-vFrontPic:: ds 7 * 7 tiles
-vBackPic::  ds 7 * 7 tiles
+vFrontPic:: ds 8 * 8 tiles
+vBackPic::  ds 8 * 8 tiles
 
 NEXTU
 ; overworld

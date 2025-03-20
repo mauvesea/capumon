@@ -179,7 +179,7 @@ wOverworldMap:: ds 1300
 wOverworldMapEnd::
 
 NEXTU
-wTempPic:: ds 7 * 7 tiles
+wTempPic:: ds 8 * 8 tiles
 ENDU
 
 

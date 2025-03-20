@@ -3,15 +3,13 @@ _ScrollTrainerPicAfterBattle:
 ; the screen from the right.
 	xor a
 	ld [wEnemyMonSpecies2], a
-	ld b, SET_PAL_BATTLE
-	call RunPaletteCommand
 	callfar _LoadTrainerPic
-	hlcoord 19, 5
+	hlcoord 19, 4
 	ld c, $0
 .scrollLoop
 	inc c
 	ld a, c
-	cp 7
+	cp 8
 	ret z
 	ld d, $0
 	push bc
@@ -19,7 +17,7 @@ _ScrollTrainerPicAfterBattle:
 .drawTrainerPicLoop
 	call DrawTrainerPicColumn
 	inc hl
-	ld a, 7
+	ld a, 8
 	add d
 	ld d, a
 	dec c
@@ -36,7 +34,7 @@ DrawTrainerPicColumn:
 	push hl
 	push de
 	push bc
-	ld e, 7
+	ld e, 8
 .loop
 	ld [hl], d
 	ld bc, SCREEN_WIDTH

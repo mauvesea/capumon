@@ -50,7 +50,7 @@ LoadUncompressedSpriteData::
 	and $f
 	ldh [hSpriteWidth], a ; each byte contains 8 pixels (in 1bpp), so tiles=bytes for width
 	ld b, a
-	ld a, $7
+	ld a, $8
 	sub b      ; 7-w
 	inc a      ; 8-w
 	srl a      ; (8-w)/2     ; horizontal center (in tiles, rounded up)
@@ -68,7 +68,7 @@ LoadUncompressedSpriteData::
 	add a
 	add a     ; 8*tiles is height in bytes
 	ldh [hSpriteHeight], a
-	ld a, $7
+	ld a, $8
 	sub b      ; 7-h         ; skip for vertical center (in tiles, relative to current column)
 	ld b, a
 	ldh a, [hSpriteOffset]
@@ -112,7 +112,7 @@ AlignSpriteDataCentered::
 	dec c
 	jr nz, .columnInnerLoop
 	pop hl
-	ld bc, 7*8    ; 7 tiles
+	ld bc, 8*8    ; 7 tiles
 	add hl, bc    ; advance one full column
 	pop af
 	dec a

@@ -11,7 +11,7 @@ SlidePlayerAndEnemySilhouettesOnScreen:
 	ld a, MESSAGE_BOX ; the usual text box at the bottom of the screen
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
-	hlcoord 1, 5
+	hlcoord 1, 4
 	lb bc, 3, 7
 	call ClearScreenArea
 	call DisableLCD
@@ -231,7 +231,7 @@ StartBattle:
 	ld [wcf91], a
 	ld [wBattleMonSpecies2], a
 	call LoadScreenTilesFromBuffer1
-	hlcoord 1, 5
+	hlcoord 1, 4
 	ld a, $9
 ;	call SlideTrainerPicOffScreen
 	call SaveScreenTilesToBuffer1
@@ -931,7 +931,7 @@ TrainerBattleVictory:
 	ld a, b
 	call nz, PlayBattleVictoryMusic
 	hlcoord 0, 0
-	lb bc, 12, 10
+	lb bc, 12, 20
 	call ClearScreenArea
 	ld hl, TrainerDefeatedText
 	call PrintText
@@ -1119,7 +1119,6 @@ ChooseNextMon:
 	predef FlagActionPredef
 	call LoadBattleMonFromParty
 	call GBPalWhiteOut
-	call LoadHudTilePatterns
 	call LoadScreenTilesFromBuffer1
 	call RunDefaultPaletteCommand
 	call GBPalNormal
@@ -1409,7 +1408,6 @@ EnemySendOutFirstMon:
 	ld [wCurrentMenuItem], a
 .next7
 	call GBPalWhiteOut
-	call LoadHudTilePatterns
 	call LoadScreenTilesFromBuffer1
 .next4
 	call ClearSprites
@@ -1427,9 +1425,9 @@ EnemySendOutFirstMon:
 	call GetMonHeader
 	ld de, vFrontPic
 	call LoadMonFrontSprite
-	ld a, -$31
+	ld a, -$40
 	ldh [hStartTileID], a
-	hlcoord 15, 11
+	hlcoord 15, 10
 	predef AnimateSendingOutMon
 	ld a, [wEnemyMonSpecies2]
 	call PlayCry
@@ -1759,7 +1757,7 @@ SendOutMon:
 	ldh [hWhoseTurn], a
 	ld a, POOF_ANIM
 	call PlayMoveAnimation
-	hlcoord 4, 11
+	hlcoord 4, 10
 	predef AnimateSendingOutMon
 	ld a, [wcf91]
 	call PlayCry
@@ -1770,8 +1768,8 @@ SendOutMon:
 
 ; show 2 stages of the player mon getting smaller before disappearing
 AnimateRetreatingPlayerMon: ; Fix send out animation
-	hlcoord 1, 5
-	lb bc, 7, 7
+	hlcoord 1, 4
+	lb bc, 8, 8
 	call ClearScreenArea
 	hlcoord 3, 7
 	lb bc, 5, 5
@@ -1802,8 +1800,8 @@ AnimateRetreatingPlayerMon: ; Fix send out animation
 	ld a, $4c
 	ldcoord_a 5, 11
 .clearScreenArea
-	hlcoord 1, 5
-	lb bc, 7, 7
+	hlcoord 1, 4
+	lb bc, 8, 8
 	jp ClearScreenArea
 
 ; reads player's current mon's HP into wBattleMonHP
@@ -2274,7 +2272,6 @@ UseBagItem:
 	xor a
 	ld [wPseudoItemID], a
 	call UseItem
-	call LoadHudTilePatterns
 	call ClearSprites
 	xor a
 	ld [wCurrentMenuItem], a
@@ -2349,7 +2346,6 @@ PartyMenuOrRockOrRun:
 .quitPartyMenu
 	call ClearSprites
 	call GBPalWhiteOut
-	call LoadHudTilePatterns
 	call LoadScreenTilesFromBuffer2
 	call RunDefaultPaletteCommand
 	call GBPalNormal
@@ -2438,7 +2434,6 @@ PartyMenuOrRockOrRun:
 	ld [wActionResultOrTookBattleTurn], a
 	call GBPalWhiteOut
 	call ClearSprites
-	call LoadHudTilePatterns
 	call LoadScreenTilesFromBuffer1
 	call RunDefaultPaletteCommand
 	call GBPalNormal
@@ -6446,13 +6441,13 @@ LoadPlayerBackPic:
 	ld de, sSpriteBuffer1
 	ldh a, [hLoadedROMBank]
 	ld b, a
-	ld c, 7 * 7
+	ld c, 8 * 8
 	call CopyVideoData
 	xor a
 	ld [MBC1SRamEnable], a
-	ld a, $31
+	ld a, $40
 	ldh [hStartTileID], a
-	hlcoord 1, 5
+	hlcoord 1, 4
 	predef_jump CopyUncompressedPicToTilemap
 
 ; does nothing since no stats are ever selected (barring glitches)
@@ -6874,7 +6869,7 @@ InitBattleCommon:
 	ldh [hStartTileID], a
 	dec a
 	ld [wAICount], a
-	hlcoord 12, 5
+	hlcoord 12, 4
 	predef CopyUncompressedPicToTilemap
 	ld a, $ff
 	ld [wEnemyMonPartyPos], a
@@ -6928,7 +6923,7 @@ InitWildBattle:
 	xor a
 	ld [wTrainerClass], a
 	ldh [hStartTileID], a
-	hlcoord 12, 5 ; enemy position
+	hlcoord 12, 4 ; enemy position
 	predef CopyUncompressedPicToTilemap
 
 ; common code that executes after init battle code specific to trainer or wild battles
@@ -7036,7 +7031,7 @@ AnimateSendingOutMon:
 .next
 	add hl, bc
 	ldh a, [hBaseTileID]
-	add $31
+	add $40
 	jr CopyUncompressedPicToHL
 
 CopyUncompressedPicToTilemap:
@@ -7046,7 +7041,7 @@ CopyUncompressedPicToTilemap:
 	ld l, a
 	ldh a, [hStartTileID]
 CopyUncompressedPicToHL::
-	lb bc, 7, 7
+	lb bc, 8, 8
 	ld de, SCREEN_WIDTH
 	push af
 	ld a, [wSpriteFlipped]
@@ -7097,8 +7092,8 @@ LoadMonBackPic:
 ; been loaded with GetMonHeader.
 	ld a, [wBattleMonSpecies2]
 	ld [wcf91], a
-	hlcoord 1, 5
-	ld b, 7
+	hlcoord 1, 4
+	ld b, 8
 	ld c, 8
 	call ClearScreenArea
 	ld de, vBackPic

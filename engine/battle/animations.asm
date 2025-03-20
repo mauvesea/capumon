@@ -1723,7 +1723,7 @@ AnimationMinimizeMon:
 	ld hl, wTempPic
 	push hl
 	xor a
-	ld bc, 7 * 7 * $10
+	ld bc, 8 * 8 * $10
 	call FillMemory
 	pop hl
 	ld de, 7 * 3 * $10 + 4 * $10 + 4
