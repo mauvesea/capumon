@@ -26,33 +26,6 @@
 	charmap "<ROCKET>",  $5e ; "ROCKET"
 	charmap "<DEXEND>",  $5f
 
-; Actual characters (from gfx/font/font_extra.png)
-
-	charmap "<BOLD_A>",  $60 ; unused
-	charmap "<BOLD_B>",  $61 ; unused
-	charmap "<BOLD_C>",  $62 ; unused
-	charmap "<BOLD_D>",  $63 ; unused
-	charmap "<BOLD_E>",  $64 ; unused
-	charmap "<BOLD_F>",  $65 ; unused
-	charmap "<BOLD_G>",  $66 ; unused
-	charmap "<BOLD_H>",  $67 ; unused
-	charmap "<BOLD_I>",  $68 ; unused
-	charmap "<BOLD_V>",  $69
-	charmap "<BOLD_S>",  $6a
-	charmap "<BOLD_L>",  $6b ; unused
-	charmap "<BOLD_M>",  $6c ; unused
-	charmap "ぃ",         $6e ; hiragana small i, unused
-	charmap "ぅ",         $6f ; hiragana small u, unused
-	charmap "‘",         $70 ; opening single quote
-	charmap "’",         $71 ; closing single quote
-	charmap "“",         $72 ; opening quote
-	charmap "”",         $73 ; closing quote
-	charmap "·",         $74 ; middle dot, unused
-	charmap "…",         $75 ; ellipsis
-	charmap "ぁ",         $76 ; hiragana small a, unused
-	charmap "ぇ",         $77 ; hiragana small e, unused
-	charmap "ぉ",         $78 ; hiragana small o, unused
-
 	charmap "┌",         $f9
 	charmap "─",         $fa
 	charmap "┐",         $fb
@@ -72,10 +45,6 @@
 	charmap "№",         $f6
 
 ; Actual characters (from other graphics files)
-
-	; needed for ShowPokedexDataInternal (see engine/menus/pokedex.asm)
-	charmap "′",         $60 ; gfx/pokedex/pokedex.png
-	charmap "″",         $61 ; gfx/pokedex/pokedex.png
 
 	; needed for StatusScreen (see engine/pokemon/status_screen.asm)
 	charmap "<BOLD_P>",  $72 ; gfx/font/P.1bpp
@@ -166,6 +135,8 @@
 	charmap "7",         $c7
 	charmap "8",         $c8
 	charmap "9",         $c9
+
+	charmap "<BALL>",    $ca
 	
 	charmap "'",         $e0
 	charmap "<PK>",      $e1

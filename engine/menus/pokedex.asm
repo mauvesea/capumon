@@ -14,7 +14,6 @@ ShowPokedexMenu:
 .setUpGraphics
 	ld b, SET_PAL_GENERIC
 	call RunPaletteCommand
-	callfar LoadPokedexTilePatterns
 .doPokemonListMenu
 	ld hl, wTopMenuItemY
 	ld a, 3
@@ -271,7 +270,7 @@ HandlePokedexListMenu:
 	pop hl
 	ld a, " "
 	jr z, .writeTile
-	ld a, $72 ; pokeball tile
+	ld a, "<BALL>" ; pokeball tile
 .writeTile
 	ld [hl], a ; put a pokeball next to pokemon that the player has owned
 	push hl
@@ -411,7 +410,6 @@ ShowPokedexData:
 	call GBPalWhiteOutWithDelay3
 	call ClearScreen
 	call UpdateSprites
-	callfar LoadPokedexTilePatterns ; load pokedex tiles
 
 ; function to display pokedex data from inside the pokedex
 ShowPokedexDataInternal:
@@ -433,37 +431,6 @@ ShowPokedexDataInternal:
 	xor a
 	ldh [hTileAnimations], a
 
-;	hlcoord 0, 0
-;	ld de, 1
-;	lb bc, $64, SCREEN_WIDTH
-;	call DrawTileLine ; draw top border
-
-;	hlcoord 0, 17
-;	ld b, $6f
-;	call DrawTileLine ; draw bottom border
-
-;	hlcoord 0, 1
-;	ld de, 20
-;	lb bc, $66, $10
-;	call DrawTileLine ; draw left border
-
-;	hlcoord 19, 1
-;	ld b, $67
-;	call DrawTileLine ; draw right border
-
-;	ld a, $63 ; upper left corner tile
-;	ldcoord_a 0, 0
-;	ld a, $65 ; upper right corner tile
-;	ldcoord_a 19, 0
-;	ld a, $6c ; lower left corner tile
-;	ldcoord_a 0, 17
-;	ld a, $6e ; lower right corner tile
-;	ldcoord_a 19, 17
-
-;	hlcoord 0, 9
-;	ld de, PokedexDataDividerLine
-;	call PlaceString ; draw horizontal divider line
-
 	hlcoord 10, 0
 	ld b, 7
 	ld c, 8
@@ -473,17 +440,13 @@ ShowPokedexDataInternal:
 	ld de, HeightWeightText1
 	call PlaceString
 	
-	hlcoord 14, 5
+	hlcoord 13, 5
 	ld de, HeightWeightText2
 	call PlaceString
 	
 	hlcoord 11, 1
 	ld de, PokedexNameText
 	call PlaceString
-
-;	call GetMonName
-;	hlcoord 11, 1
-;	call PlaceString
 
 	hlcoord 0, 9
 	ld b, 7
@@ -514,7 +477,7 @@ ShowPokedexDataInternal:
 	hlcoord 13, 0
 	ld a, "№"
 	ld [hli], a
-	ld a, "<DOT>"
+	ld a, "."
 	ld [hli], a
 	ld de, wd11e
 	lb bc, LEADING_ZEROES | 1, 2
@@ -551,18 +514,21 @@ ShowPokedexDataInternal:
 	jp z, .waitForButtonPress ; if the pokemon has not been owned, don't print the height, weight, or description
 	inc de ; de = address of feet (height)
 	ld a, [de] ; reads feet, but a is overwritten without being used
-	hlcoord 13, 5
-	lb bc, 1, 2
+	push af
+	hlcoord 14, 5
+	lb bc, 1, 3
 	call PrintNumber ; print feet (height)
-	ld a, "′"
-	ld [hl], a
-	inc de
-	inc de ; de = address of inches (height)
-	hlcoord 16, 5
-	lb bc, LEADING_ZEROES | 1, 2
-	call PrintNumber ; print inches (height)
-	ld a, "″"
-	ld [hl], a
+	hlcoord 15, 5
+	pop af
+	cp 10
+	jr nc, .skipZero
+	ld [hl], "0" ; if the height is less than 1 m, put a 0 before the decimal point
+.skipZero
+	inc hl
+	ld a, [hli]
+	ld [hld], a ; make space for the decimal point by moving the last digit forward one tile
+	ld [hl], "."
+
 ; now print the weight (note that weight is stored in tenths of pounds internally)
 	inc de
 	inc de
@@ -580,8 +546,8 @@ ShowPokedexDataInternal:
 	ld a, [de] ; a = lower byte of weight
 	ld [hl], a ; store lower byte of weight in [hDexWeight + 1]
 	ld de, hDexWeight
-	hlcoord 11, 7
-	lb bc, 2, 5 ; 2 bytes, 5 digits
+	hlcoord 12, 7
+	lb bc, 2, 4
 	call PrintNumber ; print weight
 	hlcoord 14, 7
 	ldh a, [hDexWeight + 1]
@@ -594,7 +560,7 @@ ShowPokedexDataInternal:
 	inc hl
 	ld a, [hli]
 	ld [hld], a ; make space for the decimal point by moving the last digit forward one tile
-	ld [hl], "<DOT>" ; decimal point tile
+	ld [hl], "." ; decimal point tile
 	pop af
 	ldh [hDexWeight + 1], a ; restore original value of [hDexWeight + 1]
 	pop af
@@ -629,8 +595,8 @@ HeightWeightText1:
 	next "Weight@"
 
 HeightWeightText2:
-	db   "?′??″"
-	next "???lb@"
+	db   "  ???m"
+	next " ???kg@"
 	
 PokedexNameText:
 	db "Name@"	

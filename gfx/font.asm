@@ -16,8 +16,5 @@ NintendoCopyrightLogoGraphics: INCBIN "gfx/splash/copyright.2bpp"
 GamefreakLogoGraphics: INCBIN "gfx/title/gamefreak_inc.2bpp"
 GamefreakLogoGraphicsEnd:
 
-PokedexTileGraphics: INCBIN "gfx/pokedex/pokedex.2bpp"
-PokedexTileGraphicsEnd:
-
 WorldMapTileGraphics: INCBIN "gfx/town_map/town_map.2bpp"
 WorldMapTileGraphicsEnd:

@@ -177,7 +177,7 @@ TrainerCharText:: db "TRAINER@"
 PCCharText::      db "PC@"
 RocketCharText::  db "ROCKET@"
 PlacePOKeText::   db "POKé@"
-SixDotsCharText:: db "……@"
+SixDotsCharText:: db "......@"
 EnemyText::       db "Enemy @"
 PlacePKMNText::   db "<PK><MN>@"
 
@@ -560,7 +560,7 @@ TextCommand_DOTS::
 	ld l, c
 
 .loop
-	ld a, "…"
+	ld a, "<DOT>"
 	ld [hli], a
 	push de
 	call Joypad
