@@ -45,6 +45,8 @@ LoadGymLeaderAndCityName::
 ;    4 -> before battle text (into hl)
 ;    6 -> after battle text (into hl)
 ;    8 -> end battle text (into hl)
+PrepareTrainerTextBattle::
+	ld a, b
 ReadTrainerHeaderInfo::
 	push de
 	push af
@@ -107,15 +109,12 @@ TalkToTrainer::
 	ld a, $4
 	call ReadTrainerHeaderInfo     ; print before battle text
 	call SaveStartBattleTextPointers
-	ld a, [wWalkOrTalkToTrainer]
-	cp $1
-	jr z, .DontPrintText
 	call PrintText
-.DontPrintText
-	xor a
-	ld [wWalkOrTalkToTrainer], a
-	ld a, $a
-	call ReadTrainerHeaderInfo     ; (?) does nothing apparently (maybe bug in ReadTrainerHeaderInfo)
+	push de
+	ld a, $6
+	call ReadTrainerHeaderInfo     ; read end battle text
+	pop de
+	call SaveInBattleTextPointers
 	push de
 	ld a, $8
 	call ReadTrainerHeaderInfo     ; read end battle text
@@ -159,10 +158,6 @@ ENDC
 	xor a
 	ldh [hJoyHeld], a
 	call TrainerWalkUpToPlayer_Bank0
-	push af
-	ld a, 1
-	ld [wWalkOrTalkToTrainer],a
-	pop af
 	ld hl, wCurMapScript
 	inc [hl]      ; increment map script index (next script function is usually DisplayEnemyTrainerTextAndStartBattle)
 	ret
@@ -173,13 +168,10 @@ DisplayEnemyTrainerTextAndStartBattle::
 	and $1
 	ret nz ; return if the enemy trainer hasn't finished walking to the player's sprite
 	ld [wJoyIgnore], a
+	call LoadFontTilePatterns
 	ld a, [wSpriteIndex]
 	ldh [hSpriteIndexOrTextID], a
-	ld a, 1
-	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
-	call DisplayTextIDNoBox
-	ld a, A_BUTTON
-	ldh [hJoyHeld], a
+	call DisplayTextID
 
 	; fall through
 
@@ -336,6 +328,16 @@ SaveEndBattleTextPointers::
 	ld [wEndBattleLoseTextPointer + 1], a
 	ret
 
+SaveInBattleTextPointers::
+	ldh a, [hLoadedROMBank]
+	ld [wEndBattleTextRomBank], a
+	ld a, h
+	ld [wInBattleTextPointer], a
+	ld a, l
+	ld [wInBattleTextPointer + 1], a
+	ld a, d
+	ret
+
 SaveStartBattleTextPointers::
 	ldh a, [hLoadedROMBank]
 	ld [wEndBattleTextRomBank], a
@@ -401,6 +403,22 @@ PrintStartBattleText::
 	ld [MBC1RomBank], a
 	ret
 
+PrintInBattleText::
+	ldh a, [hLoadedROMBank]
+	push af
+	ld a, [wEndBattleTextRomBank]
+	ldh [hLoadedROMBank], a
+	ld [MBC1RomBank], a
+	push hl
+	ld hl, TrainerInBattleText
+	call PrintText
+	call WaitForTextScrollButtonPress
+	pop hl
+	pop af
+	ldh [hLoadedROMBank], a
+	ld [MBC1RomBank], a
+	ret
+
 GetSavedEndBattleTextPointer::
 	ld a, [wBattleResult]
 	and a
@@ -431,6 +449,15 @@ TrainerStartBattleText::
 	ld a, [wStartBattleTextPointer]
 	ld h, a
 	ld a, [wStartBattleTextPointer + 1]
+	ld l, a
+	call TextCommandProcessor
+	jp TextScriptEnd
+
+TrainerInBattleText::
+	text_asm
+	ld a, [wInBattleTextPointer]
+	ld h, a
+	ld a, [wInBattleTextPointer + 1]
 	ld l, a
 	call TextCommandProcessor
 	jp TextScriptEnd

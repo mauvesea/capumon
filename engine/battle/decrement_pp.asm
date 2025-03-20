@@ -39,13 +39,13 @@ DecrementPP:
 	ld b, 0
 	add hl, bc           ; calculate the address in memory of the PP we need to decrement
 	                     ; based on the move chosen.
-	ld b,b
+
 	ld a, [hl] ; get PP (TP cost) into a
 	ld hl, wBattleMonHP
 	push bc
 	ld b, a
 	ld a, [wBattleMonHP+1]
-	sub a, b
+;	sub a, b ; This is where TP is decreased
 	ld [wBattleMonHP+1], a
 	jr nc, .noCarry
 	ld a, [wBattleMonHP]

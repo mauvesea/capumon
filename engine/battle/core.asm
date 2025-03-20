@@ -1184,17 +1184,17 @@ SlideDownFaintedMonPic:
 	push af
 	set 6, a
 	ld [wd730], a
-	ld b, 7 ; number of times to slide
+	ld b, 8 ; number of times to slide
 .slideStepLoop ; each iteration, the mon is slid down one row
 	push bc
 	push de
 	push hl
-	ld b, 6 ; number of rows
+	ld b, 7 ; number of rows
 .rowLoop
 	push bc
 	push hl
 	push de
-	ld bc, $7
+	ld bc, 8
 	call CopyData
 	pop de
 	pop hl

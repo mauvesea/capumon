@@ -518,6 +518,10 @@ ItemUseBall:
 	ld hl, ItemUseBallText05
 	call PrintText
 
+	hlcoord 0, 0
+	lb bc, 12, 20
+	call ClearScreenArea
+
 ; Add the caught Pokémon to the Pokédex.
 	predef IndexToPokedex
 	ld a, [wd11e]

@@ -1417,6 +1417,7 @@ wEndBattleWinTextPointer:: dw
 wEndBattleLoseTextPointer:: dw
 wStartBattleTextPointer:: dw
 wEndBattleTextRomBank:: db
+wInBattleTextPointer:: dw
 
 	ds 1
 

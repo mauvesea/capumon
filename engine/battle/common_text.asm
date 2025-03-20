@@ -13,7 +13,7 @@ PrintBeginningBattleText:
 	ld a, [wMonHIndex]
 	ld [wd11e], a
 	ld [wd0b5], a
-	predef IndexToPokedex	
+	predef IndexToPokedex
 	ld hl, WildMonAppearedText
 	ld a, [wMoveMissed]
 	and a
@@ -361,13 +361,7 @@ DisplayPrebattleMenu:
 	dec a
 	jp nz, .Run
 
-;	push hl
-;	farcall SaveTrainerName
-;	ld hl, PreBattleTalkText
-;	call PrintText
-;	pop hl
-
-	call PrintStartBattleText
+	call PrintInBattleText
 	jp DisplayPrebattleMenu
 
 .Tools ; Can't be used in prebattle
@@ -376,52 +370,9 @@ DisplayPrebattleMenu:
 	jp DisplayPrebattleMenu
 
 .Run
-	xor a
-	ld [wPartyGainExpFlags], a
-	ld [wPartyFoughtCurrentEnemyFlags], a
-	ld [wActionResultOrTookBattleTurn], a
-	inc a
-	ld [wFirstMonsNotOutYet], a
-	ld hl, wEnemyMon1HP
-	ld bc, wEnemyMon2 - wEnemyMon1 - 1
-	ld d, $3
-	farjp HandlePlayerBlackOut
-
-;	ld hl, PreBattleGiveUpText
-;	call PrintText
-;.displayYesNoBox
-;	hlcoord 13, 9
-;	lb bc, 10, 14
-;	ld a, TWO_OPTION_MENU
-;	ld [wTextBoxID], a
-;	call DisplayTextBoxID
-;	ld a, [wMenuExitMethod]
-;	cp CHOSE_SECOND_ITEM ; did the player choose NO?
-;	jr z, .tryRunning ; if the player chose NO, try running
-;	and a ; reset carry
-;	ret
-;.tryRunning
-;	ld a, [wCurrentMenuItem]
-;	and a
-;	jr z, .displayYesNoBox ; xxx when does this happen?
-;	ld hl, wPartyMon1Speed
-;	ld de, wEnemyMonSpeed
-;	jp TryRunningFromBattle
-
+	jp DisplayPrebattleMenu
 
 PreBattleCantUseItemsText::
 	text_far _ItemsCantBeUsedHereText
 	text_end
 
-;PreBattleGiveUpText::
-;	text_far _PreBattleGiveUpText
-;	text_end
-
-PreBattleTalkText::
-	text_far _TrainerNameText
-	text_asm
-	ld a, $4
-	farcall ReadTrainerHeaderInfo     ; print before battle text
-	call PrintText
-	farcall TextCommandProcessor
-	jp TextScriptEnd
