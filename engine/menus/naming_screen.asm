@@ -334,8 +334,6 @@ PrintAlphabet:
 	ldh [hAutoBGTransferEnabled], a
 	jp Delay3
 
-INCLUDE "data/text/alphabets.asm"
-
 PrintNicknameAndUnderscores:
 	call CalcStringLength
 	ld a, c
@@ -455,3 +453,12 @@ NameTextString:
 
 NicknameTextString:
 	db "'s nickname?@"
+
+AlphabetTable:
+	db "ABCDEFGHI"
+	db "JKLMNOPQR"
+	db "STUVWXYZ "
+	db "abcdefghi"
+	db "jklmnopqr"
+	db "stuvwxyz<ED>@"
+
