@@ -130,7 +130,7 @@ InterlaceMergeSpriteBuffers::
 	ld hl, sSpriteBuffer2 + (SPRITEBUFFERSIZE - 1) ; destination: end of buffer 2
 	ld de, sSpriteBuffer1 + (SPRITEBUFFERSIZE - 1) ; source 2: end of buffer 1
 	ld bc, sSpriteBuffer0 + (SPRITEBUFFERSIZE - 1) ; source 1: end of buffer 0
-	ld a, SPRITEBUFFERSIZE/2 ; $c4
+	ld a, SPRITEBUFFERSIZE/2 - 1 ; 8 * 8 * LEN_1BPP_TILE /2 is 256, so the building process throws an error. Observe if the -1 brings any issues.
 	ldh [hSpriteInterlaceCounter], a
 .interlaceLoop
 	ld a, [de]

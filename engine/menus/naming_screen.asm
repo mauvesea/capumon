@@ -91,9 +91,8 @@ DisplayNamingScreen:
 	ld b, SET_PAL_GENERIC
 	call RunPaletteCommand
 	call LoadEDTile
-	farcall LoadMonPartySpriteGfx
 	hlcoord 0, 4
-	ld b, 9
+	ld b, 11
 	ld c, 18
 	call TextBoxBorder
 	call PrintNamingText
@@ -168,9 +167,7 @@ DisplayNamingScreen:
 	ld [wAnimCounter], a
 	ld hl, wd730
 	res 6, [hl]
-	ld a, [wIsInBattle]
-	and a
-	jpfar LoadHudTilePatterns
+	ret
 
 .namingScreenButtonFunctions
 	dw .dPadReturnPoint
@@ -190,36 +187,20 @@ DisplayNamingScreen:
 	dw .ABStartReturnPoint
 	dw .pressedA
 
-.pressedA_changedCase
-	pop de
-	ld de, .selectReturnPoint
-	push de
-.pressedSelect
-	ld a, [wAlphabetCase]
-	xor $1
-	ld [wAlphabetCase], a
-	ret
-
 .pressedStart
+.pressedSelect
 	ld a, 1
 	ld [wNamingScreenSubmitName], a
 	ret
 
 .pressedA
 	ld a, [wCurrentMenuItem]
-	cp $5 ; "ED" row
+	cp 6 ; "ED" row
 	jr nz, .didNotPressED
 	ld a, [wTopMenuItemX]
 	cp $11 ; "ED" column
 	jr z, .pressedStart
 .didNotPressED
-	ld a, [wCurrentMenuItem]
-	cp $6 ; case switch row
-	jr nz, .didNotPressCaseSwtich
-	ld a, [wTopMenuItemX]
-	cp $1 ; case switch column
-	jr z, .pressedA_changedCase
-.didNotPressCaseSwtich
 	ld hl, wMenuCursorLocation
 	ld a, [hli]
 	ld h, [hl]
@@ -239,11 +220,11 @@ DisplayNamingScreen:
 	cp NAME_MON_SCREEN
 	jr nc, .checkMonNameLength
 	ld a, [wNamingScreenNameLength]
-	cp $7 ; max length of player/rival names
+	cp 7 ; max length of player/rival names
 	jr .checkNameLength
 .checkMonNameLength
 	ld a, [wNamingScreenNameLength]
-	cp $a ; max length of pokemon nicknames
+	cp 8 ; max length of pokemon nicknames
 .checkNameLength
 	jr c, .addLetter
 	ret
@@ -270,9 +251,6 @@ DisplayNamingScreen:
 	ld [hl], "@"
 	ret
 .pressedRight
-	ld a, [wCurrentMenuItem]
-	cp $6
-	ret z ; can't scroll right on bottom row
 	ld a, [wTopMenuItemX]
 	cp $11 ; max
 	jp z, .wrapToFirstColumn
@@ -283,9 +261,6 @@ DisplayNamingScreen:
 	ld a, $1
 	jr .done
 .pressedLeft
-	ld a, [wCurrentMenuItem]
-	cp $6
-	ret z ; can't scroll right on bottom row
 	ld a, [wTopMenuItemX]
 	dec a
 	jp z, .wrapToLastColumn
@@ -302,21 +277,22 @@ DisplayNamingScreen:
 	ret nz
 	ld a, $6 ; wrap to bottom row
 	ld [wCurrentMenuItem], a
-	ld a, $1 ; force left column
+	ld a, [wTopMenuItemX]
 	jr .done
 .pressedDown
 	ld a, [wCurrentMenuItem]
 	inc a
 	ld [wCurrentMenuItem], a
-	cp $7
+	cp 7
 	jr nz, .wrapToTopRow
 	ld a, $1
 	ld [wCurrentMenuItem], a
+	ld a, [wTopMenuItemX]
 	jr .done
 .wrapToTopRow
-	cp $6
+	cp 7
 	ret nz
-	ld a, $1
+	ld a, [wTopMenuItemX]
 .done
 	ld [wTopMenuItemX], a
 	jp EraseMenuCursor
@@ -336,14 +312,9 @@ ED_TileEnd:
 PrintAlphabet:
 	xor a
 	ldh [hAutoBGTransferEnabled], a
-	ld a, [wAlphabetCase]
-	and a
-	ld de, LowerCaseAlphabet
-	jr nz, .lowercase
-	ld de, UpperCaseAlphabet
-.lowercase
+	ld de, AlphabetTable
 	hlcoord 2, 5
-	lb bc, 5, 9 ; 5 rows, 9 columns
+	lb bc, 6, 9 ; 5 rows, 9 columns
 .outerLoop
 	push bc
 .innerLoop
@@ -369,13 +340,13 @@ PrintNicknameAndUnderscores:
 	call CalcStringLength
 	ld a, c
 	ld [wNamingScreenNameLength], a
-	hlcoord 10, 2
+	hlcoord 6, 2
 	lb bc, 1, 10
 	call ClearScreenArea
-	hlcoord 10, 2
+	hlcoord 6, 2
 	ld de, wStringBuffer
 	call PlaceString
-	hlcoord 10, 3
+	hlcoord 6, 3
 	ld a, [wNamingScreenType]
 	cp NAME_MON_SCREEN
 	jr nc, .pokemon1
@@ -384,7 +355,7 @@ PrintNicknameAndUnderscores:
 .pokemon1
 	ld b, 8 ; pokemon max name length
 .playerOrRival1
-	ld a, $76 ; underscore tile id
+	ld a, $e3 ; underscore tile id
 .placeUnderscoreLoop
 	ld [hli], a
 	dec b
@@ -403,7 +374,7 @@ PrintNicknameAndUnderscores:
 	call EraseMenuCursor
 	ld a, $11 ; "ED" x coord
 	ld [wTopMenuItemX], a
-	ld a, $5 ; "ED" y coord
+	ld a, 6 ; "ED" y coord
 	ld [wCurrentMenuItem], a
 	ld a, [wNamingScreenType]
 	cp NAME_MON_SCREEN
@@ -414,9 +385,9 @@ PrintNicknameAndUnderscores:
 .emptySpacesRemaining
 	ld c, a
 	ld b, $0
-	hlcoord 10, 3
+	hlcoord 6, 3
 	add hl, bc
-	ld [hl], $77 ; raised underscore tile id
+	ld [hl], $cb ; raised underscore tile id
 	ret
 
 DakutensAndHandakutens:
@@ -448,7 +419,7 @@ CalcStringLength:
 	jr .loop
 
 PrintNamingText:
-	hlcoord 0, 1
+	hlcoord 1, 1
 	ld a, [wNamingScreenType]
 	ld de, YourTextString
 	and a
@@ -457,18 +428,12 @@ PrintNamingText:
 	dec a
 	jr z, .notNickname
 	ld a, [wcf91]
-	ld [wMonPartySpriteSpecies], a
-	push af
-	farcall WriteMonPartySpriteOAMBySpecies
-	pop af
 	ld [wd11e], a
 	call GetMonName
-	hlcoord 4, 1
+	hlcoord 1, 1
 	call PlaceString
-	ld hl, $1
-	add hl, bc
-	ld [hl], "の" ; leftover from Japanese version; blank tile $c9 in English
-	hlcoord 1, 3
+	ld h, b
+	ld l, c
 	ld de, NicknameTextString
 	jr .placeString
 .notNickname
@@ -480,13 +445,13 @@ PrintNamingText:
 	jp PlaceString
 
 YourTextString:
-	db "YOUR @"
+	db "What's your @"
 
 RivalsTextString:
 	db "RIVAL's @"
 
 NameTextString:
-	db "NAME?@"
+	db "name?@"
 
 NicknameTextString:
-	db "NICKNAME?@"
+	db "'s nickname?@"
