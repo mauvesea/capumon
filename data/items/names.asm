@@ -8,7 +8,7 @@ ItemNames::
 	li "BICYCLE"
 	li "RAPRUTH GIFT"      ;"?????"
 	li "OMOM FLIGHT"          ;"SAFARI BALL"
-	li "ENCYCLOPEDIA"  ;"POKéDEX"
+	li "FIELD GUIDE"  ;"POKéDEX"
 	li "MOON STONE"
 	li "ANTIDOTE"
 	li "BURN HEAL"

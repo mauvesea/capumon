@@ -318,7 +318,7 @@ IntroDisplayPicCenteredOrUpperRight:
 	call UncompressSpriteFromDE
 	ld hl, sSpriteBuffer1
 	ld de, sSpriteBuffer0
-	ld bc, $310
+	ld bc, $400
 	call CopyData
 	ld de, vFrontPic
 	call InterlaceMergeSpriteBuffers

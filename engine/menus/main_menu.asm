@@ -459,7 +459,7 @@ SaveScreenInfoText:
 	db   "DEALER:"
 	next "RANK:"
 	next "CHARISMA:"
-	next "ENCYCLOPEDIA:"
+	next "FIELD GUIDE:"
 	next "GOLD:"
 	next "TIME:@"
 
