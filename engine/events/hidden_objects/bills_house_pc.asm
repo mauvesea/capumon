@@ -98,14 +98,14 @@ BillsHousePokemonList::
 	bit BIT_B_BUTTON, a
 	jr nz, .cancel
 	ld a, [wCurrentMenuItem]
-	add EEVEE
-	cp EEVEE
+	add OMEGA
+	cp OMEGA
 	jr z, .displayPokedex
-	cp FLAREON
+	cp OMEGA
 	jr z, .displayPokedex
-	cp JOLTEON
+	cp OMEGA
 	jr z, .displayPokedex
-	cp VAPOREON
+	cp OMEGA
 	jr z, .displayPokedex
 	jr .cancel
 .displayPokedex

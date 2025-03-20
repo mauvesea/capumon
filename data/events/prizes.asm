@@ -7,13 +7,13 @@ NoThanksText:
 	db "NO THANKS@"
 
 PrizeMenuMon1Entries:
-	db ABRA
-	db CLEFAIRY
+	db OMEGA
+	db OMEGA
 IF DEF(_RED)
-	db NIDORINA
+	db OMEGA
 ENDC
 IF DEF(_BLUE)
-	db NIDORINO
+	db OMEGA
 ENDC
 	db "@"
 
@@ -31,14 +31,14 @@ ENDC
 
 PrizeMenuMon2Entries:
 IF DEF(_RED)
-	db DRATINI
-	db SCYTHER
+	db OMEGA
+	db OMEGA
 ENDC
 IF DEF(_BLUE)
-	db PINSIR
-	db DRATINI
+	db OMEGA
+	db OMEGA
 ENDC
-	db PORYGON
+	db OMEGA
 	db "@"
 
 PrizeMenuMon2Cost:

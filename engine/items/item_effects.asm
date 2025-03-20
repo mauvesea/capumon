@@ -474,7 +474,7 @@ ItemUseBall:
 	ld hl, wEnemyBattleStatus3
 	bit TRANSFORMED, [hl]
 	jr z, .notTransformed
-	ld a, DITTO
+	ld a, OMEGA
 	ld [wEnemyMonSpecies2], a
 	jr .skip6
 
@@ -1857,7 +1857,7 @@ CoinCaseNumCoinsText:
 ItemUseOldRod:
 	call FishingInit
 	jp c, ItemUseNotTime
-	lb bc, 5, MAGIKARP
+	lb bc, 5, OMEGA
 	ld a, $1 ; set bite
 	jr RodResponse
 

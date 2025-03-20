@@ -29,7 +29,7 @@ Route12Script0:
 	ld a, $d
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
-	ld a, SNORLAX
+	ld a, OMEGA
 	ld [wCurOpponent], a
 	ld a, 30
 	ld [wCurEnemyLVL], a

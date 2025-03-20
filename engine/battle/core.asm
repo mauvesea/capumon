@@ -6909,7 +6909,7 @@ InitWildBattle:
 	ld [hl], "@"
 	ld a, [wcf91]
 	push af
-	ld a, MON_GHOST
+	ld a, OMEGA
 	ld [wcf91], a
 	ld de, vFrontPic
 	call LoadMonFrontSprite ; load ghost sprite

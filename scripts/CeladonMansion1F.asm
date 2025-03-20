@@ -15,7 +15,7 @@ CeladonMansion1_PlayCryScript:
 CeladonMansion1Text1:
 	text_far _CeladonMansion1Text1
 	text_asm
-	ld a, MEOWTH
+	ld a, OMEGA
 	jp CeladonMansion1_PlayCryScript
 
 CeladonMansion1Text2:
@@ -25,13 +25,13 @@ CeladonMansion1Text2:
 CeladonMansion1Text3:
 	text_far _CeladonMansion1Text3
 	text_asm
-	ld a, CLEFAIRY
+	ld a, OMEGA
 	jp CeladonMansion1_PlayCryScript
 
 CeladonMansion1Text4:
 	text_far _CeladonMansion1Text4
 	text_asm
-	ld a, NIDORAN_F
+	ld a, OMEGA
 	jp CeladonMansion1_PlayCryScript
 
 CeladonMansion1Text5:

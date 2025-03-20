@@ -23,12 +23,12 @@ SetIshiharaTeam:
 	jr .loop
 
 IshiharaTeam:
-	db VENUSAUR, 100
-	db RHYDON, 50
-	db BULBASAUR, 50
-	db LAPRAS, 50
-	db CLEFAIRY, 50
-	db ARCANINE, 50
+	db OMEGA, 100
+	db GAGARTH, 50
+	db GYACE, 50
+	db RAPRUTH, 50
+	db PIP, 50
+	db WING, 50
 	db -1 ; end
 
 DebugStart:

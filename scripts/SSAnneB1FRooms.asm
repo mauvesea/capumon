@@ -80,7 +80,7 @@ SSAnne10Text6:
 SSAnne10Text8:
 	text_far _SSAnne10Text8
 	text_asm
-	ld a, MACHOKE
+	ld a, OMEGA
 	call PlayCry
 	jp TextScriptEnd
 

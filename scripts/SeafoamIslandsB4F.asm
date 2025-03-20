@@ -156,7 +156,7 @@ ArticunoText:
 ArticunoBattleText:
 	text_far _ArticunoBattleText
 	text_asm
-	ld a, ARTICUNO
+	ld a, OMEGA
 	call PlayCry
 	call WaitForSoundToFinish
 	jp TextScriptEnd

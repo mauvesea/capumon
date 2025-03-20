@@ -136,7 +136,7 @@ MoltresText:
 MoltresBattleText:
 	text_far _MoltresBattleText
 	text_asm
-	ld a, MOLTRES
+	ld a, OMEGA
 	call PlayCry
 	call WaitForSoundToFinish
 	jp TextScriptEnd

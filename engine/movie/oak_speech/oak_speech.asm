@@ -65,18 +65,6 @@ OakSpeech:
 	call PrintText
 	call GBFadeOutToWhite
 	call ClearScreen
-	
-;	ld a, NIDORINO
-;	ld [wd0b5], a
-;	ld [wcf91], a
-;	call GetMonHeader
-;	hlcoord 6, 4
-;	call LoadFlippedFrontSpriteByMonIndex
-;	call MovePicLeft
-;	ld hl, OakSpeechText2
-;	call PrintText
-;	call GBFadeOutToWhite
-;	call ClearScreen
 
 	call FadeInIntroPic
 	ld hl, BoyGirlText
@@ -130,7 +118,7 @@ OakSpeech:
    	ld a, [wPlayerGender]
 	and a
 	jr z, .ChoseBoyStarter
-	ld a, NIDORAN_F
+	ld a, HARIUSAF
 	ld [wd0b5], a
 	ld [wcf91], a
 	call GetMonHeader
@@ -153,7 +141,7 @@ OakSpeech:
 	jr .StarterSceneFinish
 	
 .ChoseBoyStarter
-	ld a, NIDORAN_M
+	ld a, HARIUSAM
 	ld [wd0b5], a
 	ld [wcf91], a
 	call GetMonHeader
@@ -364,10 +352,10 @@ DisplayBoyGirlChoice::
 	jp LoadScreenTilesFromBuffer1
 
 StarterMonM:
-	db NIDORAN_M, 5
+	db HARIUSAM, 5
 	db -1 ; end
 
 StarterMonF:
-	db NIDORAN_F, 5
+	db HARIUSAF, 5
 	db -1 ; end	
 	

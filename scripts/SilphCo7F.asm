@@ -305,7 +305,7 @@ SilphCo7Text1:
 .givelapras
 	ld hl, .MeetLaprasGuyText
 	call PrintText
-	lb bc, LAPRAS, 15
+	lb bc, OMEGA, 15
 	call GivePokemon
 	jr nc, .done
 	ld a, [wSimulatedJoypadStatesEnd]

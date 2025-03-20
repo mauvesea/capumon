@@ -1,5 +1,5 @@
 AerodactylFossil:
-	ld a, FOSSIL_AERODACTYL
+	ld a, OMEGA
 	ld [wcf91], a
 	call DisplayMonFrontSpriteInBox
 	call EnableAutoTextBoxDrawing
@@ -11,7 +11,7 @@ AerodactylFossilText::
 	text_end
 
 KabutopsFossil:
-	ld a, FOSSIL_KABUTOPS
+	ld a, OMEGA
 	ld [wcf91], a
 	call DisplayMonFrontSpriteInBox
 	call EnableAutoTextBoxDrawing

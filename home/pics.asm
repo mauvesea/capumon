@@ -16,18 +16,7 @@ UncompressMonSprite::
 ; $4A ≤ index < $74:       bank $B ("Pics 3")
 ; $74 ≤ index < $99:       bank $C ("Pics 4")
 ; $99 ≤ index:             bank $D ("Pics 5")
-	ld a, [wcf91]
-	cp FOSSIL_KABUTOPS
-	jr z, .RecallBank
-	cp FOSSIL_AERODACTYL
-	jr z, .RecallBank
-	cp MON_GHOST
-	jr z, .RecallBank
 	ld a, [wMonHPicBank]
-	jr .GotBank
-.RecallBank	
-	ld a, BANK(FossilKabutopsPic)
-.GotBank
 	jp UncompressSpriteData
 
 ; de: destination location

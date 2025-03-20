@@ -222,7 +222,7 @@ VermilionCityText4:
 VermilionCityText5:
 	text_far _VermilionCityText5
 	text_asm
-	ld a, MACHOP
+	ld a, OMEGA
 	call PlayCry
 	call WaitForSoundToFinish
 	ld hl, VermilionCityText14

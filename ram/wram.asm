@@ -1733,10 +1733,10 @@ SECTION "Main Data", WRAM0
 
 wMainDataStart::
 
-wPokedexOwned:: flag_array NUM_POKEMON - 120
+wPokedexOwned:: flag_array NUM_POKEMON
 wPokedexOwnedEnd::
 
-wPokedexSeen:: flag_array NUM_POKEMON - 120
+wPokedexSeen:: flag_array NUM_POKEMON
 wPokedexSeenEnd::
 
 wNumBagItems:: db

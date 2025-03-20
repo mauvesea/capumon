@@ -32,7 +32,7 @@ MewtwoText:
 MewtwoBattleText:
 	text_far _MewtwoBattleText
 	text_asm
-	ld a, MEWTWO
+	ld a, OMEGA
 	call PlayCry
 	call WaitForSoundToFinish
 	jp TextScriptEnd

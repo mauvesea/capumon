@@ -18,19 +18,19 @@ TileIDListPointerTable:
 	assert_table_length NUM_TILEMAPS
 
 DownscaledMonTiles_5x5:
-	INCBIN "gfx/pokemon/downscaled_5x5.tilemap"
+	INCBIN "gfx/monsters/tilemaps/downscaled_5x5.tilemap"
 
 DownscaledMonTiles_3x3:
-	INCBIN "gfx/pokemon/downscaled_3x3.tilemap"
+	INCBIN "gfx/monsters/tilemaps/downscaled_3x3.tilemap"
 
 MonTiles:
-	INCBIN "gfx/pokemon/front.tilemap"
+	INCBIN "gfx/monsters/tilemaps/front.tilemap"
 
 SlideDownMonTiles_7x5:
-	INCBIN "gfx/pokemon/slide_down_7x5.tilemap"
+	INCBIN "gfx/monsters/tilemaps/slide_down_7x5.tilemap"
 
 SlideDownMonTiles_7x3:
-	INCBIN "gfx/pokemon/slide_down_7x3.tilemap"
+	INCBIN "gfx/monsters/tilemaps/slide_down_7x3.tilemap"
 
 GengarIntroTiles1:
 	INCBIN "gfx/intro/gengar_1.tilemap"

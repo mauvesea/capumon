@@ -14,7 +14,7 @@ SaffronHouse1Text1:
 SaffronHouse1Text2:
 	text_far _SaffronHouse1Text2
 	text_asm
-	ld a, PIDGEY
+	ld a, OMEGA
 	call PlayCry
 	jp TextScriptEnd
 

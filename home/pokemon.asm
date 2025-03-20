@@ -104,7 +104,7 @@ LoadFrontSpriteByMonIndex::
 	cp NUM_POKEMON + 1
 	jr c, .validDexNumber   ; dex >#151 invalid
 .invalidDexNumber
-	ld a, RHYDON ; $1
+	ld a, HARIUSAM ; $1
 	ld [wcf91], a
 	ret
 .validDexNumber
@@ -374,19 +374,6 @@ GetMonHeader::
 	push af
 	ld a, [wd0b5]
 	ld [wd11e], a
-	ld de, FossilKabutopsPic
-	ld b, $66 ; size of Kabutops fossil and Ghost sprites
-	cp FOSSIL_KABUTOPS ; Kabutops fossil
-	jr z, .specialID
-	ld de, GhostPic
-	cp MON_GHOST ; Ghost
-	jr z, .specialID
-	ld de, FossilAerodactylPic
-	ld b, $77 ; size of Aerodactyl fossil sprite
-	cp FOSSIL_AERODACTYL ; Aerodactyl fossil
-	jr z, .specialID
-	cp MEW
-	jr z, .mew
 	predef IndexToPokedex   ; convert pokemon ID in [wd11e] to pokedex number
 	ld a, [wd11e]
 	dec a
@@ -396,22 +383,6 @@ GetMonHeader::
 	ld de, wMonHeader
 	ld bc, BASE_DATA_SIZE
 	call CopyData
-	jr .done
-.specialID
-	ld hl, wMonHSpriteDim
-	ld [hl], b ; write sprite dimensions
-	inc hl
-	ld [hl], e ; write front sprite pointer
-	inc hl
-	ld [hl], d
-	jr .done
-.mew
-	ld hl, MewBaseStats
-	ld de, wMonHeader
-	ld bc, BASE_DATA_SIZE
-	ld a, BANK(MewBaseStats)
-	call FarCopyData
-.done
 	ld a, [wd0b5]
 	ld [wMonHIndex], a
 	pop af

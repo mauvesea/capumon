@@ -384,7 +384,7 @@ SilphCo10Text_6236c:
 	text_asm
 	ld hl, SilphCo10Text_6237b
 	call PrintText
-	ld a, PORYGON
+	ld a, OMEGA
 	call DisplayPokedex
 	jp TextScriptEnd
 

@@ -1,24 +1,24 @@
 	db DEX_GYARADOS ; pokedex id
 
-	db  95, 125,  79,  81, 100
+	db  25,  20,  15,  90, 105
 	;   hp  atk  def  spd  spc
 
-	db WATER, FLYING ; type
-	db 45 ; catch rate
-	db 214 ; base exp
+	db NORMAL, NORMAL ; type
+	db 200 ; catch rate
+	db 73 ; base exp
 
-	INCBIN "gfx/pokemon/front/gyarados.pic", 0, 1 ; sprite dimensions
+	INCBIN "gfx/monsters/gyarados.pic", 0, 1 ; sprite dimensions
 	dw GyaradosPicFront, GyaradosPicBack
 
-	db BITE, DRAGON_RAGE, LEER, HYDRO_PUMP ; level 1 learnset
-	db GROWTH_SLOW ; growth rate
+	db TACKLE, NO_MOVE, NO_MOVE, NO_MOVE ; level 1 learnset
+	db GROWTH_MEDIUM_SLOW ; growth rate
 
 	; tm/hm learnset
-	tmhm TOXIC,        BODY_SLAM,    TAKE_DOWN,    DOUBLE_EDGE,  BUBBLEBEAM,   \
-	     WATER_GUN,    ICE_BEAM,     BLIZZARD,     HYPER_BEAM,   RAGE,         \
-	     DRAGON_RAGE,  THUNDERBOLT,  THUNDER,      MIMIC,        DOUBLE_TEAM,  \
-	     REFLECT,      BIDE,         FIRE_BLAST,   SKULL_BASH,   REST,         \
-	     SUBSTITUTE,   SURF,         STRENGTH
+	tmhm MEGA_PUNCH,   MEGA_KICK,    TOXIC,        BODY_SLAM,    TAKE_DOWN,    \
+	     DOUBLE_EDGE,  SUBMISSION,   COUNTER,      SEISMIC_TOSS, RAGE,         \
+	     PSYCHIC_M,    TELEPORT,     MIMIC,        DOUBLE_TEAM,  REFLECT,      \
+	     BIDE,         METRONOME,    SKULL_BASH,   REST,         THUNDER_WAVE, \
+	     PSYWAVE,      TRI_ATTACK,   SUBSTITUTE,   FLASH
 	; end
 
 	db BANK(GyaradosPicFront)

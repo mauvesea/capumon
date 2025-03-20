@@ -77,7 +77,7 @@ FuchsiaCityText19:
 	text_asm
 	ld hl, FuchsiaCityChanseyText
 	call PrintText
-	ld a, CHANSEY
+	ld a, OMEGA
 	call DisplayPokedex
 	jp TextScriptEnd
 
@@ -89,7 +89,7 @@ FuchsiaCityText20:
 	text_asm
 	ld hl, FuchsiaCityVoltorbText
 	call PrintText
-	ld a, VOLTORB
+	ld a, OMEGA
 	call DisplayPokedex
 	jp TextScriptEnd
 
@@ -101,7 +101,7 @@ FuchsiaCityText21:
 	text_asm
 	ld hl, FuchsiaCityKangaskhanText
 	call PrintText
-	ld a, KANGASKHAN
+	ld a, OMEGA
 	call DisplayPokedex
 	jp TextScriptEnd
 
@@ -113,7 +113,7 @@ FuchsiaCityText22:
 	text_asm
 	ld hl, FuchsiaCitySlowpokeText
 	call PrintText
-	ld a, SLOWPOKE
+	ld a, OMEGA
 	call DisplayPokedex
 	jp TextScriptEnd
 
@@ -125,7 +125,7 @@ FuchsiaCityText23:
 	text_asm
 	ld hl, FuchsiaCityLaprasText
 	call PrintText
-	ld a, LAPRAS
+	ld a, OMEGA
 	call DisplayPokedex
 	jp TextScriptEnd
 
@@ -145,12 +145,12 @@ FuchsiaCityText24:
 .asm_3b4e8
 	ld hl, FuchsiaCityOmanyteText
 	call PrintText
-	ld a, OMANYTE
+	ld a, OMEGA
 	jr .asm_81556
 .asm_667d5
 	ld hl, FuchsiaCityKabutoText
 	call PrintText
-	ld a, KABUTO
+	ld a, OMEGA
 .asm_81556
 	call DisplayPokedex
 .asm_4343f
