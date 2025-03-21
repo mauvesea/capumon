@@ -4,9 +4,9 @@ INCLUDE "data/maps/headers/CeladonCity.asm"
 INCLUDE "data/maps/objects/CeladonCity.asm"
 CeladonCity_Blocks: INCBIN "maps/CeladonCity.blk"
 
-INCLUDE "data/maps/headers/PalletTown.asm"
-INCLUDE "data/maps/objects/PalletTown.asm"
-PalletTown_Blocks: INCBIN "maps/PalletTown.blk"
+INCLUDE "data/maps/headers/MasaraTown.asm"
+INCLUDE "data/maps/objects/MasaraTown.asm"
+MasaraTown_Blocks: INCBIN "maps/MasaraTown.blk"
 
 INCLUDE "data/maps/headers/ViridianCity.asm"
 INCLUDE "data/maps/objects/ViridianCity.asm"
@@ -32,7 +32,7 @@ FuchsiaCity_Blocks: INCBIN "maps/FuchsiaCity.blk"
 
 SECTION "Maps 2", ROMX
 
-INCLUDE "scripts/PalletTown.asm"
+INCLUDE "scripts/MasaraTown.asm"
 INCLUDE "scripts/ViridianCity.asm"
 INCLUDE "scripts/PewterCity.asm"
 INCLUDE "scripts/CeruleanCity.asm"

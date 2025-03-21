@@ -43,7 +43,7 @@ HallofFameRoomScript2:
 	ResetEventRange INDIGO_PLATEAU_EVENTS_START, INDIGO_PLATEAU_EVENTS_END, 1
 	xor a
 	ld [wHallOfFameCurScript], a
-	ld a, PALLET_TOWN
+	ld a, MASARA_TOWN
 	ld [wLastBlackoutMap], a
 	farcall SaveSAVtoSRAM
 	ld b, 5

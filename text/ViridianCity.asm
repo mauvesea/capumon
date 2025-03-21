@@ -2,15 +2,12 @@ _ViridianCityText1::
 	text "Huh? You're a"
 	line "CAPMON DEALER,"
 	cont "aren't you?"
-	
-	para "I can see all"
-	line "those CAPSULEs"
+	cont "I can see all"
+	cont "those CAPSULEs"
 	cont "in your belt!"
-
-	para "It must be great."
-	
-	para "I wanna become a"
-	line "CAPMON DEALER too"
+	cont "It must be great."
+	cont "I wanna become a"
+	cont "CAPMON DEALER too"
 	cont "when I grow up!"
 	done
 
@@ -19,19 +16,18 @@ _ViridianCityText2::
 	line "DR.CAPMON, but"
 	cont "I'm on my break"
 	cont "right now."
-	
-	para "Researching CAPMON"
-	line "is tough!"
+	cont "Researching CAPMON"
+	cont "is tough!"
 	done
 	
 _ViridianCityText4::
 	text "TOKIWA's CHAMP..."
 	
-	para "His name is"
-	line "YUJIROU!"
+	line "His name is"
+	cont "YUJIROU!"
 	
-	para "He's the strongest"
-	line "CAPMON DEALER"
+	cont "He's the strongest"
+	cont "CAPMON DEALER"
 	cont "I've ever seen!"
 	done	
 
@@ -39,29 +35,31 @@ _ViridianCityText6::
 	text "SYLPH CO. is"
 	line "amazing!"
 	
-	para "Did you know they"
-	line "invented CAPSULEs"
+	cont "Did you know they"
+	cont "invented CAPSULEs"
 	cont "for CAPMON?"
 	
-	para "We can tame CAPMON"
-	line "now thanks to"
+	cont "We can tame CAPMON"
+	cont "now thanks to"
 	cont "them!"
 	
-	para "I'm planning on"
-	line "going to YAMABUKI"
+	cont "I'm planning on"
+	cont "going to YAMABUKI"
 	cont "to visit their"
 	cont "OFFICE."
 	done
 	
 _ViridianCityText7::
 	text "I want to see"
-	line "my boyfriend"
+	cont "my boyfriend"
 	cont "in NIBI."
 	
-	para "But I'm too"
-	line "scared to walk"
-	cont "through TOKIWA"
-	cont "FOREST!"
+	cont "But I'm too"
+	cont "scared to walk"
+	cont "through ROUTE 2."
+
+	cont "Many DEALERs meet"
+	cont "there to fight!"
 	done
 	
 _ViridianCityText_19191_2::
@@ -71,8 +69,8 @@ _ViridianCityText_19191_2::
 	cont "you gotta be more"
 	cont "CHARISMAtic."
 	
-	para "You can increase"
-	line "your CHARISMA by"
+	cont "You can increase"
+	cont "your CHARISMA by"
 	cont "defeating CHAMPs."
 	done
 
@@ -80,8 +78,8 @@ _ViridianCityText_19122::
 	text "This #MON GYM"
 	line "is always closed."
 
-	para "I wonder who the"
-	line "LEADER is?"
+	cont "I wonder who the"
+	cont "LEADER is?"
 	done
 
 _ViridianCityText_19127::
@@ -92,34 +90,34 @@ _ViridianCityText_19127::
 _ViridianCityText_1914d::
 	text "Hello big bro!"
 	
-	para "Have you ever"
-	line "heard about"
+	line "Have you ever"
+	cont "heard about"
 	cont "PIP?"
 	done
 	
 _ViridianCityText_1914d2::	
 	text "Hello big sis!"
 	
-	para "Have you ever"
-	line "heard about"
+	line "Have you ever"
+	cont "heard about"
 	cont "PIP?"
 	done
 	
 _ViridianCityText_19152::
 	text "Waah... Really?"
 	
-	para "PIP is a very"
-	line "cute CAPMON."
+	line "PIP is a very"
+	cont "cute CAPMON."
 	
-	para "I want one as"
-	line "a pet!"
+	cont "I want one as"
+	cont "a pet!"
 	
-	para "But I heard"
-	line "they're pretty"
+	cont "But I heard"
+	cont "they're pretty"
 	cont "rare..."
 	
-	para "Hmm... Maybe that's"
-	line "why you haven't"
+	cont "Hmm... Maybe that's"
+	cont "why you haven't"
 	cont "heard of it."
 	done
 
@@ -149,15 +147,15 @@ _ViridianCityText_19191::
 	cont "CAPMON DEALER,"
 	cont "right?"
 	
-	para "I see you don't"
-	line "have much"
+	cont "I see you don't"
+	cont "have much"
 	cont "CHARISMA."
 	
-	para "DR.CAPMON lives"
-	line "here in TOKIWA."
+	cont "DR.CAPMON lives"
+	cont "here in TOKIWA."
 	
-	para "You should talk"
-	line "to him to learn"
+	cont "You should talk"
+	cont "to him to learn"
 	cont "more about"
 	cont "CAPMON."
 	done

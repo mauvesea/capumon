@@ -2,24 +2,14 @@
 
 ; Pallet Town events
 	const_def
-	const EVENT_FOLLOWED_OAK_INTO_LAB
-	const_skip 2
+	const_skip 3
 	const EVENT_HALL_OF_FAME_DEX_RATING
-	const_skip 2
-	const EVENT_PALLET_AFTER_GETTING_POKEBALLS
-	const_skip 17
+	const_skip 20
 	const EVENT_GOT_TOWN_MAP
-	const EVENT_ENTERED_BLUES_HOUSE
-	const EVENT_DAISY_WALKING
-	const_skip 5
-	const EVENT_FOLLOWED_OAK_INTO_LAB_2
-	const EVENT_OAK_ASKED_TO_CHOOSE_MON
-	const EVENT_GOT_STARTER
-	const EVENT_BATTLED_RIVAL_IN_OAKS_LAB
+	const_skip 11
 	const EVENT_CAN_TAKE_DEX
 	const EVENT_GOT_POKEDEX
-	const EVENT_PALLET_AFTER_GETTING_POKEBALLS_2
-	const EVENT_OAK_APPEARED_IN_PALLET
+	const_skip 2
 
 ; Viridian City events
 	const_next $28

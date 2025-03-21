@@ -405,7 +405,6 @@ wUnusedCC5B:: db
 	ds 59
 
 wNPCMovementDirections2:: ds 10
-; used in Pallet Town scripted movement
 wNumStepsToTake:: db
 
 	ds 48
@@ -1928,7 +1927,7 @@ wMissableObjectList:: ds 16 * 2 + 1
 
 wGameProgressFlags::
 wOaksLabCurScript:: db
-wPalletTownCurScript:: db
+wMasaraTownCurScript:: db
 	ds 1
 wBluesHouseCurScript:: db
 wViridianCityCurScript:: db

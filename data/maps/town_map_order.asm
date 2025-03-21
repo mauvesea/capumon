@@ -1,5 +1,5 @@
 TownMapOrder:
-	db PALLET_TOWN
+	db MASARA_TOWN
 	db ROUTE_1
 	db VIRIDIAN_CITY
 	db ROUTE_2

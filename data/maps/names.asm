@@ -1,4 +1,4 @@
-PalletTownName:      db "MASARA@"
+MasaraTownName:      db "MASARA@"
 ViridianCityName:    db "TOKIWA@"
 PewterCityName:      db "NIBI@"
 CeruleanCityName:    db "HANADA@"

@@ -6,11 +6,6 @@ Overworld_Block::   INCBIN "gfx/blocksets/overworld.bst"
 
 SECTION "Tilesets 2", ROMX
 
-Dojo_GFX::
-Gym_GFX::           INCBIN "gfx/tilesets/gym.2bpp"
-Dojo_Block::
-Gym_Block::         INCBIN "gfx/blocksets/gym.bst"
-
 Mart_GFX::
 Pokecenter_GFX::    INCBIN "gfx/tilesets/pokecenter.2bpp"
 Mart_Block::
@@ -63,3 +58,11 @@ Interior_GFX::      INCBIN "gfx/tilesets/interior.2bpp"
 Interior_Block::    INCBIN "gfx/blocksets/interior.bst"
 Plateau_GFX::       INCBIN "gfx/tilesets/plateau.2bpp"
 Plateau_Block::     INCBIN "gfx/blocksets/plateau.bst"
+
+
+SECTION "Tilesets 5", ROMX
+
+Dojo_GFX::
+Gym_GFX::           INCBIN "gfx/tilesets/gym.2bpp"
+Dojo_Block::
+Gym_Block::         INCBIN "gfx/blocksets/gym.bst"

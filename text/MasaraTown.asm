@@ -13,15 +13,15 @@ _MasaraTown_ManNPCText::
 
 	para "I heard DR.CAPMON"
 	line "developed a di-"
-	cont "gital ENCYCLO-"
-	cont "PEDIA."
+	cont "gital FIELD"
+	cont "GUIDE."
 	
 	para "It stores data"
 	line "about all CAPMON"
 	cont "in the world."
 	done
 
-_MasaraTown_SignPostText::
+_MasaraTownText::
 	text "This is..."
 	line "MASARA TOWN!"
 	para "Masara is the"
@@ -29,10 +29,10 @@ _MasaraTown_SignPostText::
 	cont "white beginnings."
 	done
 
-_MasaraTown_PlayerHouseSignText::
+_MasaraPlayerHouseText::
 	text "<PLAYER>'s house"
 	done
 
-_MasaraTown_JuniorHouseSignText::
+_MasaraJuniorHouseText::
 	text "NANAMI's house"
 	done

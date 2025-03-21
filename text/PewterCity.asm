@@ -1,117 +1,89 @@
-_PewterCityText1::
-	text "It's rumored that"
-	line "CLEFAIRYs came"
-	cont "from the moon!"
-
-	para "They appeared "
-	line "after MOON STONE"
-	cont "fell on MT.MOON."
+_NibiNPCText1::
+	text "I heard that some"
+	line "CAPMON grow up"
+	cont "quickly when they"
+	cont "come in contact"
+	cont "with a MOON"
+	cont "STONE."
 	done
 
-_PewterCityText2::
-	text "There aren't many"
-	line "serious #MON"
-	cont "trainers here!"
-
-	para "They're all like"
-	line "BUG CATCHERs,"
-	cont "but PEWTER GYM's"
-	cont "BROCK is totally"
-	cont "into it!"
+_NibiNPCText2::
+	text "DEALERs around"
+	line "here aren't the"
+	cont "strongest..."
+	cont "The only excep-"
+	cont "tion is our"
+	cont "local CHAMP,"
+	cont "ICHITARO!"
 	done
 
-_PewterCityText_193f1::
-	text "Did you check out"
-	line "the MUSEUM?"
+_NibiNPCText3::
+	text "NIBI is known"
+	line "for its museum..."
+	cont "But it's just so"
+	cont "boring!"
+	cont "Well, you can at"
+	cont "least learn a"
+	cont "bit about rare"
+	cont "CAPMON there."
 	done
 
-_PewterCityText_193f6::
-	text "Weren't those"
-	line "fossils from MT."
-	cont "MOON amazing?"
+_NibiNPCText4::
+	text "ROCKET GANG..."
+	line "They attacked"
+	cont "me when I was"
+	cont "walking around"
+	cont "MT. OTUSKIMI!"
 	done
 
-_PewterCityText_193fb::
-	text "Really?"
-	line "You absolutely"
-	cont "have to go!"
+_NibiCantLeaveText::
+	text "Hold it! ROCKET"
+	line "GANG is attacking"
+	cont "DEALERs up ahead."
+	cont "Your rank is too"
+	cont "low... You'd be"
+	cont "defeated in an"
+	cont "instant!"
+	cont "Someone that has"
+	cont "not even defeated"
+	cont "ICHITARO..."
+	cont "You're not allow-"
+	cont "ed to proceed!"
 	done
 
-_PewterCityText13::
-	text "It's right here!"
-	line "You have to pay"
-	cont "to get in, but"
-	cont "it's worth it!"
-	cont "See you around!"
+_NibiCityText::
+	text "This is..."
+	line "NIBI CITY!"
+
+	para "Nibi is the"
+	line "color of gray"
+	cont "stones."
 	done
 
-_PewterCityText_19427::
-	text "Psssst!"
-	line "Do you know what"
-	cont "I'm doing?"
+_NibiChampCupText::
+	text "NIBI CHAMP CUP"
+	line "CHAMP: ICHITARO"
 	done
 
-_PewterCityText_1942c::
-	text "That's right!"
-	line "It's hard work!"
+_NibiMuseumText::
+	text "NIBI MUSEUM"
 	done
 
-_PewterCityText_19431::
-	text "I'm spraying REPEL"
-	line "to keep #MON"
-	cont "out of my garden!"
+_NibiRocketText::
+	text "It's written..."
+	line "'Attention!"
+	cont "ROCKET GANG are"
+	cont "a bunch of"
+	cont "ruthless crim-"
+	cont "inals! They"
+	cont "have been at-"
+	cont "tacking civilians"
+	cont "around NIBI."
+	cont "If you see them,"
+	cont "report them to"
+	cont "the police ASAP.'"
 	done
 
-_PewterCityText_1945d::
-	text "You're a trainer"
-	line "right? BROCK's"
-	cont "looking for new"
-	cont "challengers!"
-	cont "Follow me!"
-	done
-
-_PewterCityText14::
-	text "If you have the"
-	line "right stuff, go"
-	cont "take on BROCK!"
-	done
-
-_PewterCityText6::
-	text "TRAINER TIPS"
-
-	para "Any #MON that"
-	line "takes part in"
-	cont "battle, however"
-	cont "short, earns EXP!"
-	done
-
-_PewterCityText7::
-	text "NOTICE!"
-
-	para "Thieves have been"
-	line "stealing #MON"
-	cont "fossils at MT."
-	cont "MOON! Please call"
-	cont "PEWTER POLICE"
-	cont "with any info!"
-	done
-
-_PewterCityText10::
-	text "PEWTER MUSEUM"
-	line "OF SCIENCE"
-	done
-
-_PewterCityText11::
-	text "PEWTER CITY"
-	line "#MON GYM"
-	cont "LEADER: BROCK"
-
-	para "The Rock Solid"
-	line "#MON Trainer!"
-	done
-
-_PewterCityText12::
-	text "PEWTER CITY"
-	line "A Stone Gray"
-	cont "City"
+_NibiPoliceText::
+	text "NIBI POLICE"
 	done

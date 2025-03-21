@@ -7,7 +7,7 @@ ENDM
 ExternalMapEntries:
 	table_width 3, ExternalMapEntries
 	; x, y, name
-	external_map  2, 11, PalletTownName
+	external_map  2, 11, MasaraTownName
 	external_map  2,  8, ViridianCityName
 	external_map  2,  3, PewterCityName
 	external_map 10,  2, CeruleanCityName
@@ -18,7 +18,7 @@ ExternalMapEntries:
 	external_map  2, 15, CinnabarIslandName
 	external_map  0,  2, IndigoPlateauName
 	external_map 10,  5, SaffronCityName
-	external_map  0,  0, PalletTownName ; unused
+	external_map  0,  0, MasaraTownName ; unused
 	external_map  2, 10, Route1Name
 	external_map  2,  6, Route2Name
 	external_map  4,  3, Route3Name
@@ -56,7 +56,7 @@ ENDM
 ; the appearance of buildings and dungeons in the town map
 InternalMapEntries:
 	; maximum map id subject to this rule, x, y, name
-	internal_map BLUES_HOUSE,                    2, 11, PalletTownName
+	internal_map BLUES_HOUSE,                    2, 11, MasaraTownName
 	internal_map VIRIDIAN_GYM,                   2,  8, ViridianCityName
 	internal_map VIRIDIAN_FOREST_SOUTH_GATE,     2,  6, Route2Name
 	internal_map VIRIDIAN_FOREST,                2,  4, ViridianForestName

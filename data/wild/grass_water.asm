@@ -1,6 +1,6 @@
 WildDataPointers:
 	table_width 2, WildDataPointers
-	dw NothingWildMons         ; PALLET_TOWN
+	dw NothingWildMons         ; MASARA_TOWN
 	dw NothingWildMons         ; VIRIDIAN_CITY
 	dw NothingWildMons         ; PEWTER_CITY
 	dw NothingWildMons         ; CERULEAN_CITY
@@ -13,7 +13,7 @@ WildDataPointers:
 	dw NothingWildMons         ; SAFFRON_CITY
 	dw NothingWildMons         ; unused
 	dw Route1WildMons          ; ROUTE_1
-	dw NothingWildMons         ; ROUTE_2
+	dw Route2WildMons          ; ROUTE_2
 	dw NothingWildMons         ; ROUTE_3
 	dw NothingWildMons         ; ROUTE_4
 	dw NothingWildMons         ; ROUTE_5
@@ -264,3 +264,4 @@ WildDataPointers:
 
 INCLUDE "data/wild/maps/nothing.asm"
 INCLUDE "data/wild/maps/Route1.asm"
+INCLUDE "data/wild/maps/Route2.asm"

@@ -1,10 +1,21 @@
 _Route2Text3::
 	text "This is..."
 	line "ROUTE 2!"
-	para "TOKIWA CITY (S)"
-	line "NIBI CITY (N)"
+	cont "TOKIWA CITY (S)"
+	cont "NIBI CITY (N)"
 	done
 
 _Route2Text4::
-	text "TOKIWA FOREST"
+	text "Warning! The area"
+	line "ahead is a popu-"
+	cont "lar meeting spot"
+	cont "for young DEALERs"
+	cont "to train and get"
+	cont "stronger!"
+	done
+
+_Route2Text5::
+	text "BELINGA has been"
+	line "spotted around"
+	cont "here."
 	done

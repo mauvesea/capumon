@@ -1,7 +1,7 @@
 ; super rod encounters
 SuperRodData:
 	; map, fishing group
-	dbw PALLET_TOWN,         .Group1
+	dbw MASARA_TOWN,         .Group1
 	dbw VIRIDIAN_CITY,       .Group1
 	dbw CERULEAN_CITY,       .Group3
 	dbw VERMILION_CITY,      .Group4

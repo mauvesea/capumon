@@ -262,8 +262,8 @@ MissableObjects:
 	table_width 3, MissableObjects
 ; format: map id, object id, HIDE/SHOW
 
-PalletTownHS:
-	db PALLET_TOWN, $01, HIDE
+MasaraTownHS:
+	db MASARA_TOWN, $01, HIDE
 ViridianCityHS:
 	db VIRIDIAN_CITY, $05, SHOW
 	db VIRIDIAN_CITY, $07, HIDE
