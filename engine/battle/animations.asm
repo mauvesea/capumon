@@ -1171,8 +1171,8 @@ AnimationSlideMonUp:
 	decoord 1, 5
 	ld a, $30
 	jr z, .next
-	hlcoord 12, 1
-	decoord 12, 0
+	hlcoord 12, 5
+	decoord 12, 4
 	ld a, $ff
 .next
 	ld [wSlideMonUpBottomRowLeftTile], a
@@ -1387,7 +1387,14 @@ AnimationFlashEnemyMonPic:
 	jp CallWithTurnFlipped
 
 AnimationShowMonPic:
+	ldh a, [hWhoseTurn]
+	and a
+	jr z, .playerTurn
 	xor a ; TILEMAP_MON_PIC
+	jr .ShowMonPic
+.playerTurn
+	ld a, 8 ; TILEMAP_MON_PIC_FLIPPED
+.ShowMonPic
 	call GetTileIDList
 	call GetMonSpriteTileMapPointerFromRowCount
 	call CopyPicTiles
@@ -1774,7 +1781,7 @@ AnimationSlideMonDownAndHide:
 	jr nz, .loop
 	call AnimationHideMonPic
 	ld hl, wTempPic
-	ld bc, 7 * 7 tiles
+	ld bc, 8 * 8 tiles
 	xor a
 	call FillMemory
 	jp CopyTempPicToMonPic
@@ -1785,7 +1792,7 @@ _AnimationSlideMonOff:
 	ldh a, [hWhoseTurn]
 	and a
 	jr z, .playerTurn
-	hlcoord 12, 0
+	hlcoord 12, 4
 	jr .next
 .playerTurn
 	hlcoord 0, 5
@@ -1867,7 +1874,7 @@ CopyTempPicToMonPic:
 	ld hl, vFrontPic ; enemy turn
 .next
 	ld de, wTempPic
-	ld bc, 7 * 7
+	ld bc, 8 * 8
 	jp CopyVideoData
 
 AnimationWavyScreen:
@@ -2035,7 +2042,7 @@ ChangeMonPic:
 	xor a
 	ld [wSpriteFlipped], a
 	call GetMonHeader
-	hlcoord 12, 0
+	hlcoord 12, 4
 	call LoadFrontSpriteByMonIndex
 	jr .done
 .playerTurn
@@ -2095,17 +2102,23 @@ AnimationHideMonPic:
 	ld a, 12
 	jr ClearMonPicFromTileMap
 .playerTurn
-	ld a, 5 * SCREEN_WIDTH + 1
+	ld a, 1
 
 ClearMonPicFromTileMap:
 	push hl
 	push de
 	push bc
 	ld e, a
-	ld d, 0
-	hlcoord 0, 0
-	add hl, de
-	lb bc, 7, 7
+	ld d, 4
+	ldh a, [hWhoseTurn]
+	and a
+	jr z, .playerTurn
+	hlcoord 11, 4
+	jr .ClearMonArea
+.playerTurn
+	hlcoord 1, 4
+.ClearMonArea
+	lb bc, 8, 9
 	call ClearScreenArea
 	pop bc
 	pop de
@@ -2121,15 +2134,16 @@ GetMonSpriteTileMapPointerFromRowCount:
 	and a
 	jr nz, .enemyTurn
 	ld a, 20 * 5 + 1
+	hlcoord 1, 4
 	jr .next
 .enemyTurn
 	ld a, 12
+	hlcoord 11, 4
 .next
-	hlcoord 0, 0
 	ld e, a
 	ld d, 0
-	add hl, de
-	ld a, 7
+;	add hl, de
+	ld a, 8
 	sub b
 	and a
 	jr z, .done
@@ -2252,7 +2266,7 @@ INCLUDE "data/moves/sfx.asm"
 CopyPicTiles:
 	ldh a, [hWhoseTurn]
 	and a
-	ld a, $31 ; base tile ID of player mon sprite
+	ld a, $40 ; base tile ID of player mon sprite
 	jr z, .next
 ; enemy turn
 	xor a ; base tile ID of enemy mon sprite
@@ -2473,7 +2487,7 @@ AnimationShakeEnemyHUD:
 ; Make a copy of the back pic's tile patterns in sprite tile pattern VRAM.
 	ld de, vBackPic
 	ld hl, vSprites
-	ld bc, 7 * 7
+	ld bc, 8 * 8
 	call CopyVideoData
 
 	xor a
@@ -2498,7 +2512,7 @@ AnimationShakeEnemyHUD:
 ; with the top row of the window on the screen. This makes it so that the window
 ; covers everything below the enemy HD with a copy that looks just like what
 ; was there before.
-	ld a, 7 * 8
+	ld a, 8 * 8
 	ldh [hWY], a
 
 ; Write OAM entries so that the copy of the back pic from the top of this

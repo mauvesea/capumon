@@ -7,14 +7,15 @@ TileIDListPointerTable:
 ; entries correspond to TILEMAP_* constants (see constants/gfx_constants.asm)
 	table_width 3, TileIDListPointerTable
 	; tilemap pointer, width, height
-	tile_ids MonTiles,               7,  7
-	tile_ids SlideDownMonTiles_7x5,  7,  5
-	tile_ids SlideDownMonTiles_7x3,  7,  3
+	tile_ids MonTiles,               8,  8
+	tile_ids SlideDownMonTiles_7x5,  8,  5
+	tile_ids SlideDownMonTiles_7x3,  8,  3
 	tile_ids GengarIntroTiles1,      7,  7
 	tile_ids GengarIntroTiles2,      7,  7
 	tile_ids GengarIntroTiles3,      7,  7
 	tile_ids GameBoyTiles,           6,  8
 	tile_ids LinkCableTiles,        12,  3
+	tile_ids MonTilesFlipped,        8,  8
 	assert_table_length NUM_TILEMAPS
 
 DownscaledMonTiles_5x5:
@@ -25,6 +26,9 @@ DownscaledMonTiles_3x3:
 
 MonTiles:
 	INCBIN "gfx/monsters/tilemaps/front.tilemap"
+
+MonTilesFlipped:
+	INCBIN "gfx/monsters/tilemaps/flipped.tilemap"
 
 SlideDownMonTiles_7x5:
 	INCBIN "gfx/monsters/tilemaps/slide_down_7x5.tilemap"
