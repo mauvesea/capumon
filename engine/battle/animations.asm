@@ -2113,7 +2113,7 @@ ClearMonPicFromTileMap:
 	ldh a, [hWhoseTurn]
 	and a
 	jr z, .playerTurn
-	hlcoord 11, 4
+	hlcoord 12, 4
 	jr .ClearMonArea
 .playerTurn
 	hlcoord 1, 4
@@ -2138,7 +2138,7 @@ GetMonSpriteTileMapPointerFromRowCount:
 	jr .next
 .enemyTurn
 	ld a, 12
-	hlcoord 11, 4
+	hlcoord 12, 4
 .next
 	ld e, a
 	ld d, 0
