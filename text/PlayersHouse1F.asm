@@ -9,7 +9,7 @@ _MomWakeUpText::
 	cont "for you."
 	done
 	
-_RedsHouse1FDadText::
+_PlayersHouse1FDadText::
 	text "DAD: <PLAYER>!"
 	line "I hope you can"
 	cont "become a famous"

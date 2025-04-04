@@ -140,7 +140,7 @@ INCLUDE "text/Route25.asm"
 
 INCLUDE "data/text/text_3.asm"
 
-INCLUDE "text/RedsHouse1F.asm"
+INCLUDE "text/PlayersHouse1F.asm"
 INCLUDE "text/BluesHouse.asm"
 INCLUDE "text/OaksLab.asm"
 INCLUDE "text/pokedex_ratings.asm"

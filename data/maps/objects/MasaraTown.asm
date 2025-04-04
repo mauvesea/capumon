@@ -2,7 +2,7 @@ MasaraTown_Object:
 	db $6 ; border block
 
 	def_warp_events
-	warp_event  6,  5, REDS_HOUSE_1F, 1
+	warp_event  6,  5, PLAYERS_HOUSE_1F, 1
 	warp_event 14,  5, BLUES_HOUSE, 1
 
 	def_bg_events

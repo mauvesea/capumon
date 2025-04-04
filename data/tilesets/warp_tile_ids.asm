@@ -1,10 +1,10 @@
 WarpTileIDPointers:
 	table_width 2, WarpTileIDPointers
 	dw .OverworldWarpTileIDs
-	dw .RedsHouse1WarpTileIDs
+	dw .PlayersHouseWarpTileIDs
 	dw .MartWarpTileIDs
 	dw .ForestWarpTileIDs
-	dw .RedsHouse2WarpTileIDs
+	dw .PlayersRoomWarpTileIDs
 	dw .DojoWarpTileIDs
 	dw .PokecenterWarpTileIDs
 	dw .GymWarpTileIDs
@@ -41,8 +41,8 @@ ENDM
 .GateWarpTileIDs:
 	db $3B
 	; fallthrough
-.RedsHouse1WarpTileIDs:
-.RedsHouse2WarpTileIDs:
+.PlayersHouseWarpTileIDs:
+.PlayersRoomWarpTileIDs:
 	warp_tiles $1A, $1C
 
 .MartWarpTileIDs:

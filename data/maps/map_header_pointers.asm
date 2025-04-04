@@ -38,8 +38,8 @@ MapHeaderPointers::
 	dw Route23_h
 	dw Route24_h
 	dw Route25_h
-	dw RedsHouse1F_h
-	dw RedsHouse2F_h
+	dw PlayersHouse1F_h
+	dw PlayersHouse2F_h
 	dw BluesHouse_h
 	dw OaksLab_h
 	dw ViridianPokecenter_h

@@ -10,10 +10,10 @@ Tilesets:
 	table_width 12, Tilesets
 	; name, 3 counter tiles, grass tile, animations
 	tileset Overworld,    -1, -1, -1, $58, TILEANIM_WATER
-	tileset RedsHouse1,   -1, -1, -1,  -1, TILEANIM_NONE
+	tileset PlayersHouse,   -1, -1, -1,  -1, TILEANIM_NONE
 	tileset Mart,        $35,$5b, -1,  -1, TILEANIM_NONE
 	tileset Forest,       -1, -1, -1, $20, TILEANIM_WATER
-	tileset RedsHouse2,   -1, -1, -1,  -1, TILEANIM_NONE
+	tileset PlayersRoom,   -1, -1, -1,  -1, TILEANIM_NONE
 	tileset Dojo,        $3A, -1, -1,  -1, TILEANIM_WATER_FLOWER
 	tileset Pokecenter,  $35,$5b, -1,  -1, TILEANIM_NONE
 	tileset Gym,         $3A, -1, -1,  -1, TILEANIM_WATER_FLOWER

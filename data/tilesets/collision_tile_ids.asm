@@ -11,8 +11,8 @@ Underground_Coll::
 Overworld_Coll::
 	coll_tiles $00, $02, $0D, $0E, $15, $18, $1B, $20, $21, $26, $27, $28, $58
 
-RedsHouse1_Coll::
-RedsHouse2_Coll::
+PlayersHouse_Coll::
+PlayersRoom_Coll::
 	coll_tiles $01, $02, $03, $11, $12, $13, $14, $1c, $1a, $55, $57
 
 Mart_Coll::

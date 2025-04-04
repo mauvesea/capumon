@@ -1,5 +1,5 @@
 HiddenObjectMaps:
-	db REDS_HOUSE_2F
+	db PLAYERS_HOUSE_2F
 	db BLUES_HOUSE
 	db OAKS_LAB
 	db VIRIDIAN_POKECENTER
@@ -88,7 +88,7 @@ HiddenObjectMaps:
 
 HiddenObjectPointers:
 ; each of these pointers is for the corresponding map in HiddenObjectMaps
-	dw RedsHouse2FHiddenObjects
+	dw PlayersHouse2FHiddenObjects
 	dw BluesHouseHiddenObjects
 	dw OaksLabHiddenObjects
 	dw ViridianPokecenterHiddenObjects
@@ -203,7 +203,7 @@ ColosseumHiddenObjects:
 	hidden_object  4,  4, ANY_FACING, CableClubLeftGameboy
 	db -1 ; end
 
-RedsHouse2FHiddenObjects:
+PlayersHouse2FHiddenObjects:
 	db -1 ; end
 
 BluesHouseHiddenObjects:

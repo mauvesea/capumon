@@ -1,12 +1,12 @@
-RedsHouse1F_Script:
+PlayersHouse1F_Script:
 	jp EnableAutoTextBoxDrawing
 
-RedsHouse1F_TextPointers:
-	dw RedsHouse1FMomText
-	dw RedsHouse1FDadText
-	dw RedsHouse1FTVText
+PlayersHouse1F_TextPointers:
+	dw PlayersHouse1FMomText
+	dw PlayersHouse1FDadText
+	dw PlayersHouse1FTVText
 
-RedsHouse1FMomText:
+PlayersHouse1FMomText:
 	text_asm
 	call MomHealPokemon
 .done
@@ -43,11 +43,11 @@ MomHealText2:
 	text_far _MomHealText2
 	text_end
 
-RedsHouse1FDadText:
-	text_far _RedsHouse1FDadText
+PlayersHouse1FDadText:
+	text_far _PlayersHouse1FDadText
 	text_end
 
-RedsHouse1FTVText:
+PlayersHouse1FTVText:
 	text_asm
 	ld a, [wSpritePlayerStateData1FacingDirection]
 	cp SPRITE_FACING_UP

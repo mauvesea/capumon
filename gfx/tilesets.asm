@@ -44,10 +44,10 @@ Underground_Block:: INCBIN "gfx/blocksets/underground.bst"
 
 SECTION "Tilesets 4", ROMX
 
-RedsHouse1_GFX::
-RedsHouse2_GFX::    INCBIN "gfx/tilesets/reds_house.2bpp"
-RedsHouse1_Block::
-RedsHouse2_Block::  INCBIN "gfx/blocksets/reds_house.bst"
+PlayersHouse_GFX::
+PlayersRoom_GFX::    INCBIN "gfx/tilesets/players_house.2bpp"
+PlayersHouse_Block::
+PlayersRoom_Block::  INCBIN "gfx/blocksets/players_house.bst"
 House_GFX::         INCBIN "gfx/tilesets/house.2bpp"
 House_Block::       INCBIN "gfx/blocksets/house.bst"
 Mansion_GFX::       INCBIN "gfx/tilesets/mansion.2bpp"

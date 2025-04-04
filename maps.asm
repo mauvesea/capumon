@@ -415,10 +415,10 @@ SECTION "Maps 8", ROMX
 
 INCLUDE "scripts/Route7.asm"
 
-INCLUDE "data/maps/headers/RedsHouse1F.asm"
-INCLUDE "scripts/RedsHouse1F.asm"
-INCLUDE "data/maps/objects/RedsHouse1F.asm"
-RedsHouse1F_Blocks: INCBIN "maps/RedsHouse1F.blk"
+INCLUDE "data/maps/headers/PlayersHouse1F.asm"
+INCLUDE "scripts/PlayersHouse1F.asm"
+INCLUDE "data/maps/objects/PlayersHouse1F.asm"
+PlayersHouse1F_Blocks: INCBIN "maps/PlayersHouse1F.blk"
 
 INCLUDE "data/maps/headers/CeladonMart3F.asm"
 INCLUDE "scripts/CeladonMart3F.asm"
@@ -828,7 +828,7 @@ CeruleanMart_Blocks:
 VermilionMart_Blocks: INCBIN "maps/VermilionMart.blk"
 
 CopycatsHouse2F_Blocks:
-RedsHouse2F_Blocks: INCBIN "maps/RedsHouse2F.blk"
+PlayersHouse2F_Blocks: INCBIN "maps/PlayersHouse2F.blk"
 
 Museum1F_Blocks: INCBIN "maps/Museum1F.blk"
 
@@ -848,9 +848,9 @@ Route2Gate_Blocks:
 ViridianForestSouthGate_Blocks:
 ViridianForestNorthGate_Blocks: INCBIN "maps/ViridianForestNorthGate.blk"
 
-INCLUDE "data/maps/headers/RedsHouse2F.asm"
-INCLUDE "scripts/RedsHouse2F.asm"
-INCLUDE "data/maps/objects/RedsHouse2F.asm"
+INCLUDE "data/maps/headers/PlayersHouse2F.asm"
+INCLUDE "scripts/PlayersHouse2F.asm"
+INCLUDE "data/maps/objects/PlayersHouse2F.asm"
 
 
 SECTION "Maps 16", ROMX
