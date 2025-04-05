@@ -9,11 +9,6 @@ DisplayDiploma::
 	ld hl, wd730
 	set 6, [hl]
 	call DisableLCD
-	ld hl, CircleTile
-	ld de, vChars2 tile CIRCLE_TILE_ID
-	ld bc, $10
-	ld a, BANK(CircleTile)
-	call FarCopyData2
 	hlcoord 0, 0
 	lb bc, 16, 18
 	predef Diploma_TextBoxBorder

@@ -1,6 +1,6 @@
 roms := \
-	capmon.gbc \
-	capmon_debug.gbc
+	capmon.gb \
+	capmon_debug.gb
 patches := \
 	capmon.patch
 
@@ -15,11 +15,9 @@ rom_obj := \
 	gfx/sprites.o \
 	gfx/tilesets.o
 
-pokered_obj        := $(rom_obj:.o=_red.o)
-capmon_obj       := $(rom_obj:.o=_blue.o)
-capmon_debug_obj := $(rom_obj:.o=_blue_debug.o)
-pokered_vc_obj     := $(rom_obj:.o=_red_vc.o)
-capmon_vc_obj    := $(rom_obj:.o=_blue_vc.o)
+capmon_obj       := $(rom_obj:.o=_regular.o)
+capmon_debug_obj := $(rom_obj:.o=_debug.o)
+capmon_vc_obj    := $(rom_obj:.o=_vc.o)
 
 
 ### Build tools
@@ -43,14 +41,12 @@ RGBLINK ?= $(RGBDS)rgblink
 .SECONDEXPANSION:
 .PRECIOUS:
 .SECONDARY:
-.PHONY: all red blue blue_debug clean tidy compare tools
+.PHONY: all capumon debug clean tidy compare tools
 
 all: $(roms)
-red:        pokered.gbc
-blue:       capmon.gbc
-blue_debug: capmon_debug.gbc
-red_vc:     pokered.patch
-blue_vc:    capmon.patch
+capmon:  capmon.gb
+debug:  capmon_debug.gb
+vc:     capmon.patch
 
 clean: tidy
 	find gfx \
@@ -61,16 +57,14 @@ clean: tidy
 
 tidy:
 	$(RM) $(roms) \
-	      $(roms:.gbc=.sym) \
-	      $(roms:.gbc=.map) \
+	      $(roms:.gb=.sym) \
+	      $(roms:.gb=.map) \
 	      $(patches) \
-	      $(patches:.patch=_vc.gbc) \
+	      $(patches:.patch=_vc.gb) \
 	      $(patches:.patch=_vc.sym) \
 	      $(patches:.patch=_vc.map) \
 	      $(patches:%.patch=vc/%.constants.sym) \
-	      $(pokered_obj) \
 	      $(capmon_obj) \
-	      $(pokered_vc_obj) \
 	      $(capmon_vc_obj) \
 	      $(capmon_debug_obj) \
 	      rgbdscheck.o
@@ -89,13 +83,11 @@ ifeq ($(DEBUG),1)
 RGBASMFLAGS += -E
 endif
 
-$(pokered_obj):        RGBASMFLAGS += -D _RED
-$(capmon_obj):         RGBASMFLAGS += -D _BLUE
-$(capmon_debug_obj):   RGBASMFLAGS += -D _BLUE -D _DEBUG
-$(pokered_vc_obj):     RGBASMFLAGS += -D _RED -D _RED_VC
-$(capmon_vc_obj):      RGBASMFLAGS += -D _BLUE -D _BLUE_VC
+$(capmon_obj):         RGBASMFLAGS += -D _REGULAR
+$(capmon_debug_obj):   RGBASMFLAGS += -D _DEBUG
+$(capmon_vc_obj):      RGBASMFLAGS += -D _VC
 
-%.patch: vc/%.constants.sym %_vc.gbc %.gbc vc/%.patch.template
+%.patch: vc/%.constants.sym %_vc.gb %.gb vc/%.patch.template
 	tools/make_patch $*_vc.sym $^ $@
 
 rgbdscheck.o: rgbdscheck.asm
@@ -116,12 +108,10 @@ $1: $2 $$(shell tools/scan_includes $2) $(preinclude_deps) | rgbdscheck.o
 	$$(RGBASM) $$(RGBASMFLAGS) -o $$@ $$<
 endef
 
-# Dependencies for objects (drop _red and _blue from asm file basenames)
-$(foreach obj, $(pokered_obj), $(eval $(call DEP,$(obj),$(obj:_red.o=.asm))))
-$(foreach obj, $(capmon_obj), $(eval $(call DEP,$(obj),$(obj:_blue.o=.asm))))
-$(foreach obj, $(capmon_debug_obj), $(eval $(call DEP,$(obj),$(obj:_blue_debug.o=.asm))))
-$(foreach obj, $(pokered_vc_obj), $(eval $(call DEP,$(obj),$(obj:_red_vc.o=.asm))))
-$(foreach obj, $(capmon_vc_obj), $(eval $(call DEP,$(obj),$(obj:_blue_vc.o=.asm))))
+# Dependencies for objects
+$(foreach obj, $(capmon_obj), $(eval $(call DEP,$(obj),$(obj:_regular.o=.asm))))
+$(foreach obj, $(capmon_debug_obj), $(eval $(call DEP,$(obj),$(obj:_debug.o=.asm))))
+$(foreach obj, $(capmon_vc_obj), $(eval $(call DEP,$(obj),$(obj:_vc.o=.asm))))
 
 # Dependencies for VC files that need to run scan_includes
 %.constants.sym: %.constants.asm $(shell tools/scan_includes %.constants.asm) $(preinclude_deps) | rgbdscheck.o
@@ -133,19 +123,15 @@ endif
 %.asm: ;
 
 
-pokered_pad        = 0x00
 capmon_pad       = 0x00
-pokered_vc_pad     = 0x00
 capmon_vc_pad    = 0x00
 capmon_debug_pad = 0xff
 
-pokered_opt      = -jsv -n 0 -k 01 -l 0x33 -m MBC3+RAM+BATTERY -r 03 -t "POKEMON RED"
 capmon_opt       = -jsv -n 0 -k 01 -l 0x33 -m MBC3+RAM+BATTERY -r 03 -t "CAPMON"
 capmon_debug_opt = -jsv -n 0 -k 01 -l 0x33 -m MBC3+RAM+BATTERY -r 03 -t "CAPMON"
-pokered_vc_opt   = -jsv -n 0 -k 01 -l 0x33 -m MBC3+RAM+BATTERY -r 03 -t "POKEMON RED"
 capmon_vc_opt    = -jsv -n 0 -k 01 -l 0x33 -m MBC3+RAM+BATTERY -r 03 -t "CAPMON"
 
-%.gbc: $$(%_obj) layout.link
+%.gb: $$(%_obj) layout.link
 	$(RGBLINK) -p $($*_pad) -d -m $*.map -n $*.sym -l layout.link -o $@ $(filter %.o,$^)
 	$(RGBFIX) -p $($*_pad) $($*_opt) $@
 
@@ -154,15 +140,6 @@ capmon_vc_opt    = -jsv -n 0 -k 01 -l 0x33 -m MBC3+RAM+BATTERY -r 03 -t "CAPMON"
 
 gfx/battle/move_anim_0.2bpp: tools/gfx += --trim-whitespace
 gfx/battle/move_anim_1.2bpp: tools/gfx += --trim-whitespace
-
-gfx/intro/blue_jigglypuff_1.2bpp: rgbgfx += -Z
-gfx/intro/blue_jigglypuff_2.2bpp: rgbgfx += -Z
-gfx/intro/blue_jigglypuff_3.2bpp: rgbgfx += -Z
-gfx/intro/red_nidorino_1.2bpp: rgbgfx += -Z
-gfx/intro/red_nidorino_2.2bpp: rgbgfx += -Z
-gfx/intro/red_nidorino_3.2bpp: rgbgfx += -Z
-gfx/intro/gengar.2bpp: rgbgfx += -Z
-gfx/intro/gengar.2bpp: tools/gfx += --remove-duplicates --preserve=0x19,0x76
 
 gfx/credits/the_end.2bpp: tools/gfx += --interleave --png=$<
 

@@ -507,4 +507,4 @@ PlayTrainerMusic::
 	ld [wNewSoundID], a
 	jp PlaySound
 
-INCLUDE "data/trainers/encounter_types.asm"
+INCLUDE "data/dealer/encounter_types.asm"

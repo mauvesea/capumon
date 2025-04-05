@@ -7,12 +7,12 @@ ENDM
 
 ; trainer class ids
 ; indexes for:
-; - TrainerNames (see data/trainers/names.asm)
-; - TrainerNamePointers (see data/trainers/name_pointers.asm)
-; - TrainerDataPointers (see data/trainers/parties.asm)
-; - TrainerPicAndMoneyPointers (see data/trainers/pic_pointers_money.asm)
-; - TrainerAIPointers (see data/trainers/ai_pointers.asm)
-; - TrainerClassMoveChoiceModifications (see data/trainers/move_choices.asm)
+; - TrainerNames (see data/dealer/names.asm)
+; - TrainerNamePointers (see data/dealer/name_pointers.asm)
+; - TrainerDataPointers (see data/dealer/parties.asm)
+; - TrainerPicAndMoneyPointers (see data/dealer/pic_pointers_money.asm)
+; - TrainerAIPointers (see data/dealer/ai_pointers.asm)
+; - TrainerClassMoveChoiceModifications (see data/dealer/move_choices.asm)
 	const_def
 	trainer_const NOBODY         ; $00
 	trainer_const YOUNGSTER      ; $01

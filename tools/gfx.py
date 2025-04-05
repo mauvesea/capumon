@@ -149,7 +149,7 @@ def filepath_rules(filepath):
 
     pokemon_name = ''
 
-    if 'gfx/pokemon/' in filedir:
+    if 'gfx/monsters/' in filedir:
         pokemon_name = filedir.split('/')[-1]
         if pokemon_name.startswith('unown_'):
             index = filedir.find(pokemon_name)
@@ -163,7 +163,7 @@ def filepath_rules(filepath):
             args['pal_file'] = os.path.join(filedir, 'normal.pal')
             args['pic'] = True
 
-    elif 'gfx/trainers' in filedir:
+    elif 'gfx/dealer' in filedir:
         args['pic'] = True
 
     elif os.path.join(filedir, name) in pics:

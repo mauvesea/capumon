@@ -18,4 +18,4 @@ SaveTrainerName::
 	jr nz, .CopyCharacter
 	ret
 
-INCLUDE "data/trainers/name_pointers.asm"
+INCLUDE "data/dealer/name_pointers.asm"

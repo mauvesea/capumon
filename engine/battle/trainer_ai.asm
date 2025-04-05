@@ -273,19 +273,19 @@ ReadMove:
 	pop hl
 	ret
 
-INCLUDE "data/trainers/move_choices.asm"
+INCLUDE "data/dealer/move_choices.asm"
 
-INCLUDE "data/trainers/pic_pointers_money.asm"
+INCLUDE "data/dealer/pic_pointers_money.asm"
 
-INCLUDE "data/trainers/names.asm"
+INCLUDE "data/dealer/names.asm"
 
 INCLUDE "engine/battle/misc.asm"
 
 INCLUDE "engine/battle/read_trainer_party.asm"
 
-INCLUDE "data/trainers/special_moves.asm"
+INCLUDE "data/dealer/special_moves.asm"
 
-INCLUDE "data/trainers/parties.asm"
+INCLUDE "data/dealer/parties.asm"
 
 TrainerAI:
 	and a
@@ -319,7 +319,7 @@ TrainerAI:
 	call Random
 	jp hl
 
-INCLUDE "data/trainers/ai_pointers.asm"
+INCLUDE "data/dealer/ai_pointers.asm"
 
 JugglerAI:
 	cp 25 percent + 1
