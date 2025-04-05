@@ -6694,31 +6694,6 @@ ApplyBadgeStatBoosts:
 	ld [hld], a
 	ret
 
-LoadHudTilePatterns:
-	ldh a, [rLCDC]
-	add a ; is LCD disabled?
-	jr c, .lcdEnabled
-.lcdDisabled
-	ld hl, BattleHudTiles1
-	ld de, vChars2 tile $6d
-	ld bc, BattleHudTiles1End - BattleHudTiles1
-	ld a, BANK(BattleHudTiles1)
-	call FarCopyDataDouble
-	ld hl, BattleHudTiles2
-	ld de, vChars2 tile $73
-	ld bc, BattleHudTiles3End - BattleHudTiles2
-	ld a, BANK(BattleHudTiles2)
-	jp FarCopyDataDouble
-.lcdEnabled
-	ld de, BattleHudTiles1
-	ld hl, vChars2 tile $6d
-	lb bc, BANK(BattleHudTiles1), (BattleHudTiles1End - BattleHudTiles1) / $8
-	call CopyVideoDataDouble
-	ld de, BattleHudTiles2
-	ld hl, vChars2 tile $73
-	lb bc, BANK(BattleHudTiles2), (BattleHudTiles3End - BattleHudTiles2) / $8
-	jp CopyVideoDataDouble
-
 PrintEmptyString:
 	ld hl, .emptyString
 	jp PrintText

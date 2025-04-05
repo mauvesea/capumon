@@ -1,20 +1,11 @@
 DrawAllPokeballs:
-;	call LoadPartyPokeballGfx
-;	call SetupOwnPartyPokeballs
 	ld a, [wIsInBattle]
 	dec a
 	ret z ; return if wild pokémon
 	jp SetupEnemyPartyPokeballs
 
 DrawEnemyPokeballs:
-	call LoadPartyPokeballGfx
 	jp SetupEnemyPartyPokeballs
-
-LoadPartyPokeballGfx:
-	ld de, PokeballTileGraphics
-	ld hl, vSprites tile $31
-	lb bc, BANK(PokeballTileGraphics), (PokeballTileGraphicsEnd - PokeballTileGraphics) / $10
-	jp CopyVideoData
 
 SetupOwnPartyPokeballs:
 	call PlacePlayerHUDTiles
@@ -164,7 +155,6 @@ PlaceHUDTiles:
 	ret
 
 SetupPlayerAndEnemyPokeballs:
-	call LoadPartyPokeballGfx
 	ld hl, wPartyMons
 	ld de, wPartyCount
 	call SetupPokeballs
@@ -185,8 +175,3 @@ SetupPlayerAndEnemyPokeballs:
 	ld [hl], $68
 	ld hl, wShadowOAMSprite06
 	jp WritePokeballOAMData
-
-; four tiles: pokeball, black pokeball (status ailment), crossed out pokeball (fainted) and pokeball slot (no mon)
-PokeballTileGraphics::
-	INCBIN "gfx/battle/balls.2bpp"
-PokeballTileGraphicsEnd:

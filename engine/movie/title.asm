@@ -61,7 +61,7 @@ DisplayTitleScreen:
 	ld de, vTitleLogo tile 128
 	ld bc, $24 tiles
 	ld a, BANK(Logo2GFX)
-	call FarCopyData2	
+	call FarCopyData2
 
 	call ClearBothBGMaps
 
@@ -214,7 +214,7 @@ LoadCopyrightAndTextBoxTiles:
 LoadCopyrightTiles:
 	ld de, NintendoCopyrightLogoGraphics
 	ld hl, vChars2 tile $30
-	lb bc, BANK(NintendoCopyrightLogoGraphics), (NintendoCopyrightLogoGraphics) / 2
+	lb bc, BANK(NintendoCopyrightLogoGraphics), (NintendoCopyrightLogoGraphics) / 2 + 1
 	call CopyVideoData
 	hlcoord 5, 7
 	ld de, CopyrightTextString
