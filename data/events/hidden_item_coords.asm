@@ -4,8 +4,6 @@ ENDM
 
 HiddenItemCoords:
 	; map id, x, y
-	hidden_item VIRIDIAN_FOREST,                1,  18
-	hidden_item VIRIDIAN_FOREST,               16,  42
 	hidden_item MT_MOON_B2F,                   18,  12
 	hidden_item ROUTE_25,                      38,   3
 	hidden_item ROUTE_9,                       14,   7
@@ -39,7 +37,7 @@ HiddenItemCoords:
 	hidden_item VICTORY_ROAD_2F,                5,   2
 	hidden_item VICTORY_ROAD_2F,               26,   7
 	hidden_item UNUSED_MAP_6F,                 14,  11
-	hidden_item VIRIDIAN_CITY,                 14,   4
+	hidden_item TOKIWA_CITY,                   14,   4
 	hidden_item ROUTE_11,                      48,   5
 	hidden_item ROUTE_12,                       2,  63
 	hidden_item ROUTE_17,                      15,  14

@@ -1,6 +1,6 @@
 ; wEventFlags bit flags
 
-; Pallet Town events
+; Masara Town events
 	const_def
 	const_skip 3
 	const EVENT_HALL_OF_FAME_DEX_RATING
@@ -11,7 +11,7 @@
 	const EVENT_GOT_POKEDEX
 	const_skip 2
 
-; Viridian City events
+; Tokiwa City events
 	const_next $28
 	const EVENT_VIRIDIAN_GYM_OPEN
 	const EVENT_GOT_TM42
@@ -523,10 +523,7 @@
 
 ; Viridian Forest events
 	const_next $560
-	const_skip 2
-	const EVENT_BEAT_VIRIDIAN_FOREST_TRAINER_0
-	const EVENT_BEAT_VIRIDIAN_FOREST_TRAINER_1
-	const EVENT_BEAT_VIRIDIAN_FOREST_TRAINER_2
+	const_skip 5
 
 ; Mt. Moon events
 	const_next $570

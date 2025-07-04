@@ -1,7 +1,7 @@
 WildDataPointers:
 	table_width 2, WildDataPointers
 	dw NothingWildMons         ; MASARA_TOWN
-	dw NothingWildMons         ; VIRIDIAN_CITY
+	dw NothingWildMons         ; TOKIWA_CITY
 	dw NothingWildMons         ; PEWTER_CITY
 	dw NothingWildMons         ; CERULEAN_CITY
 	dw NothingWildMons         ; LAVENDER_TOWN
@@ -38,10 +38,6 @@ WildDataPointers:
 	dw NothingWildMons         ; ROUTE_24
 	dw NothingWildMons         ; ROUTE_25
 	dw NothingWildMons         ; PLAYERS_HOUSE_1F
-	dw NothingWildMons
-	dw NothingWildMons
-	dw NothingWildMons
-	dw NothingWildMons
 	dw NothingWildMons
 	dw NothingWildMons
 	dw NothingWildMons

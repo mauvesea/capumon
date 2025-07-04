@@ -5,7 +5,7 @@ ENDM
 
 BenchGuyTextPointers:
 	; map id, player facing direction, predef text
-	bench_guy_text VIRIDIAN_POKECENTER,    SPRITE_FACING_LEFT, ViridianCityPokecenterBenchGuyText
+	bench_guy_text TOKIWA_INN,             SPRITE_FACING_LEFT, ViridianCityPokecenterBenchGuyText
 	bench_guy_text PEWTER_POKECENTER,      SPRITE_FACING_LEFT, PewterCityPokecenterBenchGuyText
 	bench_guy_text CERULEAN_POKECENTER,    SPRITE_FACING_LEFT, CeruleanCityPokecenterBenchGuyText
 	bench_guy_text LAVENDER_POKECENTER,    SPRITE_FACING_LEFT, LavenderCityPokecenterBenchGuyText

@@ -17,7 +17,7 @@ ENDM
 ; Order: towns/cities, then routes, then indoor/dungeon maps
 	const_def
 	map_const MASARA_TOWN,                   10,  9 ; $00
-	map_const VIRIDIAN_CITY,                 20, 18 ; $01
+	map_const TOKIWA_CITY,                   20, 18 ; $01
 	map_const PEWTER_CITY,                   20, 18 ; $02
 	map_const CERULEAN_CITY,                 20, 18 ; $03
 	map_const LAVENDER_TOWN,                 10,  9 ; $04
@@ -60,17 +60,13 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	map_const PLAYERS_HOUSE_2F,               4,  4 ; $26
 	map_const BLUES_HOUSE,                    4,  4 ; $27
 	map_const OAKS_LAB,                       4,  4 ; $28
-	map_const VIRIDIAN_POKECENTER,            4,  4 ; $29
-	map_const VIRIDIAN_MART,                  4,  4 ; $2A
-	map_const VIRIDIAN_SCHOOL_HOUSE,          4,  4 ; $2B
-	map_const VIRIDIAN_NICKNAME_HOUSE,        4,  4 ; $2C
-	map_const VIRIDIAN_GYM,                   8,  4 ; $2D
+	map_const TOKIWA_INN,                     4,  4 ; $29
+	map_const TOKIWA_CVS,                     4,  4 ; $2A
+	map_const TOKIWA_HOUSE1,                  4,  4 ; $2B
+	map_const TOKIWA_CHAMP_CUP,               8,  4 ; $2D
 	map_const DIGLETTS_CAVE_ROUTE_2,          4,  4 ; $2E
-	map_const VIRIDIAN_FOREST_NORTH_GATE,     5,  4 ; $2F
 	map_const ROUTE_2_TRADE_HOUSE,            4,  4 ; $30
 	map_const ROUTE_2_GATE,                   5,  4 ; $31
-	map_const VIRIDIAN_FOREST_SOUTH_GATE,     5,  4 ; $32
-	map_const VIRIDIAN_FOREST,               17, 24 ; $33
 	map_const MUSEUM_1F,                     10,  4 ; $34
 	map_const MUSEUM_2F,                      7,  4 ; $35
 	map_const PEWTER_GYM,                     5,  7 ; $36

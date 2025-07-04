@@ -2,7 +2,7 @@
 MapHeaderPointers::
 	table_width 2, MapHeaderPointers
 	dw MasaraTown_h
-	dw ViridianCity_h
+	dw TokiwaCity_h
 	dw PewterCity_h
 	dw CeruleanCity_h
 	dw LavenderTown_h
@@ -42,17 +42,13 @@ MapHeaderPointers::
 	dw PlayersHouse2F_h
 	dw BluesHouse_h
 	dw OaksLab_h
-	dw ViridianPokecenter_h
-	dw ViridianMart_h
-	dw ViridianSchoolHouse_h
-	dw ViridianNicknameHouse_h
-	dw ViridianGym_h
+	dw TokiwaInn_h
+	dw TokiwaCVS_h
+	dw TokiwaHouse1_h
+	dw TokiwaChampCup_h
 	dw DiglettsCaveRoute2_h
-	dw ViridianForestNorthGate_h
 	dw Route2TradeHouse_h
 	dw Route2Gate_h
-	dw ViridianForestSouthGate_h
-	dw ViridianForest_h
 	dw Museum1F_h
 	dw Museum2F_h
 	dw PewterGym_h

@@ -1930,13 +1930,13 @@ wOaksLabCurScript:: db
 wMasaraTownCurScript:: db
 	ds 1
 wBluesHouseCurScript:: db
-wViridianCityCurScript:: db
+wTokiwaCityCurScript:: db
 	ds 2
 wPewterCityCurScript:: db
 wRoute3CurScript:: db
 wRoute4CurScript:: db
 	ds 1
-wViridianGymCurScript:: db
+wTokiwaChampCupCurScript:: db
 wPewterGymCurScript:: db
 wCeruleanGymCurScript:: db
 wVermilionGymCurScript:: db
@@ -1954,12 +1954,12 @@ wSSAnne2FRoomsCurScript:: db
 wRoute22CurScript:: db
 	ds 1
 wPlayersHouse2FCurScript:: db
-wViridianMartCurScript:: db
+wTokiwaCVSCurScript:: db
 wRoute22GateCurScript:: db
 wCeruleanCityCurScript:: db
 	ds 7
 wSSAnneBowCurScript:: db
-wViridianForestCurScript:: db
+	ds 1
 wMuseum1FCurScript:: db
 wRoute13CurScript:: db
 wRoute14CurScript:: db

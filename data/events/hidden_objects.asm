@@ -2,10 +2,10 @@ HiddenObjectMaps:
 	db PLAYERS_HOUSE_2F
 	db BLUES_HOUSE
 	db OAKS_LAB
-	db VIRIDIAN_POKECENTER
-	db VIRIDIAN_MART
-	db VIRIDIAN_SCHOOL_HOUSE
-	db VIRIDIAN_GYM
+	db TOKIWA_INN
+	db TOKIWA_CVS
+	db TOKIWA_HOUSE1
+	db TOKIWA_CHAMP_CUP
 	db MUSEUM_1F
 	db PEWTER_GYM
 	db PEWTER_MART
@@ -30,7 +30,6 @@ HiddenObjectMaps:
 	db ROCK_TUNNEL_POKECENTER
 	db TRADE_CENTER
 	db COLOSSEUM
-	db VIRIDIAN_FOREST
 	db MT_MOON_B2F
 	db INDIGO_PLATEAU
 	db ROUTE_25
@@ -59,7 +58,7 @@ HiddenObjectMaps:
 	db VICTORY_ROAD_2F
 	db UNUSED_MAP_6F
 	db BILLS_HOUSE
-	db VIRIDIAN_CITY
+	db TOKIWA_CITY
 	db SAFARI_ZONE_WEST_REST_HOUSE
 	db SAFARI_ZONE_EAST_REST_HOUSE
 	db SAFARI_ZONE_NORTH_REST_HOUSE
@@ -119,7 +118,6 @@ HiddenObjectPointers:
 	dw RockTunnelPokecenterHiddenObjects
 	dw TradeCenterHiddenObjects
 	dw ColosseumHiddenObjects
-	dw ViridianForestHiddenObjects
 	dw MtMoon3HiddenObjects
 	dw IndigoPlateauHiddenObjects
 	dw Route25HiddenObjects
@@ -408,11 +406,6 @@ MtMoonPokecenterHiddenObjects:
 RockTunnelPokecenterHiddenObjects:
 	hidden_object  0,  4, SPRITE_FACING_LEFT, PrintBenchGuyText
 	hidden_object 13,  3, SPRITE_FACING_UP, OpenPokemonCenterPC
-	db -1 ; end
-
-ViridianForestHiddenObjects:
-	hidden_object  1, 18, POTION, HiddenItems
-	hidden_object 16, 42, ANTIDOTE, HiddenItems
 	db -1 ; end
 
 MtMoon3HiddenObjects:

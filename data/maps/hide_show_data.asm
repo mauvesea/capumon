@@ -47,14 +47,10 @@ MapHSPointers:
 	dw NoHS
 	dw NoHS
 	dw NoHS
-	dw NoHS
 	dw ViridianGymHS
 	dw NoHS
 	dw NoHS
 	dw NoHS
-	dw NoHS
-	dw NoHS
-	dw ViridianForestHS
 	dw Museum1FHS
 	dw NoHS
 	dw NoHS
@@ -265,8 +261,8 @@ MissableObjects:
 MasaraTownHS:
 	db MASARA_TOWN, $01, HIDE
 ViridianCityHS:
-	db VIRIDIAN_CITY, $05, SHOW
-	db VIRIDIAN_CITY, $07, HIDE
+	db TOKIWA_CITY, $05, SHOW
+	db TOKIWA_CITY, $07, HIDE
 PewterCityHS:
 	db PEWTER_CITY, $03, SHOW
 	db PEWTER_CITY, $05, SHOW
@@ -326,8 +322,8 @@ OaksLabHS:
 	db OAKS_LAB, $04, SHOW
 	db OAKS_LAB, $05, SHOW
 ViridianGymHS:
-	db VIRIDIAN_GYM, $01, SHOW
-	db VIRIDIAN_GYM, $0B, SHOW
+	db TOKIWA_CHAMP_CUP, $01, SHOW
+	db TOKIWA_CHAMP_CUP, $0B, SHOW
 Museum1FHS:
 	db MUSEUM_1F, $05, SHOW
 CeruleanCaveHS:
@@ -394,10 +390,6 @@ BillsHouseHS:
 	db BILLS_HOUSE, $01, SHOW
 	db BILLS_HOUSE, $02, HIDE
 	db BILLS_HOUSE, $03, HIDE
-ViridianForestHS:
-	db VIRIDIAN_FOREST, $05, SHOW
-	db VIRIDIAN_FOREST, $06, SHOW
-	db VIRIDIAN_FOREST, $07, SHOW
 MtMoon1FHS:
 	db MT_MOON_1F, $08, SHOW
 	db MT_MOON_1F, $09, SHOW

@@ -6,7 +6,6 @@
 ; GetBattleTransitionID_IsDungeonMap checks if wCurMap
 ; is equal to one of these maps
 DungeonMaps1:
-	db VIRIDIAN_FOREST
 	db ROCK_TUNNEL_1F
 	db SEAFOAM_ISLANDS_1F
 	db ROCK_TUNNEL_B1F

@@ -2,7 +2,6 @@ SECTION "Text 1", ROMX
 
 INCLUDE "data/text/text_1.asm"
 
-INCLUDE "text/ViridianForest.asm"
 INCLUDE "text/MtMoon1F.asm"
 INCLUDE "text/MtMoonB1F.asm"
 INCLUDE "text/MtMoonB2F.asm"
@@ -67,10 +66,8 @@ INCLUDE "text/SeafoamIslandsB4F.asm"
 INCLUDE "data/text/text_2.asm"
 
 INCLUDE "text/DiglettsCaveRoute2.asm"
-INCLUDE "text/ViridianForestNorthGate.asm"
 INCLUDE "text/Route2TradeHouse.asm"
 INCLUDE "text/Route2Gate.asm"
-INCLUDE "text/ViridianForestSouthGate.asm"
 INCLUDE "text/MtMoonPokecenter.asm"
 INCLUDE "text/SaffronGates.asm"
 INCLUDE "text/Daycare.asm"
@@ -144,11 +141,6 @@ INCLUDE "text/PlayersHouse1F.asm"
 INCLUDE "text/BluesHouse.asm"
 INCLUDE "text/OaksLab.asm"
 INCLUDE "text/pokedex_ratings.asm"
-INCLUDE "text/ViridianPokecenter.asm"
-INCLUDE "text/ViridianMart.asm"
-INCLUDE "text/ViridianSchoolHouse.asm"
-INCLUDE "text/ViridianNicknameHouse.asm"
-INCLUDE "text/ViridianGym.asm"
 INCLUDE "text/Museum1F.asm"
 INCLUDE "text/Museum2F.asm"
 INCLUDE "text/PewterGym.asm"
@@ -250,7 +242,6 @@ SECTION "Text 10", ROMX
 INCLUDE "data/text/text_5.asm"
 
 INCLUDE "text/MasaraTown.asm"
-INCLUDE "text/ViridianCity.asm"
 INCLUDE "text/PewterCity.asm"
 INCLUDE "text/CeruleanCity.asm"
 INCLUDE "text/LavenderTown.asm"
@@ -276,3 +267,11 @@ INCLUDE "data/pokemon/dex_text.asm"
 SECTION "Move Names", ROMX
 
 INCLUDE "data/moves/names.asm"
+
+
+SECTION "Tokiwa Text", ROMX
+INCLUDE "text/TokiwaCity.asm"
+INCLUDE "text/TokiwaInn.asm"
+INCLUDE "text/TokiwaCVS.asm"
+INCLUDE "text/TokiwaHouse1.asm"
+INCLUDE "text/TokiwaChampCup.asm"

@@ -63,7 +63,7 @@ ENDM
 
 FlyWarpDataPtr:
 	fly_warp_spec MASARA_TOWN,     .MasaraTown
-	fly_warp_spec VIRIDIAN_CITY,   .ViridianCity
+	fly_warp_spec TOKIWA_CITY,     .TokiwaCity
 	fly_warp_spec PEWTER_CITY,     .PewterCity
 	fly_warp_spec CERULEAN_CITY,   .CeruleanCity
 	fly_warp_spec LAVENDER_TOWN,   .LavenderTown
@@ -77,7 +77,7 @@ FlyWarpDataPtr:
 	fly_warp_spec ROUTE_10,        .Route10
 
 .MasaraTown:     fly_warp MASARA_TOWN,      6,  6
-.ViridianCity:   fly_warp VIRIDIAN_CITY,   23, 26
+.TokiwaCity:     fly_warp TOKIWA_CITY,     18, 28
 .PewterCity:     fly_warp PEWTER_CITY,     13, 26
 .CeruleanCity:   fly_warp CERULEAN_CITY,   19, 18
 .LavenderTown:   fly_warp LAVENDER_TOWN,    3,  6

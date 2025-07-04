@@ -8,7 +8,7 @@ ExternalMapEntries:
 	table_width 3, ExternalMapEntries
 	; x, y, name
 	external_map  2, 11, MasaraTownName
-	external_map  2,  8, ViridianCityName
+	external_map  2,  8, TokiwaCityName
 	external_map  2,  3, PewterCityName
 	external_map 10,  2, CeruleanCityName
 	external_map 14,  5, LavenderTownName
@@ -57,9 +57,7 @@ ENDM
 InternalMapEntries:
 	; maximum map id subject to this rule, x, y, name
 	internal_map BLUES_HOUSE,                    2, 11, MasaraTownName
-	internal_map VIRIDIAN_GYM,                   2,  8, ViridianCityName
-	internal_map VIRIDIAN_FOREST_SOUTH_GATE,     2,  6, Route2Name
-	internal_map VIRIDIAN_FOREST,                2,  4, ViridianForestName
+	internal_map TOKIWA_CHAMP_CUP,               2,  8, TokiwaCityName
 	internal_map PEWTER_POKECENTER,              2,  3, PewterCityName
 	internal_map MT_MOON_B2F,                    6,  2, MountMoonName
 	internal_map CERULEAN_MART,                 10,  2, CeruleanCityName
