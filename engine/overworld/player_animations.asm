@@ -380,13 +380,6 @@ FishingAnim:
 	call DelayFrames
 	ld hl, wd736
 	set 6, [hl] ; reserve the last 4 OAM entries
-;	ld de, RedSprite
-;	ld hl, vNPCSprites tile $00
-;	lb bc, BANK(RedSprite), 12
-;	call CopyVideoData
-;	ld a, $4
-;	ld hl, RedFishingTiles
-;	call LoadAnimSpriteGfx
 	ld a, [wPlayerGender] ; added gender check
 	and a      ; added gender check
 	jr z, .BoySpriteLoad
@@ -410,7 +403,6 @@ FishingAnim:
 	ld a, $4
 	ld hl, RedFishingTiles
 .ContinueRoutine
-	call LoadAnimSpriteGfx
 	ld a, [wSpritePlayerStateData1ImageIndex]
 	ld c, a
 	ld b, $0

@@ -26,29 +26,20 @@ DisplayTitleScreen:
 	xor a
 	ldh [hTileAnimations], a
 	call GBPalWhiteOut
-;	ld a, $1
-;	ldh [hAutoBGTransferEnabled], a
-;	xor a
-;	ldh [hTileAnimations], a
-;	ldh [hSCX], a
-;	ld a, $40
-;	ldh [hSCY], a
-;	ld a, $90
-;	ldh [hWY], a
 	call ClearScreen
 	call DisableLCD
 	call LoadFontTilePatterns
 	
-	ld hl, NintendoCopyrightLogoGraphics
+	ld hl, TitleScreenSplashGFX
 	ld de, vTitleLogo2 tile 16
 	ld bc, 5 tiles
-	ld a, BANK(NintendoCopyrightLogoGraphics)
+	ld a, BANK(TitleScreenSplashGFX)
 	call FarCopyData2
 	
-	ld hl, GamefreakLogoGraphics
+	ld hl, TitleScreenCopyrightGFX
 	ld de, vTitleLogo2 tile (16 + 5)
 	ld bc, 36 tiles
-	ld a, BANK(GamefreakLogoGraphics)
+	ld a, BANK(TitleScreenCopyrightGFX)
 	call FarCopyData2
 
 	ld hl, Logo1GFX
@@ -211,16 +202,16 @@ LoadCopyrightAndTextBoxTiles:
 	ldh [hWY], a
 	call ClearScreen
 
-LoadCopyrightTiles:
-	ld de, NintendoCopyrightLogoGraphics
+LoadSplashGFX:
+	ld de, TitleScreenSplashGFX
 	ld hl, vChars2 tile $30
-	lb bc, BANK(NintendoCopyrightLogoGraphics), (NintendoCopyrightLogoGraphics) / 2 + 1
+	lb bc, BANK(TitleScreenSplashGFX), (TitleScreenSplashGFX) / 2 + 1
 	call CopyVideoData
 	hlcoord 5, 7
-	ld de, CopyrightTextString
+	ld de, SplashTextString
 	jp PlaceString
 
-CopyrightTextString: ; GAMEFREAK PRESENTS
+SplashTextString: ; GAMEFREAK PRESENTS
 	db   $30,$31,$32,$33,$41,$34,$35,$36,$37,$38
 	next $41
 	next $41, $39, $3a, $3b, $3c, $3d, $3e, $3f, $40 

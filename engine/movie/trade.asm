@@ -1,3 +1,7 @@
+DEF ICON_TRADEBUBBLE EQU $e
+
+DEF ICONOFFSET EQU $40 ; difference between alternating icon frames' tile IDs
+
 InternalClockTradeAnim:
 ; Do the trading animation with the player's gameboy on the left.
 ; In-game trades and internally clocked link cable trades use this.
@@ -199,7 +203,7 @@ LoadTradingGFXAndMonNames:
 Trade_LoadMonPartySpriteGfx:
 	ld a, %11010000
 	ldh [rOBP1], a
-	farjp LoadMonPartySpriteGfx
+	ret
 
 Trade_SwapNames:
 	ld hl, wPlayerName
@@ -615,7 +619,6 @@ Trade_AnimCircledMon:
 	ret
 
 Trade_WriteCircledMonOAM:
-	farcall WriteMonPartySpriteOAMBySpecies
 	call Trade_WriteCircleOAM
 
 Trade_AddOffsetsToOAMCoords:

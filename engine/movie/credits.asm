@@ -235,7 +235,7 @@ Credits:
 	jr .nextCreditsScreen
 .showCopyrightText
 	push de
-	farcall LoadCopyrightTiles
+	farcall LoadSplashGFX
 	pop de
 	pop de
 	jr .nextCreditsCommand

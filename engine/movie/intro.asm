@@ -10,8 +10,7 @@ PlayIntro:
 	ldh [hJoyHeld], a
 	inc a
 	ldh [hAutoBGTransferEnabled], a
-	call PlayShootingStar
-;	call PlayIntroScene
+	call LoadSplashGFXIntro
 	call GBFadeOutToWhite
 	xor a
 	ldh [hSCX], a
@@ -54,20 +53,7 @@ CopyTileIDsFromList_ZeroBaseTileID:
 	ld c, 0
 	predef_jump CopyTileIDsFromList
 
-PlayMoveSoundB:
-; unused
-	predef GetMoveSoundB
-	ld a, b
-	jp PlaySound
-
-LoadIntroGraphics:
-	ld hl, GameFreakIntro
-	ld de, vChars1
-	ld bc, 10
-	ld a, BANK(GameFreakIntro)
-	jp FarCopyData2
-
-PlayShootingStar:
+LoadSplashGFXIntro:
 	ld b, SET_PAL_GAME_FREAK_INTRO
 	call RunPaletteCommand
 	farcall LoadCopyrightAndTextBoxTiles
@@ -83,4 +69,4 @@ PlayShootingStar:
 	call ClearSprites
 	jp Delay3
 
-GameFreakIntro:: INCBIN "gfx/splash/gamefreak_presents.2bpp"
+GameFreakIntro:: INCBIN "gfx/title/splash.2bpp"

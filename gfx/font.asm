@@ -5,10 +5,10 @@ FontGraphicsEnd::
 
 ABTiles: INCBIN "gfx/font/AB.2bpp"
 
-NintendoCopyrightLogoGraphics: INCBIN "gfx/splash/copyright.2bpp"
+TitleScreenSplashGFX: INCBIN "gfx/title/splash.2bpp"
 
-GamefreakLogoGraphics: INCBIN "gfx/title/gamefreak_inc.2bpp"
-GamefreakLogoGraphicsEnd:
+TitleScreenCopyrightGFX: INCBIN "gfx/title/copyright.2bpp"
+TitleScreenCopyrightGFXEnd:
 
 WorldMapTileGraphics: INCBIN "gfx/town_map/town_map.2bpp"
 WorldMapTileGraphicsEnd:

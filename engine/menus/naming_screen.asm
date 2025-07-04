@@ -126,7 +126,6 @@ DisplayNamingScreen:
 .inputLoop
 	ld a, [wCurrentMenuItem]
 	push af
-	farcall AnimatePartyMon_ForceSpeed1
 	pop af
 	ld [wCurrentMenuItem], a
 	call JoypadLowSensitivity
