@@ -1,10 +1,13 @@
 # Capsule Monsters
 
-**Capsule Monsters** was the initial proposal Game Freak made for a monster catching game, which was then renamed to the world-wide famous Pocket Monsters, Pokémon.
+The year is 199X. In Masara Town, a quiet settlement in the Kanto region, an eleven-year-old child hears of Dr. Ookido, better known as Dr. Capmon, a scholar devoted to studying the mysterious creatures that inhabit their world: Capsule Monsters. And he's living in Tokiwa City, a short walk from Masara!
+With a trusted partner Capmon by their side, the child sets out on a grand adventure to meet Dr. Capmon, uncover the secrets about these creatures, and battle their way to the very top... to become the greatest DEALER in the entire region.
 
-This is a custom game based on [the Pokémon Red and Pokémon Blue disassembly](https://github.com/pret/pokered). It aims to create a new experience using the earliest assets available.
+**Capsule Monsters**, which would later be renamed Pocket Monsters, was the initial idea GameFreak had for a Monster Taming game.
 
-Keep in mind that it's supposed to be a simpler RPG, simpler than even the very first Pokémon games. It takes inspiration from early RPGs, such as Dragon Quest/Warrior, Final Fantasy Legend, etc.
+This is a custom game based on [the Pokémon Red and Pokémon Blue disassembly](https://github.com/pret/pokered). It aims to create a new experience using the earliest assets available. A "what if" scenario.
+
+Keep in mind that it's supposed to be a simpler RPG, even more simple than the very first Pokémon games. It takes inspiration from early RPGs, such as Dragon Quest/Warrior, Final Fantasy Legend, etc.
 
 ![title](screenshots/title.bmp) ![character](screenshots/character.bmp)
 ![starter](screenshots/starter.bmp) ![battle](screenshots/battle.bmp)
@@ -12,24 +15,8 @@ Keep in mind that it's supposed to be a simpler RPG, simpler than even the very 
 ## Links
 
 - **Discord:** [click here][discord]
+- **pret:** [click here][pret]
 
-pret disassembly projects:
 
-- [**Pokémon Red/Blue**][pokered]
-- [**Pokémon Yellow**][pokeyellow]
-- [**Pokémon Crystal**][pokecrystal]
-- [**Pokémon Pinball**][pokepinball]
-- [**Pokémon TCG**][poketcg]
-- [**Pokémon Ruby**][pokeruby]
-- [**Pokémon FireRed**][pokefirered]
-- [**Pokémon Emerald**][pokeemerald]
-
-[pokered]: https://github.com/pret/pokered
-[pokeyellow]: https://github.com/pret/pokeyellow
-[pokecrystal]: https://github.com/pret/pokecrystal
-[pokepinball]: https://github.com/pret/pokepinball
-[poketcg]: https://github.com/pret/poketcg
-[pokeruby]: https://github.com/pret/pokeruby
-[pokefirered]: https://github.com/pret/pokefirered
-[pokeemerald]: https://github.com/pret/pokeemerald
 [discord]: https://discord.gg/qCBHjGH729
+[pret]: https://github.com/pret/
