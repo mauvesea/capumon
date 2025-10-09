@@ -3,12 +3,12 @@ TokiwaInn_Script:
 	jp EnableAutoTextBoxDrawing
 
 TokiwaInn_TextPointers:
-	dw ViridianHealNurseText
+	dw TokiwaInnNurseText
 	dw TokiwaInnText2
 	dw TokiwaInnText3
-	dw ViridianTradeNurseText
+	dw TokiwaInnBoxLadyText
 
-ViridianHealNurseText:
+TokiwaInnNurseText:
 	script_pokecenter_nurse
 
 TokiwaInnText2:
@@ -19,6 +19,31 @@ TokiwaInnText3:
 	text_far _TokiwaInnText3
 	text_end
 
-ViridianTradeNurseText:
-	script_bills_pc
+TokiwaInnBoxLadyText:
+	text_asm
+	ld hl, TokiwaInnBoxLadyText1
+	call PrintText
+	call YesNoChoice
+	ld a, [wCurrentMenuItem]
+	and a
+	jr nz, .No
+	ld a, 0
+	ld [wCurrentMenuItem], a
+	farcall ChangeBox
+	call SaveScreenTilesToBuffer2
+	callfar BillsPC_
+.No
+	ld hl, TokiwaInnBoxLadyText2
+	call PrintText
+.Finished
+	jp TextScriptEnd
+
+TokiwaInnBoxLadyText1:
+	text_far _TokiwaInnBoxLadyText1
+	text_end
+
+
+TokiwaInnBoxLadyText2:
+	text_far _TokiwaInnBoxLadyText2
+	text_end
 	

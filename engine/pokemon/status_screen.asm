@@ -321,12 +321,12 @@ StatsText:
 
 StatusScreen2:
 	hlcoord 0, 0
-	lb bc, 20, 10
+	lb bc, 8, 8
 	call ClearScreenArea ; Clear under name
 	hlcoord 6, 0
 	ld b, 6
 	ld c, 12
-	call TextBoxBorder ; Draw move container	
+	call TextBoxBorder ; Draw move container
 	ldh a, [hTileAnimations]
 	push af
 	xor a
@@ -340,11 +340,6 @@ StatusScreen2:
 	ld bc, NUM_MOVES
 	call CopyData
 	callfar FormatMovesString
-;	hlcoord 9, 2
-;	lb bc, 5, 10
-;	call ClearScreenArea ; Clear under name
-;	hlcoord 19, 3
-;	ld [hl], $78
 	hlcoord 0, 8
 	ld b, 8
 	ld c, 18
@@ -400,11 +395,6 @@ StatusScreen2:
 	ld h, d
 	ld l, e
 	push hl
-;	ld de, wStatusScreenCurrentPP
-;	lb bc, 1, 2
-;	call PrintNumber
-;	ld a, "/"
-;	ld [hli], a
 	ld de, wMaxPP
 	lb bc, 1, 2
 	call PrintNumber
@@ -430,11 +420,6 @@ StatusScreen2:
 	inc a
 	ld [wLoadedMonLevel], a ; Increase temporarily if not 100
 .Level100
-;	hlcoord 14, 6
-;	ld [hl], "<to>"
-;	inc hl
-;	inc hl
-;	call PrintLevel
 	pop af
 	ld [wLoadedMonLevel], a
 	ld de, wLoadedMonExp
@@ -459,15 +444,6 @@ StatusScreen2:
 	ld de, StatusText
 	call PlaceString ; "STATUS/"
 
-;	hlcoord 9, 0
-;	call StatusScreen_ClearName
-;	hlcoord 9, 1
-;	call StatusScreen_ClearName
-;	ld a, [wMonHIndex]
-;	ld [wd11e], a
-;	call GetMonName
-;	hlcoord 9, 1
-;	call PlaceString
 	ld a, $1
 	ldh [hAutoBGTransferEnabled], a
 	call Delay3

@@ -1567,7 +1567,7 @@ _SwitchOnText::
 	prompt
 
 _WhatText::
-	text "What?"
+	text "Take your time."
 	done
 
 _DepositWhichMonText::

@@ -13,3 +13,21 @@ _TokiwaInnText3::
 	para "They heal your"
 	line "CAPMON for free!"
 	done
+
+_TokiwaInnBoxLadyText1::
+	text "Welcome to the"
+	line "STORAGE CORNER!"
+
+	para "It's good to see"
+	line "you here!"
+
+	para "If you want to use"
+	line "our services,"
+	cont "we need to save"
+	cont "your game first,"
+	cont "okay?"
+	done
+
+_TokiwaInnBoxLadyText2::
+	text "Come back soon!"
+	done

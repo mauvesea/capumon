@@ -376,24 +376,9 @@ BoxSRAMPointerTable:
 	dw sBox6 ; sBox12
 
 ChangeBox::
-	ld hl, WhenYouChangeBoxText
-	call PrintText
-	call YesNoChoice
-	ld a, [wCurrentMenuItem]
-	and a
-	ret nz ; return if No was chosen
 	ld hl, wCurrentBoxNum
 	bit 7, [hl] ; is it the first time player is changing the box?
 	call z, EmptyAllSRAMBoxes ; if so, empty all boxes in SRAM
-	call DisplayChangeBoxMenu
-	call UpdateSprites
-	ld hl, hUILayoutFlags
-	set 1, [hl]
-	call HandleMenuInput
-	ld hl, hUILayoutFlags
-	res 1, [hl]
-	bit BIT_B_BUTTON, a
-	ret nz
 	call GetBoxSRAMLocation
 	ld e, l
 	ld d, h

@@ -104,18 +104,13 @@ BillsPC_::
 	ld a, [wFlags_0xcd60]
 	bit 3, a ; accessing Bill's PC through another PC?
 	jr nz, BillsPCMenu
-; accessing it directly
-;	ld a, SFX_TURN_ON_PC
-;	call PlaySound
-	ld hl, SwitchOnText
-	call PrintText
 
 BillsPCMenu:
 	ld a, [wParentMenuItem]
 	ld [wCurrentMenuItem], a
 	call LoadScreenTilesFromBuffer2DisableBGTransfer
 	hlcoord 0, 0
-	ld b, 10
+	ld b, 8
 	ld c, 12
 	call TextBoxBorder
 	hlcoord 2, 2
@@ -128,7 +123,7 @@ BillsPCMenu:
 	ld [hli], a ; wTopMenuItemX
 	inc hl
 	inc hl
-	ld a, 4
+	ld a, 3
 	ld [hli], a ; wMaxMenuItem
 	ld a, A_BUTTON | B_BUTTON
 	ld [hli], a ; wMenuWatchedKeys
@@ -141,27 +136,6 @@ BillsPCMenu:
 	ld [wPlayerMonNumber], a
 	ld hl, WhatText
 	call PrintText
-	hlcoord 9, 14
-	ld b, 2
-	ld c, 9
-	call TextBoxBorder
-	ld a, [wCurrentBoxNum]
-	and $7f
-	cp 9
-	jr c, .singleDigitBoxNum
-; two digit box num
-	sub 9
-	hlcoord 17, 16
-	ld [hl], "1"
-	add "0"
-	jr .next
-.singleDigitBoxNum
-	add "1"
-.next
-	ldcoord_a 18, 16
-	hlcoord 10, 16
-	ld de, BoxNoPCText
-	call PlaceString
 	ld a, 1
 	ldh [hAutoBGTransferEnabled], a
 	call Delay3
@@ -177,8 +151,6 @@ BillsPCMenu:
 	jp z, BillsPCDeposit ; deposit
 	cp $2
 	jp z, BillsPCRelease ; release
-	cp $3
-	jp z, BillsPCChangeBox ; change box
 
 ExitBillsPC:
 	ld a, [wFlags_0xcd60]
@@ -336,7 +308,6 @@ BillsPCMenuText:
 	db   "WITHDRAW"
 	next "DEPOSIT"
 	next "RELEASE"
-	next "CHANGE BOX"
 	next "QUIT"
 	db "@"
 
@@ -445,10 +416,6 @@ WithdrawPCText: db "WITHDRAW@"
 StatsCancelPCText:
 	db   "STATS"
 	next "CANCEL@"
-
-SwitchOnText:
-	text_far _SwitchOnText
-	text_end
 
 WhatText:
 	text_far _WhatText
