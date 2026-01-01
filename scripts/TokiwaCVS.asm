@@ -2,10 +2,10 @@ TokiwaCVS_Script:
 	jp EnableAutoTextBoxDrawing
 
 TokiwaCVS_TextPointers:
-	dw ViridianCashierText
+	dw TokiwaItemSellerText
+	dw TokiwaMonsterSellerText
+	dw TokiwaCVSText1
 	dw TokiwaCVSText2
-	dw TokiwaCVSText3
-	dw TokiwaCVSText4
 
 TokiwaCVSText1:
 	text_far _TokiwaCVSText1
@@ -15,14 +15,8 @@ TokiwaCVSText2:
 	text_far _TokiwaCVSText2
 	text_end
 
-TokiwaCVSText3:
-	text_far _TokiwaCVSText3
-	text_end
-
-TokiwaCVSText4:
+TokiwaMonsterSellerText:
 	text_asm
-	CheckEvent EVENT_BOUGHT_MAGIKARP, 1
-	jp c, .alreadyBoughtMagikarp
 	ld hl, .Text1
 	call PrintText
 	ld a, MONEY_BOX
@@ -34,20 +28,21 @@ TokiwaCVSText4:
 	jp nz, .choseNo
 	ldh [hMoney], a
 	ldh [hMoney + 2], a
-	ld a, $5
+	ld a, $20
 	ldh [hMoney + 1], a
 	call HasEnoughMoney
 	jr nc, .enoughMoney
 	ld hl, .NoMoneyText
 	jr .printText
 .enoughMoney
-	lb bc, OMEGA, 5
+; Add a Rank check here
+	lb bc, CYHORN, 5
 	call GivePokemon
 	jr nc, .done
 	xor a
 	ld [wPriceTemp], a
 	ld [wPriceTemp + 2], a
-	ld a, $5
+	ld a, $20
 	ld [wPriceTemp + 1], a
 	ld hl, wPriceTemp + 2
 	ld de, wPlayerMoney + 2
@@ -56,30 +51,23 @@ TokiwaCVSText4:
 	ld a, MONEY_BOX
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
-	SetEvent EVENT_BOUGHT_MAGIKARP
 	jr .done
 .choseNo
 	ld hl, .RefuseText
 	jr .printText
-.alreadyBoughtMagikarp
-	ld hl, .Text2
 .printText
 	call PrintText
 .done
 	jp TextScriptEnd
 
 .Text1
-	text_far _MagikarpSalesmanText1
+	text_far _TokiwaCVSMonsterSellerText1
 	text_end
 
 .RefuseText
-	text_far _MagikarpSalesmanNoText
+	text_far _TokiwaCVSMonsterSellerTextNotBuying
 	text_end
 
 .NoMoneyText
-	text_far _MagikarpSalesmanNoMoneyText
-	text_end
-
-.Text2
-	text_far _MagikarpSalesmanText2
+	text_far _TokiwaCVSMonsterSellerTextNoMoney
 	text_end

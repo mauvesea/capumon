@@ -16,8 +16,8 @@ _TokiwaCityText2::
 	line "DR.CAPMON, but"
 	cont "I'm on my break"
 	cont "right now."
-	cont "Researching CAPMON"
-	cont "is tough!"
+	cont "Researching"
+	cont "CAPMON is tough!"
 	done
 	
 _TokiwaCityText4::

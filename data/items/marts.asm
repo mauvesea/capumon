@@ -1,7 +1,7 @@
 ; mart inventories are below
 ; they are texts
 
-ViridianCashierText::
+TokiwaItemSellerText::
 	script_mart POKE_BALL, ANTIDOTE, PARLYZ_HEAL, BURN_HEAL
 
 PewterCashierText::
