@@ -69,6 +69,43 @@ BoxIsFullText:
 	text_end
 
 DecideWhichStorageCornerText:
+.YamabukiSC
+	ld a, [wCurrentBoxNum]
+	cp 8
+	jr nz, .GurenSC
+	ld de, YamabukiSC
+	jr .next
+.GurenSC
+	ld a, [wCurrentBoxNum]
+	cp 7
+	jr nz, .SekichikuSC
+	ld de, GurenSC
+	jr .next
+.SekichikuSC
+	ld a, [wCurrentBoxNum]
+	cp 6
+	jr nz, .TamamushiSC
+	ld de, SekichikuSC
+	jr .next
+.TamamushiSC
+	ld a, [wCurrentBoxNum]
+	cp 5
+	jr nz, .ShionSC
+	ld de, TamamushiSC
+	jr .next
+.ShionSC
+	ld a, [wCurrentBoxNum]
+	cp 4
+	jr nz, .KuchibaSC
+	ld de, ShionSC
+	jr .next
+.KuchibaSC
+	ld a, [wCurrentBoxNum]
+	cp 3
+	jr nz, .HanadaSC
+	ld de, KuchibaSC
+	jr .next
+.HanadaSC
 	ld a, [wCurrentBoxNum]
 	cp 2
 	jr nz, .NibiSC
@@ -85,11 +122,21 @@ DecideWhichStorageCornerText:
 .next
 	ret
 
+YamabukiSC:
+	db "YAMABUKI@"
+GurenSC:
+	db "GUREN@"
+SekichikuSC:
+	db "SEKICHIKU@"
+TamamushiSC:
+	db "TAMAMUSHI@"
+ShionSC:
+	db "SHION@"
+KuchibaSC:
+	db "KUCHIBA@"
 HanadaSC:
 	db "HANADA@"
-
 NibiSC:
 	db "NIBI@"
-
 TokiwaSC:
 	db "TOKIWA@"
