@@ -1,7 +1,7 @@
 HiddenObjectMaps:
 	db PLAYERS_HOUSE_2F
 	db BLUES_HOUSE
-	db OAKS_LAB
+	db TOKIWA_DR_CAPMON_SCHOOL
 	db TOKIWA_INN
 	db TOKIWA_CVS
 	db TOKIWA_HOUSE1
@@ -89,7 +89,7 @@ HiddenObjectPointers:
 ; each of these pointers is for the corresponding map in HiddenObjectMaps
 	dw PlayersHouse2FHiddenObjects
 	dw BluesHouseHiddenObjects
-	dw OaksLabHiddenObjects
+	dw TokiwaDrCapmonSchoolHiddenObjects
 	dw ViridianPokecenterHiddenObjects
 	dw ViridianMartHiddenObjects
 	dw ViridianSchoolHiddenObjects
@@ -210,7 +210,7 @@ BluesHouseHiddenObjects:
 	hidden_object  7,  1, SPRITE_FACING_UP, PrintBookcaseText
 	db -1 ; end
 
-OaksLabHiddenObjects:
+TokiwaDrCapmonSchoolHiddenObjects:
 	hidden_object  4,  0, SPRITE_FACING_UP, DisplayOakLabLeftPoster
 	hidden_object  5,  0, SPRITE_FACING_UP, DisplayOakLabRightPoster
 	hidden_object  0,  1, SPRITE_FACING_UP, DisplayOakLabEmailText

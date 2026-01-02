@@ -341,7 +341,7 @@ OverworldLoopLessDelay::
 	ld hl, wd72e
 	set 5, [hl]
 	ld a, [wCurMap]
-	cp OAKS_LAB
+	cp TOKIWA_DR_CAPMON_SCHOOL
 	jp z, .noFaintCheck ; no blacking out if the player lost to the rival in Oak's lab
 	callfar AnyPartyAlive
 	ld a, d

@@ -41,7 +41,7 @@ MapHeaderPointers::
 	dw PlayersHouse1F_h
 	dw PlayersHouse2F_h
 	dw BluesHouse_h
-	dw OaksLab_h
+	dw TokiwaDrCapmonSchool_h
 	dw TokiwaInn_h
 	dw TokiwaCVS_h
 	dw TokiwaHouse1_h

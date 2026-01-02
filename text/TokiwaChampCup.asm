@@ -13,7 +13,7 @@ _YujiroBeforeBattleText::
 	cont "got it?"
 
 	para "Did ya even talk"
-	line "to DR. CAPMON"
+	line "to DR.CAPMON"
 	cont "before runnin' in"
 	cont "here?"
 

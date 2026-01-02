@@ -139,7 +139,7 @@ INCLUDE "data/text/text_3.asm"
 
 INCLUDE "text/PlayersHouse1F.asm"
 INCLUDE "text/BluesHouse.asm"
-INCLUDE "text/OaksLab.asm"
+INCLUDE "text/TokiwaDrCapmonSchool.asm"
 INCLUDE "text/pokedex_ratings.asm"
 INCLUDE "text/Museum1F.asm"
 INCLUDE "text/Museum2F.asm"

@@ -1,4 +1,4 @@
-OaksLab_Object:
+TokiwaDrCapmonSchool_Object:
 	db $3 ; border block
 
 	def_warp_events
@@ -14,4 +14,4 @@ OaksLab_Object:
 	object_event  6,  6, SPRITE_GIRL, STAY, NONE, 5 ; person
 	object_event  0,  2, SPRITE_SCIENTIST, STAY, UP, 4 ; person
 
-	def_warps_to OAKS_LAB
+	def_warps_to TOKIWA_DR_CAPMON_SCHOOL

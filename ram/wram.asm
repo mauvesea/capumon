@@ -1926,7 +1926,7 @@ wMissableObjectList:: ds 16 * 2 + 1
 	ds 1
 
 wGameProgressFlags::
-wOaksLabCurScript:: db
+wTokiwaDrCapmonSchoolCurScript:: db
 wMasaraTownCurScript:: db
 	ds 1
 wBluesHouseCurScript:: db

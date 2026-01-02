@@ -108,6 +108,12 @@ ItemUseBall:
 	and a
 	jp z, ItemUseNotTime
 
+; Can't used before getting the Dex
+	push af
+	CheckEvent EVENT_GOT_POKEDEX
+	jp z, ItemHowToUseCapsule
+	pop af
+
 ; Balls can't catch trainers' Pokémon.
 	dec a
 	jp nz, ThrowBallAtTrainerMon
@@ -2320,6 +2326,10 @@ ItemUseNotTime:
 	ld hl, ItemUseNotTimeText
 	jr ItemUseFailed
 
+ItemHowToUseCapsule:
+	ld hl, ItemHowToUseCapsuleText
+	jr ItemUseFailed
+
 ItemUseNotYoursToUse:
 	ld hl, ItemUseNotYoursToUseText
 	jr ItemUseFailed
@@ -2359,6 +2369,10 @@ ItemUseFailed:
 
 ItemUseNotTimeText:
 	text_far _ItemUseNotTimeText
+	text_end
+
+ItemHowToUseCapsuleText:
+	text_far _ItemHowToUseCapsuleText
 	text_end
 
 ItemUseNotYoursToUseText:

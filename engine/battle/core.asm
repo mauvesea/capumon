@@ -1146,7 +1146,7 @@ HandlePlayerBlackOut::
 	ld hl, Rival1WinText
 	call PrintText
 	ld a, [wCurMap]
-	cp OAKS_LAB
+	cp TOKIWA_DR_CAPMON_SCHOOL
 	ret z            ; starter battle in oak's lab: don't black out
 .notRival1Battle
 	ld b, SET_PAL_BATTLE_BLACK

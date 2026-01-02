@@ -1,13 +1,13 @@
-OaksLab_Script:
+TokiwaDrCapmonSchool_Script:
 	call EnableAutoTextBoxDrawing
-	ld hl, OaksLab_ScriptPointers
-	ld a, [wOaksLabCurScript]
+	ld hl, TokiwaDrCapmonSchool_ScriptPointers
+	ld a, [wTokiwaDrCapmonSchoolCurScript]
 	jp CallFunctionInTable
 
-OaksLab_ScriptPointers:
-	dw OaksLabScript0
+TokiwaDrCapmonSchool_ScriptPointers:
+	dw TokiwaDrCapmonSchoolScript0
 	
-OaksLabScript0:
+TokiwaDrCapmonSchoolScript0:
 	CheckEvent EVENT_GOT_POKEDEX
 	ret nz
 	CheckEvent EVENT_CAN_TAKE_DEX
@@ -26,15 +26,15 @@ OaksLabScript0:
 .Finish
 	ret	
 
-OaksLab_TextPointers:
-	dw TokiwaOokidoSchoolScript1
-	dw TokiwaOokidoSchoolDexScript1
-	dw TokiwaOokidoSchoolDexScript2
-	dw TokiwaOokidoSchoolScientistScript
-	dw TokiwaOokidoSchoolGirlScript
+TokiwaDrCapmonSchool_TextPointers:
+	dw TokiwaDrCapmonSchoolScript1
+	dw TokiwaDrCapmonSchoolDexScript1
+	dw TokiwaDrCapmonSchoolDexScript2
+	dw TokiwaDrCapmonSchoolScientistScript
+	dw TokiwaDrCapmonSchoolGirlScript
 	dw OokidoDexText3
 
-TokiwaOokidoSchoolScript1:
+TokiwaDrCapmonSchoolScript1:
 	text_asm
 	CheckEvent EVENT_GOT_POKEDEX
 	jr nz, .CheckPokedexProgress
@@ -42,10 +42,21 @@ TokiwaOokidoSchoolScript1:
 	jr nz, .GetDex
 	ld hl, OokidoDexText1
 	call PrintText
+	call YesNoChoice
+	ld a, [wCurrentMenuItem]
+	and a
+	jr nz, .RefusedFieldGuide
+
 	SetEvent EVENT_CAN_TAKE_DEX
+	ld hl, OokidoDexText2
+	call PrintText
+	jr .ScriptEnd
+.RefusedFieldGuide
+	ld hl, OokidoDexText3
+	call PrintText
 	jr .ScriptEnd
 .GetDex
-	ld hl, OokidoDexText2
+	ld hl, OokidoDexText4
 	call PrintText
 	jr .ScriptEnd
 .CheckPokedexProgress
@@ -53,7 +64,7 @@ TokiwaOokidoSchoolScript1:
 	ld b, wPokedexOwnedEnd - wPokedexOwned
 	call CountSetBits
 	ld a, [wNumSetBits]
-	ld hl, OaksLabText_1d31d
+	ld hl, OokidoDexText5
 	call PrintText
 	ld a, $1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
@@ -61,7 +72,7 @@ TokiwaOokidoSchoolScript1:
 .ScriptEnd	
 	jp TextScriptEnd
 	
-TokiwaOokidoSchoolDexScript1:
+TokiwaDrCapmonSchoolDexScript1:
 	text_asm
 	CheckEvent EVENT_GOT_POKEDEX
 	jr nz, .RegularText
@@ -80,6 +91,8 @@ TokiwaOokidoSchoolDexScript1:
 	predef HideObject
 	ld hl, TokiwaReceivedDexText
 	call PrintText
+	ld hl, TokiwaDrCapmonSchoolCatchingText
+	call PrintText
 	SetEvent EVENT_GOT_POKEDEX
 	jr .ScriptEnd
 .bag_full
@@ -88,7 +101,7 @@ TokiwaOokidoSchoolDexScript1:
 .ScriptEnd
 	jp TextScriptEnd
 
-TokiwaOokidoSchoolDexScript2:
+TokiwaDrCapmonSchoolDexScript2:
 	text_asm
 	CheckEvent EVENT_GOT_POKEDEX
 	jr nz, .RegularText
@@ -107,6 +120,8 @@ TokiwaOokidoSchoolDexScript2:
 	predef HideObject
 	ld hl, TokiwaReceivedDexText
 	call PrintText
+	ld hl, TokiwaDrCapmonSchoolCatchingText
+	call PrintText
 	SetEvent EVENT_GOT_POKEDEX
 	jr .ScriptEnd
 .bag_full
@@ -115,15 +130,15 @@ TokiwaOokidoSchoolDexScript2:
 .ScriptEnd
 	jp TextScriptEnd
 	
-TokiwaOokidoSchoolScientistScript:
+TokiwaDrCapmonSchoolScientistScript:
 	text_asm
-	ld hl, TokiwaOokidoSchoolScientistText
+	ld hl, TokiwaDrCapmonSchoolScientistText
 	call PrintText
 	jp TextScriptEnd
 	
-TokiwaOokidoSchoolGirlScript:
+TokiwaDrCapmonSchoolGirlScript:
 	text_asm
-	ld hl, TokiwaOokidoSchoolGirlText
+	ld hl, TokiwaDrCapmonSchoolGirlText
 	call PrintText
 	jp TextScriptEnd
 
@@ -138,9 +153,13 @@ OokidoDexText2:
 OokidoDexText3:
 	text_far _OokidoDexText3
 	text_end
+
+OokidoDexText4:
+	text_far _OokidoDexText4
+	text_end
 	
-OaksLabText_1d31d:
-	text_far _OaksLabText_1d31d
+OokidoDexText5:
+	text_far _OokidoDexText5
 	text_end
 	
 OokidoSchoolBagFull:
@@ -156,13 +175,15 @@ TokiwaReceivedDexText:
 	sound_get_key_item
 	text_end
 	
-TokiwaOokidoSchoolScientistText:
-	text_far _TokiwaOokidoSchoolScientistText
+TokiwaDrCapmonSchoolScientistText:
+	text_far _TokiwaDrCapmonSchoolScientistText
 	text_end	
 	
-TokiwaOokidoSchoolGirlText:
-	text_far _TokiwaOokidoSchoolGirlScript
+TokiwaDrCapmonSchoolGirlText:
+	text_far _TokiwaDrCapmonSchoolGirlScript
 	text_end	
-	
 
+TokiwaDrCapmonSchoolCatchingText:
+	text_far _TokiwaDrCapmonSchoolCatchingText
+	text_end
 	

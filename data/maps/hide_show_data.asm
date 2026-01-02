@@ -43,7 +43,7 @@ MapHSPointers:
 	dw NoHS
 	dw NoHS
 	dw BluesHouseHS
-	dw OaksLabHS
+	dw TokiwaDrCapmonSchoolHS
 	dw NoHS
 	dw NoHS
 	dw NoHS
@@ -315,12 +315,12 @@ BluesHouseHS:
 	db BLUES_HOUSE, $01, SHOW
 	db BLUES_HOUSE, $02, HIDE
 	db BLUES_HOUSE, $03, SHOW
-OaksLabHS:
-	db OAKS_LAB, $01, SHOW
-	db OAKS_LAB, $02, SHOW
-	db OAKS_LAB, $03, SHOW
-	db OAKS_LAB, $04, SHOW
-	db OAKS_LAB, $05, SHOW
+TokiwaDrCapmonSchoolHS:
+	db TOKIWA_DR_CAPMON_SCHOOL, $01, SHOW
+	db TOKIWA_DR_CAPMON_SCHOOL, $02, SHOW
+	db TOKIWA_DR_CAPMON_SCHOOL, $03, SHOW
+	db TOKIWA_DR_CAPMON_SCHOOL, $04, SHOW
+	db TOKIWA_DR_CAPMON_SCHOOL, $05, SHOW
 ViridianGymHS:
 	db TOKIWA_CHAMP_CUP, $01, SHOW
 	db TOKIWA_CHAMP_CUP, $0B, SHOW

@@ -59,7 +59,7 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	map_const PLAYERS_HOUSE_1F,               4,  4 ; $25
 	map_const PLAYERS_HOUSE_2F,               4,  4 ; $26
 	map_const BLUES_HOUSE,                    4,  4 ; $27
-	map_const OAKS_LAB,                       4,  4 ; $28
+	map_const TOKIWA_DR_CAPMON_SCHOOL,        4,  4 ; $28
 	map_const TOKIWA_INN,                     4,  4 ; $29
 	map_const TOKIWA_CVS,                     4,  4 ; $2A
 	map_const TOKIWA_HOUSE1,                  4,  4 ; $2B

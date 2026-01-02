@@ -4,7 +4,7 @@ TokiwaCity_Object:
 	def_warp_events
 	warp_event 18, 27, TOKIWA_INN, 1
 	warp_event 28, 27, TOKIWA_CVS, 1
-	warp_event 28, 19, OAKS_LAB, 1
+	warp_event 28, 19, TOKIWA_DR_CAPMON_SCHOOL, 1
 	warp_event 18, 19, TOKIWA_HOUSE1, 1
 	warp_event 18, 11, TOKIWA_CHAMP_CUP, 1
 

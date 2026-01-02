@@ -83,7 +83,7 @@ Route1_Blocks: INCBIN "maps/Route1.blk"
 
 UndergroundPathRoute8_Blocks: INCBIN "maps/UndergroundPathRoute8.blk"
 
-OaksLab_Blocks: INCBIN "maps/OaksLab.blk"
+TokiwaDrCapmonSchool_Blocks: INCBIN "maps/TokiwaDrCapmonSchool.blk"
 
 MrPsychicsHouse_Blocks:
 NameRatersHouse_Blocks:
@@ -111,9 +111,9 @@ INCLUDE "scripts/CinnabarIsland.asm"
 
 INCLUDE "scripts/Route1.asm"
 
-INCLUDE "data/maps/headers/OaksLab.asm"
-INCLUDE "scripts/OaksLab.asm"
-INCLUDE "data/maps/objects/OaksLab.asm"
+INCLUDE "data/maps/headers/TokiwaDrCapmonSchool.asm"
+INCLUDE "scripts/TokiwaDrCapmonSchool.asm"
+INCLUDE "data/maps/objects/TokiwaDrCapmonSchool.asm"
 
 INCLUDE "data/maps/headers/TokiwaHouse1.asm"
 INCLUDE "scripts/TokiwaHouse1.asm"

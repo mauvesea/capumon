@@ -41,7 +41,7 @@ MapHeaderBanks::
 	db BANK(PlayersHouse1F_h)
 	db BANK(PlayersHouse2F_h)
 	db BANK(BluesHouse_h)
-	db BANK(OaksLab_h)
+	db BANK(TokiwaDrCapmonSchool_h)
 	db BANK(TokiwaInn_h)
 	db BANK(TokiwaCVS_h)
 	db BANK(TokiwaHouse1_h)

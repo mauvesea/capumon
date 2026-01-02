@@ -186,9 +186,13 @@ _MonCannotLearnMachineMoveText::
 	prompt
 
 _ItemUseNotTimeText::
-	text "OAK: <PLAYER>!"
-	line "This isn't the"
-	cont "time to use that! "
+	text "This isn't the time"
+	line "to use this!"
+	prompt
+
+_ItemHowToUseCapsuleText::
+	text "...How do I use"
+	line "this again?"
 	prompt
 
 _ItemUseNotYoursToUseText::
