@@ -114,7 +114,6 @@ TokiwaCity_TextPointers:
 	dw TokiwaCityText6
 	dw TokiwaCityText7
 	dw TokiwaCityText8
-	dw TokiwaCityText9
 	dw TokiwaCityText10
 	dw MartSignText
 	dw PokeCenterSignText
@@ -238,10 +237,6 @@ TokiwaCityText7:
 
 TokiwaCityText8:
 	text_far _TokiwaCityText8
-	text_end
-
-TokiwaCityText9:
-	text_far _TokiwaCityText9
 	text_end
 
 TokiwaCityText10:

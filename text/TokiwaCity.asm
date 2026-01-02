@@ -186,18 +186,6 @@ _TokiwaCityText8::
 	cont "eternity."
 	done
 
-_TokiwaCityText9::
-	text "TRAINER TIPS"
-
-	para "Catch #MON"
-	line "and expand your"
-	cont "collection!"
-
-	para "The more you have,"
-	line "the easier it is"
-	cont "to fight!"
-	done
-
 _TokiwaCityText10::
 	text "DR.CAPMON SCHOOL"
 	done
