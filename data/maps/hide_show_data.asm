@@ -289,8 +289,8 @@ SaffronCityHS:
 	db SAFFRON_CITY, $0E, SHOW
 	db SAFFRON_CITY, $0F, HIDE
 Route2HS:
-	db ROUTE_2, $01, SHOW
-	db ROUTE_2, $02, SHOW
+	db ROUTE_2, $0b, SHOW
+	db ROUTE_2, $0c, SHOW
 Route4HS:
 	db ROUTE_4, $03, SHOW
 Route9HS:

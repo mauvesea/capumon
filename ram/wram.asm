@@ -1931,7 +1931,8 @@ wMasaraTownCurScript:: db
 	ds 1
 wBluesHouseCurScript:: db
 wTokiwaCityCurScript:: db
-	ds 2
+wRoute2CurScript:: db
+	ds 1
 wPewterCityCurScript:: db
 wRoute3CurScript:: db
 wRoute4CurScript:: db
