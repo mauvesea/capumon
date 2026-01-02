@@ -110,6 +110,10 @@ _TokiwaChampCupGuideDoorOpenText::
 
 	para "I'll open the"
 	line "doors for you!"
+	prompt
+
+_TokiwaChampCupGuideDoorOpenText2::
+	text "Good luck!"
 	done
 
 _TokiwaChampCupGuideAfterDoorOpenText::

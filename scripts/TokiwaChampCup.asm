@@ -177,7 +177,17 @@ TokiwaChampCupGuideText:
 	ld hl, TokiwaChampCupGuideDoorOpenText
 	call PrintText
 	SetEvent EVENT_TOKIWA_CHAMP_CUP_DOOR_OPEN
-	call TokiwaChampCupOpenDoorScript
+
+	ld a, SFX_GO_INSIDE
+	call PlaySound
+	ld a, $7 ; clear floor tile ID
+	ld [wNewTileBlockID], a
+	lb bc, 2, 2
+	predef ReplaceTileBlock
+
+	ld hl, TokiwaChampCupGuideDoorOpenText2
+	call PrintText
+
 	jr .done
 
 .ChampBeaten
@@ -201,6 +211,10 @@ TokiwaChampCupGuideInitialText:
 
 TokiwaChampCupGuideDoorOpenText:
 	text_far _TokiwaChampCupGuideDoorOpenText
+	text_end
+
+TokiwaChampCupGuideDoorOpenText2:
+	text_far _TokiwaChampCupGuideDoorOpenText2
 	text_end
 
 TokiwaChampCupGuideAfterDoorOpenText:
