@@ -1388,7 +1388,7 @@ AnimationShowMonPic:
 	xor a ; TILEMAP_MON_PIC
 	jr .ShowMonPic
 .playerTurn
-	ld a, 8 ; TILEMAP_MON_PIC_FLIPPED
+	ld a, 5 ; TILEMAP_MON_PIC_FLIPPED
 .ShowMonPic
 	call GetTileIDList
 	call GetMonSpriteTileMapPointerFromRowCount
@@ -1454,11 +1454,12 @@ AnimationMoveMonHorizontally:
 	call AnimationHideMonPic
 	ldh a, [hWhoseTurn]
 	and a
-	hlcoord 2, 5
+	hlcoord 1, 4
+	ld a, 5 ; TILEMAP_MON_PIC_FLIPPED
 	jr z, .next
-	hlcoord 11, 0
-.next
+	hlcoord 12, 4
 	xor a ; TILEMAP_MON_PIC
+.next
 	push hl
 	call GetTileIDList
 	pop hl
@@ -2094,7 +2095,7 @@ AnimationHideMonPic:
 	ldh a, [hWhoseTurn]
 	and a
 	jr z, .playerTurn
-	ld a, 12
+	ld a, 11
 	jr ClearMonPicFromTileMap
 .playerTurn
 	ld a, 1
@@ -2108,7 +2109,7 @@ ClearMonPicFromTileMap:
 	ldh a, [hWhoseTurn]
 	and a
 	jr z, .playerTurn
-	hlcoord 12, 4
+	hlcoord 11, 4
 	jr .ClearMonArea
 .playerTurn
 	hlcoord 1, 4
