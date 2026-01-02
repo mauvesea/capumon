@@ -203,6 +203,7 @@ AttackAnimationPointers:
 	dw HidePicAnim
 	dw ThrowRockAnim
 	dw ThrowBaitAnim
+	dw BallPoofAnimPlayer
 	assert_table_length NUM_ATTACK_ANIMS
 	dw ZigZagScreenAnim
 
@@ -1163,6 +1164,10 @@ BallPoofAnim:
 	battle_anim NO_MOVE, SUBANIM_0_BALL_POOF_ENEMY, 0, 4
 	db -1 ; end
 
+BallPoofAnimPlayer:
+	battle_anim NO_MOVE, SUBANIM_0_BALL_POOF, 0, 4
+	db -1 ; end
+	
 ShowPicAnim:
 	battle_anim NO_MOVE, SE_SHOW_ENEMY_MON_PIC
 	db -1 ; end
