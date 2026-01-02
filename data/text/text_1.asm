@@ -48,7 +48,7 @@ _BoulderText::
 
 _MartSignText::
 	text "Lots of tools!"
-	cont "FRIENDLY SHOP"
+	line "FRIENDLY SHOP"
 	done
 
 _PokeCenterSignText::
@@ -70,13 +70,13 @@ _NoMoreRoomForItemText::
 
 _OaksAideHiText::
 	text "Hi! Remember me?"
-	line "I'm PROF.OAK's"
+	line "I'm OOKIDO's"
 	cont "AIDE!"
 
 	para "If you caught @"
 	text_decimal hOaksAideRequirement, 1, 3
 	text_start
-	line "kinds of #MON,"
+	line "kinds of CAPMON,"
 	cont "I'm supposed to"
 	cont "give you an"
 	cont "@"
@@ -97,7 +97,7 @@ _OaksAideUhOhText::
 	cont "caught only @"
 	text_decimal hOaksAideNumMonsOwned, 1, 3
 	text_start
-	cont "kinds of #MON!"
+	cont "kinds of CAPMON!"
 
 	para "You need @"
 	text_decimal hOaksAideRequirement, 1, 3
@@ -125,7 +125,7 @@ _OaksAideHereYouGoText::
 	line "caught @"
 	text_decimal hOaksAideNumMonsOwned, 1, 3
 	text " kinds "
-	cont "of #MON!"
+	cont "of CAPMON!"
 	cont "Congratulations!"
 
 	para "Here you go!"

@@ -2,17 +2,17 @@ _ItemUseBallText00::
 	text "It dodged the"
 	line "thrown BALL!"
 
-	para "This #MON"
+	para "This CAPMON"
 	line "can't be caught!"
 	prompt
 
 _ItemUseBallText01::
 	text "You missed the"
-	line "#MON!"
+	line "CAPMON!"
 	prompt
 
 _ItemUseBallText02::
-	text "Darn! The #MON"
+	text "Darn! The CAPMON"
 	line "broke free!"
 	prompt
 
@@ -49,7 +49,8 @@ _ItemUseBallText08::
 	prompt
 
 _ItemUseBallText06::
-	text "New #DEX data"
+	;xxx "123456789012345678"
+	text "New FLD.GUIDE data"
 	line "will be added for"
 	cont "@"
 	text_ram wEnemyMonNick

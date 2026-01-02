@@ -1755,7 +1755,7 @@ SendOutMon:
 	res USING_TRAPPING_MOVE, [hl]
 	ld a, $1
 	ldh [hWhoseTurn], a
-	ld a, POOF_ANIM
+	ld a, POOF_ANIM_PLAYER
 	call PlayMoveAnimation
 	hlcoord 4, 10
 	predef AnimateSendingOutMon

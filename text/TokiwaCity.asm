@@ -32,8 +32,8 @@ _TokiwaCityTextLass1::
 	line "His name is"
 	cont "YUJIRO!"
 	
-	cont "He's the strongest"
-	cont "CAPMON DEALER"
+	para "He's the strongest"
+	line "CAPMON DEALER"
 	cont "I've ever seen!"
 	done
 
@@ -57,31 +57,31 @@ _TokiwaCityText6::
 	text "SYLPH CO. is"
 	line "amazing!"
 	
-	cont "Did you know they"
-	cont "invented CAPSULEs"
+	para "Did you know they"
+	line "invented CAPSULEs"
 	cont "for CAPMON?"
 	
-	cont "We can tame CAPMON"
-	cont "now thanks to"
+	para "We can tame CAPMON"
+	line "now thanks to"
 	cont "them!"
 	
-	cont "I'm planning on"
-	cont "going to YAMABUKI"
+	para "I'm planning on"
+	line "going to YAMABUKI"
 	cont "to visit their"
 	cont "OFFICE."
 	done
 	
 _TokiwaCityText7::
 	text "I want to see"
-	cont "my boyfriend"
+	line "my boyfriend"
 	cont "in NIBI."
 	
-	cont "But I'm too"
-	cont "scared to walk"
+	para "But I'm too"
+	line "scared to walk"
 	cont "through ROUTE 2."
 
-	cont "Many DEALERs meet"
-	cont "there to fight!"
+	para "Many DEALERs meet"
+	line "there to fight!"
 	done
 
 _TokiwaCityTextGirl_MaleMC::
@@ -106,15 +106,15 @@ _TokiwaCityTextGirl_NoChosen::
 	line "PIP is a very"
 	cont "cute CAPMON."
 	
-	cont "I want one as"
-	cont "a pet!"
+	para "I want one as"
+	line "a pet!"
 	
-	cont "But I heard"
-	cont "they're pretty"
+	para "But I heard"
+	line "they're pretty"
 	cont "rare..."
 	
-	cont "Hmm... Maybe that's"
-	cont "why you haven't"
+	para "Hmm... Maybe that's"
+	line "why you haven't"
 	cont "heard of it."
 	done
 
@@ -128,13 +128,13 @@ _TokiwaCityText_Scientist1::
 	line "You're a fresh"
 	cont "CAPMON DEALER,"
 	cont "are you not?"
-	
+
+	;xxx "123456789012345678"	
 	para "How do I know?"
 
-	para "Well... I no-"
-	line "ticed you don't"
-	cont "have much"
-	cont "CHARISMA."
+	line "Well... I noticed"
+	cont "you don't have"
+	cont "much CHARISMA."
 	
 	para "DR.CAPMON lives"
 	line "here in TOKIWA."
@@ -165,15 +165,17 @@ _TokiwaCityText_Scientist3::
 	text "As CAPMON grow,"
 	line "they get stronger."
 
+	;xxx "123456789012345678"
+	
 	para "However..."
-
+	
 	para "If you don't have"
 	line "enough CHARISMA,"
-	cont "they won't lis-"
-	cont "ten to you."
+	cont "they won't listen"
+	cont "to you."
 
-	cont "You can increase"
-	cont "your CHARISMA by"
+	para "You can increase"
+	line "your CHARISMA by"
 	cont "defeating CHAMPs."
 	done
 
