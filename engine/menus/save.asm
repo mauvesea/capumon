@@ -515,7 +515,7 @@ ChooseABoxText:
 	text_end
 
 BoxNames:
-	db   "BOX 1"
+	db   "TOKIWA"
 	next "BOX 2"
 	next "BOX 3"
 	next "BOX 4"

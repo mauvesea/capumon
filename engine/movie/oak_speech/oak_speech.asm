@@ -47,6 +47,12 @@ OakSpeech:
 	ld a, 1
 	ld [wItemQuantity], a
 	call AddItemToInventory  ; give one potion
+
+	ld hl, wCharisma
+	ld a, [hl]
+	inc a
+	ld [wCharisma], a ; Charisma starts at 1
+
 	ld a, [wDefaultMap]
 	ld [wDestinationMap], a
 	call SpecialWarpIn

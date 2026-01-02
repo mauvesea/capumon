@@ -47,7 +47,7 @@ ENDM
 	trainer_const ROCKET         ; $1E
 	trainer_const COOLTRAINER_M  ; $1F
 	trainer_const COOLTRAINER_F  ; $20
-	trainer_const BRUNO          ; $21
+	trainer_const YUJIRO         ; $21
 	trainer_const BROCK          ; $22
 	trainer_const MISTY          ; $23
 	trainer_const LT_SURGE       ; $24

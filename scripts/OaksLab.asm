@@ -46,8 +46,8 @@ TokiwaOokidoSchoolScript1:
 	jr .ScriptEnd
 .GetDex
 	ld hl, OokidoDexText2
-	call PrintText	
-	jr .ScriptEnd	
+	call PrintText
+	jr .ScriptEnd
 .CheckPokedexProgress
 	ld hl, wPokedexOwned
 	ld b, wPokedexOwnedEnd - wPokedexOwned
@@ -67,7 +67,7 @@ TokiwaOokidoSchoolDexScript1:
 	jr nz, .RegularText
 	CheckEvent EVENT_CAN_TAKE_DEX
 	jr nz, .GetDex
-.RegularText	
+.RegularText
 	ld hl, TokiwaDexText
 	call PrintText
 	jr .ScriptEnd

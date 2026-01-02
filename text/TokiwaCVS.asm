@@ -33,3 +33,19 @@ _TokiwaCVSMonsterSellerTextNoMoney::
 	text "Oh... You need"
 	line "more money."
 	done
+
+_TokiwaCVSMonsterSellerLowRank::
+	text "Wait a minute..."
+
+	para "Your CHARISMA is"
+	line "too low!"
+
+	para "There's not way"
+	line "you can actually"
+	cont "raise a CAPMON"
+	cont "like this one."
+
+	para "Come back when"
+	line "you raise your"
+	cont "CHARISMA a bit."
+	done

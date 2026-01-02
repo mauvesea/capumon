@@ -16,7 +16,7 @@ Tilesets:
 	tileset PlayersRoom,   -1, -1, -1,  -1, TILEANIM_NONE
 	tileset Dojo,        $3A, -1, -1,  -1, TILEANIM_WATER_FLOWER
 	tileset Pokecenter,  $35,$5b, -1,  -1, TILEANIM_NONE
-	tileset Gym,         $3A, -1, -1,  -1, TILEANIM_WATER_FLOWER
+	tileset Gym,         $1A, $1B, -1,  -1, TILEANIM_WATER_FLOWER
 	tileset House,        -1, -1, -1,  -1, TILEANIM_NONE
 	tileset ForestGate,  $17,$32, -1,  -1, TILEANIM_NONE
 	tileset Museum,      $17,$32, -1,  -1, TILEANIM_NONE

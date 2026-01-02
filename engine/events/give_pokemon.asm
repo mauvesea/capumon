@@ -18,21 +18,8 @@ _GivePokemon::
 	callfar LoadEnemyMonData
 	call SetPokedexOwnedFlag
 	callfar SendNewMonToBox
-	ld hl, wStringBuffer
-	ld a, [wCurrentBoxNum]
-	and $7f
-	cp 9
-	jr c, .singleDigitBoxNum
-	sub 9
-	ld [hl], "1"
-	inc hl
-	add "0"
-	jr .next
-.singleDigitBoxNum
-	add "1"
-.next
-	ld [hli], a
-	ld [hl], "@"
+	call DecideWhichStorageCornerText
+	call CopyToStringBuffer
 	ld hl, SentToBoxText
 	call PrintText
 	scf
@@ -80,3 +67,29 @@ SentToBoxText:
 BoxIsFullText:
 	text_far _BoxIsFullText
 	text_end
+
+DecideWhichStorageCornerText:
+	ld a, [wCurrentBoxNum]
+	cp 2
+	jr nz, .NibiSC
+	ld de, HanadaSC
+	jr .next
+.NibiSC
+	ld a, [wCurrentBoxNum]
+	cp 1
+	jr nz, .TokiwaSC
+	ld de, NibiSC
+	jr .next
+.TokiwaSC
+	ld de, TokiwaSC
+.next
+	ret
+
+HanadaSC:
+	db "HANADA@"
+
+NibiSC:
+	db "NIBI@"
+
+TokiwaSC:
+	db "TOKIWA@"

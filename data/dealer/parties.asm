@@ -31,7 +31,7 @@ TrainerDataPointers:
 	dw RocketData
 	dw CooltrainerMData
 	dw CooltrainerFData
-	dw BrunoData
+	dw YujiroData
 	dw BrockData
 	dw MistyData
 	dw LtSurgeData
@@ -635,8 +635,8 @@ CooltrainerFData:
 	db 5, OMEGA, 0
 	db 5, OMEGA, 0
 
-BrunoData:
-	db 5, OMEGA, 0
+YujiroData:
+	db $FF, 8, OMOM, 10, BELINGA, 0
 
 BrockData:
 	db 5, OMEGA, 0

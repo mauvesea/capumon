@@ -35,7 +35,10 @@ TokiwaMonsterSellerText:
 	ld hl, .NoMoneyText
 	jr .printText
 .enoughMoney
-; Add a Rank check here
+	ld a, [wCharisma]
+	cp 2
+	jr c, .LowRank
+
 	lb bc, CYHORN, 5
 	call GivePokemon
 	jr nc, .done
@@ -55,6 +58,8 @@ TokiwaMonsterSellerText:
 .choseNo
 	ld hl, .RefuseText
 	jr .printText
+.LowRank
+	ld hl, .LowRankText
 .printText
 	call PrintText
 .done
@@ -70,4 +75,8 @@ TokiwaMonsterSellerText:
 
 .NoMoneyText
 	text_far _TokiwaCVSMonsterSellerTextNoMoney
+	text_end
+
+.LowRankText
+	text_far _TokiwaCVSMonsterSellerLowRank
 	text_end

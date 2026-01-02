@@ -80,19 +80,22 @@ _GotMonText::
 
 _SentToBoxText::
 	text "There's no more"
-	line "room for #MON!"
+	line "room for CAPMON"
+	cont "in your party!"
 	cont "@"
 	text_ram wBoxMonNicks
 	text " was"
-	cont "sent to #MON"
-	cont "BOX @"
+	cont "sent to the"
+	cont "STORAGE CORNER in"
+	cont "@"
 	text_ram wStringBuffer
-	text " on PC!"
+	text "!"
 	done
 
 _BoxIsFullText::
 	text "There's no more"
-	line "room for #MON!"
+	line "room for CAPMON"
+	cont "in your party!"
 
 	para "The #MON BOX"
 	line "is full and can't"
