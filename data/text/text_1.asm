@@ -48,7 +48,7 @@ _BoulderText::
 
 _MartSignText::
 	text "Lots of tools!"
-	cont "FRIENDLY SHOP"
+	line "FRIENDLY SHOP"
 	done
 
 _PokeCenterSignText::
