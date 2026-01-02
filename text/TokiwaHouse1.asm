@@ -13,11 +13,11 @@ _TokiwaHouse1Text2::
 	line "CAPMON too."
 	done
 
-_TokiwaHouse1Text_1d5b1::
-	text "MUMU: Tetweet!"
+_TokiwaHouseMumuText::
+	text "MOMU: Tetweet!"
 	done
 
 _TokiwaHouse1Text4::
 	text "OMOM"
-	line "Name: MUMU"
+	line "Name: MOMU"
 	done

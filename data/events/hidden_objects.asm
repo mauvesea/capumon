@@ -4,7 +4,6 @@ HiddenObjectMaps:
 	db TOKIWA_DR_CAPMON_SCHOOL
 	db TOKIWA_INN
 	db TOKIWA_CVS
-	db TOKIWA_HOUSE1
 	db TOKIWA_CHAMP_CUP
 	db MUSEUM_1F
 	db PEWTER_GYM
@@ -92,7 +91,6 @@ HiddenObjectPointers:
 	dw TokiwaDrCapmonSchoolHiddenObjects
 	dw ViridianPokecenterHiddenObjects
 	dw ViridianMartHiddenObjects
-	dw ViridianSchoolHiddenObjects
 	dw ViridianGymHiddenObjects
 	dw Museum1FHiddenObjects
 	dw PewterGymHiddenObjects

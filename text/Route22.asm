@@ -2,7 +2,7 @@ _Route22Text1::
 	text "Look out!"
 	
 	para "There are a lot"
-	line "of DEALERs in"
+	line "of DEALERs on"
 	cont "this road."
 	
 	para "They're all look-"
@@ -113,6 +113,6 @@ _Route22AfterBattleText8::
 
 _Route22Text10::
 	text "This is..."
-	line "ROUTE 1!"
+	line "ROUTE 12!"
 	para "TOKIWA CITY (E)"
 	done

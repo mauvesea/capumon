@@ -5,7 +5,6 @@ TokiwaHouse1_TextPointers:
 	dw TokiwaHouse1Text1
 	dw TokiwaHouse1Text2
 	dw TokiwaHouse1Text3
-	dw TokiwaHouse1Text4
 
 TokiwaHouse1Text1:
 	text_far _TokiwaHouse1Text1
@@ -17,15 +16,15 @@ TokiwaHouse1Text2:
 
 TokiwaHouse1Text3:
 	text_asm
-	ld hl, TokiwaHouse1Text_1d5b1
+	ld hl, TokiwaHouseMumuText
 	call PrintText
-	ld a, OMEGA
+	ld a, OMOM
 	call PlayCry
 	call WaitForSoundToFinish
 	jp TextScriptEnd
 
-TokiwaHouse1Text_1d5b1:
-	text_far _TokiwaHouse1Text_1d5b1
+TokiwaHouseMumuText:
+	text_far _TokiwaHouseMumuText
 	text_end
 
 TokiwaHouse1Text4:

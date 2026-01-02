@@ -10,11 +10,10 @@ TokiwaCity_Object:
 
 	def_bg_events
 	bg_event 15, 25,  8 ; ViridianCityText8
-	bg_event  0,  0,  9 ; ViridianCityText9
-	bg_event 25, 19, 10 ; ViridianCityText10
-	bg_event 27, 27, 11 ; MartSignText
-	bg_event 17, 27, 12 ; PokeCenterSignText
-	bg_event 17, 11, 13 ; ViridianCityText13
+	bg_event 25, 19,  9 ; ViridianCityText10
+	bg_event 27, 27, 10 ; MartSignText
+	bg_event 17, 27, 11 ; PokeCenterSignText
+	bg_event 17, 11, 12 ; ViridianCityText13
 
 	def_object_events
 	object_event 13, 28, SPRITE_LITTLE_BOY, WALK, ANY_DIR, 1 ; person
