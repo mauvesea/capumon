@@ -11,15 +11,18 @@ TokiwaCity_ScriptPointers:
 	dw TokiwaCityScript3
 
 TokiwaCityScript0:
-	call TokiwaCityScript_1900b
-	jp TokiwaCityScript_1903d
+	call TokiwaCityScriptClear
+	jp TokiwaCityScript_Scientist
 
-TokiwaCityScript_1900b:
+TokiwaCityScriptClear:
 	ret
 
-TokiwaCityScript_1903d:
+TokiwaCityScript_Scientist: ; Check both Dex and Yujiro's defeat
 	CheckEvent EVENT_GOT_POKEDEX
+	jr z, .FailedFirstCheck
+	CheckEvent EVENT_BEAT_YUJIRO
 	ret nz
+.FailedFirstCheck
 	ld a, [wYCoord]
 	cp 7
 	ret nz
@@ -31,7 +34,7 @@ TokiwaCityScript_1903d:
 	call DisplayTextID
 	xor a
 	ldh [hJoyHeld], a
-	call TokiwaCityScript_190cf
+	call TokiwaCityScript_MovePlayerDown
 	ld a, $3
 	ld [wTokiwaCityCurScript], a
 	ret
@@ -91,7 +94,7 @@ TokiwaCityScript3:
 	ld [wTokiwaCityCurScript], a
 	ret
 
-TokiwaCityScript_190cf:
+TokiwaCityScript_MovePlayerDown:
 	call StartSimulatingJoypadStates
 	ld a, $1
 	ld [wSimulatedJoypadStatesIndex], a
@@ -103,11 +106,11 @@ TokiwaCityScript_190cf:
 	ret
 
 TokiwaCity_TextPointers:
-	dw TokiwaCityText1
-	dw TokiwaCityText2
-	dw TokiwaCityText3
-	dw TokiwaCityText4
-	dw TokiwaCityText5
+	dw TokiwaCityTextBoy
+	dw TokiwaCityTextScientist
+	dw TokiwaCityTextGirl
+	dw TokiwaCityTextLass
+	dw TokiwaCityTextScientistRoadblock
 	dw TokiwaCityText6
 	dw TokiwaCityText7
 	dw TokiwaCityText8
@@ -116,141 +119,121 @@ TokiwaCity_TextPointers:
 	dw MartSignText
 	dw PokeCenterSignText
 	dw TokiwaCityText13
-	dw TokiwaCityText14
-	dw TokiwaCityText15
 
-TokiwaCityText1:
-	text_far _TokiwaCityText1
+TokiwaCityTextBoy:
+	text_far _TokiwaCityTextBoy1
 	text_end
 
-TokiwaCityText2:
-	text_far _TokiwaCityText2
+TokiwaCityTextScientist:
+	text_far _TokiwaCityTextScientist
 	text_end
 
-TokiwaCityText_19122:
-	text_far _TokiwaCityText_19122
-	text_end
-
-TokiwaCityText_19127:
-	text_far _TokiwaCityText_19127
-	text_end
-
-TokiwaCityText3:
+TokiwaCityTextGirl:
 	text_asm
    	ld a, [wPlayerGender]
 	and a
 	jr z, .BoyText
-	ld hl, TokiwaCityText_1914d2
+	ld hl, TokiwaCityTextGirl_FemaleMC
 	jr .next
-.BoyText	
-	ld hl, TokiwaCityText_1914d
+.BoyText
+	ld hl, TokiwaCityTextGirl_MaleMC
 .next
 	call PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
 	jr nz, .no
-	ld hl, TokiwaCityText_19157
+	ld hl, TokiwaCityTextGirl_YesChosen
 	call PrintText
 	jr .done
 .no
-	ld hl, TokiwaCityText_19152
+	ld hl, TokiwaCityTextGirl_NoChosen
 	call PrintText
 .done
 	jp TextScriptEnd
 
-TokiwaCityText_1914d:
-	text_far _TokiwaCityText_1914d
+TokiwaCityTextGirl_MaleMC:
+	text_far _TokiwaCityTextGirl_MaleMC
 	text_end
 	
-TokiwaCityText_1914d2:
-	text_far _TokiwaCityText_1914d2
+TokiwaCityTextGirl_FemaleMC:
+	text_far _TokiwaCityTextGirl_FemaleMC
 	text_end
 
-TokiwaCityText_19152:
-	text_far _TokiwaCityText_19152
+TokiwaCityTextGirl_NoChosen:
+	text_far _TokiwaCityTextGirl_NoChosen
 	text_end
 
-TokiwaCityText_19157:
-	text_far _TokiwaCityText_19157
+TokiwaCityTextGirl_YesChosen:
+	text_far _TokiwaCityTextGirl_YesChosen
 	text_end
 
-TokiwaCityText4:
-	text_far _TokiwaCityText4
-	text_end
-
-TokiwaCityText_19175:
-	text_far _TokiwaCityText_19175
-	text_end
-
-TokiwaCityText_1917a:
-	text_far _TokiwaCityText_1917a
-	text_end
-
-TokiwaCityText5:
+TokiwaCityTextLass:
 	text_asm
-	CheckEvent EVENT_GOT_POKEDEX
-	jr nz, .GotDex
-	ld hl, TokiwaCityText_19191
+	CheckEvent EVENT_BEAT_YUJIRO
+	jr nz, .BeatYujiro
+	ld hl, TokiwaCityTextLass1
 	call PrintText
-	call TokiwaCityScript_190cf
-	ld a, $3
-	ld [wTokiwaCityCurScript], a
-	jr .end
-.GotDex
-	ld hl, TokiwaCityText_19191_2
+	jr .done
+.BeatYujiro
+	ld hl, TokiwaCityTextLass2
 	call PrintText
-.end
+.done
 	jp TextScriptEnd
 
-TokiwaCityText_19191:
-	text_far _TokiwaCityText_19191
+TokiwaCityTextLass1:
+	text_far _TokiwaCityTextLass1
+	text_end
+
+TokiwaCityTextLass2:
+	text_far _TokiwaCityTextLass2
+	text_end
+
+TokiwaCityTextScientistRoadblock:
+	text_asm
+	CheckEvent EVENT_GOT_POKEDEX
+	jr z, .DexText
+	CheckEvent EVENT_BEAT_YUJIRO
+	jr z, .ChampText
+	ld hl, TokiwaCityText_Scientist3
+	call PrintText
+	jr .done
+
+.DexText
+	ld hl, TokiwaCityText_Scientist1
+	call PrintText
+	jr .MovePlayer
+
+.ChampText
+	ld hl, TokiwaCityText_Scientist2
+	call PrintText
+
+.MovePlayer
+	call TokiwaCityScript_MovePlayerDown
+	ld a, $3
+	ld [wTokiwaCityCurScript], a
+
+.done
+	jp TextScriptEnd
+
+TokiwaCityText_Scientist1:
+	text_far _TokiwaCityText_Scientist1
 	text_end
 	
-TokiwaCityText_19191_2:
-	text_far _TokiwaCityText_19191_2
+TokiwaCityText_Scientist2:
+	text_far _TokiwaCityText_Scientist2
+	text_end
+
+TokiwaCityText_Scientist3:
+	text_far _TokiwaCityText_Scientist3
 	text_end
 
 TokiwaCityText6:
 	text_far _TokiwaCityText6
 	text_end
 
-
-TokiwaCityText_191ca:
-	text_far _TokiwaCityText_191ca
-	text_end
-
-ReceivedTM42Text:
-	text_far _ReceivedTM42Text
-	sound_get_item_2
-	text_end
-
-TM42Explanation:
-	text_far _TM42Explanation
-	text_end
-
-TM42NoRoomText:
-	text_far _TM42NoRoomText
-	text_end
-
 TokiwaCityText7:
 	text_far _TokiwaCityText7
-	text_end
-
-TokiwaCityText_1920a:
-	text_far _TokiwaCityText_1920a
-	text_end
-
-TokiwaCityText_1920f:
-	text_far _TokiwaCityText_1920f
-	text_end
-
-TokiwaCityText_19214:
-	text_far _TokiwaCityText_19214
-	text_end
-
-TokiwaCityText15:
-	text_far _TokiwaCityText_19219
 	text_end
 
 TokiwaCityText8:
@@ -269,6 +252,4 @@ TokiwaCityText13:
 	text_far _TokiwaCityText13
 	text_end
 
-TokiwaCityText14:
-	text_far _TokiwaCityText14
-	text_end
+

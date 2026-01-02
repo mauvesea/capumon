@@ -1,35 +1,57 @@
-_TokiwaCityText1::
+_TokiwaCityTextBoy1::
 	text "Huh? You're a"
 	line "CAPMON DEALER,"
 	cont "aren't you?"
-	cont "I can see all"
-	cont "those CAPSULEs"
+
+	para "I can see all"
+	line "those CAPSULEs"
 	cont "in your belt!"
-	cont "It must be great."
-	cont "I wanna become a"
-	cont "CAPMON DEALER too"
+
+	para "It must be great."
+
+	para "I wanna become a"
+	line "CAPMON DEALER too"
 	cont "when I grow up!"
 	done
 
-_TokiwaCityText2::
-	text "I work here with"
+_TokiwaCityTextScientist::
+	text "Yes, yes..."
+
+	para "I work here with"
 	line "DR.CAPMON, but"
 	cont "I'm on my break"
-	cont "right now."
-	cont "Researching"
-	cont "CAPMON is tough!"
+	cont "right now!"
+
+	para "Researching"
+	line "CAPMON is tough!"
 	done
 	
-_TokiwaCityText4::
+_TokiwaCityTextLass1::
 	text "TOKIWA's CHAMP..."
 	
 	line "His name is"
-	cont "YUJIROU!"
+	cont "YUJIRO!"
 	
 	cont "He's the strongest"
 	cont "CAPMON DEALER"
 	cont "I've ever seen!"
-	done	
+	done
+
+_TokiwaCityTextLass2::
+	text "...What!?"
+	line "You defeated"
+	cont "YUJIRO?"
+
+	para "Now that's"
+	line "impressive!"
+
+	para "Okay... I'll tell"
+	line "the truth."
+
+	para "YUJIRO is"
+	line "actually my"
+	cont "younger brother!"
+	done
 
 _TokiwaCityText6::
 	text "SYLPH CO. is"
@@ -61,33 +83,8 @@ _TokiwaCityText7::
 	cont "Many DEALERs meet"
 	cont "there to fight!"
 	done
-	
-_TokiwaCityText_19191_2::
-	text "If your CAPMON"
-	line "aren't listening"
-	cont "to you, it means"
-	cont "you gotta be more"
-	cont "CHARISMAtic."
-	
-	cont "You can increase"
-	cont "your CHARISMA by"
-	cont "defeating CHAMPs."
-	done
 
-_TokiwaCityText_19122::
-	text "This #MON GYM"
-	line "is always closed."
-
-	cont "I wonder who the"
-	cont "LEADER is?"
-	done
-
-_TokiwaCityText_19127::
-	text "VIRIDIAN GYM's"
-	line "LEADER returned!"
-	done
-
-_TokiwaCityText_1914d::
+_TokiwaCityTextGirl_MaleMC::
 	text "Hello big bro!"
 	
 	line "Have you ever"
@@ -95,7 +92,7 @@ _TokiwaCityText_1914d::
 	cont "PIP?"
 	done
 	
-_TokiwaCityText_1914d2::
+_TokiwaCityTextGirl_FemaleMC::
 	text "Hello big sis!"
 	
 	line "Have you ever"
@@ -103,7 +100,7 @@ _TokiwaCityText_1914d2::
 	cont "PIP?"
 	done
 	
-_TokiwaCityText_19152::
+_TokiwaCityTextGirl_NoChosen::
 	text "Waah... Really?"
 	
 	line "PIP is a very"
@@ -121,116 +118,63 @@ _TokiwaCityText_19152::
 	cont "heard of it."
 	done
 
-_TokiwaCityText_19157::
+_TokiwaCityTextGirl_YesChosen::
 	text "Tee-hee..."
 	line "PIP is the cutest!"
 	done
 
-_TokiwaCityText_19175::
-	text "Oh Grandpa! Don't"
-	line "be so mean!"
-	cont "He hasn't had his"
-	cont "coffee yet."
-	done
-
-_TokiwaCityText_1917a::
-	text "When I go shop in"
-	line "PEWTER CITY, I"
-	cont "have to take the"
-	cont "winding trail in"
-	cont "VIRIDIAN FOREST."
-	done
-
-_TokiwaCityText_19191::
+_TokiwaCityText_Scientist1::
 	text "Excuse me..."
 	line "You're a fresh"
 	cont "CAPMON DEALER,"
-	cont "right?"
+	cont "are you not?"
 	
-	cont "I see you don't"
+	para "How do I know?"
+
+	para "Well... I no-"
+	line "ticed you don't"
 	cont "have much"
 	cont "CHARISMA."
 	
-	cont "DR.CAPMON lives"
-	cont "here in TOKIWA."
+	para "DR.CAPMON lives"
+	line "here in TOKIWA."
 	
-	cont "You should talk"
-	cont "to him to learn"
+	para "You should talk"
+	line "to him to learn"
 	cont "more about"
 	cont "CAPMON."
 	done
 
-_TokiwaCityText_191ca::
-	text "Yawn!"
-	line "I must have dozed"
-	cont "off in the sun."
+_TokiwaCityText_Scientist2::
+	text "I see you got an"
+	line "ENCYCLOPEDIA..."
 
-	para "I had this dream"
-	line "about a DROWZEE"
-	cont "eating my dream."
-	cont "What's this?"
-	cont "Where did this TM"
-	cont "come from?"
+	para "That's great!"
 
-	para "This is spooky!"
-	line "Here, you can"
-	cont "have this TM."
-	prompt
+	para "However... I"
+	line "think you should"
+	cont "take part in our"
+	cont "local CHAMP CUP."
 
-_ReceivedTM42Text::
-	text "<PLAYER> received"
-	line "TM42!@"
-	text_end
-
-_TM42Explanation::
-	text "TM42 contains"
-	line "DREAM EATER..."
-	cont "...Snore..."
+	para "You still lack"
+	line "any experience"
+	cont "as a DEALER!"
 	done
 
-_TM42NoRoomText::
-	text "You have too much"
-	line "stuff already."
-	done
+_TokiwaCityText_Scientist3::
+	text "As CAPMON grow,"
+	line "they get stronger."
 
-_TokiwaCityText_1920a::
-	text "Ahh, I've had my"
-	line "coffee now and I"
-	cont "feel great!"
+	para "However..."
 
-	para "Sure you can go"
-	line "through!"
+	para "If you don't have"
+	line "enough CHARISMA,"
+	cont "they won't lis-"
+	cont "ten to you."
 
-	para "Are you in a"
-	line "hurry?"
-	done
-
-_TokiwaCityText_1920f::
-	text "I see you're using"
-	line "a #DEX."
-
-	para "When you catch a"
-	line "#MON, #DEX"
-	cont "is automatically"
-	cont "updated."
-
-	para "What? Don't you"
-	line "know how to catch"
-	cont "#MON?"
-
-	para "I'll show you"
-	line "how to then."
-	done
-
-_TokiwaCityText_19214::
-	text "Time is money..."
-	line "Go along then."
-	done
-
-_TokiwaCityText_19219::
-	text "First, you need"
-	line "to weaken the"
-	cont "target #MON."
+	cont "You can increase"
+	cont "your CHARISMA by"
+	cont "defeating CHAMPs."
 	done
 
 _TokiwaCityText8::
@@ -260,10 +204,5 @@ _TokiwaCityText10::
 
 _TokiwaCityText13::
 	text "TOKIWA CHAMP CUP"
-	line "CHAMP: YUJIROU"
-	done
-
-_TokiwaCityText14::
-	text "The GYM's doors"
-	line "are locked..."
+	line "CHAMP: YUJIRO"
 	done
