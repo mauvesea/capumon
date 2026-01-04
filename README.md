@@ -14,9 +14,6 @@ Keep in mind that it's supposed to be a simpler RPG, even more simple than the v
 
 ## Links
 
-- **Discord:** [click here][discord]
 - **pret:** [click here][pret]
 
-
-[discord]: https://discord.gg/qCBHjGH729
 [pret]: https://github.com/pret/
