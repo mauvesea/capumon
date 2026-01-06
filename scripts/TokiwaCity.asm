@@ -31,6 +31,9 @@ TokiwaCityScript_Scientist: ; Check both Dex and Yujiro's defeat
 	ret nz
 	ld a, $5
 	ldh [hSpriteIndexOrTextID], a
+	ld a, SPRITE_FACING_RIGHT
+	ldh [hSpriteFacingDirection], a
+	call SetSpriteFacingDirectionAndDelay
 	call DisplayTextID
 	xor a
 	ldh [hJoyHeld], a
