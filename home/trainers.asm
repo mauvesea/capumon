@@ -314,7 +314,7 @@ CheckForEngagingTrainers::
 	and a
 	ret nz        ; break if the trainer is engaging
 .continue
-	ld hl, $c
+	ld hl, TRAINER_HEADER_SIZE
 	add hl, de
 	ld d, h
 	ld e, l

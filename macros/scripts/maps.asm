@@ -98,10 +98,14 @@ MACRO trainer
 	DEF _cur_bit = CURRENT_TRAINER_BIT % 8
 	ASSERT _ev_bit == _cur_bit, \
 		"Expected \1 to be bit {d:_cur_bit}, got {d:_ev_bit}"
+:
 	db CURRENT_TRAINER_BIT
 	db \2 << 4
 	dw wEventFlags + (\1 - CURRENT_TRAINER_BIT) / 8
 	dw \3, \5, \4, \4, \6
+; CheckForEngagingTrainers walks this table TRAINER_HEADER_SIZE bytes at a time
+	ASSERT @ - :- == TRAINER_HEADER_SIZE, \
+		"trainer header size does not match TRAINER_HEADER_SIZE"
 	DEF CURRENT_TRAINER_BIT += 1
 ENDM
 
