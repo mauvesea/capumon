@@ -2486,9 +2486,9 @@ BattleMenu_RunWasSelected:
 MoveSelectionMenu:
 	ld a, [wMoveMenuType]
 	dec a
-	jr z, .mimicmenu
+	jp z, .mimicmenu
 	dec a
-	jr z, .relearnmenu
+	jp z, .relearnmenu
 	jr .regularmenu
 
 .loadmoves
@@ -2514,22 +2514,67 @@ MoveSelectionMenu:
 	ret z
 	ld hl, wBattleMonMoves
 	call .loadmoves
-	hlcoord 4, 12
+	hlcoord 0, 12
 	ld b, 4
-	ld c, 14
+	ld c, 18
 	di ; out of pure coincidence, it is possible for vblank to occur between the di and ei
 	   ; so it is necessary to put the di ei block to not cause tearing
 	call TextBoxBorder
-	hlcoord 4, 12
-	ld [hl], $7a
-	hlcoord 10, 12
-	ld [hl], $7e
 	ei
-	hlcoord 6, 13
+	hlcoord 2, 13
 	call .writemoves
-	ld b, $5
+	call .writemovetpcosts
+	ld b, $1
 	ld a, $c
-	jr .menuset
+	jp .menuset
+
+.writemovetpcosts
+; print "TP:<cost>" at column 14 beside each move the mon actually knows
+	ld hl, wBattleMonMoves
+	decoord 14, 13
+	ld c, NUM_MOVES
+.tpcostloop
+	ld a, [hl]
+	and a
+	jr z, .nomoveinslot
+	push hl
+	push de
+	push bc
+	call GetMoveTPCost
+	ld [wMoveTPCostBuffer], a
+	pop bc
+	pop hl ; hl = screen position for this row
+	push hl
+	push bc
+	ld de, BattleTPCostText
+	call PlaceString
+	pop bc
+	pop hl
+	push hl
+	push bc
+	ld de, 3
+	add hl, de
+	ld de, wMoveTPCostBuffer
+	lb bc, 1, 3
+	call PrintNumber
+	pop bc
+	pop hl
+	ld d, h
+	ld e, l
+	pop hl
+.nomoveinslot
+	inc hl
+	push hl
+	ld h, d
+	ld l, e
+	ld de, SCREEN_WIDTH
+	add hl, de
+	ld d, h
+	ld e, l
+	pop hl
+	dec c
+	jr nz, .tpcostloop
+	ret
 .mimicmenu
 	ld hl, wEnemyMonMoves
 	call .loadmoves
@@ -2708,6 +2753,9 @@ MoveDisabledText:
 
 WhichTechniqueString:
 	db "WHICH TECHNIQUE?@"
+
+BattleTPCostText:
+	db "TP:@"
 
 SelectMenuItem_CursorUp:
 	ld a, [wCurrentMenuItem]
@@ -2898,26 +2946,8 @@ SwapMovesInMenu:
 	jp MoveSelectionMenu
 
 PrintMenuItem:
-	xor a
-	ldh [hAutoBGTransferEnabled], a
-	hlcoord 0, 8
-	ld b, 3
-	ld c, 9
-	call TextBoxBorder
-	ld a, [wPlayerDisabledMove]
-	and a
-	jr z, .notDisabled
-	swap a
-	and $f
-	ld b, a
-	ld a, [wCurrentMenuItem]
-	cp b
-	jr nz, .notDisabled
-	hlcoord 1, 10
-	ld de, DisabledText
-	call PlaceString
-	jr .moveDisabled
-.notDisabled
+; the move list shows each move's TP cost, so there is no info box to draw;
+; this just keeps the selected move in sync with the cursor
 	ld hl, wCurrentMenuItem
 	dec [hl]
 	xor a
@@ -2932,35 +2962,7 @@ PrintMenuItem:
 	                            ; isn't actually selected (just pointed to by the cursor)
 	ld hl, wCurrentMenuItem
 	inc [hl]
-	ld a, [wPlayerSelectedMove]
-	call GetMoveTPCost
-	ld [wcd6d], a
-; print TYPE/<type> and TP <cost>
-	hlcoord 1, 9
-	ld de, TypeText
-	call PlaceString
-	hlcoord 5, 9
-	ld [hl], "/"
-	hlcoord 1, 11
-	ld de, TechPointText
-	call PlaceString
-	hlcoord 5, 11
-	ld de, wcd6d
-	lb bc, 1, 3
-	call PrintNumber
-	call GetCurrentMove
-	hlcoord 2, 10
-	predef PrintMoveType
-.moveDisabled
-	ld a, $1
-	ldh [hAutoBGTransferEnabled], a
-	jp Delay3
-
-DisabledText:
-	db "disabled!@"
-
-TypeText:
-	db "TYPE@"
+	jp GetCurrentMove
 
 SelectEnemyMove:
 	ld a, [wLinkState]

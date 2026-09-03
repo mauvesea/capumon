@@ -890,11 +890,6 @@ NEXTU
 wEvosMoves:: ds MAX_EVOLUTIONS * EVOLUTION_SIZE + 1
 wEvosMovesEnd::
 
-NEXTU
-	ds 4
-; temp variable used to print a move's TP cost on the status screen
-wStatusScreenMoveTPCost:: db
-	ds 15
 ENDU
 
 UNION
@@ -1696,6 +1691,14 @@ wEvoStoneItemID:: db
 wSavedNPCMovementDirections2Index:: db
 
 wPlayerName:: ds NAME_LENGTH
+
+; scratch byte used when printing a move's TP cost
+wMoveTPCostBuffer:: db
+
+; how much the mon in wLoadedMon is worth, in money
+; set by CalcMonValue (see engine/pokemon/status_screen.asm)
+wMonValue::    ds 3 ; binary, big endian
+wMonValueBCD:: ds 3 ; the same value as BCD, for paying the player
 
 
 SECTION "Party Data", WRAM0

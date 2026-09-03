@@ -49,3 +49,47 @@ _TokiwaCVSMonsterSellerLowRank::
 	line "you raise your"
 	cont "CHARISMA a bit."
 	done
+
+_TokiwaCVSMonsterBuyerAskText::
+	text "Welcome! I buy"
+	line "CAPMON off"
+	cont "trainers."
+
+	para "Care to sell me"
+	line "one of yours?"
+	done
+
+_TokiwaCVSMonsterBuyerWhichMonText::
+	text "Which one are"
+	line "you selling?"
+	done
+
+_TokiwaCVSMonsterBuyerOfferText::
+	text "I can buy"
+	line "@"
+	text_ram wcd6d
+	text " for @"
+	text_bcd wMonValueBCD, 3 | LEADING_ZEROES | LEFT_ALIGN
+	text "G."
+
+	para "Is that okay?"
+	done
+
+_TokiwaCVSMonsterBuyerThanksText::
+	text "Thanks! It's in"
+	line "good hands."
+	done
+
+_TokiwaCVSMonsterBuyerOnlyOneMonText::
+	text "Hold on! That's"
+	line "your last CAPMON."
+
+	para "You'd have"
+	line "nothing left to"
+	cont "battle with!"
+	done
+
+_TokiwaCVSMonsterBuyerComeAgainText::
+	text "Come back any"
+	line "time!"
+	done

@@ -6,6 +6,7 @@ TokiwaCVS_TextPointers:
 	dw TokiwaMonsterSellerText
 	dw TokiwaCVSText1
 	dw TokiwaCVSText2
+	dw TokiwaMonsterBuyerText
 
 TokiwaCVSText1:
 	text_far _TokiwaCVSText1
@@ -79,4 +80,86 @@ TokiwaMonsterSellerText:
 
 .LowRankText
 	text_far _TokiwaCVSMonsterSellerLowRank
+	text_end
+
+TokiwaMonsterBuyerText:
+	text_asm
+	call SaveScreenTilesToBuffer2
+	ld hl, .AskText
+	call PrintText
+	call YesNoChoice
+	ld a, [wCurrentMenuItem]
+	and a
+	ld hl, .ComeAgainText
+	jp nz, .printText
+; the player has to keep at least one CAPMON
+	ld a, [wPartyCount]
+	dec a
+	ld hl, .OnlyOneMonText
+	jp z, .printText
+	ld hl, .WhichMonText
+	call PrintText
+	xor a
+	ld [wPartyMenuTypeOrMessageID], a
+	ld [wUpdateSpritesEnabled], a
+	ld [wMenuItemToSwap], a
+	call DisplayPartyMenu
+	push af
+	call GBPalWhiteOutWithDelay3
+	call RestoreScreenTilesAndReloadTilePatterns
+	call LoadGBPal
+	pop af
+	ld hl, .ComeAgainText
+	jp c, .printText ; the player backed out of the party menu
+; work out what the chosen mon is worth
+	xor a ; PLAYER_PARTY_DATA
+	ld [wMonDataLocation], a
+	call LoadMonData
+	callfar CalcMonValue
+	call GetPartyMonName2
+	ld hl, .OfferText
+	call PrintText
+	call YesNoChoice
+	ld a, [wCurrentMenuItem]
+	and a
+	ld hl, .ComeAgainText
+	jp nz, .printText
+; pay the player and take the mon away
+	ld hl, wMonValueBCD + 2
+	ld de, wPlayerMoney + 2
+	ld c, 3
+	predef AddBCDPredef ; caps the player's money at 999999
+	xor a
+	ld [wRemoveMonFromBox], a
+	call RemovePokemon
+	ld a, MONEY_BOX
+	ld [wTextBoxID], a
+	call DisplayTextBoxID
+	ld hl, .ThanksText
+.printText
+	call PrintText
+	jp TextScriptEnd
+
+.AskText
+	text_far _TokiwaCVSMonsterBuyerAskText
+	text_end
+
+.WhichMonText
+	text_far _TokiwaCVSMonsterBuyerWhichMonText
+	text_end
+
+.OfferText
+	text_far _TokiwaCVSMonsterBuyerOfferText
+	text_end
+
+.ThanksText
+	text_far _TokiwaCVSMonsterBuyerThanksText
+	text_end
+
+.OnlyOneMonText
+	text_far _TokiwaCVSMonsterBuyerOnlyOneMonText
+	text_end
+
+.ComeAgainText
+	text_far _TokiwaCVSMonsterBuyerComeAgainText
 	text_end
