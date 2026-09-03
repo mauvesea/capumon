@@ -1,7 +1,7 @@
 	db DEX_RAPRUTH ; pokedex id
 
-	db  25,  20,  15,  90, 105
-	;   hp  atk  def  spd  spc
+	db  25, 100,  20,  15,  90, 105
+	;   hp   tp  atk  def  spd  spc
 
 	db NORMAL, NORMAL ; type
 	db 200 ; catch rate

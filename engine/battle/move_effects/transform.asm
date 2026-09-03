@@ -54,15 +54,16 @@ TransformEffect_:
 	ld a, [hl]
 	ld [de], a
 ; type 1, type 2, catch rate, and moves
-	ld bc, $5
+	ld bc, wBattleMonType - wBattleMonSpecies
 	add hl, bc
 	inc de
 	inc de
 	inc de
 	inc de
 	inc de
-	inc bc
-	inc bc
+	inc de
+	inc de
+	ld bc, wBattleMonDVs - wBattleMonType
 	call CopyData
 	ldh a, [hWhoseTurn]
 	and a
@@ -82,36 +83,20 @@ TransformEffect_:
 	ld a, [hli]
 	ld [de], a
 	inc de
+; skip the level, max HP and max TP: a transformed mon keeps its own
 ; Attack, Defense, Speed, and Special stats
 	inc hl
 	inc hl
 	inc hl
+	inc hl
+	inc hl
+	inc de
+	inc de
 	inc de
 	inc de
 	inc de
 	ld bc, $8
 	call CopyData
-	ld bc, wBattleMonMoves - wBattleMonPP
-	add hl, bc ; ld hl, wBattleMonMoves
-	ld b, NUM_MOVES
-.copyPPLoop
-; 5 PP for all moves
-	ld a, [hli]
-	and a
-	jr z, .lessThanFourMoves
-	ld a, $5
-	ld [de], a
-	inc de
-	dec b
-	jr nz, .copyPPLoop
-	jr .copyStats
-.lessThanFourMoves
-; 0 PP for blank moves
-	xor a
-	ld [de], a
-	inc de
-	dec b
-	jr nz, .lessThanFourMoves
 .copyStats
 ; original (unmodified) stats and stat mods
 	pop hl

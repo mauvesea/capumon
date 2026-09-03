@@ -125,30 +125,8 @@ _ItemfinderFoundNothingText::
 	line "isn't responding."
 	prompt
 
-_RaisePPWhichTechniqueText::
-	text "Raise PP of which"
-	line "technique?"
-	done
-
-_RestorePPWhichTechniqueText::
-	text "Restore PP of"
-	line "which technique?"
-	done
-
-_PPMaxedOutText::
-	text_ram wStringBuffer
-	text "'s PP"
-	line "is maxed out."
-	prompt
-
-_PPIncreasedText::
-	text_ram wStringBuffer
-	text "'s PP"
-	line "increased."
-	prompt
-
-_PPRestoredText::
-	text "PP was restored."
+_TPRestoredText::
+	text "TP was restored."
 	prompt
 
 _BootedUpTMText::

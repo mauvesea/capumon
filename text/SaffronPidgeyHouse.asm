@@ -18,10 +18,10 @@ _SaffronHouse1Text3::
 	done
 
 _SaffronHouse1Text4::
-	text "I was given a PP"
+	text "I was given a TP"
 	line "UP as a gift."
 
 	para "It's used for"
-	line "increasing the PP"
-	cont "of techniques!"
+	line "increasing the TP"
+	cont "of #MON!"
 	done

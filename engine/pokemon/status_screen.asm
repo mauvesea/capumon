@@ -147,7 +147,12 @@ StatusScreen:
 	
 	hlcoord 6, 10
 	predef DrawHP
-	
+
+	hlcoord 6, 12
+	ld de, wLoadedMonTP
+	lb bc, 2, 3
+	call PrintNumber
+
 	hlcoord 1, 14
 	ld de, PartyMenuValueText
 	call PlaceString
@@ -355,47 +360,29 @@ StatusScreen2:
 	ld b, a ; Number of moves ?
 	hlcoord 14, 9
 	ld de, SCREEN_WIDTH * 2
-	ld a, "P"
-	call StatusScreen_PrintPP ; Print "PP"
+	call StatusScreen_PrintTP ; Print "TP"
 	ld a, b
 	and a
-	jr z, .InitPP
+	jr z, .InitTP
 	ld c, a
 	ld a, "-"
-	call StatusScreen_PrintPP ; Fill the rest with --
-.InitPP
+	call StatusScreen_PrintPlaceholder ; Fill the rest with --
+.InitTP
 	ld hl, wLoadedMonMoves
 	decoord 17, 9
 	ld b, 0
-.PrintPP
+.PrintTP
 	ld a, [hli]
 	and a
-	jr z, .PPDone
+	jr z, .TPDone
 	push bc
 	push hl
-	push de
-	ld hl, wCurrentMenuItem
-	ld a, [hl]
-	push af
-	ld a, b
-	ld [hl], a
-	push hl
-	callfar GetMaxPP
-	pop hl
-	pop af
-	ld [hl], a
-	pop de
-	pop hl
-	push hl
-	ld bc, wPartyMon1PP - wPartyMon1Moves - 1
-	add hl, bc
-	ld a, [hl]
-	and $3f
-	ld [wStatusScreenCurrentPP], a
+	call GetMoveTPCost
+	ld [wStatusScreenMoveTPCost], a
 	ld h, d
 	ld l, e
 	push hl
-	ld de, wMaxPP
+	ld de, wStatusScreenMoveTPCost
 	lb bc, 1, 2
 	call PrintNumber
 	pop hl
@@ -407,9 +394,9 @@ StatusScreen2:
 	pop bc
 	inc b
 	ld a, b
-	cp $4
-	jr nz, .PrintPP
-.PPDone
+	cp NUM_MOVES
+	jr nz, .PrintTP
+.TPDone
 	hlcoord 7, 1
 	ld de, StatusScreenExpText
 	call PlaceString
@@ -492,11 +479,22 @@ StatusScreen_ClearName:
 	ld a, " "
 	jp FillMemory
 
-StatusScreen_PrintPP:
-; print PP or -- c times, going down two rows each time
+StatusScreen_PrintTP:
+; print "TP" c times, going down two rows each time
+	ld a, "T"
+	ld [hli], a
+	ld a, "P"
+	ld [hld], a
+	add hl, de
+	dec c
+	jr nz, StatusScreen_PrintTP
+	ret
+
+StatusScreen_PrintPlaceholder:
+; print the character in a twice, c times, going down two rows each time
 	ld [hli], a
 	ld [hld], a
 	add hl, de
 	dec c
-	jr nz, StatusScreen_PrintPP
+	jr nz, StatusScreen_PrintPlaceholder
 	ret

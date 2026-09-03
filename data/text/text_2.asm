@@ -965,8 +965,8 @@ _AlreadyOutText::
 	line "already out!"
 	prompt
 
-_MoveNoPPText::
-	text "No PP left for"
+_MoveNoTPText::
+	text "Not enough TP for"
 	line "this move!"
 	prompt
 
@@ -978,7 +978,7 @@ _MoveDisabledText::
 _NoMovesLeftText::
 	text_ram wBattleMonNick
 	text " has no"
-	line "moves left!"
+	line "TP left!"
 	done
 
 _MultiHitText::

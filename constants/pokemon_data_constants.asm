@@ -4,6 +4,7 @@ DEF BASE_DEX_NO      rb
 DEF BASE_STATS       rb NUM_STATS
 rsset BASE_STATS
 DEF BASE_HP          rb
+DEF BASE_TP          rb
 DEF BASE_ATK         rb
 DEF BASE_DEF         rb
 DEF BASE_SPD         rb
@@ -27,6 +28,7 @@ DEF BASE_DATA_SIZE EQU _RS
 rsreset
 DEF MON_SPECIES    rb
 DEF MON_HP         rw
+DEF MON_TP         rw
 DEF MON_BOX_LEVEL  rb
 DEF MON_STATUS     rb
 DEF MON_TYPE       rw
@@ -38,17 +40,18 @@ DEF MON_MOVES      rb NUM_MOVES
 DEF MON_OTID       rw
 DEF MON_EXP        rb 3
 DEF MON_HP_EXP     rw
+DEF MON_TP_EXP     rw
 DEF MON_ATK_EXP    rw
 DEF MON_DEF_EXP    rw
 DEF MON_SPD_EXP    rw
 DEF MON_SPC_EXP    rw
 DEF MON_DVS        rw
-DEF MON_PP         rb NUM_MOVES
 DEF BOXMON_STRUCT_LENGTH EQU _RS
 DEF MON_LEVEL      rb
 DEF MON_STATS      rw NUM_STATS
 rsset MON_STATS
 DEF MON_MAXHP      rw
+DEF MON_MAXTP      rw
 DEF MON_ATK        rw
 DEF MON_DEF        rw
 DEF MON_SPD        rw

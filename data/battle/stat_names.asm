@@ -3,6 +3,7 @@
 VitaminStats:
 	list_start VitaminStats
 	li "HEALTH"
+	li "TECH"
 	li "ATTACK"
 	li "DEFENSE"
 	li "SPEED"

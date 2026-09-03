@@ -103,7 +103,6 @@ PredefPointers::
 	add_predef PrintStrengthTxt
 	add_predef PickUpItem
 	add_predef PrintMoveType
-	add_predef LoadMovePPs
 	add_predef DrawHP
 	add_predef DrawHP2
 	add_predef DisplayElevatorFloorMenu

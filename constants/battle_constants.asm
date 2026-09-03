@@ -5,11 +5,16 @@ DEF NUM_MOVES EQU 4
 ; VitaminStats indexes (see data/battle/stat_names.asm)
 	const_def
 	const STAT_HEALTH
+	const STAT_TECH
 	const STAT_ATTACK
 	const STAT_DEFENSE
 	const STAT_SPEED
 	const STAT_SPECIAL
 DEF NUM_STATS EQU const_value
+
+; stats that can be raised/lowered by stat modifiers in battle
+; (Attack, Defense, Speed, Special: every stat except HP and TP)
+DEF NUM_MODIFIED_STATS EQU NUM_STATS - 2
 
 ; StatModTextStrings indexes (see data/battle/stat_mod_names.asm)
 	const_def
@@ -29,7 +34,7 @@ DEF MOVE_EFFECT rb
 DEF MOVE_POWER  rb
 DEF MOVE_TYPE   rb
 DEF MOVE_ACC    rb
-DEF MOVE_PP     rb
+DEF MOVE_TP     rb ; TP cost
 DEF MOVE_LENGTH EQU _RS
 
 ; D733 flags

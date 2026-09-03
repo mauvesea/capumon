@@ -389,7 +389,7 @@ wAnimPalette:: db
 NEXTU
 	ds 60
 ; temporary buffer when swapping party mon data
-wSwitchPartyMonTempBuffer:: ds 44 ; party_struct size
+wSwitchPartyMonTempBuffer:: ds 46 ; party_struct size
 
 NEXTU
 	ds 120
@@ -516,6 +516,7 @@ wInGameTradeReceiveMonSpecies:: db
 NEXTU
 wPlayerMonUnmodifiedLevel:: db
 wPlayerMonUnmodifiedMaxHP:: dw
+wPlayerMonUnmodifiedMaxTP:: dw
 wPlayerMonUnmodifiedAttack:: dw
 wPlayerMonUnmodifiedDefense:: dw
 wPlayerMonUnmodifiedSpeed:: dw
@@ -538,6 +539,7 @@ wPlayerMonStatModsEnd::
 
 wEnemyMonUnmodifiedLevel:: db
 wEnemyMonUnmodifiedMaxHP:: dw
+wEnemyMonUnmodifiedMaxTP:: dw
 wEnemyMonUnmodifiedAttack:: dw
 wEnemyMonUnmodifiedDefense:: dw
 wEnemyMonUnmodifiedSpeed:: dw
@@ -816,7 +818,7 @@ wTempSCX::
 ; which entry from TradeMons to select
 wWhichTrade::
 wDexMaxSeenMon::
-wPPRestoreItem::
+wTPRestoreItem::
 wWereAnyMonsAsleep::
 wNumShakes::
 wWhichBadge::
@@ -890,12 +892,9 @@ wEvosMovesEnd::
 
 NEXTU
 	ds 4
-; temp variable used to print a move's current PP on the status screen
-wStatusScreenCurrentPP:: db
-	ds 6
-; list of normal max PP (without PP up) values
-wNormalMaxPPList:: ds NUM_MOVES
-	ds 5
+; temp variable used to print a move's TP cost on the status screen
+wStatusScreenMoveTPCost:: db
+	ds 15
 ENDU
 
 UNION
@@ -1150,13 +1149,13 @@ wEnemyMoveEffect:: db
 wEnemyMovePower:: db
 wEnemyMoveType:: db
 wEnemyMoveAccuracy:: db
-wEnemyMoveMaxPP:: db
+wEnemyMoveTPCost:: db
 wPlayerMoveNum:: db
 wPlayerMoveEffect:: db
 wPlayerMovePower:: db
 wPlayerMoveType:: db
 wPlayerMoveAccuracy:: db
-wPlayerMoveMaxPP:: db
+wPlayerMoveTPCost:: db
 
 wEnemyMonSpecies2:: db
 wBattleMonSpecies2:: db
@@ -1518,6 +1517,7 @@ wMonHeader::
 wMonHIndex:: db
 wMonHBaseStats::
 wMonHBaseHP:: db
+wMonHBaseTP:: db
 wMonHBaseAttack:: db
 wMonHBaseDefense:: db
 wMonHBaseSpeed:: db
@@ -1576,8 +1576,6 @@ wPokeBallCaptureCalcTemp::
 ; lower nybble: number of shakes
 ; upper nybble: number of animations to play
 wPokeBallAnimData::
-wUsingPPUp::
-wMaxPP::
 ; 0 for player, non-zero for enemy
 wCalculateWhoseStats::
 wTypeEffectiveness::

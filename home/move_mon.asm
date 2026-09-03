@@ -30,7 +30,7 @@ AddPartyMon::
 	pop hl
 	ret
 
-; calculates all 5 stats of current mon and writes them to [de]
+; calculates all stats of current mon and writes them to [de]
 CalcStats::
 	ld c, $0
 .statsLoop
@@ -48,7 +48,7 @@ CalcStats::
 	ret
 
 ; calculates stat c of current mon
-; c: stat to calc (HP=1,Atk=2,Def=3,Spd=4,Spc=5)
+; c: stat to calc (HP=1,TP=2,Atk=3,Def=4,Spd=5,Spc=6)
 ; b: consider stat exp?
 ; hl: base ptr to stat exp values ([hl + 2*c - 1] and [hl + 2*c])
 CalcStat::
@@ -98,14 +98,15 @@ CalcStat::
 	add hl, bc
 	pop bc
 	ld a, c
-	cp $2
+	cp STAT_ATTACK + 1
 	jr z, .getAttackIV
-	cp $3
+	cp STAT_DEFENSE + 1
 	jr z, .getDefenseIV
-	cp $4
+	cp STAT_SPEED + 1
 	jr z, .getSpeedIV
-	cp $5
+	cp STAT_SPECIAL + 1
 	jr z, .getSpecialIV
+; HP and TP share the same DV
 .getHpIV
 	push bc
 	ld a, [hl]  ; Atk IV
@@ -187,9 +188,9 @@ CalcStat::
 	ld b, a
 	call Divide             ; (((Base + IV) * 2 + ceil(Sqrt(stat exp)) / 4) * Level) / 100
 	ld a, c
-	cp $1
-	ld a, 5 ; + 5 for non-HP stat
-	jr nz, .notHPStat
+	cp STAT_ATTACK + 1
+	ld a, 5 ; + 5 for non-HP/TP stat
+	jr nc, .notHPStat ; HP (1) and TP (2) use the same formula
 	ld a, [wCurEnemyLVL]
 	ld b, a
 	ldh a, [hMultiplicand+2]
@@ -200,7 +201,7 @@ CalcStat::
 	inc a
 	ldh [hMultiplicand+1], a ; HP: (((Base + IV) * 2 + ceil(Sqrt(stat exp)) / 4) * Level) / 100 + Level
 .noCarry3
-	ld a, 10 ; +10 for HP stat
+	ld a, 10 ; +10 for HP/TP stat
 .notHPStat
 	ld b, a
 	ldh a, [hMultiplicand+2]
@@ -208,7 +209,7 @@ CalcStat::
 	ldh [hMultiplicand+2], a
 	jr nc, .noCarry4
 	ldh a, [hMultiplicand+1]
-	inc a                    ; non-HP: (((Base + IV) * 2 + ceil(Sqrt(stat exp)) / 4) * Level) / 100 + 5
+	inc a                    ; non-HP/TP: (((Base + IV) * 2 + ceil(Sqrt(stat exp)) / 4) * Level) / 100 + 5
 	ldh [hMultiplicand+1], a ; HP: (((Base + IV) * 2 + ceil(Sqrt(stat exp)) / 4) * Level) / 100 + Level + 10
 .noCarry4
 	ldh a, [hMultiplicand+1] ; check for overflow (>999)
@@ -225,6 +226,29 @@ CalcStat::
 	ld a, LOW(MAX_STAT_VALUE)
 	ldh [hMultiplicand+2], a
 .noOverflow
+	pop bc
+	pop de
+	pop hl
+	ret
+
+; Returns the TP cost of move a in a.
+; Returns 0 if a is NO_MOVE.
+; Preserves bc, de and hl.
+GetMoveTPCost::
+	and a
+	ret z
+	push hl
+	push de
+	push bc
+	dec a
+	ld hl, Moves + MOVE_TP
+	ld bc, MOVE_LENGTH
+	call AddNTimes
+	ld a, BANK(Moves)
+	call BankswitchHome
+	ld b, [hl]
+	call BankswitchBack
+	ld a, b
 	pop bc
 	pop de
 	pop hl

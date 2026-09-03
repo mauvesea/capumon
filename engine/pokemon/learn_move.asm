@@ -38,21 +38,6 @@ DontAbandonLearning:
 .next
 	ld a, [wMoveNum]
 	ld [hl], a
-	ld bc, wPartyMon1PP - wPartyMon1Moves
-	add hl, bc
-	push hl
-	push de
-	dec a
-	ld hl, Moves
-	ld bc, MOVE_LENGTH
-	call AddNTimes
-	ld de, wBuffer
-	ld a, BANK(Moves)
-	call FarCopyData
-	ld a, [wBuffer + 5] ; a = move's max PP
-	pop de
-	pop hl
-	ld [hl], a
 	ld a, [wIsInBattle]
 	and a
 	jp z, PrintLearnedMove
@@ -64,11 +49,6 @@ DontAbandonLearning:
 	ld h, d
 	ld l, e
 	ld de, wBattleMonMoves
-	ld bc, NUM_MOVES
-	call CopyData
-	ld bc, wPartyMon1PP - wPartyMon1OTID
-	add hl, bc
-	ld de, wBattleMonPP
 	ld bc, NUM_MOVES
 	call CopyData
 	jp PrintLearnedMove

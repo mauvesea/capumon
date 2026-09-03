@@ -95,11 +95,11 @@ ItemUsePtrTable:
 	dw ItemUseOldRod     ; OLD_ROD
 	dw ItemUseGoodRod    ; GOOD_ROD
 	dw ItemUseSuperRod   ; SUPER_ROD
-	dw ItemUsePPUp       ; PP_UP (real one)
-	dw ItemUsePPRestore  ; ETHER
-	dw ItemUsePPRestore  ; MAX_ETHER
-	dw ItemUsePPRestore  ; ELIXER
-	dw ItemUsePPRestore  ; MAX_ELIXER
+	dw ItemUseVitamin    ; PP_UP (TP UP)
+	dw ItemUseTPRestore  ; ETHER
+	dw ItemUseTPRestore  ; MAX_ETHER
+	dw ItemUseTPRestore  ; ELIXER
+	dw ItemUseTPRestore  ; MAX_ELIXER
 
 ItemUseBall:
 
@@ -844,6 +844,22 @@ ItemUseEvoStone:
 	pop af
 	ret
 
+; Returns the stat a vitamin raises: 1 = HP, 2 = TP, 3 = Attack, and so on.
+; a = item id
+GetVitaminStat:
+	cp PP_UP
+	jr z, .techPoints
+	sub HP_UP
+	jr z, .hitPoints
+	add STAT_ATTACK ; PROTEIN/IRON/CARBOS/CALCIUM -> Attack/Defense/Speed/Special
+	ret
+.hitPoints
+	ld a, STAT_HEALTH + 1
+	ret
+.techPoints
+	ld a, STAT_TECH + 1
+	ret
+
 ItemUseVitamin:
 	ld a, [wIsInBattle]
 	and a
@@ -903,6 +919,8 @@ ItemUseMedicine:
 	jr z, ItemUseMedicine ; if so, force another choice
 .checkItemType
 	ld a, [wcf91]
+	cp PP_UP
+	jp z, .useVitamin ; TP UP raises the TP stat like the other vitamins
 	cp REVIVE
 	jr nc, .healHP ; if it's a Revive or Max Revive
 	cp FULL_HEAL
@@ -1318,8 +1336,9 @@ ItemUseMedicine:
 	cp RARE_CANDY
 	jp z, .useRareCandy
 	push hl
-	sub HP_UP
-	add a
+	call GetVitaminStat
+	dec a
+	add a ; a = offset of the stat's stat exp MSB
 	ld bc, wPartyMon1HPExp - wPartyMon1
 	add hl, bc
 	add l
@@ -1341,7 +1360,7 @@ ItemUseMedicine:
 	call .recalculateStats
 	ld hl, VitaminStats
 	ld a, [wcf91]
-	sub HP_UP - 1
+	call GetVitaminStat
 	ld c, a
 .statNameLoop ; loop to get the address of the name of the stat the vitamin increases
 	dec c
@@ -1408,6 +1427,14 @@ ItemUseMedicine:
 	push af
 	push de
 	push hl
+	ld bc, wPartyMon1MaxTP - wPartyMon1
+	add hl, bc ; hl now points to MSB of max TP
+	ld a, [hli]
+	ld b, a
+	ld c, [hl]
+	pop hl
+	push bc ; save the max TP from before leveling up
+	push hl
 	ld bc, wPartyMon1MaxHP - wPartyMon1
 	add hl, bc ; hl now points to MSB of max HP
 	ld a, [hli]
@@ -1430,6 +1457,26 @@ ItemUseMedicine:
 ; add the amount gained to the current HP
 	ld de, (wPartyMon1HP + 1) - wPartyMon1MaxHP
 	add hl, de ; hl now points to LSB of current HP
+	ld a, [hl]
+	add c
+	ld [hld], a
+	ld a, [hl]
+	adc b
+	ld [hl], a ; hl now points to MSB of current HP
+; do the same for TP
+	pop bc ; bc = the max TP from before leveling up
+	push hl
+	ld de, (wPartyMon1MaxTP + 1) - wPartyMon1HP
+	add hl, de ; hl now points to LSB of max TP
+	ld a, [hld]
+	sub c
+	ld c, a
+	ld a, [hl]
+	sbc b
+	ld b, a ; bc = the amount of max TP gained from leveling up
+	pop hl
+	ld de, (wPartyMon1TP + 1) - wPartyMon1HP
+	add hl, de ; hl now points to LSB of current TP
 	ld a, [hl]
 	add c
 	ld [hld], a
@@ -1987,177 +2034,42 @@ ItemfinderFoundNothingText:
 	text_far _ItemfinderFoundNothingText
 	text_end
 
-ItemUsePPUp:
-	ld a, [wIsInBattle]
-	and a
-	jp nz, ItemUseNotTime
-
-ItemUsePPRestore:
+ItemUseTPRestore:
+; Ether and Elixer restore 10 TP; Max Ether and Max Elixer restore all of it.
 	ld a, [wWhichPokemon]
 	push af
 	ld a, [wcf91]
-	ld [wPPRestoreItem], a
-.chooseMon
+	ld [wTPRestoreItem], a
 	xor a
 	ld [wUpdateSpritesEnabled], a
 	ld a, USE_ITEM_PARTY_MENU
 	ld [wPartyMenuTypeOrMessageID], a
 	call DisplayPartyMenu
-	jr nc, .chooseMove
-	jp .itemNotUsed
-.chooseMove
-	ld a, [wPPRestoreItem]
-	cp ELIXER
-	jp nc, .useElixir ; if Elixir or Max Elixir
-	ld a, $02
-	ld [wMoveMenuType], a
-	ld hl, RaisePPWhichTechniqueText
-	ld a, [wPPRestoreItem]
-	cp ETHER ; is it a PP Up?
-	jr c, .printWhichTechniqueMessage ; if so, print the raise PP message
-	ld hl, RestorePPWhichTechniqueText ; otherwise, print the restore PP message
-.printWhichTechniqueMessage
-	call PrintText
-	xor a
-	ld [wPlayerMoveListIndex], a
-	callfar MoveSelectionMenu ; move selection menu
-	ld a, 0
-	ld [wPlayerMoveListIndex], a
-	jr nz, .chooseMon
-	ld hl, wPartyMon1Moves
+	jr c, .itemNotUsed
+	call .restoreTP
+	jr z, .noEffect
+; if the mon is the one out in battle, update the battle data too
+	ld a, [wWhichPokemon]
+	ld b, a
+	ld a, [wPlayerMonNumber]
+	cp b
+	jr nz, .skipUpdatingInBattleData
+	ld hl, wPartyMon1TP
 	ld bc, wPartyMon2 - wPartyMon1
-	call GetSelectedMoveOffset
-	push hl
-	ld a, [hl]
-	ld [wd11e], a
-	call GetMoveName
-	call CopyToStringBuffer
-	pop hl
-	ld a, [wPPRestoreItem]
-	cp ETHER
-	jr nc, .useEther ; if Ether or Max Ether
-.usePPUp
-	ld bc, wPartyMon1PP - wPartyMon1Moves
-	add hl, bc
-	ld a, [hl] ; move PP
-	cp 3 << 6 ; have 3 PP Ups already been used?
-	jr c, .PPNotMaxedOut
-	ld hl, PPMaxedOutText
+	call AddNTimes
+	ld de, wBattleMonTP
+	ld bc, 2
+	call CopyData
+.skipUpdatingInBattleData
+	ld a, SFX_HEAL_AILMENT
+	call PlaySound
+	ld hl, TPRestoredText
 	call PrintText
-	jr .chooseMove
-.PPNotMaxedOut
-	ld a, [hl]
-	add 1 << 6 ; increase PP Up count by 1
-	ld [hl], a
-	ld a, 1 ; 1 PP Up used
-	ld [wd11e], a
-	call RestoreBonusPP ; add the bonus PP to current PP
-	ld hl, PPIncreasedText
-	call PrintText
-.done
 	pop af
 	ld [wWhichPokemon], a
 	call GBPalWhiteOut
 	call RunDefaultPaletteCommand
 	jp RemoveUsedItem
-.afterRestoringPP ; after using a (Max) Ether/Elixir
-	ld a, [wWhichPokemon]
-	ld b, a
-	ld a, [wPlayerMonNumber]
-	cp b ; is the pokemon whose PP was restored active in battle?
-	jr nz, .skipUpdatingInBattleData
-	ld hl, wPartyMon1PP
-	ld bc, wPartyMon2 - wPartyMon1
-	call AddNTimes
-	ld de, wBattleMonPP
-	ld bc, 4
-	call CopyData ; copy party data to in-battle data
-.skipUpdatingInBattleData
-	ld a, SFX_HEAL_AILMENT
-	call PlaySound
-	ld hl, PPRestoredText
-	call PrintText
-	jr .done
-.useEther
-	call .restorePP
-	jr nz, .afterRestoringPP
-	jp .noEffect
-; unsets zero flag if PP was restored, sets zero flag if not
-; however, this is bugged for Max Ethers and Max Elixirs (see below)
-.restorePP
-	xor a ; PLAYER_PARTY_DATA
-	ld [wMonDataLocation], a
-	call GetMaxPP
-	ld hl, wPartyMon1Moves
-	ld bc, wPartyMon2 - wPartyMon1
-	call GetSelectedMoveOffset
-	ld bc, wPartyMon1PP - wPartyMon1Moves
-	add hl, bc ; hl now points to move's PP
-	ld a, [wMaxPP]
-	ld b, a
-	ld a, [wPPRestoreItem]
-	cp MAX_ETHER
-	jr z, .fullyRestorePP
-	ld a, [hl] ; move PP
-	and %00111111 ; lower 6 bit bits store current PP
-	cp b ; does current PP equal max PP?
-	ret z ; if so, return
-	add 10 ; increase current PP by 10
-; b holds the max PP amount and b will hold the new PP amount.
-; So, if the new amount meets or exceeds the max amount,
-; cap the amount to the max amount by leaving b unchanged.
-; Otherwise, store the new amount in b.
-	cp b ; does the new amount meet or exceed the maximum?
-	jr nc, .storeNewAmount
-	ld b, a
-.storeNewAmount
-	ld a, [hl] ; move PP
-	and %11000000 ; PP Up counter bits
-	add b
-	ld [hl], a
-	ret
-.fullyRestorePP
-	ld a, [hl] ; move PP
-; Note that this code has a bug. It doesn't mask out the upper two bits, which
-; are used to count how many PP Ups have been used on the move. So, Max Ethers
-; and Max Elixirs will not be detected as having no effect on a move with full
-; PP if the move has had any PP Ups used on it.
-	cp b ; does current PP equal max PP?
-	ret z
-	jr .storeNewAmount
-.useElixir
-; decrement the item ID so that ELIXER becomes ETHER and MAX_ELIXER becomes MAX_ETHER
-	ld hl, wPPRestoreItem
-	dec [hl]
-	dec [hl]
-	xor a
-	ld hl, wCurrentMenuItem
-	ld [hli], a
-	ld [hl], a ; zero the counter for number of moves that had their PP restored
-	ld b, 4
-; loop through each move and restore PP
-.elixirLoop
-	push bc
-	ld hl, wPartyMon1Moves
-	ld bc, wPartyMon2 - wPartyMon1
-	call GetSelectedMoveOffset
-	ld a, [hl]
-	and a ; does the current slot have a move?
-	jr z, .nextMove
-	call .restorePP
-	jr z, .nextMove
-; if some PP was restored
-	ld hl, wTileBehindCursor ; counter for number of moves that had their PP restored
-	inc [hl]
-.nextMove
-	ld hl, wCurrentMenuItem
-	inc [hl]
-	pop bc
-	dec b
-	jr nz, .elixirLoop
-	ld a, [wTileBehindCursor]
-	and a ; did any moves have their PP restored?
-	jp nz, .afterRestoringPP
 .noEffect
 	call ItemUseNoEffect
 .itemNotUsed
@@ -2168,24 +2080,70 @@ ItemUsePPRestore:
 	ld [wActionResultOrTookBattleTurn], a ; item use failed
 	ret
 
-RaisePPWhichTechniqueText:
-	text_far _RaisePPWhichTechniqueText
-	text_end
+; Restores the TP of the mon at [wWhichPokemon].
+; Sets the zero flag if the mon was already at full TP.
+.restoreTP
+	ld hl, wPartyMons
+	ld bc, wPartyMon2 - wPartyMon1
+	ld a, [wWhichPokemon]
+	call AddNTimes
+	push hl
+	ld bc, wPartyMon1MaxTP - wPartyMon1
+	add hl, bc
+	ld a, [hli]
+	ld b, a
+	ld c, [hl] ; bc = max TP
+	pop hl
+	ld de, wPartyMon1TP - wPartyMon1
+	add hl, de
+	ld a, [hli]
+	ld d, a
+	ld e, [hl]
+	dec hl     ; hl = current TP, de = current TP value
+	ld a, d
+	cp b
+	jr nz, .notFull
+	ld a, e
+	cp c
+	jr nz, .notFull
+	xor a ; already at full TP
+	ret
+.notFull
+	ld a, [wTPRestoreItem]
+	cp MAX_ETHER
+	jr z, .fullyRestoreTP
+	cp MAX_ELIXER
+	jr z, .fullyRestoreTP
+	ld a, e
+	add TP_RESTORE_AMOUNT
+	ld e, a
+	jr nc, .cap
+	inc d
+.cap
+	ld a, b
+	cp d
+	jr c, .fullyRestoreTP ; new TP is above max TP
+	jr nz, .storeNewTP
+	ld a, c
+	cp e
+	jr c, .fullyRestoreTP
+.storeNewTP
+	ld a, d
+	ld [hli], a
+	ld [hl], e
+	ld a, $1
+	and a ; clear z
+	ret
+.fullyRestoreTP
+	ld a, b
+	ld [hli], a
+	ld [hl], c
+	ld a, $1
+	and a ; clear z
+	ret
 
-RestorePPWhichTechniqueText:
-	text_far _RestorePPWhichTechniqueText
-	text_end
-
-PPMaxedOutText:
-	text_far _PPMaxedOutText
-	text_end
-
-PPIncreasedText:
-	text_far _PPIncreasedText
-	text_end
-
-PPRestoredText:
-	text_far _PPRestoredText
+TPRestoredText:
+	text_far _TPRestoredText
 	text_end
 
 ; for items that can't be used from the Item menu
@@ -2420,162 +2378,6 @@ GotOffBicycleText:
 	text_low
 	text_far _GotOffBicycleText2
 	text_end
-
-; restores bonus PP (from PP Ups) when healing at a pokemon center
-; also, when a PP Up is used, it increases the current PP by one PP Up bonus
-; INPUT:
-; [wWhichPokemon] = index of pokemon in party
-; [wCurrentMenuItem] = index of move (when using a PP Up)
-RestoreBonusPP:
-	ld hl, wPartyMon1Moves
-	ld bc, wPartyMon2 - wPartyMon1
-	ld a, [wWhichPokemon]
-	call AddNTimes
-	push hl
-	ld de, wNormalMaxPPList - 1
-	predef LoadMovePPs ; loads the normal max PP of each of the pokemon's moves to wNormalMaxPPList
-	pop hl
-	ld c, wPartyMon1PP - wPartyMon1Moves
-	ld b, 0
-	add hl, bc ; hl now points to move 1 PP
-	ld de, wNormalMaxPPList
-	ld b, 0 ; initialize move counter to zero
-; loop through the pokemon's moves
-.loop
-	inc b
-	ld a, b
-	cp 5 ; reached the end of the pokemon's moves?
-	ret z ; if so, return
-	ld a, [wUsingPPUp]
-	dec a ; using a PP Up?
-	jr nz, .skipMenuItemIDCheck
-; if using a PP Up, check if this is the move it's being used on
-	ld a, [wCurrentMenuItem]
-	inc a
-	cp b
-	jr nz, .nextMove
-.skipMenuItemIDCheck
-	ld a, [hl]
-	and %11000000 ; have any PP Ups been used?
-	call nz, AddBonusPP ; if so, add bonus PP
-.nextMove
-	inc hl
-	inc de
-	jr .loop
-
-; adds bonus PP from PP Ups to current PP
-; 1/5 of normal max PP (capped at 7) is added for each PP Up
-; INPUT:
-; [de] = normal max PP
-; [hl] = move PP
-AddBonusPP:
-	push bc
-	ld a, [de] ; normal max PP of move
-	ldh [hDividend + 3], a
-	xor a
-	ldh [hDividend], a
-	ldh [hDividend + 1], a
-	ldh [hDividend + 2], a
-	ld a, 5
-	ldh [hDivisor], a
-	ld b, 4
-	call Divide
-	ld a, [hl] ; move PP
-	ld b, a
-	swap a
-	and %00001111
-	srl a
-	srl a
-	ld c, a ; c = number of PP Ups used
-.loop
-	ldh a, [hQuotient + 3]
-	cp 8 ; is the amount greater than or equal to 8?
-	jr c, .addAmount
-	ld a, 7 ; cap the amount at 7
-.addAmount
-	add b
-	ld b, a
-	ld a, [wUsingPPUp]
-	dec a ; is the player using a PP Up right now?
-	jr z, .done ; if so, only add the bonus once
-	dec c
-	jr nz, .loop
-.done
-	ld [hl], b
-	pop bc
-	ret
-
-; gets max PP of a pokemon's move (including PP from PP Ups)
-; INPUT:
-; [wWhichPokemon] = index of pokemon within party/box
-; [wMonDataLocation] = pokemon source
-; 00: player's party
-; 01: enemy's party
-; 02: current box
-; 03: daycare
-; 04: player's in-battle pokemon
-; [wCurrentMenuItem] = move index
-; OUTPUT:
-; [wMaxPP] = max PP
-GetMaxPP:
-	ld a, [wMonDataLocation]
-	and a
-	ld hl, wPartyMon1Moves
-	ld bc, wPartyMon2 - wPartyMon1
-	jr z, .sourceWithMultipleMon
-	ld hl, wEnemyMon1Moves
-	dec a
-	jr z, .sourceWithMultipleMon
-	ld hl, wBoxMon1Moves
-	ld bc, wBoxMon2 - wBoxMon1
-	dec a
-	jr z, .sourceWithMultipleMon
-	ld hl, wDayCareMonMoves
-	dec a
-	jr z, .sourceWithOneMon
-	ld hl, wBattleMonMoves ; player's in-battle pokemon
-.sourceWithOneMon
-	call GetSelectedMoveOffset2
-	jr .next
-.sourceWithMultipleMon
-	call GetSelectedMoveOffset
-.next
-	ld a, [hl]
-	dec a
-	push hl
-	ld hl, Moves
-	ld bc, MOVE_LENGTH
-	call AddNTimes
-	ld de, wcd6d
-	ld a, BANK(Moves)
-	call FarCopyData
-	ld de, wcd6d + 5 ; PP is byte 5 of move data
-	ld a, [de]
-	ld b, a ; b = normal max PP
-	pop hl
-	push bc
-	ld bc, wPartyMon1PP - wPartyMon1Moves ; PP offset if not player's in-battle pokemon data
-	ld a, [wMonDataLocation]
-	cp 4 ; player's in-battle pokemon?
-	jr nz, .addPPOffset
-	ld bc, wBattleMonPP - wBattleMonMoves ; PP offset if player's in-battle pokemon data
-.addPPOffset
-	add hl, bc
-	ld a, [hl] ; a = current PP
-	and %11000000 ; get PP Up count
-	pop bc
-	or b ; place normal max PP in 6 lower bits of a
-	ld h, d
-	ld l, e
-	inc hl ; hl = wcd73
-	ld [hl], a
-	xor a ; add the bonus for the existing PP Up count
-	ld [wUsingPPUp], a
-	call AddBonusPP ; add bonus PP from PP Ups
-	ld a, [hl]
-	and %00111111 ; mask out the PP Up count
-	ld [wMaxPP], a ; store max PP
-	ret
 
 GetSelectedMoveOffset:
 	ld a, [wWhichPokemon]
@@ -2853,14 +2655,6 @@ SendNewMonToBox:
 	inc de
 	ld a, [hli]
 	ld [de], a
-	ld hl, wEnemyMonPP
-	ld b, NUM_MOVES
-.loop6
-	ld a, [hli]
-	inc de
-	ld [de], a
-	dec b
-	jr nz, .loop6
 	ret
 
 ; checks if the tile in front of the player is a shore or water tile

@@ -200,7 +200,31 @@ Evolution_PartyMonLoop: ; loop over party mons
 	ld a, [hl]
 	adc b
 	ld [hl], a
-	dec hl
+; add the max TP gained by evolving to the current TP as well
+	push de
+	ld h, d
+	ld l, e
+	ld bc, wPartyMon1MaxTP - wPartyMon1
+	add hl, bc
+	ld a, [hli]
+	ld b, a
+	ld c, [hl] ; bc = max TP from before evolving
+	ld hl, wLoadedMonMaxTP + 1
+	ld a, [hld]
+	sub c
+	ld c, a
+	ld a, [hl]
+	sbc b
+	ld b, a ; bc = max TP gained by evolving
+	ld hl, wLoadedMonTP + 1
+	ld a, [hl]
+	add c
+	ld [hld], a
+	ld a, [hl]
+	adc b
+	ld [hl], a
+	pop de
+	ld hl, wLoadedMon
 	pop bc
 	call CopyData
 	ld a, [wd0b5]
@@ -449,45 +473,10 @@ WriteMonMoves:
 	ld h, d
 	ld l, e
 	call WriteMonMoves_ShiftMoveData ; shift all moves one up (deleting move 1)
-	ld a, [wLearningMovesFromDayCare]
-	and a
-	jr z, .writeMoveToSlot
-
-; shift PP as well if learning moves from day care
-	push de
-	ld bc, wPartyMon1PP - (wPartyMon1Moves + 3)
-	add hl, bc
-	ld d, h
-	ld e, l
-	call WriteMonMoves_ShiftMoveData ; shift all move PP data one up
-	pop de
-
-.writeMoveToSlot
 	pop hl
 .writeMoveToSlot2
 	ld a, [hl]
 	ld [de], a
-	ld a, [wLearningMovesFromDayCare]
-	and a
-	jr z, .nextMove
-
-; write move PP value if learning moves from day care
-	push hl
-	ld a, [hl]
-	ld hl, wPartyMon1PP - wPartyMon1Moves
-	add hl, de
-	push hl
-	dec a
-	ld hl, Moves
-	ld bc, MOVE_LENGTH
-	call AddNTimes
-	ld de, wBuffer
-	ld a, BANK(Moves)
-	call FarCopyData
-	ld a, [wBuffer + 5]
-	pop hl
-	ld [hl], a
-	pop hl
 	jr .nextMove
 
 .done
