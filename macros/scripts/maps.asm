@@ -90,8 +90,9 @@ ENDM
 ;\1 event flag
 ;\2 view range
 ;\3 TextBeforeBattle
-;\4 TextAfterBattle
-;\5 TextEndBattle
+;\4 TextEndBattle
+;\5 TextAfterBattle
+;\6 InBattleScript (run when TALK is picked from the pre-battle menu)
 MACRO trainer
 	DEF _ev_bit = \1 % 8
 	DEF _cur_bit = CURRENT_TRAINER_BIT % 8
@@ -100,8 +101,27 @@ MACRO trainer
 	db CURRENT_TRAINER_BIT
 	db \2 << 4
 	dw wEventFlags + (\1 - CURRENT_TRAINER_BIT) / 8
-	dw \3, \5, \4, \4
+	dw \3, \5, \4, \4, \6
 	DEF CURRENT_TRAINER_BIT += 1
+ENDM
+
+; The script a trainer runs when the player picks TALK in the pre-battle menu.
+; This is the placeholder every trainer starts with: it offers a draw, and
+; starts the fight if the player turns the offer down. Each trainer gets its
+; own copy so it can be replaced with something specific to that trainer.
+;\1 label to define for this trainer's script
+;\2 optional: the text to print instead of the default one
+MACRO default_in_battle_script
+\1:
+	ld hl, .Text
+	jp DefaultInBattleTalk
+.Text
+	IF _NARG > 1
+	text_far \2
+	ELSE
+	text_far _DefaultInBattleTalkText
+	ENDC
+	text_end
 ENDM
 
 ;\1 x position

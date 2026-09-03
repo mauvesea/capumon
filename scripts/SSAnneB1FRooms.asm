@@ -28,17 +28,17 @@ SSAnneB1FRooms_TextPointers:
 SSAnne10TrainerHeaders:
 	def_trainers
 SSAnne10TrainerHeader0:
-	trainer EVENT_BEAT_SS_ANNE_10_TRAINER_0, 2, SSAnne10BattleText1, SSAnne10EndBattleText1, SSAnne10AfterBattleText1
+	trainer EVENT_BEAT_SS_ANNE_10_TRAINER_0, 2, SSAnne10BattleText1, SSAnne10EndBattleText1, SSAnne10AfterBattleText1, SSAnneB1FRoomsInBattleScript0
 SSAnne10TrainerHeader1:
-	trainer EVENT_BEAT_SS_ANNE_10_TRAINER_1, 3, SSAnne10BattleText2, SSAnne10EndBattleText2, SSAnne10AfterBattleText2
+	trainer EVENT_BEAT_SS_ANNE_10_TRAINER_1, 3, SSAnne10BattleText2, SSAnne10EndBattleText2, SSAnne10AfterBattleText2, SSAnneB1FRoomsInBattleScript1
 SSAnne10TrainerHeader2:
-	trainer EVENT_BEAT_SS_ANNE_10_TRAINER_2, 2, SSAnne10BattleText3, SSAnne10EndBattleText3, SSAnne10AfterBattleText3
+	trainer EVENT_BEAT_SS_ANNE_10_TRAINER_2, 2, SSAnne10BattleText3, SSAnne10EndBattleText3, SSAnne10AfterBattleText3, SSAnneB1FRoomsInBattleScript2
 SSAnne10TrainerHeader3:
-	trainer EVENT_BEAT_SS_ANNE_10_TRAINER_3, 2, SSAnne10BattleText4, SSAnne10EndBattleText4, SSAnne10AfterBattleText4
+	trainer EVENT_BEAT_SS_ANNE_10_TRAINER_3, 2, SSAnne10BattleText4, SSAnne10EndBattleText4, SSAnne10AfterBattleText4, SSAnneB1FRoomsInBattleScript3
 SSAnne10TrainerHeader4:
-	trainer EVENT_BEAT_SS_ANNE_10_TRAINER_4, 2, SSAnne10BattleText5, SSAnne10EndBattleText5, SSAnne10AfterBattleText5
+	trainer EVENT_BEAT_SS_ANNE_10_TRAINER_4, 2, SSAnne10BattleText5, SSAnne10EndBattleText5, SSAnne10AfterBattleText5, SSAnneB1FRoomsInBattleScript4
 SSAnne10TrainerHeader5:
-	trainer EVENT_BEAT_SS_ANNE_10_TRAINER_5, 3, SSAnne10BattleText6, SSAnne10EndBattleText6, SSAnne10AfterBattleText6
+	trainer EVENT_BEAT_SS_ANNE_10_TRAINER_5, 3, SSAnne10BattleText6, SSAnne10EndBattleText6, SSAnne10AfterBattleText6, SSAnneB1FRoomsInBattleScript5
 	db -1 ; end
 
 SSAnne10Text1:
@@ -159,3 +159,12 @@ SSAnne10AfterBattleText6:
 SSAnne10Text7:
 	text_far _SSAnne10Text7
 	text_end
+
+; Pre-battle TALK scripts. Every trainer gets its own copy of the default
+; placeholder so it can be replaced with something specific to them.
+	default_in_battle_script SSAnneB1FRoomsInBattleScript0
+	default_in_battle_script SSAnneB1FRoomsInBattleScript1
+	default_in_battle_script SSAnneB1FRoomsInBattleScript2
+	default_in_battle_script SSAnneB1FRoomsInBattleScript3
+	default_in_battle_script SSAnneB1FRoomsInBattleScript4
+	default_in_battle_script SSAnneB1FRoomsInBattleScript5

@@ -122,7 +122,7 @@ LoreleisRoom_TextPointers:
 LoreleisRoomTrainerHeaders:
 	def_trainers
 LoreleisRoomTrainerHeader0:
-	trainer EVENT_BEAT_LORELEIS_ROOM_TRAINER_0, 0, LoreleiBeforeBattleText, LoreleiEndBattleText, LoreleiAfterBattleText
+	trainer EVENT_BEAT_LORELEIS_ROOM_TRAINER_0, 0, LoreleiBeforeBattleText, LoreleiEndBattleText, LoreleiAfterBattleText, LoreleisRoomInBattleScript0
 	db -1 ; end
 
 LoreleiText1:
@@ -146,3 +146,7 @@ LoreleiAfterBattleText:
 LoreleiDontRunAwayText:
 	text_far _LoreleiDontRunAwayText
 	text_end
+
+; Pre-battle TALK scripts. Every trainer gets its own copy of the default
+; placeholder so it can be replaced with something specific to them.
+	default_in_battle_script LoreleisRoomInBattleScript0

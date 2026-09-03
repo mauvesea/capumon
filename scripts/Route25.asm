@@ -56,23 +56,23 @@ Route25_TextPointers:
 Route25TrainerHeaders:
 	def_trainers
 Route25TrainerHeader0:
-	trainer EVENT_BEAT_ROUTE_25_TRAINER_0, 2, Route25BattleText1, Route25EndBattleText1, Route25AfterBattleText1
+	trainer EVENT_BEAT_ROUTE_25_TRAINER_0, 2, Route25BattleText1, Route25EndBattleText1, Route25AfterBattleText1, Route25InBattleScript0
 Route25TrainerHeader1:
-	trainer EVENT_BEAT_ROUTE_25_TRAINER_1, 3, Route25BattleText2, Route25EndBattleText2, Route25AfterBattleText2
+	trainer EVENT_BEAT_ROUTE_25_TRAINER_1, 3, Route25BattleText2, Route25EndBattleText2, Route25AfterBattleText2, Route25InBattleScript1
 Route25TrainerHeader2:
-	trainer EVENT_BEAT_ROUTE_25_TRAINER_2, 3, Route25BattleText3, Route25EndBattleText3, Route25AfterBattleText3
+	trainer EVENT_BEAT_ROUTE_25_TRAINER_2, 3, Route25BattleText3, Route25EndBattleText3, Route25AfterBattleText3, Route25InBattleScript2
 Route25TrainerHeader3:
-	trainer EVENT_BEAT_ROUTE_25_TRAINER_3, 2, Route25BattleText4, Route25EndBattleText4, Route25AfterBattleText4
+	trainer EVENT_BEAT_ROUTE_25_TRAINER_3, 2, Route25BattleText4, Route25EndBattleText4, Route25AfterBattleText4, Route25InBattleScript3
 Route25TrainerHeader4:
-	trainer EVENT_BEAT_ROUTE_25_TRAINER_4, 4, Route25BattleText5, Route25EndBattleText5, Route25AfterBattleText5
+	trainer EVENT_BEAT_ROUTE_25_TRAINER_4, 4, Route25BattleText5, Route25EndBattleText5, Route25AfterBattleText5, Route25InBattleScript4
 Route25TrainerHeader5:
-	trainer EVENT_BEAT_ROUTE_25_TRAINER_5, 4, Route25BattleText6, Route25EndBattleText6, Route25AfterBattleText6
+	trainer EVENT_BEAT_ROUTE_25_TRAINER_5, 4, Route25BattleText6, Route25EndBattleText6, Route25AfterBattleText6, Route25InBattleScript5
 Route25TrainerHeader6:
-	trainer EVENT_BEAT_ROUTE_25_TRAINER_6, 3, Route25BattleText7, Route25EndBattleText7, Route25AfterBattleText7
+	trainer EVENT_BEAT_ROUTE_25_TRAINER_6, 3, Route25BattleText7, Route25EndBattleText7, Route25AfterBattleText7, Route25InBattleScript6
 Route25TrainerHeader7:
-	trainer EVENT_BEAT_ROUTE_25_TRAINER_7, 2, Route25BattleText8, Route25EndBattleText8, Route25AfterBattleText8
+	trainer EVENT_BEAT_ROUTE_25_TRAINER_7, 2, Route25BattleText8, Route25EndBattleText8, Route25AfterBattleText8, Route25InBattleScript7
 Route25TrainerHeader8:
-	trainer EVENT_BEAT_ROUTE_25_TRAINER_8, 2, Route25BattleText9, Route25EndBattleText9, Route25AfterBattleText9
+	trainer EVENT_BEAT_ROUTE_25_TRAINER_8, 2, Route25BattleText9, Route25EndBattleText9, Route25AfterBattleText9, Route25InBattleScript8
 	db -1 ; end
 
 Route25Text1:
@@ -240,3 +240,15 @@ Route25AfterBattleText9:
 Route25Text11:
 	text_far _Route25Text11
 	text_end
+
+; Pre-battle TALK scripts. Every trainer gets its own copy of the default
+; placeholder so it can be replaced with something specific to them.
+	default_in_battle_script Route25InBattleScript0
+	default_in_battle_script Route25InBattleScript1
+	default_in_battle_script Route25InBattleScript2
+	default_in_battle_script Route25InBattleScript3
+	default_in_battle_script Route25InBattleScript4
+	default_in_battle_script Route25InBattleScript5
+	default_in_battle_script Route25InBattleScript6
+	default_in_battle_script Route25InBattleScript7
+	default_in_battle_script Route25InBattleScript8

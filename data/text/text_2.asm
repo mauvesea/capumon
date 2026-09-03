@@ -954,6 +954,25 @@ _GotAwayText::
 	text "Got away safely!"
 	prompt
 
+_GiveUpText::
+	text "Giving up already?"
+
+	para "You'll lose half"
+	line "the money you're"
+	cont "carrying!"
+
+	para "Do you really"
+	line "want to quit?"
+	done
+
+_DefaultInBattleTalkText::
+	text "Hey, we don't"
+	line "have to do this."
+
+	para "How about we call"
+	line "it a draw?"
+	done
+
 _ItemsCantBeUsedHereText::
 	text "Items can't be"
 	line "used here."

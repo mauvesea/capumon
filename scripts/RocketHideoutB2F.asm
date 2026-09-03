@@ -279,7 +279,7 @@ RocketHideoutB2F_TextPointers:
 RocketHideout2TrainerHeaders:
 	def_trainers
 RocketHideout2TrainerHeader0:
-	trainer EVENT_BEAT_ROCKET_HIDEOUT_2_TRAINER_0, 4, RocketHideout2BattleText2, RocketHideout2EndBattleText2, RocketHideout2AfterBattleTxt2
+	trainer EVENT_BEAT_ROCKET_HIDEOUT_2_TRAINER_0, 4, RocketHideout2BattleText2, RocketHideout2EndBattleText2, RocketHideout2AfterBattleTxt2, RocketHideoutB2FInBattleScript0
 	db -1 ; end
 
 RocketHideout2Text1:
@@ -299,3 +299,7 @@ RocketHideout2EndBattleText2:
 RocketHideout2AfterBattleTxt2:
 	text_far _RocketHideout2AfterBattleTxt2
 	text_end
+
+; Pre-battle TALK scripts. Every trainer gets its own copy of the default
+; placeholder so it can be replaced with something specific to them.
+	default_in_battle_script RocketHideoutB2FInBattleScript0

@@ -28,25 +28,25 @@ Route19_TextPointers:
 Route19TrainerHeaders:
 	def_trainers
 Route19TrainerHeader0:
-	trainer EVENT_BEAT_ROUTE_19_TRAINER_0, 4, Route19BattleText1, Route19EndBattleText1, Route19AfterBattleText1
+	trainer EVENT_BEAT_ROUTE_19_TRAINER_0, 4, Route19BattleText1, Route19EndBattleText1, Route19AfterBattleText1, Route19InBattleScript0
 Route19TrainerHeader1:
-	trainer EVENT_BEAT_ROUTE_19_TRAINER_1, 3, Route19BattleText2, Route19EndBattleText2, Route19AfterBattleText2
+	trainer EVENT_BEAT_ROUTE_19_TRAINER_1, 3, Route19BattleText2, Route19EndBattleText2, Route19AfterBattleText2, Route19InBattleScript1
 Route19TrainerHeader2:
-	trainer EVENT_BEAT_ROUTE_19_TRAINER_2, 3, Route19BattleText3, Route19EndBattleText3, Route19AfterBattleText3
+	trainer EVENT_BEAT_ROUTE_19_TRAINER_2, 3, Route19BattleText3, Route19EndBattleText3, Route19AfterBattleText3, Route19InBattleScript2
 Route19TrainerHeader3:
-	trainer EVENT_BEAT_ROUTE_19_TRAINER_3, 4, Route19BattleText4, Route19EndBattleText4, Route19AfterBattleText4
+	trainer EVENT_BEAT_ROUTE_19_TRAINER_3, 4, Route19BattleText4, Route19EndBattleText4, Route19AfterBattleText4, Route19InBattleScript3
 Route19TrainerHeader4:
-	trainer EVENT_BEAT_ROUTE_19_TRAINER_4, 4, Route19BattleText5, Route19EndBattleText5, Route19AfterBattleText5
+	trainer EVENT_BEAT_ROUTE_19_TRAINER_4, 4, Route19BattleText5, Route19EndBattleText5, Route19AfterBattleText5, Route19InBattleScript4
 Route19TrainerHeader5:
-	trainer EVENT_BEAT_ROUTE_19_TRAINER_5, 4, Route19BattleText6, Route19EndBattleText6, Route19AfterBattleText6
+	trainer EVENT_BEAT_ROUTE_19_TRAINER_5, 4, Route19BattleText6, Route19EndBattleText6, Route19AfterBattleText6, Route19InBattleScript5
 Route19TrainerHeader6:
-	trainer EVENT_BEAT_ROUTE_19_TRAINER_6, 3, Route19BattleText7, Route19EndBattleText7, Route19AfterBattleText7
+	trainer EVENT_BEAT_ROUTE_19_TRAINER_6, 3, Route19BattleText7, Route19EndBattleText7, Route19AfterBattleText7, Route19InBattleScript6
 Route19TrainerHeader7:
-	trainer EVENT_BEAT_ROUTE_19_TRAINER_7, 4, Route19BattleText8, Route19EndBattleText8, Route19AfterBattleText8
+	trainer EVENT_BEAT_ROUTE_19_TRAINER_7, 4, Route19BattleText8, Route19EndBattleText8, Route19AfterBattleText8, Route19InBattleScript7
 Route19TrainerHeader8:
-	trainer EVENT_BEAT_ROUTE_19_TRAINER_8, 4, Route19BattleText9, Route19EndBattleText9, Route19AfterBattleText9
+	trainer EVENT_BEAT_ROUTE_19_TRAINER_8, 4, Route19BattleText9, Route19EndBattleText9, Route19AfterBattleText9, Route19InBattleScript8
 Route19TrainerHeader9:
-	trainer EVENT_BEAT_ROUTE_19_TRAINER_9, 4, Route19BattleText10, Route19EndBattleText10, Route19AfterBattleText10
+	trainer EVENT_BEAT_ROUTE_19_TRAINER_9, 4, Route19BattleText10, Route19EndBattleText10, Route19AfterBattleText10, Route19InBattleScript9
 	db -1 ; end
 
 Route19Text1:
@@ -232,3 +232,16 @@ Route19AfterBattleText10:
 Route19Text11:
 	text_far _Route19Text11
 	text_end
+
+; Pre-battle TALK scripts. Every trainer gets its own copy of the default
+; placeholder so it can be replaced with something specific to them.
+	default_in_battle_script Route19InBattleScript0
+	default_in_battle_script Route19InBattleScript1
+	default_in_battle_script Route19InBattleScript2
+	default_in_battle_script Route19InBattleScript3
+	default_in_battle_script Route19InBattleScript4
+	default_in_battle_script Route19InBattleScript5
+	default_in_battle_script Route19InBattleScript6
+	default_in_battle_script Route19InBattleScript7
+	default_in_battle_script Route19InBattleScript8
+	default_in_battle_script Route19InBattleScript9

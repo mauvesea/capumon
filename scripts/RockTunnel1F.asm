@@ -25,19 +25,19 @@ RockTunnel1F_TextPointers:
 RockTunnel1TrainerHeaders:
 	def_trainers
 RockTunnel1TrainerHeader0:
-	trainer EVENT_BEAT_ROCK_TUNNEL_1_TRAINER_0, 4, RockTunnel1BattleText1, RockTunnel1EndBattleText1, RockTunnel1AfterBattleText1
+	trainer EVENT_BEAT_ROCK_TUNNEL_1_TRAINER_0, 4, RockTunnel1BattleText1, RockTunnel1EndBattleText1, RockTunnel1AfterBattleText1, RockTunnel1FInBattleScript0
 RockTunnel1TrainerHeader1:
-	trainer EVENT_BEAT_ROCK_TUNNEL_1_TRAINER_1, 4, RockTunnel1BattleText2, RockTunnel1EndBattleText2, RockTunnel1AfterBattleText2
+	trainer EVENT_BEAT_ROCK_TUNNEL_1_TRAINER_1, 4, RockTunnel1BattleText2, RockTunnel1EndBattleText2, RockTunnel1AfterBattleText2, RockTunnel1FInBattleScript1
 RockTunnel1TrainerHeader2:
-	trainer EVENT_BEAT_ROCK_TUNNEL_1_TRAINER_2, 3, RockTunnel1BattleText3, RockTunnel1EndBattleText3, RockTunnel1AfterBattleText3
+	trainer EVENT_BEAT_ROCK_TUNNEL_1_TRAINER_2, 3, RockTunnel1BattleText3, RockTunnel1EndBattleText3, RockTunnel1AfterBattleText3, RockTunnel1FInBattleScript2
 RockTunnel1TrainerHeader3:
-	trainer EVENT_BEAT_ROCK_TUNNEL_1_TRAINER_3, 3, RockTunnel1BattleText4, RockTunnel1EndBattleText4, RockTunnel1AfterBattleText4
+	trainer EVENT_BEAT_ROCK_TUNNEL_1_TRAINER_3, 3, RockTunnel1BattleText4, RockTunnel1EndBattleText4, RockTunnel1AfterBattleText4, RockTunnel1FInBattleScript3
 RockTunnel1TrainerHeader4:
-	trainer EVENT_BEAT_ROCK_TUNNEL_1_TRAINER_4, 4, RockTunnel1BattleText5, RockTunnel1EndBattleText5, RockTunnel1AfterBattleText5
+	trainer EVENT_BEAT_ROCK_TUNNEL_1_TRAINER_4, 4, RockTunnel1BattleText5, RockTunnel1EndBattleText5, RockTunnel1AfterBattleText5, RockTunnel1FInBattleScript4
 RockTunnel1TrainerHeader5:
-	trainer EVENT_BEAT_ROCK_TUNNEL_1_TRAINER_5, 4, RockTunnel1BattleText6, RockTunnel1EndBattleText6, RockTunnel1AfterBattleText6
+	trainer EVENT_BEAT_ROCK_TUNNEL_1_TRAINER_5, 4, RockTunnel1BattleText6, RockTunnel1EndBattleText6, RockTunnel1AfterBattleText6, RockTunnel1FInBattleScript5
 RockTunnel1TrainerHeader6:
-	trainer EVENT_BEAT_ROCK_TUNNEL_1_TRAINER_6, 4, RockTunnel1BattleText7, RockTunnel1EndBattleText7, RockTunnel1AfterBattleText7
+	trainer EVENT_BEAT_ROCK_TUNNEL_1_TRAINER_6, 4, RockTunnel1BattleText7, RockTunnel1EndBattleText7, RockTunnel1AfterBattleText7, RockTunnel1FInBattleScript6
 	db -1 ; end
 
 RockTunnel1Text1:
@@ -164,3 +164,13 @@ RockTunnel1AfterBattleText7:
 RockTunnel1Text8:
 	text_far _RockTunnel1Text8
 	text_end
+
+; Pre-battle TALK scripts. Every trainer gets its own copy of the default
+; placeholder so it can be replaced with something specific to them.
+	default_in_battle_script RockTunnel1FInBattleScript0
+	default_in_battle_script RockTunnel1FInBattleScript1
+	default_in_battle_script RockTunnel1FInBattleScript2
+	default_in_battle_script RockTunnel1FInBattleScript3
+	default_in_battle_script RockTunnel1FInBattleScript4
+	default_in_battle_script RockTunnel1FInBattleScript5
+	default_in_battle_script RockTunnel1FInBattleScript6

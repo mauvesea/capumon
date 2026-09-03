@@ -86,13 +86,13 @@ SilphCo5F_TextPointers:
 SilphCo5TrainerHeaders:
 	def_trainers 2
 SilphCo5TrainerHeader0:
-	trainer EVENT_BEAT_SILPH_CO_5F_TRAINER_0, 1, SilphCo5BattleText2, SilphCo5EndBattleText2, SilphCo5AfterBattleText2
+	trainer EVENT_BEAT_SILPH_CO_5F_TRAINER_0, 1, SilphCo5BattleText2, SilphCo5EndBattleText2, SilphCo5AfterBattleText2, SilphCo5FInBattleScript0
 SilphCo5TrainerHeader1:
-	trainer EVENT_BEAT_SILPH_CO_5F_TRAINER_1, 2, SilphCo5BattleText3, SilphCo5EndBattleText3, SilphCo5AfterBattleText3
+	trainer EVENT_BEAT_SILPH_CO_5F_TRAINER_1, 2, SilphCo5BattleText3, SilphCo5EndBattleText3, SilphCo5AfterBattleText3, SilphCo5FInBattleScript1
 SilphCo5TrainerHeader2:
-	trainer EVENT_BEAT_SILPH_CO_5F_TRAINER_2, 4, SilphCo5BattleText4, SilphCo5EndBattleText4, SilphCo5AfterBattleText4
+	trainer EVENT_BEAT_SILPH_CO_5F_TRAINER_2, 4, SilphCo5BattleText4, SilphCo5EndBattleText4, SilphCo5AfterBattleText4, SilphCo5FInBattleScript2
 SilphCo5TrainerHeader3:
-	trainer EVENT_BEAT_SILPH_CO_5F_TRAINER_3, 3, SilphCo5BattleText5, SilphCo5EndBattleText5, SilphCo5AfterBattleText5
+	trainer EVENT_BEAT_SILPH_CO_5F_TRAINER_3, 3, SilphCo5BattleText5, SilphCo5EndBattleText5, SilphCo5AfterBattleText5, SilphCo5FInBattleScript3
 	db -1 ; end
 
 SilphCo5Text1:
@@ -193,3 +193,10 @@ SilphCo5Text10:
 SilphCo5Text11:
 	text_far _SilphCo5Text11
 	text_end
+
+; Pre-battle TALK scripts. Every trainer gets its own copy of the default
+; placeholder so it can be replaced with something specific to them.
+	default_in_battle_script SilphCo5FInBattleScript0
+	default_in_battle_script SilphCo5FInBattleScript1
+	default_in_battle_script SilphCo5FInBattleScript2
+	default_in_battle_script SilphCo5FInBattleScript3

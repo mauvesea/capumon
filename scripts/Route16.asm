@@ -77,17 +77,17 @@ Route16_TextPointers:
 Route16TrainerHeaders:
 	def_trainers
 Route16TrainerHeader0:
-	trainer EVENT_BEAT_ROUTE_16_TRAINER_0, 3, Route16BattleText1, Route16EndBattleText1, Route16AfterBattleText1
+	trainer EVENT_BEAT_ROUTE_16_TRAINER_0, 3, Route16BattleText1, Route16EndBattleText1, Route16AfterBattleText1, Route16InBattleScript0
 Route16TrainerHeader1:
-	trainer EVENT_BEAT_ROUTE_16_TRAINER_1, 2, Route16BattleText2, Route16EndBattleText2, Route16AfterBattleText2
+	trainer EVENT_BEAT_ROUTE_16_TRAINER_1, 2, Route16BattleText2, Route16EndBattleText2, Route16AfterBattleText2, Route16InBattleScript1
 Route16TrainerHeader2:
-	trainer EVENT_BEAT_ROUTE_16_TRAINER_2, 2, Route16BattleText3, Route16EndBattleText3, Route16AfterBattleText3
+	trainer EVENT_BEAT_ROUTE_16_TRAINER_2, 2, Route16BattleText3, Route16EndBattleText3, Route16AfterBattleText3, Route16InBattleScript2
 Route16TrainerHeader3:
-	trainer EVENT_BEAT_ROUTE_16_TRAINER_3, 2, Route16BattleText4, Route16EndBattleText4, Route16AfterBattleText4
+	trainer EVENT_BEAT_ROUTE_16_TRAINER_3, 2, Route16BattleText4, Route16EndBattleText4, Route16AfterBattleText4, Route16InBattleScript3
 Route16TrainerHeader4:
-	trainer EVENT_BEAT_ROUTE_16_TRAINER_4, 2, Route16BattleText5, Route16EndBattleText5, Route16AfterBattleText5
+	trainer EVENT_BEAT_ROUTE_16_TRAINER_4, 2, Route16BattleText5, Route16EndBattleText5, Route16AfterBattleText5, Route16InBattleScript4
 Route16TrainerHeader5:
-	trainer EVENT_BEAT_ROUTE_16_TRAINER_5, 4, Route16BattleText6, Route16EndBattleText6, Route16AfterBattleText6
+	trainer EVENT_BEAT_ROUTE_16_TRAINER_5, 4, Route16BattleText6, Route16EndBattleText6, Route16AfterBattleText6, Route16InBattleScript5
 	db -1 ; end
 
 Route16Text1:
@@ -217,3 +217,12 @@ Route16Text8:
 Route16Text9:
 	text_far _Route16Text9
 	text_end
+
+; Pre-battle TALK scripts. Every trainer gets its own copy of the default
+; placeholder so it can be replaced with something specific to them.
+	default_in_battle_script Route16InBattleScript0
+	default_in_battle_script Route16InBattleScript1
+	default_in_battle_script Route16InBattleScript2
+	default_in_battle_script Route16InBattleScript3
+	default_in_battle_script Route16InBattleScript4
+	default_in_battle_script Route16InBattleScript5

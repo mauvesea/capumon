@@ -1695,6 +1695,9 @@ wPlayerName:: ds NAME_LENGTH
 ; scratch byte used when printing a move's TP cost
 wMoveTPCostBuffer:: db
 
+; what the pre-battle menu decided to do (see PREBATTLE_ACTION_* constants)
+wPrebattleAction:: db
+
 ; how much the mon in wLoadedMon is worth, in money
 ; set by CalcMonValue (see engine/pokemon/status_screen.asm)
 wMonValue::    ds 3 ; binary, big endian

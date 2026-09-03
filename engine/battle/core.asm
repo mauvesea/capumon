@@ -1128,6 +1128,25 @@ ChooseNextMon:
 	or [hl]
 	ret
 
+; Faints every mon in the player's party. Used when the player gives up in the
+; pre-battle menu, so that the rest of the game treats it as a lost battle.
+; The party is healed again by ResetStatusAndHalveMoneyOnBlackout.
+FaintPlayerParty:
+	ld a, [wPartyCount]
+	and a
+	ret z
+	ld b, a
+	ld hl, wPartyMon1HP
+	ld de, wPartyMon2 - wPartyMon1
+.loop
+	xor a
+	ld [hli], a
+	ld [hld], a
+	add hl, de
+	dec b
+	jr nz, .loop
+	ret
+
 ; called when player is out of usable mons.
 ; prints appropriate lose message, sets carry flag if player blacked out (special case for initial rival fight)
 HandlePlayerBlackOut::
@@ -7003,7 +7022,26 @@ _InitBattleCommon:
 	ld a, [wIsInBattle]
 	dec a ; is it a wild battle?
 	call z, DrawEnemyHUDAndHPBar ; draw enemy HUD and HP bar if it's a wild battle
+	ld a, [wPrebattleAction]
+	cp PREBATTLE_ACTION_DRAW
+	jr z, .calledItADraw
+	cp PREBATTLE_ACTION_GIVE_UP
+	jr z, .playerGaveUp
 	call StartBattle
+	jr .battleOver
+.playerGaveUp
+; giving up counts as a loss, so wipe the party out and black the player out
+; the same way running out of usable mons would
+	call FaintPlayerParty
+	ld a, $1 ; lost
+	ld [wBattleResult], a
+	call HandlePlayerBlackOut
+	jr .battleOver
+.calledItADraw
+; the battle never happens, so no prize money is handed out
+	ld a, $2 ; draw
+	ld [wBattleResult], a
+.battleOver
 	callfar EndOfBattle
 	pop af
 	ld [wLetterPrintingDelayFlags], a

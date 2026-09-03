@@ -28,25 +28,25 @@ Route11_TextPointers:
 Route11TrainerHeaders:
 	def_trainers
 Route11TrainerHeader0:
-	trainer EVENT_BEAT_ROUTE_11_TRAINER_0, 3, Route11BattleText1, Route11EndBattleText1, Route11AfterBattleText1
+	trainer EVENT_BEAT_ROUTE_11_TRAINER_0, 3, Route11BattleText1, Route11EndBattleText1, Route11AfterBattleText1, Route11InBattleScript0
 Route11TrainerHeader1:
-	trainer EVENT_BEAT_ROUTE_11_TRAINER_1, 2, Route11BattleText2, Route11EndBattleText2, Route11AfterBattleText2
+	trainer EVENT_BEAT_ROUTE_11_TRAINER_1, 2, Route11BattleText2, Route11EndBattleText2, Route11AfterBattleText2, Route11InBattleScript1
 Route11TrainerHeader2:
-	trainer EVENT_BEAT_ROUTE_11_TRAINER_2, 3, Route11BattleText3, Route11EndBattleText3, Route11AfterBattleText3
+	trainer EVENT_BEAT_ROUTE_11_TRAINER_2, 3, Route11BattleText3, Route11EndBattleText3, Route11AfterBattleText3, Route11InBattleScript2
 Route11TrainerHeader3:
-	trainer EVENT_BEAT_ROUTE_11_TRAINER_3, 3, Route11BattleText4, Route11EndBattleText4, Route11AfterBattleText4
+	trainer EVENT_BEAT_ROUTE_11_TRAINER_3, 3, Route11BattleText4, Route11EndBattleText4, Route11AfterBattleText4, Route11InBattleScript3
 Route11TrainerHeader4:
-	trainer EVENT_BEAT_ROUTE_11_TRAINER_4, 4, Route11BattleText5, Route11EndBattleText5, Route11AfterBattleText5
+	trainer EVENT_BEAT_ROUTE_11_TRAINER_4, 4, Route11BattleText5, Route11EndBattleText5, Route11AfterBattleText5, Route11InBattleScript4
 Route11TrainerHeader5:
-	trainer EVENT_BEAT_ROUTE_11_TRAINER_5, 3, Route11BattleText6, Route11EndBattleText6, Route11AfterBattleText6
+	trainer EVENT_BEAT_ROUTE_11_TRAINER_5, 3, Route11BattleText6, Route11EndBattleText6, Route11AfterBattleText6, Route11InBattleScript5
 Route11TrainerHeader6:
-	trainer EVENT_BEAT_ROUTE_11_TRAINER_6, 3, Route11BattleText7, Route11EndBattleText7, Route11AfterBattleText7
+	trainer EVENT_BEAT_ROUTE_11_TRAINER_6, 3, Route11BattleText7, Route11EndBattleText7, Route11AfterBattleText7, Route11InBattleScript6
 Route11TrainerHeader7:
-	trainer EVENT_BEAT_ROUTE_11_TRAINER_7, 4, Route11BattleText8, Route11EndBattleText8, Route11AfterBattleText8
+	trainer EVENT_BEAT_ROUTE_11_TRAINER_7, 4, Route11BattleText8, Route11EndBattleText8, Route11AfterBattleText8, Route11InBattleScript7
 Route11TrainerHeader8:
-	trainer EVENT_BEAT_ROUTE_11_TRAINER_8, 3, Route11BattleText9, Route11EndBattleText9, Route11AfterBattleText9
+	trainer EVENT_BEAT_ROUTE_11_TRAINER_8, 3, Route11BattleText9, Route11EndBattleText9, Route11AfterBattleText9, Route11InBattleScript8
 Route11TrainerHeader9:
-	trainer EVENT_BEAT_ROUTE_11_TRAINER_9, 4, Route11BattleText10, Route11EndBattleText10, Route11AfterBattleText10
+	trainer EVENT_BEAT_ROUTE_11_TRAINER_9, 4, Route11BattleText10, Route11EndBattleText10, Route11AfterBattleText10, Route11InBattleScript9
 	db -1 ; end
 
 Route11Text1:
@@ -232,3 +232,16 @@ Route11AfterBattleText10:
 Route11Text11:
 	text_far _Route11Text11
 	text_end
+
+; Pre-battle TALK scripts. Every trainer gets its own copy of the default
+; placeholder so it can be replaced with something specific to them.
+	default_in_battle_script Route11InBattleScript0
+	default_in_battle_script Route11InBattleScript1
+	default_in_battle_script Route11InBattleScript2
+	default_in_battle_script Route11InBattleScript3
+	default_in_battle_script Route11InBattleScript4
+	default_in_battle_script Route11InBattleScript5
+	default_in_battle_script Route11InBattleScript6
+	default_in_battle_script Route11InBattleScript7
+	default_in_battle_script Route11InBattleScript8
+	default_in_battle_script Route11InBattleScript9

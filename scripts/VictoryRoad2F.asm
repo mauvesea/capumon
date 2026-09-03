@@ -84,17 +84,17 @@ VictoryRoad2F_TextPointers:
 VictoryRoad2TrainerHeaders:
 	def_trainers
 VictoryRoad2TrainerHeader0:
-	trainer EVENT_BEAT_VICTORY_ROAD_2_TRAINER_0, 4, VictoryRoad2BattleText1, VictoryRoad2EndBattleText1, VictoryRoad2AfterBattleText1
+	trainer EVENT_BEAT_VICTORY_ROAD_2_TRAINER_0, 4, VictoryRoad2BattleText1, VictoryRoad2EndBattleText1, VictoryRoad2AfterBattleText1, VictoryRoad2FInBattleScript0
 VictoryRoad2TrainerHeader1:
-	trainer EVENT_BEAT_VICTORY_ROAD_2_TRAINER_1, 3, VictoryRoad2BattleText2, VictoryRoad2EndBattleText2, VictoryRoad2AfterBattleText2
+	trainer EVENT_BEAT_VICTORY_ROAD_2_TRAINER_1, 3, VictoryRoad2BattleText2, VictoryRoad2EndBattleText2, VictoryRoad2AfterBattleText2, VictoryRoad2FInBattleScript1
 VictoryRoad2TrainerHeader2:
-	trainer EVENT_BEAT_VICTORY_ROAD_2_TRAINER_2, 3, VictoryRoad2BattleText3, VictoryRoad2EndBattleText3, VictoryRoad2AfterBattleText3
+	trainer EVENT_BEAT_VICTORY_ROAD_2_TRAINER_2, 3, VictoryRoad2BattleText3, VictoryRoad2EndBattleText3, VictoryRoad2AfterBattleText3, VictoryRoad2FInBattleScript2
 VictoryRoad2TrainerHeader3:
-	trainer EVENT_BEAT_VICTORY_ROAD_2_TRAINER_3, 1, VictoryRoad2BattleText4, VictoryRoad2EndBattleText4, VictoryRoad2AfterBattleText4
+	trainer EVENT_BEAT_VICTORY_ROAD_2_TRAINER_3, 1, VictoryRoad2BattleText4, VictoryRoad2EndBattleText4, VictoryRoad2AfterBattleText4, VictoryRoad2FInBattleScript3
 VictoryRoad2TrainerHeader4:
-	trainer EVENT_BEAT_VICTORY_ROAD_2_TRAINER_4, 3, VictoryRoad2BattleText5, VictoryRoad2EndBattleText5, VictoryRoad2AfterBattleText5
+	trainer EVENT_BEAT_VICTORY_ROAD_2_TRAINER_4, 3, VictoryRoad2BattleText5, VictoryRoad2EndBattleText5, VictoryRoad2AfterBattleText5, VictoryRoad2FInBattleScript4
 MoltresTrainerHeader:
-	trainer EVENT_BEAT_MOLTRES, 0, MoltresBattleText, MoltresBattleText, MoltresBattleText
+	trainer EVENT_BEAT_MOLTRES, 0, MoltresBattleText, MoltresBattleText, MoltresBattleText, VictoryRoad2FInBattleScript5
 	db -1 ; end
 
 VictoryRoad2Text1:
@@ -200,3 +200,12 @@ VictoryRoad2EndBattleText5:
 VictoryRoad2AfterBattleText5:
 	text_far _VictoryRoad2AfterBattleText5
 	text_end
+
+; Pre-battle TALK scripts. Every trainer gets its own copy of the default
+; placeholder so it can be replaced with something specific to them.
+	default_in_battle_script VictoryRoad2FInBattleScript0
+	default_in_battle_script VictoryRoad2FInBattleScript1
+	default_in_battle_script VictoryRoad2FInBattleScript2
+	default_in_battle_script VictoryRoad2FInBattleScript3
+	default_in_battle_script VictoryRoad2FInBattleScript4
+	default_in_battle_script VictoryRoad2FInBattleScript5

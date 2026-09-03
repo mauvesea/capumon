@@ -22,11 +22,11 @@ Route18_TextPointers:
 Route18TrainerHeaders:
 	def_trainers
 Route18TrainerHeader0:
-	trainer EVENT_BEAT_ROUTE_18_TRAINER_0, 3, Route18BattleText1, Route18EndBattleText1, Route18AfterBattleText1
+	trainer EVENT_BEAT_ROUTE_18_TRAINER_0, 3, Route18BattleText1, Route18EndBattleText1, Route18AfterBattleText1, Route18InBattleScript0
 Route18TrainerHeader1:
-	trainer EVENT_BEAT_ROUTE_18_TRAINER_1, 3, Route18BattleText2, Route18EndBattleText2, Route18AfterBattleText2
+	trainer EVENT_BEAT_ROUTE_18_TRAINER_1, 3, Route18BattleText2, Route18EndBattleText2, Route18AfterBattleText2, Route18InBattleScript1
 Route18TrainerHeader2:
-	trainer EVENT_BEAT_ROUTE_18_TRAINER_2, 4, Route18BattleText3, Route18EndBattleText3, Route18AfterBattleText3
+	trainer EVENT_BEAT_ROUTE_18_TRAINER_2, 4, Route18BattleText3, Route18EndBattleText3, Route18AfterBattleText3, Route18InBattleScript2
 	db -1 ; end
 
 Route18Text1:
@@ -90,3 +90,9 @@ Route18Text4:
 Route18Text5:
 	text_far _Route18Text5
 	text_end
+
+; Pre-battle TALK scripts. Every trainer gets its own copy of the default
+; placeholder so it can be replaced with something specific to them.
+	default_in_battle_script Route18InBattleScript0
+	default_in_battle_script Route18InBattleScript1
+	default_in_battle_script Route18InBattleScript2

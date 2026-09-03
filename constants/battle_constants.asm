@@ -40,6 +40,14 @@ DEF MOVE_LENGTH EQU _RS
 ; D733 flags
 DEF BIT_TEST_BATTLE EQU 0
 
+; wPrebattleAction values
+; what the pre-battle menu (FIGHT/TOOL/TALK/RUN) decided should happen
+	const_def
+	const PREBATTLE_ACTION_MENU    ; 0 ; go back to the pre-battle menu
+	const PREBATTLE_ACTION_FIGHT   ; 1 ; start the battle as normal
+	const PREBATTLE_ACTION_DRAW    ; 2 ; call it a draw: no battle, no prize money
+	const PREBATTLE_ACTION_GIVE_UP ; 3 ; give up: counts as a loss
+
 ; battle type constants (wBattleType values)
 	const_def
 	const BATTLE_TYPE_NORMAL  ; 0

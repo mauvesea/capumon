@@ -142,7 +142,7 @@ SeafoamIslandsB4F_TextPointers:
 ; trainer headers were not stored by ExecuteCurMapScriptInTable.
 	def_trainers 2
 ArticunoTrainerHeader:
-	trainer EVENT_BEAT_ARTICUNO, 0, ArticunoBattleText, ArticunoBattleText, ArticunoBattleText
+	trainer EVENT_BEAT_ARTICUNO, 0, ArticunoBattleText, ArticunoBattleText, ArticunoBattleText, SeafoamIslandsB4FInBattleScript0
 	db -1 ; end
 
 ArticunoText:
@@ -168,3 +168,7 @@ SeafoamIslands5Text4:
 SeafoamIslands5Text5:
 	text_far _SeafoamIslands5Text5
 	text_end
+
+; Pre-battle TALK scripts. Every trainer gets its own copy of the default
+; placeholder so it can be replaced with something specific to them.
+	default_in_battle_script SeafoamIslandsB4FInBattleScript0

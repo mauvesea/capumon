@@ -120,7 +120,7 @@ BrunosRoom_TextPointers:
 BrunosRoomTrainerHeaders:
 	def_trainers
 BrunosRoomTrainerHeader0:
-	trainer EVENT_BEAT_BRUNOS_ROOM_TRAINER_0, 0, BrunoBeforeBattleText, BrunoEndBattleText, BrunoAfterBattleText
+	trainer EVENT_BEAT_BRUNOS_ROOM_TRAINER_0, 0, BrunoBeforeBattleText, BrunoEndBattleText, BrunoAfterBattleText, BrunosRoomInBattleScript0
 	db -1 ; end
 
 BrunoText1:
@@ -144,3 +144,7 @@ BrunoAfterBattleText:
 BrunoDontRunAwayText:
 	text_far _BrunoDontRunAwayText
 	text_end
+
+; Pre-battle TALK scripts. Every trainer gets its own copy of the default
+; placeholder so it can be replaced with something specific to them.
+	default_in_battle_script BrunosRoomInBattleScript0

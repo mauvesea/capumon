@@ -123,7 +123,7 @@ AgathasRoom_TextPointers:
 AgathasRoomTrainerHeaders:
 	def_trainers
 AgathasRoomTrainerHeader0:
-	trainer EVENT_BEAT_AGATHAS_ROOM_TRAINER_0, 0, AgathaBeforeBattleText, AgathaEndBattleText, AgathaAfterBattleText
+	trainer EVENT_BEAT_AGATHAS_ROOM_TRAINER_0, 0, AgathaBeforeBattleText, AgathaEndBattleText, AgathaAfterBattleText, AgathasRoomInBattleScript0
 	db -1 ; end
 
 AgathaText1:
@@ -147,3 +147,7 @@ AgathaAfterBattleText:
 AgathaDontRunAwayText:
 	text_far _AgathaDontRunAwayText
 	text_end
+
+; Pre-battle TALK scripts. Every trainer gets its own copy of the default
+; placeholder so it can be replaced with something specific to them.
+	default_in_battle_script AgathasRoomInBattleScript0

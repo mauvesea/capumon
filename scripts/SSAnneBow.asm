@@ -22,9 +22,9 @@ SSAnneBow_TextPointers:
 SSAnne5TrainerHeaders:
 	def_trainers 4
 SSAnne5TrainerHeader0:
-	trainer EVENT_BEAT_SS_ANNE_5_TRAINER_0, 3, SSAnne5BattleText1, SSAnne5EndBattleText1, SSAnne5AfterBattleText1
+	trainer EVENT_BEAT_SS_ANNE_5_TRAINER_0, 3, SSAnne5BattleText1, SSAnne5EndBattleText1, SSAnne5AfterBattleText1, SSAnneBowInBattleScript0
 SSAnne5TrainerHeader1:
-	trainer EVENT_BEAT_SS_ANNE_5_TRAINER_1, 3, SSAnne5BattleText2, SSAnne5EndBattleText2, SSAnne5AfterBattleText2
+	trainer EVENT_BEAT_SS_ANNE_5_TRAINER_1, 3, SSAnne5BattleText2, SSAnne5EndBattleText2, SSAnne5AfterBattleText2, SSAnneBowInBattleScript1
 	db -1 ; end
 
 SSAnne5Text1:
@@ -74,3 +74,8 @@ SSAnne5EndBattleText2:
 SSAnne5AfterBattleText2:
 	text_far _SSAnne5AfterBattleText2
 	text_end
+
+; Pre-battle TALK scripts. Every trainer gets its own copy of the default
+; placeholder so it can be replaced with something specific to them.
+	default_in_battle_script SSAnneBowInBattleScript0
+	default_in_battle_script SSAnneBowInBattleScript1

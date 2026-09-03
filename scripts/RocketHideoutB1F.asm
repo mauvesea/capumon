@@ -47,15 +47,15 @@ RocketHideoutB1F_TextPointers:
 RocketHideout1TrainerHeaders:
 	def_trainers
 RocketHideout1TrainerHeader0:
-	trainer EVENT_BEAT_ROCKET_HIDEOUT_1_TRAINER_0, 3, RocketHideout1BattleText2, RocketHideout1EndBattleText2, RocketHideout1AfterBattleTxt2
+	trainer EVENT_BEAT_ROCKET_HIDEOUT_1_TRAINER_0, 3, RocketHideout1BattleText2, RocketHideout1EndBattleText2, RocketHideout1AfterBattleTxt2, RocketHideoutB1FInBattleScript0
 RocketHideout1TrainerHeader1:
-	trainer EVENT_BEAT_ROCKET_HIDEOUT_1_TRAINER_1, 2, RocketHideout1BattleText3, RocketHideout1EndBattleText3, RocketHideout1AfterBattleTxt3
+	trainer EVENT_BEAT_ROCKET_HIDEOUT_1_TRAINER_1, 2, RocketHideout1BattleText3, RocketHideout1EndBattleText3, RocketHideout1AfterBattleTxt3, RocketHideoutB1FInBattleScript1
 RocketHideout1TrainerHeader2:
-	trainer EVENT_BEAT_ROCKET_HIDEOUT_1_TRAINER_2, 2, RocketHideout1BattleText4, RocketHideout1EndBattleText4, RocketHideout1AfterBattleTxt4
+	trainer EVENT_BEAT_ROCKET_HIDEOUT_1_TRAINER_2, 2, RocketHideout1BattleText4, RocketHideout1EndBattleText4, RocketHideout1AfterBattleTxt4, RocketHideoutB1FInBattleScript2
 RocketHideout1TrainerHeader3:
-	trainer EVENT_BEAT_ROCKET_HIDEOUT_1_TRAINER_3, 3, RocketHideout1BattleText5, RocketHideout1EndBattleText5, RocketHideout1AfterBattleTxt5
+	trainer EVENT_BEAT_ROCKET_HIDEOUT_1_TRAINER_3, 3, RocketHideout1BattleText5, RocketHideout1EndBattleText5, RocketHideout1AfterBattleTxt5, RocketHideoutB1FInBattleScript3
 RocketHideout1TrainerHeader4:
-	trainer EVENT_BEAT_ROCKET_HIDEOUT_1_TRAINER_4, 3, RocketHideout1BattleText6, RocketHideout1EndBattleText6, RocketHideout1AfterBattleTxt6
+	trainer EVENT_BEAT_ROCKET_HIDEOUT_1_TRAINER_4, 3, RocketHideout1BattleText6, RocketHideout1EndBattleText6, RocketHideout1AfterBattleTxt6, RocketHideoutB1FInBattleScript4
 	db -1 ; end
 
 RocketHideout1Text1:
@@ -154,3 +154,11 @@ RocketHideout1BattleText6:
 RocketHideout1AfterBattleTxt6:
 	text_far _RocketHideout1AfterBattleTxt6
 	text_end
+
+; Pre-battle TALK scripts. Every trainer gets its own copy of the default
+; placeholder so it can be replaced with something specific to them.
+	default_in_battle_script RocketHideoutB1FInBattleScript0
+	default_in_battle_script RocketHideoutB1FInBattleScript1
+	default_in_battle_script RocketHideoutB1FInBattleScript2
+	default_in_battle_script RocketHideoutB1FInBattleScript3
+	default_in_battle_script RocketHideoutB1FInBattleScript4
