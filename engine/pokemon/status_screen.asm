@@ -171,15 +171,28 @@ StatusScreen:
 	ld [wd11e], a
 	predef IndexToPokedex
 	ld a, [wd11e]
+	push af
+	ld a, [wLoadedMonSpecies]
 	ld b, a
-	ld hl, wLoadedMonMoves
-	ld c, NUM_MOVES
+	ld a, [wLoadedMonLevel]
+	ld c, a
+	ld a, b
+	ld b, c
+	callfar GetAvailableMoves
+	pop af
+	ld b, a
+	ld hl, wAvailableMoves
+	ld a, [wAvailableMoveCount]
+	ld c, a
+	and a
+	jr z, .noSignatureMove
 .findSignatureMove
 	ld a, [hli]
 	cp b
 	jr z, .knowsSignatureMove
 	dec c
 	jr nz, .findSignatureMove
+.noSignatureMove
 	hlcoord 11, 15
 	ld de, NoSignatureMoveText
 	call PlaceString
@@ -527,66 +540,16 @@ StatusScreen2:
 	xor a
 	ldh [hTileAnimations], a
 	ldh [hAutoBGTransferEnabled], a
-	ld bc, NUM_MOVES + 1
-	ld hl, wMoves
-	call FillMemory
-	ld hl, wLoadedMonMoves
-	ld de, wMoves
-	ld bc, NUM_MOVES
-	call CopyData
-	callfar FormatMovesString
-	hlcoord 0, 8
-	ld b, 8
-	ld c, 18
-	call TextBoxBorder ; Draw move container
-	hlcoord 2, 9
-	ld de, wMovesString
-	call PlaceString ; Print moves
-	ld a, [wNumMovesMinusOne]
-	inc a
+	ld a, [wLoadedMonSpecies]
+	ld b, a
+	ld a, [wLoadedMonLevel]
 	ld c, a
-	ld a, $4
-	sub c
-	ld b, a ; Number of moves ?
-	hlcoord 14, 9
-	ld de, SCREEN_WIDTH * 2
-	call StatusScreen_PrintTP ; Print "TP"
 	ld a, b
-	and a
-	jr z, .InitTP
-	ld c, a
-	ld a, "-"
-	call StatusScreen_PrintPlaceholder ; Fill the rest with --
-.InitTP
-	ld hl, wLoadedMonMoves
-	decoord 17, 9
-	ld b, 0
-.PrintTP
-	ld a, [hli]
-	and a
-	jr z, .TPDone
-	push bc
-	push hl
-	call GetMoveTPCost
-	ld [wMoveTPCostBuffer], a
-	ld h, d
-	ld l, e
-	push hl
-	ld de, wMoveTPCostBuffer
-	lb bc, 1, 2
-	call PrintNumber
-	pop hl
-	ld de, SCREEN_WIDTH * 2
-	add hl, de
-	ld d, h
-	ld e, l
-	pop hl
-	pop bc
-	inc b
-	ld a, b
-	cp NUM_MOVES
-	jr nz, .PrintTP
-.TPDone
+	ld b, c
+	callfar GetAvailableMoves
+	xor a
+	ld [wAvailableMoveOffset], a
+	call StatusScreen_DrawMoveList
 	hlcoord 7, 1
 	ld de, StatusScreenExpText
 	call PlaceString
@@ -624,7 +587,7 @@ StatusScreen2:
 	ld a, $1
 	ldh [hAutoBGTransferEnabled], a
 	call Delay3
-	call WaitForTextScrollButtonPress ; wait for button
+	call StatusScreen_MoveInput
 	pop af
 	ldh [hTileAnimations], a
 	ld hl, wd72c
@@ -633,6 +596,129 @@ StatusScreen2:
 	ldh [rNR50], a
 	call GBPalWhiteOut
 	jp ClearScreen
+
+
+; The four double-spaced rows show a window into the unlocked learnset.
+StatusScreen_DrawMoveList:
+	hlcoord 0, 8
+	ld b, 8
+	ld c, 18
+	call TextBoxBorder
+	ld a, [wAvailableMoveCount]
+	ld b, a
+	ld a, [wAvailableMoveOffset]
+	ld c, a
+	ld a, b
+	sub c
+	cp 4
+	jr c, .countReady
+	ld a, 4
+.countReady
+	ld [wAvailableMoveCursor], a ; number of visible rows
+	and a
+	ret z
+	ld a, [wAvailableMoveOffset]
+	ld c, a
+	ld b, 0
+	ld hl, wAvailableMoves
+	add hl, bc
+	ld b, 0
+.printRow
+	ld a, [hli]
+	push hl
+	push bc
+	ld [wd11e], a
+	call GetMoveName
+	pop bc
+	push bc
+	ld a, b
+	ld bc, SCREEN_WIDTH * 2
+	hlcoord 2, 9
+	call AddNTimes
+	call PlaceString
+	pop bc
+	pop hl
+	push hl
+	push bc
+	ld a, [wd11e]
+	call GetMoveTPCost
+	ld [wMoveTPCostBuffer], a
+	pop bc
+	push bc
+	ld a, b
+	ld bc, SCREEN_WIDTH * 2
+	hlcoord 12, 9
+	call AddNTimes
+	ld de, TPCostText
+	call PlaceString
+	pop bc
+	push bc
+	ld a, b
+	ld bc, SCREEN_WIDTH * 2
+	hlcoord 15, 9
+	call AddNTimes
+	ld de, wMoveTPCostBuffer
+	lb bc, 1, 3
+	call PrintNumber
+	pop bc
+	pop hl
+	inc b
+	ld a, [wAvailableMoveCursor]
+	cp b
+	jr nz, .printRow
+	ld a, [wAvailableMoveOffset]
+	and a
+	jr z, .checkDownArrow
+	hlcoord 18, 9
+	ld [hl], "▲"
+.checkDownArrow
+	ld a, [wAvailableMoveOffset]
+	ld b, a
+	ld a, [wAvailableMoveCursor]
+	add b
+	ld b, a
+	ld a, [wAvailableMoveCount]
+	cp b
+	ret z
+	hlcoord 18, 15
+	ld [hl], "▼"
+	ret
+
+StatusScreen_MoveInput:
+	call JoypadLowSensitivity
+	ldh a, [hJoy5]
+	bit BIT_D_DOWN, a
+	jr nz, .down
+	bit BIT_D_UP, a
+	jr nz, .up
+	and A_BUTTON | B_BUTTON
+	jr z, StatusScreen_MoveInput
+	ret
+.down
+	ld a, [wAvailableMoveOffset]
+	ld c, a
+	ld a, [wAvailableMoveCount]
+	sub 4
+	jr c, StatusScreen_MoveInput
+	cp c
+	jr z, StatusScreen_MoveInput
+	ld hl, wAvailableMoveOffset
+	inc [hl]
+	jr .redraw
+.up
+	ld hl, wAvailableMoveOffset
+	ld a, [hl]
+	and a
+	jr z, StatusScreen_MoveInput
+	dec [hl]
+.redraw
+	xor a
+	ldh [hAutoBGTransferEnabled], a
+	call StatusScreen_DrawMoveList
+	ld a, 1
+	ldh [hAutoBGTransferEnabled], a
+	call Delay3
+	jr StatusScreen_MoveInput
 
 CalcExpToLevelUp:
 	ld a, [wLoadedMonLevel]

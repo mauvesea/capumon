@@ -70,6 +70,10 @@ MimiEvosMoves:
 ; Evolutions
 	db 0
 ; Learnset
+	db 1, TACKLE
 	db 12, ROAR
+	db 22, POUND
 	db 32, MEGA_PUNCH
+	db 42, KARATE_CHOP
+	db 52, JUMP_KICK
 	db 0

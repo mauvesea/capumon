@@ -1547,7 +1547,12 @@ wMoves:: ds NUM_MOVES
 
 wMoveNum:: db
 
+; The regular move menus reuse the move-name scratch area as their ID list.
+wAvailableMoves::
 wMovesString:: ds 56
+wAvailableMoveCount:: db
+wAvailableMoveOffset:: db
+wAvailableMoveCursor:: db
 
 wUnusedD119:: db
 

@@ -388,12 +388,36 @@ LearnMoveFromLevelUp:
 	jr z, .done ; if already known, jump
 	dec b
 	jr nz, .checkCurrentMovesLoop
-	ld a, d
-	ld [wMoveNum], a
-	ld [wd11e], a
-	call GetMoveName
-	call CopyToStringBuffer
-	predef LearnMove
+; Saved slots remain for older mechanics. Fill an empty one, but never ask the
+; player to forget a move: the complete learnset is available from the table.
+	ld bc, -NUM_MOVES
+	add hl, bc
+	ld b, NUM_MOVES
+.findEmptySlot
+	ld a, [hl]
+	and a
+	jr z, .storeMove
+	inc hl
+	dec b
+	jr nz, .findEmptySlot
+	jr .done
+.storeMove
+	ld [hl], d
+	ld a, [wIsInBattle]
+	and a
+	jr z, .done
+	ld a, [wWhichPokemon]
+	ld b, a
+	ld a, [wPlayerMonNumber]
+	cp b
+	jr nz, .done
+	ld hl, wPartyMon1Moves
+	ld a, [wWhichPokemon]
+	ld bc, wPartyMon2 - wPartyMon1
+	call AddNTimes
+	ld de, wBattleMonMoves
+	ld bc, NUM_MOVES
+	call CopyData
 .done
 	ld a, [wcf91]
 	ld [wd11e], a
@@ -494,6 +518,55 @@ WriteMonMoves_ShiftMoveData:
 	ld [hli], a
 	dec c
 	jr nz, .loop
+	ret
+
+; Build the level-up move list for species a at level b. The table is kept in
+; learnset order, so saved four-move slots do not limit battle or status menus.
+GetAvailableMoves:
+	ld c, b
+	dec a
+	ld b, 0
+	add a
+	rl b
+	ld e, a
+	ld d, b
+	ld hl, EvosMovesPointerTable
+	add hl, de
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+.skipEvolutions
+	ld a, [hli]
+	and a
+	jr nz, .skipEvolutions
+	ld de, wAvailableMoves
+	ld b, 0
+.nextMove
+	ld a, [hli]
+	and a
+	jr z, .done
+	cp c
+	jr c, .available
+	jr z, .available
+	inc hl
+	jr .nextMove
+.available
+	ld a, [hli]
+	push af
+	ld a, b
+	cp 56
+	jr nc, .full
+	pop af
+	ld [de], a
+	inc de
+	inc b
+	jr .nextMove
+.full
+	pop af
+	jr .nextMove
+.done
+	ld a, b
+	ld [wAvailableMoveCount], a
 	ret
 
 Evolution_FlagAction:

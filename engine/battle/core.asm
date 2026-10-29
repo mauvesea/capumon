@@ -2529,6 +2529,13 @@ MoveSelectionMenu:
 	ret
 
 .regularmenu
+	ld a, [wLinkState]
+	cp LINK_STATE_BATTLING
+	jr z, .savedMovesMenu ; link exchange sends a four-slot move index
+	ld a, [wPlayerBattleStatus3]
+	bit TRANSFORMED, a
+	jp z, BattleFullMoveMenu
+.savedMovesMenu
 	call AnyMoveToSelect
 	ret z
 	ld hl, wBattleMonMoves
@@ -2775,6 +2782,240 @@ WhichTechniqueString:
 
 BattleTPCostText:
 	db "TP:@"
+
+; The regular battle menu reads every unlocked move from the species learnset.
+BattleFullMoveMenu:
+	ld a, [wBattleMonSpecies]
+	ld b, a
+	ld a, [wBattleMonLevel]
+	ld c, a
+	ld a, b
+	ld b, c
+	callfar GetAvailableMoves
+	xor a
+	ld [wAvailableMoveOffset], a
+	ld [wAvailableMoveCursor], a
+	ld [wPlayerMoveListIndex], a
+	ld a, [wAvailableMoveCount]
+	and a
+	jr z, .struggle
+	ld b, a
+	ld hl, wAvailableMoves
+.checkTP
+	ld a, [hli]
+	ld c, a
+	ld a, [wPlayerDisabledMoveNumber]
+	cp c
+	jr z, .nextTP
+	ld a, c
+	push hl
+	push bc
+	ld hl, wBattleMonTP
+	call CanAffordMoveTP
+	pop bc
+	pop hl
+	jr c, .draw
+.nextTP
+	dec b
+	jr nz, .checkTP
+	ld hl, NoMovesLeftText
+	call PrintText
+	ld c, 60
+	call DelayFrames
+.struggle
+	ld a, STRUGGLE
+	ld [wPlayerSelectedMove], a
+	xor a
+	ret
+.draw
+	hlcoord 0, 12
+	ld b, 4
+	ld c, 18
+	call TextBoxBorder
+	ld a, [wAvailableMoveCount]
+	ld b, a
+	ld a, [wAvailableMoveOffset]
+	ld c, a
+	ld a, b
+	sub c
+	cp 4
+	jr c, .countReady
+	ld a, 4
+.countReady
+	ld b, a
+	dec a
+	ld [wMaxMenuItem], a
+	ld a, 13
+	ld [wTopMenuItemY], a
+	ld a, 1
+	ld [wTopMenuItemX], a
+	ld a, [wAvailableMoveCursor]
+	ld [wCurrentMenuItem], a
+	ld a, D_UP | D_DOWN | A_BUTTON | B_BUTTON
+	ld [wMenuWatchedKeys], a
+	ld a, 1
+	ld [wMenuWatchMovingOutOfBounds], a
+	ld a, [wAvailableMoveOffset]
+	ld c, a
+	ld b, 0
+	ld hl, wAvailableMoves
+	add hl, bc
+	ld b, 0
+.printRow
+	ld a, [hli]
+	push hl
+	push bc
+	ld [wd11e], a
+	call GetMoveName
+	pop bc
+	push bc
+	ld a, b
+	ld bc, SCREEN_WIDTH
+	hlcoord 2, 13
+	call AddNTimes
+	call PlaceString
+	pop bc
+	pop hl
+	push hl
+	push bc
+	ld a, [wd11e]
+	call GetMoveTPCost
+	ld [wMoveTPCostBuffer], a
+	pop bc
+	push bc
+	ld a, b
+	ld bc, SCREEN_WIDTH
+	hlcoord 12, 13
+	call AddNTimes
+	ld de, BattleTPCostText
+	call PlaceString
+	pop bc
+	push bc
+	ld a, b
+	ld bc, SCREEN_WIDTH
+	hlcoord 15, 13
+	call AddNTimes
+	ld de, wMoveTPCostBuffer
+	lb bc, 1, 3
+	call PrintNumber
+	pop bc
+	pop hl
+	inc b
+	ld a, [wMaxMenuItem]
+	cp b
+	jr nc, .printRow
+	ld a, [wAvailableMoveOffset]
+	and a
+	jr z, .checkDownArrow
+	hlcoord 18, 13
+	ld [hl], "▲"
+.checkDownArrow
+	ld a, [wAvailableMoveOffset]
+	ld b, a
+	ld a, [wMaxMenuItem]
+	inc a
+	add b
+	ld b, a
+	ld a, [wAvailableMoveCount]
+	cp b
+	jr z, .input
+	ld a, [wMaxMenuItem]
+	ld bc, SCREEN_WIDTH
+	hlcoord 18, 13
+	call AddNTimes
+	ld [hl], "▼"
+.input
+	ld hl, hUILayoutFlags
+	set 1, [hl]
+	call HandleMenuInput
+	ld hl, hUILayoutFlags
+	res 1, [hl]
+	ld b, a
+	bit BIT_B_BUTTON, b
+	jp nz, .cancel
+	bit BIT_A_BUTTON, b
+	jr nz, .choose
+	bit BIT_D_DOWN, b
+	jr nz, .down
+	bit BIT_D_UP, b
+	jr nz, .up
+	jr .input
+.down
+	ld a, [wCurrentMenuItem]
+	ld c, a
+	ld a, [wAvailableMoveCursor]
+	cp c
+	jr nz, .moved
+	ld a, [wMaxMenuItem]
+	cp c
+	jr nz, .input
+	ld a, [wAvailableMoveOffset]
+	ld c, a
+	ld a, [wAvailableMoveCount]
+	sub 4
+	cp c
+	jr z, .input
+	jr c, .input
+	ld hl, wAvailableMoveOffset
+	inc [hl]
+	jp .draw
+.up
+	ld a, [wCurrentMenuItem]
+	ld c, a
+	ld a, [wAvailableMoveCursor]
+	cp c
+	jr nz, .moved
+	ld a, c
+	and a
+	jr nz, .input
+	ld hl, wAvailableMoveOffset
+	ld a, [hl]
+	and a
+	jr z, .input
+	dec [hl]
+	jp .draw
+.moved
+	ld a, c
+	ld [wAvailableMoveCursor], a
+	jr .input
+.choose
+	ld a, [wAvailableMoveOffset]
+	ld c, a
+	ld a, [wCurrentMenuItem]
+	add c
+	ld c, a
+	ld b, 0
+	ld hl, wAvailableMoves
+	add hl, bc
+	ld a, [hl]
+	ld [wPlayerSelectedMove], a
+	ld hl, wBattleMonTP
+	call CanAffordMoveTP
+	jr nc, .noTP
+	ld a, [wPlayerSelectedMove]
+	ld c, a
+	ld a, [wPlayerDisabledMoveNumber]
+	cp c
+	jr z, .disabled
+	xor a
+	ld [wMenuWatchMovingOutOfBounds], a
+	xor a
+	ret
+.noTP
+	ld hl, MoveNoTPText
+	jr .error
+.disabled
+	ld hl, MoveDisabledText
+.error
+	call PrintText
+	call LoadScreenTilesFromBuffer1
+	jp .draw
+.cancel
+	xor a
+	ld [wMenuWatchMovingOutOfBounds], a
+	ld a, 1
+	and a
+	ret
 
 SelectMenuItem_CursorUp:
 	ld a, [wCurrentMenuItem]
