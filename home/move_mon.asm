@@ -30,6 +30,92 @@ AddPartyMon::
 	pop hl
 	ret
 
+; Scale each DV from 0..15 to 0..(wCharisma + 5), capped at 15.
+; HP and TP derive their DV from the low bits, so reject pairs that exceed
+; the same cap there.
+; Input and output: a = one DV byte, b = the other DV byte.
+CapDVsByCharisma::
+	push hl
+	push de
+	push bc
+	ld d, a
+	ld e, b
+	ld a, [wCharisma]
+	cp 10
+	jr nc, .done
+	add 6 ; number of allowed DV values (0 through Charisma + 5)
+	ld c, a
+.scalePair
+	ld a, d
+	call .scaleByte
+	ld d, a
+	ld a, e
+	call .scaleByte
+	ld e, a
+	ld a, d ; Attack low bit contributes 8 to the HP/TP DV
+	swap a
+	and 1
+	sla a
+	sla a
+	sla a
+	ld b, a
+	ld a, d ; Defense contributes 4
+	and 1
+	sla a
+	sla a
+	add b
+	ld b, a
+	ld a, e ; Speed contributes 2
+	swap a
+	and 1
+	sla a
+	add b
+	ld b, a
+	ld a, e ; Special contributes 1
+	and 1
+	add b
+	cp c
+	jr c, .done
+	call Random
+	ld b, a
+	ldh a, [hRandomSub]
+	ld d, a
+	ld e, b
+	jr .scalePair
+.done
+	ld a, d
+	pop bc
+	ld b, e
+	pop de
+	pop hl
+	ret
+
+.scaleByte
+	ld h, a
+	swap a
+	and $f
+	call .scaleNibble
+	swap a
+	ld l, a
+	ld a, h
+	and $f
+	call .scaleNibble
+	or l
+	ret
+
+.scaleNibble
+	ld b, a
+	and a
+	ret z
+	xor a
+.scaleLoop
+	add c
+	dec b
+	jr nz, .scaleLoop
+	swap a ; divide the product by 16
+	and $f
+	ret
+
 ; calculates all stats of current mon and writes them to [de]
 CalcStats::
 	ld c, $0
@@ -154,6 +240,7 @@ CalcStat::
 	and $f
 .calcStatFromIV
 	ld d, $0
+	add a                     ; double the DV's contribution
 	add e
 	ld e, a
 	jr nc, .noCarry

@@ -46,9 +46,10 @@ TryDoWildEncounter:
 	jr z, .CantEncounter2
 	ld a, [wGrassRate]
 .CanEncounter
-; compare encounter chance with a random number to determine if there will be an encounter
+; Use the free-running divider for the encounter check. Restricting hRandomAdd
+; here also restricts the two RNG bytes used for the wild mon's DVs.
 	ld b, a
-	ldh a, [hRandomAdd]
+	ldh a, [rDIV]
 	cp b
 	jr nc, .CantEncounter2
 	ldh a, [hRandomSub]

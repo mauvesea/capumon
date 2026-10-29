@@ -6531,7 +6531,8 @@ LoadEnemyMonData:
 ; random DVs for wild mon
 	call BattleRandom
 	ld b, a
-	call BattleRandom
+	ldh a, [hRandomSub] ; use the other RNG byte for independent DV combinations
+	call CapDVsByCharisma
 .storeDVs
 	ld hl, wEnemyMonDVs
 	ld [hli], a

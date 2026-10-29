@@ -598,7 +598,7 @@ StatusScreen2:
 	jp ClearScreen
 
 
-; The four double-spaced rows show a window into the unlocked learnset.
+; Show eight consecutive moves in the status screen's move box.
 StatusScreen_DrawMoveList:
 	hlcoord 0, 8
 	ld b, 8
@@ -610,9 +610,9 @@ StatusScreen_DrawMoveList:
 	ld c, a
 	ld a, b
 	sub c
-	cp 4
+	cp 8
 	jr c, .countReady
-	ld a, 4
+	ld a, 8
 .countReady
 	ld [wAvailableMoveCursor], a ; number of visible rows
 	and a
@@ -632,7 +632,7 @@ StatusScreen_DrawMoveList:
 	pop bc
 	push bc
 	ld a, b
-	ld bc, SCREEN_WIDTH * 2
+	ld bc, SCREEN_WIDTH
 	hlcoord 2, 9
 	call AddNTimes
 	call PlaceString
@@ -646,7 +646,7 @@ StatusScreen_DrawMoveList:
 	pop bc
 	push bc
 	ld a, b
-	ld bc, SCREEN_WIDTH * 2
+	ld bc, SCREEN_WIDTH
 	hlcoord 12, 9
 	call AddNTimes
 	ld de, TPCostText
@@ -654,7 +654,7 @@ StatusScreen_DrawMoveList:
 	pop bc
 	push bc
 	ld a, b
-	ld bc, SCREEN_WIDTH * 2
+	ld bc, SCREEN_WIDTH
 	hlcoord 15, 9
 	call AddNTimes
 	ld de, wMoveTPCostBuffer
@@ -680,7 +680,7 @@ StatusScreen_DrawMoveList:
 	ld a, [wAvailableMoveCount]
 	cp b
 	ret z
-	hlcoord 18, 15
+	hlcoord 18, 16
 	ld [hl], "▼"
 	ret
 
@@ -698,7 +698,7 @@ StatusScreen_MoveInput:
 	ld a, [wAvailableMoveOffset]
 	ld c, a
 	ld a, [wAvailableMoveCount]
-	sub 4
+	sub 8
 	jr c, StatusScreen_MoveInput
 	cp c
 	jr z, StatusScreen_MoveInput

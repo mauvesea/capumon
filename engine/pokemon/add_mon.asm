@@ -110,10 +110,11 @@ _AddPartyMon::
 	and a ; is this a wild mon caught in battle?
 	jr nz, .copyEnemyMonData
 
-; Not wild.
-	call Random ; generate random IVs
+; Gift, starter, or other newly created player mon.
+	call Random ; generate both DV bytes from one RNG state
 	ld b, a
-	call Random
+	ldh a, [hRandomSub]
+	call CapDVsByCharisma
 
 .next4
 	push bc

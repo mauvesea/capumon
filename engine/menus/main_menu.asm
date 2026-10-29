@@ -349,7 +349,7 @@ PrintSaveScreenText:
 	hlcoord 14, 6
 	ld de, wCharisma
 	lb bc, 1, 3
-	call PrintNumber	
+	call PrintNumber
 	hlcoord 14, 8
 	call PrintNumOwnedMons
 	hlcoord 10, 10
