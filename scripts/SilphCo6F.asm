@@ -54,11 +54,11 @@ SilphCo6F_TextPointers:
 SilphCo6TrainerHeaders:
 	def_trainers 6
 SilphCo6TrainerHeader0:
-	trainer EVENT_BEAT_SILPH_CO_6F_TRAINER_0, 2, SilphCo6BattleText2, SilphCo6EndBattleText2, SilphCo6AfterBattleText2
+	trainer EVENT_BEAT_SILPH_CO_6F_TRAINER_0, 2, SilphCo6BattleText2, SilphCo6EndBattleText2, SilphCo6AfterBattleText2, SilphCo6FInBattleScript0
 SilphCo6TrainerHeader1:
-	trainer EVENT_BEAT_SILPH_CO_6F_TRAINER_1, 3, SilphCo6BattleText3, SilphCo6EndBattleText3, SilphCo6AfterBattleText3
+	trainer EVENT_BEAT_SILPH_CO_6F_TRAINER_1, 3, SilphCo6BattleText3, SilphCo6EndBattleText3, SilphCo6AfterBattleText3, SilphCo6FInBattleScript1
 SilphCo6TrainerHeader2:
-	trainer EVENT_BEAT_SILPH_CO_6F_TRAINER_2, 2, SilphCo6BattleText4, SilphCo6EndBattleText4, SilphCo6AfterBattleText4
+	trainer EVENT_BEAT_SILPH_CO_6F_TRAINER_2, 2, SilphCo6BattleText4, SilphCo6EndBattleText4, SilphCo6AfterBattleText4, SilphCo6FInBattleScript2
 	db -1 ; end
 
 SilphCo6Script_1a22f:
@@ -199,3 +199,9 @@ SilphCo6EndBattleText4:
 SilphCo6AfterBattleText4:
 	text_far _SilphCo6AfterBattleText4
 	text_end
+
+; Pre-battle TALK scripts. Every trainer gets its own copy of the default
+; placeholder so it can be replaced with something specific to them.
+	default_in_battle_script SilphCo6FInBattleScript0
+	default_in_battle_script SilphCo6FInBattleScript1
+	default_in_battle_script SilphCo6FInBattleScript2

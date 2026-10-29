@@ -45,6 +45,8 @@ LoadGymLeaderAndCityName::
 ;    4 -> before battle text (into hl)
 ;    6 -> after battle text (into hl)
 ;    8 -> end battle text (into hl)
+;    a -> end battle text (into de)
+;    c -> in-battle script (into hl)
 PrepareTrainerTextBattle::
 	ld a, b
 ReadTrainerHeaderInfo::
@@ -72,12 +74,17 @@ ReadTrainerHeaderInfo::
 	jr z, .readPointer ; read after battle text
 	cp $8
 	jr z, .readPointer ; read end battle text
+	cp $c
+	jr z, .readPointer ; read in-battle script
 	cp $a
 	jr nz, .done
-	ld a, [hli]        ; read end battle text (2) but override the result afterwards (XXX why, bug?)
-	ld d, [hl]
-	ld e, a
-	jr .done
+	ld a, [hli]        ; read end battle text (2) into de
+	ld h, [hl]
+	ld l, a
+	pop de             ; drop the saved de so the result survives
+	ld d, h
+	ld e, l
+	ret
 .readPointer
 	ld a, [hli]
 	ld h, [hl]
@@ -110,14 +117,14 @@ TalkToTrainer::
 	call ReadTrainerHeaderInfo     ; print before battle text
 	call SaveStartBattleTextPointers
 	call PrintText
-	push de
-	ld a, $6
-	call ReadTrainerHeaderInfo     ; read end battle text
-	pop de
+	ld a, $c
+	call ReadTrainerHeaderInfo     ; read in-battle script
 	call SaveInBattleTextPointers
+	ld a, $a
+	call ReadTrainerHeaderInfo     ; read end battle (lose) text into de
 	push de
 	ld a, $8
-	call ReadTrainerHeaderInfo     ; read end battle text
+	call ReadTrainerHeaderInfo     ; read end battle (win) text into hl
 	pop de
 	call SaveEndBattleTextPointers
 	ld hl, wFlags_D733
@@ -307,7 +314,7 @@ CheckForEngagingTrainers::
 	and a
 	ret nz        ; break if the trainer is engaging
 .continue
-	ld hl, $c
+	ld hl, TRAINER_HEADER_SIZE
 	add hl, de
 	ld d, h
 	ld e, l
@@ -403,20 +410,40 @@ PrintStartBattleText::
 	ld [MBC1RomBank], a
 	ret
 
-PrintInBattleText::
+; Runs the current trainer's in-battle script (the TALK option of the
+; pre-battle menu). The script lives in the trainer's own map bank and is
+; plain code, so it is free to print text, show menus or do anything else.
+; It reports back what should happen next in wPrebattleAction.
+RunInBattleScript::
 	ldh a, [hLoadedROMBank]
 	push af
 	ld a, [wEndBattleTextRomBank]
 	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a
-	push hl
-	ld hl, TrainerInBattleText
-	call PrintText
-	call WaitForTextScrollButtonPress
-	pop hl
+	ld a, [wInBattleTextPointer]
+	ld h, a
+	ld a, [wInBattleTextPointer + 1]
+	ld l, a
+	call .callScript
 	pop af
 	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a
+	ret
+.callScript
+	jp hl
+
+; The placeholder in-battle script every trainer starts with: offer a draw.
+; hl = the text to print before asking
+DefaultInBattleTalk::
+	call PrintText
+	call YesNoChoice
+	ld a, [wCurrentMenuItem]
+	and a
+	ld a, PREBATTLE_ACTION_DRAW
+	jr z, .gotAction ; the player agreed to a draw
+	ld a, PREBATTLE_ACTION_FIGHT
+.gotAction
+	ld [wPrebattleAction], a
 	ret
 
 GetSavedEndBattleTextPointer::
@@ -449,15 +476,6 @@ TrainerStartBattleText::
 	ld a, [wStartBattleTextPointer]
 	ld h, a
 	ld a, [wStartBattleTextPointer + 1]
-	ld l, a
-	call TextCommandProcessor
-	jp TextScriptEnd
-
-TrainerInBattleText::
-	text_asm
-	ld a, [wInBattleTextPointer]
-	ld h, a
-	ld a, [wInBattleTextPointer + 1]
 	ld l, a
 	call TextCommandProcessor
 	jp TextScriptEnd

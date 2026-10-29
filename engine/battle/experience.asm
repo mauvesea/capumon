@@ -179,14 +179,24 @@ GainExperience:
 	ld c, a
 	ld b, [hl]
 	push bc ; push max HP (from before levelling up)
+	push hl
+	ld bc, wPartyMon1MaxTP - wPartyMon1MaxHP
+	add hl, bc
+	ld a, [hli]
+	ld b, a
+	ld c, [hl]
+	pop hl
+	push bc ; push max TP (from before levelling up)
 	ld d, h
 	ld e, l
 	ld bc, (wPartyMon1HPExp - 1) - wPartyMon1MaxHP
 	add hl, bc
 	ld b, $1 ; consider stat exp when calculating stats
 	call CalcStats
+	pop de ; pop max TP (from before levelling up)
 	pop bc ; pop max HP (from before levelling up)
 	pop hl
+	push de ; keep the old max TP for later
 	ld a, [hld]
 	sub c
 	ld c, a
@@ -199,9 +209,32 @@ GainExperience:
 	ld a, [hl] ; wPartyMon1HP + 1
 	add c
 	ld [hld], a
-	ld a, [hl] ; wPartyMon1HP + 1
+	ld a, [hl] ; wPartyMon1HP
 	adc b
 	ld [hl], a ; wPartyMon1HP
+; add to the current TP the amount of max TP gained when levelling
+	pop de ; de = max TP from before levelling up
+	push hl
+	ld bc, wPartyMon1MaxTP - wPartyMon1HP
+	add hl, bc
+	inc hl
+	ld a, [hld]
+	sub e
+	ld e, a
+	ld a, [hl]
+	sbc d
+	ld d, a ; de = difference between old max TP and new max TP
+	pop hl
+	ld bc, wPartyMon1TP - wPartyMon1HP + 1
+	add hl, bc
+	ld a, [hl]
+	add e
+	ld [hld], a
+	ld a, [hl]
+	adc d
+	ld [hl], a
+	ld bc, wPartyMon1HP - wPartyMon1TP
+	add hl, bc ; hl = wPartyMon1HP again
 	ld a, [wPlayerMonNumber]
 	ld b, a
 	ld a, [wWhichPokemon]
@@ -209,14 +242,20 @@ GainExperience:
 	jr nz, .printGrewLevelText
 ; current mon is in battle
 	ld de, wBattleMonHP
-; copy party mon HP to battle mon HP
+; copy party mon HP and TP to the battle mon
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hli]
+	ld [de], a
+	inc de
 	ld a, [hli]
 	ld [de], a
 	inc de
 	ld a, [hl]
 	ld [de], a
 ; copy other stats from party mon to battle mon
-	ld bc, wPartyMon1Level - (wPartyMon1HP + 1)
+	ld bc, wPartyMon1Level - (wPartyMon1TP + 1)
 	add hl, bc
 	push hl
 	ld de, wBattleMonLevel

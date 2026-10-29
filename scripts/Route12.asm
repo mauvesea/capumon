@@ -79,19 +79,19 @@ Route12_TextPointers:
 Route12TrainerHeaders:
 	def_trainers 2
 Route12TrainerHeader0:
-	trainer EVENT_BEAT_ROUTE_12_TRAINER_0, 4, Route12BattleText1, Route12EndBattleText1, Route12AfterBattleText1
+	trainer EVENT_BEAT_ROUTE_12_TRAINER_0, 4, Route12BattleText1, Route12EndBattleText1, Route12AfterBattleText1, Route12InBattleScript0
 Route12TrainerHeader1:
-	trainer EVENT_BEAT_ROUTE_12_TRAINER_1, 4, Route12BattleText2, Route12EndBattleText2, Route12AfterBattleText2
+	trainer EVENT_BEAT_ROUTE_12_TRAINER_1, 4, Route12BattleText2, Route12EndBattleText2, Route12AfterBattleText2, Route12InBattleScript1
 Route12TrainerHeader2:
-	trainer EVENT_BEAT_ROUTE_12_TRAINER_2, 4, Route12BattleText3, Route12EndBattleText3, Route12AfterBattleText3
+	trainer EVENT_BEAT_ROUTE_12_TRAINER_2, 4, Route12BattleText3, Route12EndBattleText3, Route12AfterBattleText3, Route12InBattleScript2
 Route12TrainerHeader3:
-	trainer EVENT_BEAT_ROUTE_12_TRAINER_3, 4, Route12BattleText4, Route12EndBattleText4, Route12AfterBattleText4
+	trainer EVENT_BEAT_ROUTE_12_TRAINER_3, 4, Route12BattleText4, Route12EndBattleText4, Route12AfterBattleText4, Route12InBattleScript3
 Route12TrainerHeader4:
-	trainer EVENT_BEAT_ROUTE_12_TRAINER_4, 4, Route12BattleText5, Route12EndBattleText5, Route12AfterBattleText5
+	trainer EVENT_BEAT_ROUTE_12_TRAINER_4, 4, Route12BattleText5, Route12EndBattleText5, Route12AfterBattleText5, Route12InBattleScript4
 Route12TrainerHeader5:
-	trainer EVENT_BEAT_ROUTE_12_TRAINER_5, 4, Route12BattleText6, Route12EndBattleText6, Route12AfterBattleText6
+	trainer EVENT_BEAT_ROUTE_12_TRAINER_5, 4, Route12BattleText6, Route12EndBattleText6, Route12AfterBattleText6, Route12InBattleScript5
 Route12TrainerHeader6:
-	trainer EVENT_BEAT_ROUTE_12_TRAINER_6, 1, Route12BattleText7, Route12EndBattleText7, Route12AfterBattleText7
+	trainer EVENT_BEAT_ROUTE_12_TRAINER_6, 1, Route12BattleText7, Route12EndBattleText7, Route12AfterBattleText7, Route12InBattleScript6
 	db -1 ; end
 
 Route12Text1:
@@ -239,3 +239,13 @@ Route12Text11:
 Route12Text12:
 	text_far _Route12Text12
 	text_end
+
+; Pre-battle TALK scripts. Every trainer gets its own copy of the default
+; placeholder so it can be replaced with something specific to them.
+	default_in_battle_script Route12InBattleScript0
+	default_in_battle_script Route12InBattleScript1
+	default_in_battle_script Route12InBattleScript2
+	default_in_battle_script Route12InBattleScript3
+	default_in_battle_script Route12InBattleScript4
+	default_in_battle_script Route12InBattleScript5
+	default_in_battle_script Route12InBattleScript6

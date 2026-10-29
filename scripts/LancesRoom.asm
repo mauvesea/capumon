@@ -131,7 +131,7 @@ LancesRoom_TextPointers:
 LancesRoomTrainerHeaders:
 	def_trainers
 LancesRoomTrainerHeader0:
-	trainer EVENT_BEAT_LANCES_ROOM_TRAINER_0, 0, LanceBeforeBattleText, LanceEndBattleText, LanceAfterBattleText
+	trainer EVENT_BEAT_LANCES_ROOM_TRAINER_0, 0, LanceBeforeBattleText, LanceEndBattleText, LanceAfterBattleText, LancesRoomInBattleScript0
 	db -1 ; end
 
 LanceText1:
@@ -153,3 +153,7 @@ LanceAfterBattleText:
 	text_asm
 	SetEvent EVENT_BEAT_LANCE
 	jp TextScriptEnd
+
+; Pre-battle TALK scripts. Every trainer gets its own copy of the default
+; placeholder so it can be replaced with something specific to them.
+	default_in_battle_script LancesRoomInBattleScript0

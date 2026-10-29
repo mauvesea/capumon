@@ -1,5 +1,5 @@
 HealParty:
-; Restore HP and PP.
+; Restore HP and TP.
 
 	ld hl, wPartySpecies
 	ld de, wPartyMon1HP
@@ -16,51 +16,18 @@ HealParty:
 	xor a
 	ld [hl], a
 
-	push de
-	ld b, NUM_MOVES ; A Pokémon has 4 moves
-.pp
-	ld hl, wPartyMon1Moves - wPartyMon1HP
-	add hl, de
-
-	ld a, [hl]
-	and a
-	jr z, .nextmove
-
-	dec a
-	ld hl, wPartyMon1PP - wPartyMon1HP
-	add hl, de
-
-	push hl
-	push de
-	push bc
-
-	ld hl, Moves
-	ld bc, MOVE_LENGTH
-	call AddNTimes
-	ld de, wcd6d
-	ld a, BANK(Moves)
-	call FarCopyData
-	ld a, [wcd6d + 5] ; PP is byte 5 of move data
-
-	pop bc
-	pop de
-	pop hl
-
-	inc de
-	push bc
-	ld b, a
-	ld a, [hl]
-	and $c0
-	add b
-	ld [hl], a
-	pop bc
-
-.nextmove
-	dec b
-	jr nz, .pp
-	pop de
-
+; restore current HP to max HP
 	ld hl, wPartyMon1MaxHP - wPartyMon1HP
+	add hl, de
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hl]
+	ld [de], a
+	inc de
+
+; de now points at current TP: restore it to max TP
+	ld hl, wPartyMon1MaxTP - wPartyMon1TP
 	add hl, de
 	ld a, [hli]
 	ld [de], a
@@ -85,15 +52,4 @@ HealParty:
 	xor a
 	ld [wWhichPokemon], a
 	ld [wd11e], a
-
-	ld a, [wPartyCount]
-	ld b, a
-.ppup
-	push bc
-	call RestoreBonusPP
-	pop bc
-	ld hl, wWhichPokemon
-	inc [hl]
-	dec b
-	jr nz, .ppup
 	ret

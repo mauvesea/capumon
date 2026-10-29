@@ -389,7 +389,7 @@ wAnimPalette:: db
 NEXTU
 	ds 60
 ; temporary buffer when swapping party mon data
-wSwitchPartyMonTempBuffer:: ds 44 ; party_struct size
+wSwitchPartyMonTempBuffer:: ds 46 ; party_struct size
 
 NEXTU
 	ds 120
@@ -516,6 +516,7 @@ wInGameTradeReceiveMonSpecies:: db
 NEXTU
 wPlayerMonUnmodifiedLevel:: db
 wPlayerMonUnmodifiedMaxHP:: dw
+wPlayerMonUnmodifiedMaxTP:: dw
 wPlayerMonUnmodifiedAttack:: dw
 wPlayerMonUnmodifiedDefense:: dw
 wPlayerMonUnmodifiedSpeed:: dw
@@ -538,6 +539,7 @@ wPlayerMonStatModsEnd::
 
 wEnemyMonUnmodifiedLevel:: db
 wEnemyMonUnmodifiedMaxHP:: dw
+wEnemyMonUnmodifiedMaxTP:: dw
 wEnemyMonUnmodifiedAttack:: dw
 wEnemyMonUnmodifiedDefense:: dw
 wEnemyMonUnmodifiedSpeed:: dw
@@ -816,7 +818,7 @@ wTempSCX::
 ; which entry from TradeMons to select
 wWhichTrade::
 wDexMaxSeenMon::
-wPPRestoreItem::
+wTPRestoreItem::
 wWereAnyMonsAsleep::
 wNumShakes::
 wWhichBadge::
@@ -888,14 +890,6 @@ NEXTU
 wEvosMoves:: ds MAX_EVOLUTIONS * EVOLUTION_SIZE + 1
 wEvosMovesEnd::
 
-NEXTU
-	ds 4
-; temp variable used to print a move's current PP on the status screen
-wStatusScreenCurrentPP:: db
-	ds 6
-; list of normal max PP (without PP up) values
-wNormalMaxPPList:: ds NUM_MOVES
-	ds 5
 ENDU
 
 UNION
@@ -1150,13 +1144,13 @@ wEnemyMoveEffect:: db
 wEnemyMovePower:: db
 wEnemyMoveType:: db
 wEnemyMoveAccuracy:: db
-wEnemyMoveMaxPP:: db
+wEnemyMoveTPCost:: db
 wPlayerMoveNum:: db
 wPlayerMoveEffect:: db
 wPlayerMovePower:: db
 wPlayerMoveType:: db
 wPlayerMoveAccuracy:: db
-wPlayerMoveMaxPP:: db
+wPlayerMoveTPCost:: db
 
 wEnemyMonSpecies2:: db
 wBattleMonSpecies2:: db
@@ -1518,6 +1512,7 @@ wMonHeader::
 wMonHIndex:: db
 wMonHBaseStats::
 wMonHBaseHP:: db
+wMonHBaseTP:: db
 wMonHBaseAttack:: db
 wMonHBaseDefense:: db
 wMonHBaseSpeed:: db
@@ -1576,8 +1571,6 @@ wPokeBallCaptureCalcTemp::
 ; lower nybble: number of shakes
 ; upper nybble: number of animations to play
 wPokeBallAnimData::
-wUsingPPUp::
-wMaxPP::
 ; 0 for player, non-zero for enemy
 wCalculateWhoseStats::
 wTypeEffectiveness::
@@ -1698,6 +1691,17 @@ wEvoStoneItemID:: db
 wSavedNPCMovementDirections2Index:: db
 
 wPlayerName:: ds NAME_LENGTH
+
+; scratch byte used when printing a move's TP cost
+wMoveTPCostBuffer:: db
+
+; what the pre-battle menu decided to do (see PREBATTLE_ACTION_* constants)
+wPrebattleAction:: db
+
+; how much the mon in wLoadedMon is worth, in money
+; set by CalcMonValue (see engine/pokemon/status_screen.asm)
+wMonValue::    ds 3 ; binary, big endian
+wMonValueBCD:: ds 3 ; the same value as BCD, for paying the player
 
 
 SECTION "Party Data", WRAM0

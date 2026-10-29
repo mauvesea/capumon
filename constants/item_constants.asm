@@ -94,6 +94,9 @@ DEF SAFARI_ROCK EQU $16 ; overload
 	const MAX_ELIXER    ; $53
 DEF NUM_ITEMS EQU const_value - 1
 
+; how much TP an ETHER or ELIXER restores (MAX_ETHER and MAX_ELIXER restore all of it)
+DEF TP_RESTORE_AMOUNT EQU 10
+
 ; elevator floors use item IDs
 	const FLOOR_B2F     ; $54
 	const FLOOR_B1F     ; $55

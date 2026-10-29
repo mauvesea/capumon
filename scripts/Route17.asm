@@ -33,25 +33,25 @@ Route17_TextPointers:
 Route17TrainerHeaders:
 	def_trainers
 Route17TrainerHeader0:
-	trainer EVENT_BEAT_ROUTE_17_TRAINER_0, 3, Route17BattleText1, Route17EndBattleText1, Route17AfterBattleText1
+	trainer EVENT_BEAT_ROUTE_17_TRAINER_0, 3, Route17BattleText1, Route17EndBattleText1, Route17AfterBattleText1, Route17InBattleScript0
 Route17TrainerHeader1:
-	trainer EVENT_BEAT_ROUTE_17_TRAINER_1, 4, Route17BattleText2, Route17EndBattleText2, Route17AfterBattleText2
+	trainer EVENT_BEAT_ROUTE_17_TRAINER_1, 4, Route17BattleText2, Route17EndBattleText2, Route17AfterBattleText2, Route17InBattleScript1
 Route17TrainerHeader2:
-	trainer EVENT_BEAT_ROUTE_17_TRAINER_2, 4, Route17BattleText3, Route17EndBattleText3, Route17AfterBattleText3
+	trainer EVENT_BEAT_ROUTE_17_TRAINER_2, 4, Route17BattleText3, Route17EndBattleText3, Route17AfterBattleText3, Route17InBattleScript2
 Route17TrainerHeader3:
-	trainer EVENT_BEAT_ROUTE_17_TRAINER_3, 4, Route17BattleText4, Route17EndBattleText4, Route17AfterBattleText4
+	trainer EVENT_BEAT_ROUTE_17_TRAINER_3, 4, Route17BattleText4, Route17EndBattleText4, Route17AfterBattleText4, Route17InBattleScript3
 Route17TrainerHeader4:
-	trainer EVENT_BEAT_ROUTE_17_TRAINER_4, 3, Route17BattleText5, Route17EndBattleText5, Route17AfterBattleText5
+	trainer EVENT_BEAT_ROUTE_17_TRAINER_4, 3, Route17BattleText5, Route17EndBattleText5, Route17AfterBattleText5, Route17InBattleScript4
 Route17TrainerHeader5:
-	trainer EVENT_BEAT_ROUTE_17_TRAINER_5, 2, Route17BattleText6, Route17EndBattleText6, Route17AfterBattleText6
+	trainer EVENT_BEAT_ROUTE_17_TRAINER_5, 2, Route17BattleText6, Route17EndBattleText6, Route17AfterBattleText6, Route17InBattleScript5
 Route17TrainerHeader6:
-	trainer EVENT_BEAT_ROUTE_17_TRAINER_6, 4, Route17BattleText7, Route17EndBattleText7, Route17AfterBattleText7
+	trainer EVENT_BEAT_ROUTE_17_TRAINER_6, 4, Route17BattleText7, Route17EndBattleText7, Route17AfterBattleText7, Route17InBattleScript6
 Route17TrainerHeader7:
-	trainer EVENT_BEAT_ROUTE_17_TRAINER_7, 2, Route17BattleText8, Route17EndBattleText8, Route17AfterBattleText8
+	trainer EVENT_BEAT_ROUTE_17_TRAINER_7, 2, Route17BattleText8, Route17EndBattleText8, Route17AfterBattleText8, Route17InBattleScript7
 Route17TrainerHeader8:
-	trainer EVENT_BEAT_ROUTE_17_TRAINER_8, 3, Route17BattleText9, Route17EndBattleText9, Route17AfterBattleText9
+	trainer EVENT_BEAT_ROUTE_17_TRAINER_8, 3, Route17BattleText9, Route17EndBattleText9, Route17AfterBattleText9, Route17InBattleScript8
 Route17TrainerHeader9:
-	trainer EVENT_BEAT_ROUTE_17_TRAINER_9, 4, Route17BattleText10, Route17EndBattleText10, Route17AfterBattleText10
+	trainer EVENT_BEAT_ROUTE_17_TRAINER_9, 4, Route17BattleText10, Route17EndBattleText10, Route17AfterBattleText10, Route17InBattleScript9
 	db -1 ; end
 
 Route17Text1:
@@ -257,3 +257,16 @@ Route17Text15:
 Route17Text16:
 	text_far _Route17Text16
 	text_end
+
+; Pre-battle TALK scripts. Every trainer gets its own copy of the default
+; placeholder so it can be replaced with something specific to them.
+	default_in_battle_script Route17InBattleScript0
+	default_in_battle_script Route17InBattleScript1
+	default_in_battle_script Route17InBattleScript2
+	default_in_battle_script Route17InBattleScript3
+	default_in_battle_script Route17InBattleScript4
+	default_in_battle_script Route17InBattleScript5
+	default_in_battle_script Route17InBattleScript6
+	default_in_battle_script Route17InBattleScript7
+	default_in_battle_script Route17InBattleScript8
+	default_in_battle_script Route17InBattleScript9

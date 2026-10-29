@@ -50,9 +50,9 @@ VictoryRoad1F_TextPointers:
 VictoryRoad1TrainerHeaders:
 	def_trainers
 VictoryRoad1TrainerHeader0:
-	trainer EVENT_BEAT_VICTORY_ROAD_1_TRAINER_0, 2, VictoryRoad1BattleText1, VictoryRoad1EndBattleText1, VictoryRoad1AfterBattleText1
+	trainer EVENT_BEAT_VICTORY_ROAD_1_TRAINER_0, 2, VictoryRoad1BattleText1, VictoryRoad1EndBattleText1, VictoryRoad1AfterBattleText1, VictoryRoad1FInBattleScript0
 VictoryRoad1TrainerHeader1:
-	trainer EVENT_BEAT_VICTORY_ROAD_1_TRAINER_1, 2, VictoryRoad1BattleText2, VictoryRoad1EndBattleText2, VictoryRoad1AfterBattleText2
+	trainer EVENT_BEAT_VICTORY_ROAD_1_TRAINER_1, 2, VictoryRoad1BattleText2, VictoryRoad1EndBattleText2, VictoryRoad1AfterBattleText2, VictoryRoad1FInBattleScript1
 	db -1 ; end
 
 VictoryRoad1Text1:
@@ -90,3 +90,8 @@ VictoryRoad1EndBattleText2:
 VictoryRoad1AfterBattleText2:
 	text_far _VictoryRoad1AfterBattleText2
 	text_end
+
+; Pre-battle TALK scripts. Every trainer gets its own copy of the default
+; placeholder so it can be replaced with something specific to them.
+	default_in_battle_script VictoryRoad1FInBattleScript0
+	default_in_battle_script VictoryRoad1FInBattleScript1

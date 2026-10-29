@@ -195,11 +195,11 @@ PokemonTower7F_TextPointers:
 PokemonTower7TrainerHeaders:
 	def_trainers
 PokemonTower7TrainerHeader0:
-	trainer EVENT_BEAT_POKEMONTOWER_7_TRAINER_0, 3, PokemonTower7BattleText1, PokemonTower7EndBattleText1, PokemonTower7AfterBattleText1
+	trainer EVENT_BEAT_POKEMONTOWER_7_TRAINER_0, 3, PokemonTower7BattleText1, PokemonTower7EndBattleText1, PokemonTower7AfterBattleText1, PokemonTower7FInBattleScript0
 PokemonTower7TrainerHeader1:
-	trainer EVENT_BEAT_POKEMONTOWER_7_TRAINER_1, 3, PokemonTower7BattleText2, PokemonTower7EndBattleText2, PokemonTower7AfterBattleText2
+	trainer EVENT_BEAT_POKEMONTOWER_7_TRAINER_1, 3, PokemonTower7BattleText2, PokemonTower7EndBattleText2, PokemonTower7AfterBattleText2, PokemonTower7FInBattleScript1
 PokemonTower7TrainerHeader2:
-	trainer EVENT_BEAT_POKEMONTOWER_7_TRAINER_2, 3, PokemonTower7BattleText3, PokemonTower7EndBattleText3, PokemonTower7AfterBattleText3
+	trainer EVENT_BEAT_POKEMONTOWER_7_TRAINER_2, 3, PokemonTower7BattleText3, PokemonTower7EndBattleText3, PokemonTower7AfterBattleText3, PokemonTower7FInBattleScript2
 	db -1 ; end
 
 PokemonTower7Text1:
@@ -279,3 +279,9 @@ PokemonTower7EndBattleText3:
 PokemonTower7AfterBattleText3:
 	text_far _PokemonTower7AfterBattleText3
 	text_end
+
+; Pre-battle TALK scripts. Every trainer gets its own copy of the default
+; placeholder so it can be replaced with something specific to them.
+	default_in_battle_script PokemonTower7FInBattleScript0
+	default_in_battle_script PokemonTower7FInBattleScript1
+	default_in_battle_script PokemonTower7FInBattleScript2

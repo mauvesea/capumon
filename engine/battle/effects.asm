@@ -1310,36 +1310,7 @@ DisableEffect:
 	and a
 	jr z, .pickMoveToDisable ; loop until a non-00 move slot is found
 	ld [wd11e], a ; store move number
-	push hl
-	ldh a, [hWhoseTurn]
-	and a
-	ld hl, wBattleMonPP
-	jr nz, .enemyTurn
-	ld a, [wLinkState]
-	cp LINK_STATE_BATTLING
-	pop hl ; wEnemyMonMoves
-	jr nz, .playerTurnNotLinkBattle
-; .playerTurnLinkBattle
-	push hl
-	ld hl, wEnemyMonPP
-.enemyTurn
-	push hl
-	ld a, [hli]
-	or [hl]
-	inc hl
-	or [hl]
-	inc hl
-	or [hl]
-	and $3f
-	pop hl ; wBattleMonPP or wEnemyMonPP
-	jr z, .moveMissedPopHL ; nothing to do if all moves have no PP left
-	add hl, bc
-	ld a, [hl]
-	pop hl
-	and a
-	jr z, .pickMoveToDisable ; pick another move if this one had 0 PP
-.playerTurnNotLinkBattle
-; non-link battle enemies have unlimited PP so the previous checks aren't needed
+; with TP there is no per-move PP left to check, so any known move can be disabled
 	call BattleRandom
 	and $7
 	inc a ; 1-8 turns disabled
@@ -1359,8 +1330,6 @@ DisableEffect:
 	call GetMoveName
 	ld hl, MoveWasDisabledText
 	jp PrintText
-.moveMissedPopHL
-	pop hl
 .moveMissed
 	jp PrintButItFailedText_
 

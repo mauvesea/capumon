@@ -4,11 +4,12 @@ MACRO flag_array
 	ds ((\1) + 7) / 8
 ENDM
 
-DEF BOX_STRUCT_LENGTH EQU 25 + NUM_MOVES * 2
+DEF BOX_STRUCT_LENGTH EQU 29 + NUM_MOVES
 
 MACRO box_struct
 \1Species::    db
 \1HP::         dw
+\1TP::         dw
 \1BoxLevel::   db
 \1Status::     db
 \1Type::
@@ -19,12 +20,12 @@ MACRO box_struct
 \1OTID::       dw
 \1Exp::        ds 3
 \1HPExp::      dw
+\1TPExp::      dw
 \1AttackExp::  dw
 \1DefenseExp:: dw
 \1SpeedExp::   dw
 \1SpecialExp:: dw
 \1DVs::        ds 2
-\1PP::         ds NUM_MOVES
 ENDM
 
 MACRO party_struct
@@ -32,6 +33,7 @@ MACRO party_struct
 \1Level::      db
 \1Stats::
 \1MaxHP::      dw
+\1MaxTP::      dw
 \1Attack::     dw
 \1Defense::    dw
 \1Speed::      dw
@@ -41,6 +43,7 @@ ENDM
 MACRO battle_struct
 \1Species::    db
 \1HP::         dw
+\1TP::         dw
 \1PartyPos::
 \1BoxLevel::   db
 \1Status::     db
@@ -53,11 +56,11 @@ MACRO battle_struct
 \1Level::      db
 \1Stats::
 \1MaxHP::      dw
+\1MaxTP::      dw
 \1Attack::     dw
 \1Defense::    dw
 \1Speed::      dw
 \1Special::    dw
-\1PP::         ds NUM_MOVES
 ENDM
 
 MACRO spritestatedata1

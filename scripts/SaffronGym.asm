@@ -87,19 +87,19 @@ SaffronGym_TextPointers:
 SaffronGymTrainerHeaders:
 	def_trainers 2
 SaffronGymTrainerHeader0:
-	trainer EVENT_BEAT_SAFFRON_GYM_TRAINER_0, 3, SaffronGymBattleText1, SaffronGymEndBattleText1, SaffronGymAfterBattleText1
+	trainer EVENT_BEAT_SAFFRON_GYM_TRAINER_0, 3, SaffronGymBattleText1, SaffronGymEndBattleText1, SaffronGymAfterBattleText1, SaffronGymInBattleScript0
 SaffronGymTrainerHeader1:
-	trainer EVENT_BEAT_SAFFRON_GYM_TRAINER_1, 3, SaffronGymBattleText2, SaffronGymEndBattleText2, SaffronGymAfterBattleText2
+	trainer EVENT_BEAT_SAFFRON_GYM_TRAINER_1, 3, SaffronGymBattleText2, SaffronGymEndBattleText2, SaffronGymAfterBattleText2, SaffronGymInBattleScript1
 SaffronGymTrainerHeader2:
-	trainer EVENT_BEAT_SAFFRON_GYM_TRAINER_2, 3, SaffronGymBattleText3, SaffronGymEndBattleText3, SaffronGymAfterBattleText3
+	trainer EVENT_BEAT_SAFFRON_GYM_TRAINER_2, 3, SaffronGymBattleText3, SaffronGymEndBattleText3, SaffronGymAfterBattleText3, SaffronGymInBattleScript2
 SaffronGymTrainerHeader3:
-	trainer EVENT_BEAT_SAFFRON_GYM_TRAINER_3, 3, SaffronGymBattleText4, SaffronGymEndBattleText4, SaffronGymAfterBattleText4
+	trainer EVENT_BEAT_SAFFRON_GYM_TRAINER_3, 3, SaffronGymBattleText4, SaffronGymEndBattleText4, SaffronGymAfterBattleText4, SaffronGymInBattleScript3
 SaffronGymTrainerHeader4:
-	trainer EVENT_BEAT_SAFFRON_GYM_TRAINER_4, 3, SaffronGymBattleText5, SaffronGymEndBattleText5, SaffronGymAfterBattleText5
+	trainer EVENT_BEAT_SAFFRON_GYM_TRAINER_4, 3, SaffronGymBattleText5, SaffronGymEndBattleText5, SaffronGymAfterBattleText5, SaffronGymInBattleScript4
 SaffronGymTrainerHeader5:
-	trainer EVENT_BEAT_SAFFRON_GYM_TRAINER_5, 3, SaffronGymBattleText6, SaffronGymEndBattleText6, SaffronGymAfterBattleText6
+	trainer EVENT_BEAT_SAFFRON_GYM_TRAINER_5, 3, SaffronGymBattleText6, SaffronGymEndBattleText6, SaffronGymAfterBattleText6, SaffronGymInBattleScript5
 SaffronGymTrainerHeader6:
-	trainer EVENT_BEAT_SAFFRON_GYM_TRAINER_6, 3, SaffronGymBattleText7, SaffronGymEndBattleText7, SaffronGymAfterBattleText7
+	trainer EVENT_BEAT_SAFFRON_GYM_TRAINER_6, 3, SaffronGymBattleText7, SaffronGymEndBattleText7, SaffronGymAfterBattleText7, SaffronGymInBattleScript6
 	db -1 ; end
 
 SabrinaText:
@@ -309,3 +309,13 @@ SaffronGymEndBattleText7:
 SaffronGymAfterBattleText7:
 	text_far _SaffronGymAfterBattleText7
 	text_end
+
+; Pre-battle TALK scripts. Every trainer gets its own copy of the default
+; placeholder so it can be replaced with something specific to them.
+	default_in_battle_script SaffronGymInBattleScript0
+	default_in_battle_script SaffronGymInBattleScript1
+	default_in_battle_script SaffronGymInBattleScript2
+	default_in_battle_script SaffronGymInBattleScript3
+	default_in_battle_script SaffronGymInBattleScript4
+	default_in_battle_script SaffronGymInBattleScript5
+	default_in_battle_script SaffronGymInBattleScript6

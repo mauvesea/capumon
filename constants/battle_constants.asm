@@ -5,11 +5,16 @@ DEF NUM_MOVES EQU 4
 ; VitaminStats indexes (see data/battle/stat_names.asm)
 	const_def
 	const STAT_HEALTH
+	const STAT_TECH
 	const STAT_ATTACK
 	const STAT_DEFENSE
 	const STAT_SPEED
 	const STAT_SPECIAL
 DEF NUM_STATS EQU const_value
+
+; stats that can be raised/lowered by stat modifiers in battle
+; (Attack, Defense, Speed, Special: every stat except HP and TP)
+DEF NUM_MODIFIED_STATS EQU NUM_STATS - 2
 
 ; StatModTextStrings indexes (see data/battle/stat_mod_names.asm)
 	const_def
@@ -29,11 +34,19 @@ DEF MOVE_EFFECT rb
 DEF MOVE_POWER  rb
 DEF MOVE_TYPE   rb
 DEF MOVE_ACC    rb
-DEF MOVE_PP     rb
+DEF MOVE_TP     rb ; TP cost
 DEF MOVE_LENGTH EQU _RS
 
 ; D733 flags
 DEF BIT_TEST_BATTLE EQU 0
+
+; wPrebattleAction values
+; what the pre-battle menu (FIGHT/TOOL/TALK/RUN) decided should happen
+	const_def
+	const PREBATTLE_ACTION_MENU    ; 0 ; go back to the pre-battle menu
+	const PREBATTLE_ACTION_FIGHT   ; 1 ; start the battle as normal
+	const PREBATTLE_ACTION_DRAW    ; 2 ; call it a draw: no battle, no prize money
+	const PREBATTLE_ACTION_GIVE_UP ; 3 ; give up: counts as a loss
 
 ; battle type constants (wBattleType values)
 	const_def

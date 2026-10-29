@@ -33,13 +33,13 @@ SSAnne2FRooms_TextPointers:
 SSAnne9TrainerHeaders:
 	def_trainers
 SSAnne9TrainerHeader0:
-	trainer EVENT_BEAT_SS_ANNE_9_TRAINER_0, 2, SSAnne9BattleText1, SSAnne9EndBattleText1, SSAnne9AfterBattleText1
+	trainer EVENT_BEAT_SS_ANNE_9_TRAINER_0, 2, SSAnne9BattleText1, SSAnne9EndBattleText1, SSAnne9AfterBattleText1, SSAnne2FRoomsInBattleScript0
 SSAnne9TrainerHeader1:
-	trainer EVENT_BEAT_SS_ANNE_9_TRAINER_1, 3, SSAnne9BattleText2, SSAnne9EndBattleText2, SSAnne9AfterBattleText2
+	trainer EVENT_BEAT_SS_ANNE_9_TRAINER_1, 3, SSAnne9BattleText2, SSAnne9EndBattleText2, SSAnne9AfterBattleText2, SSAnne2FRoomsInBattleScript1
 SSAnne9TrainerHeader2:
-	trainer EVENT_BEAT_SS_ANNE_9_TRAINER_2, 3, SSAnne9BattleText3, SSAnne9EndBattleText3, SSAnne9AfterBattleText3
+	trainer EVENT_BEAT_SS_ANNE_9_TRAINER_2, 3, SSAnne9BattleText3, SSAnne9EndBattleText3, SSAnne9AfterBattleText3, SSAnne2FRoomsInBattleScript2
 SSAnne9TrainerHeader3:
-	trainer EVENT_BEAT_SS_ANNE_9_TRAINER_3, 2, SSAnne9BattleText4, SSAnne9EndBattleText4, SSAnne9AfterBattleText4
+	trainer EVENT_BEAT_SS_ANNE_9_TRAINER_3, 2, SSAnne9BattleText4, SSAnne9EndBattleText4, SSAnne9AfterBattleText4, SSAnne2FRoomsInBattleScript3
 	db -1 ; end
 
 SSAnne9Text1:
@@ -187,3 +187,10 @@ SSAnne9EndBattleText4:
 SSAnne9AfterBattleText4:
 	text_far _SSAnne9AfterBattleText4
 	text_end
+
+; Pre-battle TALK scripts. Every trainer gets its own copy of the default
+; placeholder so it can be replaced with something specific to them.
+	default_in_battle_script SSAnne2FRoomsInBattleScript0
+	default_in_battle_script SSAnne2FRoomsInBattleScript1
+	default_in_battle_script SSAnne2FRoomsInBattleScript2
+	default_in_battle_script SSAnne2FRoomsInBattleScript3

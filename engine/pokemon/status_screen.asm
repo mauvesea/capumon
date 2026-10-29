@@ -147,7 +147,12 @@ StatusScreen:
 	
 	hlcoord 6, 10
 	predef DrawHP
-	
+
+	hlcoord 6, 12
+	ld de, wLoadedMonTP
+	lb bc, 2, 3
+	call PrintNumber
+
 	hlcoord 1, 14
 	ld de, PartyMenuValueText
 	call PlaceString
@@ -159,6 +164,50 @@ StatusScreen:
 	hlcoord 11, 13
 	ld de, PartyMenuSpecialMoveText
 	call PlaceString
+
+; A mon's signature move is the move whose ID matches its Pokedex number.
+; Show it (and what it costs) only if the mon actually knows it.
+	ld a, [wLoadedMonSpecies]
+	ld [wd11e], a
+	predef IndexToPokedex
+	ld a, [wd11e]
+	ld b, a
+	ld hl, wLoadedMonMoves
+	ld c, NUM_MOVES
+.findSignatureMove
+	ld a, [hli]
+	cp b
+	jr z, .knowsSignatureMove
+	dec c
+	jr nz, .findSignatureMove
+	hlcoord 11, 15
+	ld de, NoSignatureMoveText
+	call PlaceString
+	jr .signatureMoveDone
+.knowsSignatureMove
+	ld [wd11e], a
+	hlcoord 11, 15
+	call GetMoveName ; returns de = wcd6d
+	call PlaceString
+	ld a, [wd11e]
+	call GetMoveTPCost
+	ld [wMoveTPCostBuffer], a
+	hlcoord 11, 16
+	ld de, TPCostText
+	call PlaceString
+	hlcoord 14, 16
+	ld de, wMoveTPCostBuffer
+	lb bc, 1, 3
+	call PrintNumber
+.signatureMoveDone
+
+; what the mon is worth
+	call CalcMonValue
+	hlcoord 1, 16
+	ld de, wMonValue
+	lb bc, 3, 6
+	call PrintNumber
+	ld [hl], "G"
 
 ;	ld hl, OTPointers
 ;	call .GetStringPointer
@@ -243,6 +292,152 @@ PartyMenuValueText:
 
 PartyMenuSpecialMoveText:
 	db "SPECIAL@"
+
+TPCostText:
+	db "TP:@"
+
+NoSignatureMoveText:
+	db "  ----  @"
+
+; Works out how much the mon in wLoadedMon is worth and stores it in
+; wMonValue (binary) and wMonValueBCD (BCD, ready to be paid out).
+; value = ((Level / 2) * (MaxHP / 2) * (MaxTP / 2)) / 2, clamped to 1-999999.
+CalcMonValue::
+; t = (MaxHP / 2) * (Level / 2); t fits in 16 bits (50 * 499 = 24950)
+	ld hl, wLoadedMonMaxHP
+	ld a, [hli]
+	ld b, a
+	ld c, [hl]
+	srl b
+	rr c
+	xor a
+	ldh [hMultiplicand], a
+	ld a, b
+	ldh [hMultiplicand + 1], a
+	ld a, c
+	ldh [hMultiplicand + 2], a
+	ld a, [wLoadedMonLevel]
+	srl a
+	ldh [hMultiplier], a
+	call Multiply
+	ldh a, [hProduct + 2]
+	ld d, a
+	ldh a, [hProduct + 3]
+	ld e, a ; de = t
+; wMonValue = t * LOW(MaxTP / 2)
+	ld hl, wLoadedMonMaxTP
+	ld a, [hli]
+	ld b, a
+	ld c, [hl]
+	srl b
+	rr c ; bc = MaxTP / 2
+	push bc
+	xor a
+	ldh [hMultiplicand], a
+	ld a, d
+	ldh [hMultiplicand + 1], a
+	ld a, e
+	ldh [hMultiplicand + 2], a
+	ld a, c
+	ldh [hMultiplier], a
+	call Multiply
+	ldh a, [hProduct + 1]
+	ld [wMonValue], a
+	ldh a, [hProduct + 2]
+	ld [wMonValue + 1], a
+	ldh a, [hProduct + 3]
+	ld [wMonValue + 2], a
+	pop bc
+; add (t * HIGH(MaxTP / 2)) << 8
+	ld a, b
+	and a
+	jr z, .noHighByte
+	xor a
+	ldh [hMultiplicand], a
+	ld a, d
+	ldh [hMultiplicand + 1], a
+	ld a, e
+	ldh [hMultiplicand + 2], a
+	ld a, b
+	ldh [hMultiplier], a
+	call Multiply
+	ldh a, [hProduct + 3]
+	ld b, a
+	ldh a, [hProduct + 2]
+	ld c, a
+	ld a, [wMonValue + 1]
+	add b
+	ld [wMonValue + 1], a
+	ld a, [wMonValue]
+	adc c
+	ld [wMonValue], a
+.noHighByte
+; halve the result
+	ld hl, wMonValue
+	srl [hl]
+	inc hl
+	rr [hl]
+	inc hl
+	rr [hl]
+; clamp to 999999 ($0f423f)
+	ld a, [wMonValue]
+	cp $0f
+	jr c, .notTooBig
+	jr nz, .tooBig
+	ld a, [wMonValue + 1]
+	cp $42
+	jr c, .notTooBig
+	jr nz, .tooBig
+	ld a, [wMonValue + 2]
+	cp $40
+	jr c, .notTooBig
+.tooBig
+	ld a, $0f
+	ld [wMonValue], a
+	ld a, $42
+	ld [wMonValue + 1], a
+	ld a, $3f
+	ld [wMonValue + 2], a
+	jr .toBCD
+.notTooBig
+; every mon is worth at least 1
+	ld a, [wMonValue]
+	ld hl, wMonValue + 1
+	or [hl]
+	inc hl
+	or [hl]
+	jr nz, .toBCD
+	ld [hl], 1
+.toBCD
+; convert wMonValue to BCD by pulling off one decimal digit at a time
+	xor a
+	ldh [hDividend], a
+	ld a, [wMonValue]
+	ldh [hDividend + 1], a
+	ld a, [wMonValue + 1]
+	ldh [hDividend + 2], a
+	ld a, [wMonValue + 2]
+	ldh [hDividend + 3], a
+	ld hl, wMonValueBCD + 2
+	ld c, 3
+.bcdLoop
+	ld a, 10
+	ldh [hDivisor], a
+	ld b, 4
+	call Divide
+	ldh a, [hRemainder]
+	ld d, a ; low digit
+	ld a, 10
+	ldh [hDivisor], a
+	ld b, 4
+	call Divide
+	ldh a, [hRemainder]
+	swap a
+	or d
+	ld [hld], a
+	dec c
+	jr nz, .bcdLoop
+	ret
 
 ; Draws a line starting from hl high b and wide c
 DrawLineBox:
@@ -355,47 +550,29 @@ StatusScreen2:
 	ld b, a ; Number of moves ?
 	hlcoord 14, 9
 	ld de, SCREEN_WIDTH * 2
-	ld a, "P"
-	call StatusScreen_PrintPP ; Print "PP"
+	call StatusScreen_PrintTP ; Print "TP"
 	ld a, b
 	and a
-	jr z, .InitPP
+	jr z, .InitTP
 	ld c, a
 	ld a, "-"
-	call StatusScreen_PrintPP ; Fill the rest with --
-.InitPP
+	call StatusScreen_PrintPlaceholder ; Fill the rest with --
+.InitTP
 	ld hl, wLoadedMonMoves
 	decoord 17, 9
 	ld b, 0
-.PrintPP
+.PrintTP
 	ld a, [hli]
 	and a
-	jr z, .PPDone
+	jr z, .TPDone
 	push bc
 	push hl
-	push de
-	ld hl, wCurrentMenuItem
-	ld a, [hl]
-	push af
-	ld a, b
-	ld [hl], a
-	push hl
-	callfar GetMaxPP
-	pop hl
-	pop af
-	ld [hl], a
-	pop de
-	pop hl
-	push hl
-	ld bc, wPartyMon1PP - wPartyMon1Moves - 1
-	add hl, bc
-	ld a, [hl]
-	and $3f
-	ld [wStatusScreenCurrentPP], a
+	call GetMoveTPCost
+	ld [wMoveTPCostBuffer], a
 	ld h, d
 	ld l, e
 	push hl
-	ld de, wMaxPP
+	ld de, wMoveTPCostBuffer
 	lb bc, 1, 2
 	call PrintNumber
 	pop hl
@@ -407,9 +584,9 @@ StatusScreen2:
 	pop bc
 	inc b
 	ld a, b
-	cp $4
-	jr nz, .PrintPP
-.PPDone
+	cp NUM_MOVES
+	jr nz, .PrintTP
+.TPDone
 	hlcoord 7, 1
 	ld de, StatusScreenExpText
 	call PlaceString
@@ -492,11 +669,22 @@ StatusScreen_ClearName:
 	ld a, " "
 	jp FillMemory
 
-StatusScreen_PrintPP:
-; print PP or -- c times, going down two rows each time
+StatusScreen_PrintTP:
+; print "TP" c times, going down two rows each time
+	ld a, "T"
+	ld [hli], a
+	ld a, "P"
+	ld [hld], a
+	add hl, de
+	dec c
+	jr nz, StatusScreen_PrintTP
+	ret
+
+StatusScreen_PrintPlaceholder:
+; print the character in a twice, c times, going down two rows each time
 	ld [hli], a
 	ld [hld], a
 	add hl, de
 	dec c
-	jr nz, StatusScreen_PrintPP
+	jr nz, StatusScreen_PrintPlaceholder
 	ret

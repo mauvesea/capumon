@@ -124,11 +124,18 @@ _AddPartyMon::
 	ld [hl], b         ; write IVs
 	ld bc, (wPartyMon1HPExp - 1) - (wPartyMon1DVs + 1)
 	add hl, bc
-	ld a, 1
-	ld c, a
-	xor a
-	ld b, a
-	call CalcStat      ; calc HP stat (set cur Hp to max HP)
+	ld c, STAT_HEALTH + 1
+	ld b, 0
+	call CalcStat      ; calc HP stat (set cur HP to max HP)
+	ldh a, [hMultiplicand+1]
+	ld [de], a
+	inc de
+	ldh a, [hMultiplicand+2]
+	ld [de], a
+	inc de
+	ld c, STAT_TECH + 1
+	ld b, 0
+	call CalcStat      ; calc TP stat (set cur TP to max TP)
 	ldh a, [hMultiplicand+1]
 	ld [de], a
 	inc de
@@ -152,6 +159,12 @@ _AddPartyMon::
 	ld [de], a
 	inc de
 	ld a, [wEnemyMonHP+1]
+	ld [de], a
+	inc de
+	ld a, [wEnemyMonTP]    ; copy TP from cur enemy mon
+	ld [de], a
+	inc de
+	ld a, [wEnemyMonTP+1]
 	ld [de], a
 	inc de
 	xor a
@@ -222,7 +235,6 @@ _AddPartyMon::
 	inc de
 	inc de
 	pop hl
-	call AddPartyMon_WriteMovePP
 	inc de
 	ld a, [wCurEnemyLVL]
 	ld [de], a
@@ -231,7 +243,7 @@ _AddPartyMon::
 	dec a
 	jr nz, .calcFreshStats
 	ld hl, wEnemyMonMaxHP
-	ld bc, $a
+	ld bc, NUM_STATS * 2
 	call CopyData          ; copy stats of cur enemy mon
 	pop hl
 	jr .done
@@ -243,36 +255,6 @@ _AddPartyMon::
 	call CalcStats         ; calculate fresh set of stats
 .done
 	scf
-	ret
-
-LoadMovePPs:
-	call GetPredefRegisters
-	; fallthrough
-AddPartyMon_WriteMovePP:
-	ld b, NUM_MOVES
-.pploop
-	ld a, [hli]     ; read move ID
-	and a
-	jr z, .empty
-	dec a
-	push hl
-	push de
-	push bc
-	ld hl, Moves
-	ld bc, MOVE_LENGTH
-	call AddNTimes
-	ld de, wcd6d
-	ld a, BANK(Moves)
-	call FarCopyData
-	pop bc
-	pop de
-	pop hl
-	ld a, [wcd6d + 5] ; PP is byte 5 of move data
-.empty
-	inc de
-	ld [de], a
-	dec b
-	jr nz, .pploop ; there are still moves to read
 	ret
 
 ; adds enemy mon [wcf91] (at position [wWhichPokemon] in enemy list) to own party
@@ -421,10 +403,13 @@ _MoveMon::
 	ld bc, wBoxMon2 - wBoxMon1
 	add hl, bc
 	ld a, [hl] ; hl = Level
-	inc de
-	inc de
-	inc de
-	ld [de], a ; de = BoxLevel
+	push hl
+	ld h, d
+	ld l, e
+	ld bc, wBoxMon1BoxLevel - wBoxMon1
+	add hl, bc
+	ld [hl], a ; write it to the destination's BoxLevel
+	pop hl
 .findOTdest
 	ld a, [wMoveMonType]
 	cp PARTY_TO_DAYCARE
@@ -507,7 +492,7 @@ _MoveMon::
 	ld [hli], a
 	ld d, h
 	ld e, l
-	ld bc, -18
+	ld bc, (wPartyMon1HPExp - 1) - wPartyMon1Stats
 	add hl, bc
 	ld b, $1
 	call CalcStats

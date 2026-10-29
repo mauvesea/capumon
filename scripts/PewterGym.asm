@@ -90,7 +90,7 @@ PewterGym_TextPointers:
 PewterGymTrainerHeaders:
 	def_trainers 2
 PewterGymTrainerHeader0:
-	trainer EVENT_BEAT_PEWTER_GYM_TRAINER_0, 5, PewterGymBattleText1, PewterGymEndBattleText1, PewterGymAfterBattleText1
+	trainer EVENT_BEAT_PEWTER_GYM_TRAINER_0, 5, PewterGymBattleText1, PewterGymEndBattleText1, PewterGymAfterBattleText1, PewterGymInBattleScript0
 	db -1 ; end
 
 BrockText:
@@ -221,3 +221,7 @@ PewterGymText_5c524:
 PewterGymGuidePostBattleText:
 	text_far _PewterGymGuidePostBattleText
 	text_end
+
+; Pre-battle TALK scripts. Every trainer gets its own copy of the default
+; placeholder so it can be replaced with something specific to them.
+	default_in_battle_script PewterGymInBattleScript0

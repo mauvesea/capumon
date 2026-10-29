@@ -27,23 +27,23 @@ Route8_TextPointers:
 Route8TrainerHeaders:
 	def_trainers
 Route8TrainerHeader0:
-	trainer EVENT_BEAT_ROUTE_8_TRAINER_0, 4, Route8BattleText1, Route8EndBattleText1, Route8AfterBattleText1
+	trainer EVENT_BEAT_ROUTE_8_TRAINER_0, 4, Route8BattleText1, Route8EndBattleText1, Route8AfterBattleText1, Route8InBattleScript0
 Route8TrainerHeader1:
-	trainer EVENT_BEAT_ROUTE_8_TRAINER_1, 4, Route8BattleText2, Route8EndBattleText2, Route8AfterBattleText2
+	trainer EVENT_BEAT_ROUTE_8_TRAINER_1, 4, Route8BattleText2, Route8EndBattleText2, Route8AfterBattleText2, Route8InBattleScript1
 Route8TrainerHeader2:
-	trainer EVENT_BEAT_ROUTE_8_TRAINER_2, 4, Route8BattleText3, Route8EndBattleText3, Route8AfterBattleText3
+	trainer EVENT_BEAT_ROUTE_8_TRAINER_2, 4, Route8BattleText3, Route8EndBattleText3, Route8AfterBattleText3, Route8InBattleScript2
 Route8TrainerHeader3:
-	trainer EVENT_BEAT_ROUTE_8_TRAINER_3, 2, Route8BattleText4, Route8EndBattleText4, Route8AfterBattleText4
+	trainer EVENT_BEAT_ROUTE_8_TRAINER_3, 2, Route8BattleText4, Route8EndBattleText4, Route8AfterBattleText4, Route8InBattleScript3
 Route8TrainerHeader4:
-	trainer EVENT_BEAT_ROUTE_8_TRAINER_4, 3, Route8BattleText5, Route8EndBattleText5, Route8AfterBattleText5
+	trainer EVENT_BEAT_ROUTE_8_TRAINER_4, 3, Route8BattleText5, Route8EndBattleText5, Route8AfterBattleText5, Route8InBattleScript4
 Route8TrainerHeader5:
-	trainer EVENT_BEAT_ROUTE_8_TRAINER_5, 3, Route8BattleText6, Route8EndBattleText6, Route8AfterBattleText6
+	trainer EVENT_BEAT_ROUTE_8_TRAINER_5, 3, Route8BattleText6, Route8EndBattleText6, Route8AfterBattleText6, Route8InBattleScript5
 Route8TrainerHeader6:
-	trainer EVENT_BEAT_ROUTE_8_TRAINER_6, 2, Route8BattleText7, Route8EndBattleText7, Route8AfterBattleText7
+	trainer EVENT_BEAT_ROUTE_8_TRAINER_6, 2, Route8BattleText7, Route8EndBattleText7, Route8AfterBattleText7, Route8InBattleScript6
 Route8TrainerHeader7:
-	trainer EVENT_BEAT_ROUTE_8_TRAINER_7, 2, Route8BattleText8, Route8EndBattleText8, Route8AfterBattleText8
+	trainer EVENT_BEAT_ROUTE_8_TRAINER_7, 2, Route8BattleText8, Route8EndBattleText8, Route8AfterBattleText8, Route8InBattleScript7
 Route8TrainerHeader8:
-	trainer EVENT_BEAT_ROUTE_8_TRAINER_8, 4, Route8BattleText9, Route8EndBattleText9, Route8AfterBattleText9
+	trainer EVENT_BEAT_ROUTE_8_TRAINER_8, 4, Route8BattleText9, Route8EndBattleText9, Route8AfterBattleText9, Route8InBattleScript8
 	db -1 ; end
 
 Route8Text1:
@@ -211,3 +211,15 @@ Route8AfterBattleText9:
 Route8Text10:
 	text_far _Route8Text10
 	text_end
+
+; Pre-battle TALK scripts. Every trainer gets its own copy of the default
+; placeholder so it can be replaced with something specific to them.
+	default_in_battle_script Route8InBattleScript0
+	default_in_battle_script Route8InBattleScript1
+	default_in_battle_script Route8InBattleScript2
+	default_in_battle_script Route8InBattleScript3
+	default_in_battle_script Route8InBattleScript4
+	default_in_battle_script Route8InBattleScript5
+	default_in_battle_script Route8InBattleScript6
+	default_in_battle_script Route8InBattleScript7
+	default_in_battle_script Route8InBattleScript8

@@ -27,21 +27,21 @@ Route3_TextPointers:
 Route3TrainerHeaders:
 	def_trainers 2
 Route3TrainerHeader0:
-	trainer EVENT_BEAT_ROUTE_3_TRAINER_0, 2, Route3BattleText1, Route3EndBattleText1, Route3AfterBattleText1
+	trainer EVENT_BEAT_ROUTE_3_TRAINER_0, 2, Route3BattleText1, Route3EndBattleText1, Route3AfterBattleText1, Route3InBattleScript0
 Route3TrainerHeader1:
-	trainer EVENT_BEAT_ROUTE_3_TRAINER_1, 3, Route3BattleText2, Route3EndBattleText2, Route3AfterBattleText2
+	trainer EVENT_BEAT_ROUTE_3_TRAINER_1, 3, Route3BattleText2, Route3EndBattleText2, Route3AfterBattleText2, Route3InBattleScript1
 Route3TrainerHeader2:
-	trainer EVENT_BEAT_ROUTE_3_TRAINER_2, 2, Route3BattleText3, Route3EndBattleText3, Route3AfterBattleText3
+	trainer EVENT_BEAT_ROUTE_3_TRAINER_2, 2, Route3BattleText3, Route3EndBattleText3, Route3AfterBattleText3, Route3InBattleScript2
 Route3TrainerHeader3:
-	trainer EVENT_BEAT_ROUTE_3_TRAINER_3, 1, Route3BattleText4, Route3EndBattleText4, Route3AfterBattleText4
+	trainer EVENT_BEAT_ROUTE_3_TRAINER_3, 1, Route3BattleText4, Route3EndBattleText4, Route3AfterBattleText4, Route3InBattleScript3
 Route3TrainerHeader4:
-	trainer EVENT_BEAT_ROUTE_3_TRAINER_4, 4, Route3BattleText5, Route3EndBattleText5, Route3AfterBattleText5
+	trainer EVENT_BEAT_ROUTE_3_TRAINER_4, 4, Route3BattleText5, Route3EndBattleText5, Route3AfterBattleText5, Route3InBattleScript4
 Route3TrainerHeader5:
-	trainer EVENT_BEAT_ROUTE_3_TRAINER_5, 3, Route3BattleText6, Route3EndBattleText6, Route3AfterBattleText6
+	trainer EVENT_BEAT_ROUTE_3_TRAINER_5, 3, Route3BattleText6, Route3EndBattleText6, Route3AfterBattleText6, Route3InBattleScript5
 Route3TrainerHeader6:
-	trainer EVENT_BEAT_ROUTE_3_TRAINER_6, 3, Route3BattleText7, Route3EndBattleText7, Route3AfterBattleText7
+	trainer EVENT_BEAT_ROUTE_3_TRAINER_6, 3, Route3BattleText7, Route3EndBattleText7, Route3AfterBattleText7, Route3InBattleScript6
 Route3TrainerHeader7:
-	trainer EVENT_BEAT_ROUTE_3_TRAINER_7, 2, Route3BattleText8, Route3EndBattleText8, Route3AfterBattleText8
+	trainer EVENT_BEAT_ROUTE_3_TRAINER_7, 2, Route3BattleText8, Route3EndBattleText8, Route3AfterBattleText8, Route3InBattleScript7
 	db -1 ; end
 
 Route3Text1:
@@ -195,3 +195,14 @@ Route3AfterBattleText8:
 Route3Text10:
 	text_far _Route3Text10
 	text_end
+
+; Pre-battle TALK scripts. Every trainer gets its own copy of the default
+; placeholder so it can be replaced with something specific to them.
+	default_in_battle_script Route3InBattleScript0
+	default_in_battle_script Route3InBattleScript1
+	default_in_battle_script Route3InBattleScript2
+	default_in_battle_script Route3InBattleScript3
+	default_in_battle_script Route3InBattleScript4
+	default_in_battle_script Route3InBattleScript5
+	default_in_battle_script Route3InBattleScript6
+	default_in_battle_script Route3InBattleScript7

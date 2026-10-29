@@ -1128,6 +1128,25 @@ ChooseNextMon:
 	or [hl]
 	ret
 
+; Faints every mon in the player's party. Used when the player gives up in the
+; pre-battle menu, so that the rest of the game treats it as a lost battle.
+; The party is healed again by ResetStatusAndHalveMoneyOnBlackout.
+FaintPlayerParty:
+	ld a, [wPartyCount]
+	and a
+	ret z
+	ld b, a
+	ld hl, wPartyMon1HP
+	ld de, wPartyMon2 - wPartyMon1
+.loop
+	xor a
+	ld [hli], a
+	ld [hld], a
+	add hl, de
+	dec b
+	jr nz, .loop
+	ret
+
 ; called when player is out of usable mons.
 ; prints appropriate lose message, sets carry flag if player blacked out (special case for initial rival fight)
 HandlePlayerBlackOut::
@@ -1633,13 +1652,10 @@ LoadBattleMonFromParty:
 	ld bc, wPartyMon1DVs - wPartyMon1OTID
 	add hl, bc
 	ld de, wBattleMonDVs
-	ld bc, wPartyMon1PP - wPartyMon1DVs
-	call CopyData
-	ld de, wBattleMonPP
-	ld bc, NUM_MOVES
+	ld bc, wPartyMon1Level - wPartyMon1DVs
 	call CopyData
 	ld de, wBattleMonLevel
-	ld bc, wBattleMonPP - wBattleMonLevel
+	ld bc, 1 + NUM_STATS * 2
 	call CopyData
 	ld a, [wBattleMonSpecies2]
 	ld [wd0b5], a
@@ -1677,13 +1693,10 @@ LoadEnemyMonFromParty:
 	ld bc, wEnemyMon1DVs - wEnemyMon1OTID
 	add hl, bc
 	ld de, wEnemyMonDVs
-	ld bc, wEnemyMon1PP - wEnemyMon1DVs
-	call CopyData
-	ld de, wEnemyMonPP
-	ld bc, NUM_MOVES
+	ld bc, wEnemyMon1Level - wEnemyMon1DVs
 	call CopyData
 	ld de, wEnemyMonLevel
-	ld bc, wEnemyMonPP - wEnemyMonLevel
+	ld bc, 1 + NUM_STATS * 2
 	call CopyData
 	ld a, [wEnemyMonSpecies]
 	ld [wd0b5], a
@@ -1804,7 +1817,7 @@ AnimateRetreatingPlayerMon: ; Fix send out animation
 	lb bc, 8, 8
 	jp ClearScreenArea
 
-; reads player's current mon's HP into wBattleMonHP
+; reads player's current mon's HP, TP and status into the battle mon struct
 ReadPlayerMonCurHPAndStatus:
 	ld a, [wPlayerMonNumber]
 	ld hl, wPartyMon1HP
@@ -1813,7 +1826,7 @@ ReadPlayerMonCurHPAndStatus:
 	ld d, h
 	ld e, l
 	ld hl, wBattleMonHP
-	ld bc, $4               ; 2 bytes HP, 1 byte unknown (unused?), 1 byte status
+	ld bc, wBattleMonType - wBattleMonHP ; 2 bytes HP, 2 bytes TP, 1 byte box level, 1 byte status
 	jp CopyData
 
 DrawHUDsAndHPBars:
@@ -1853,7 +1866,7 @@ DrawPlayerHUDAndHPBar: ; Player HP Bar
 	call CopyData
 	ld hl, wBattleMonLevel
 	ld de, wLoadedMonLevel
-	ld bc, wBattleMonPP - wBattleMonLevel
+	ld bc, 1 + NUM_STATS * 2
 	call CopyData
 	hlcoord 14, 8
 	push hl
@@ -1868,6 +1881,10 @@ DrawPlayerHUDAndHPBar: ; Player HP Bar
 	ld [wcf91], a
 	hlcoord 6, 0
 	call DrawPlayerHP
+	hlcoord 6, 2
+	ld de, wLoadedMonTP
+	lb bc, 2, 3
+	call PrintNumber
 	ld a, $1
 	ldh [hAutoBGTransferEnabled], a
 	ld hl, wPlayerHPBarColor
@@ -1998,6 +2015,10 @@ DrawEnemyHUDAndHPBar:
 ;	ld [wcf91], a
 	hlcoord 15, 0
 	call DrawEnemyHP
+	hlcoord 16, 2
+	ld de, wEnemyMonTP
+	lb bc, 2, 3
+	call PrintNumber
 	ld a, $1
 	ldh [hAutoBGTransferEnabled], a
 	ld hl, wEnemyHPBarColor
@@ -2484,9 +2505,9 @@ BattleMenu_RunWasSelected:
 MoveSelectionMenu:
 	ld a, [wMoveMenuType]
 	dec a
-	jr z, .mimicmenu
+	jp z, .mimicmenu
 	dec a
-	jr z, .relearnmenu
+	jp z, .relearnmenu
 	jr .regularmenu
 
 .loadmoves
@@ -2512,22 +2533,67 @@ MoveSelectionMenu:
 	ret z
 	ld hl, wBattleMonMoves
 	call .loadmoves
-	hlcoord 4, 12
+	hlcoord 0, 12
 	ld b, 4
-	ld c, 14
+	ld c, 18
 	di ; out of pure coincidence, it is possible for vblank to occur between the di and ei
 	   ; so it is necessary to put the di ei block to not cause tearing
 	call TextBoxBorder
-	hlcoord 4, 12
-	ld [hl], $7a
-	hlcoord 10, 12
-	ld [hl], $7e
 	ei
-	hlcoord 6, 13
+	hlcoord 2, 13
 	call .writemoves
-	ld b, $5
+	call .writemovetpcosts
+	ld b, $1
 	ld a, $c
-	jr .menuset
+	jp .menuset
+
+.writemovetpcosts
+; print "TP:<cost>" at column 14 beside each move the mon actually knows
+	ld hl, wBattleMonMoves
+	decoord 14, 13
+	ld c, NUM_MOVES
+.tpcostloop
+	ld a, [hl]
+	and a
+	jr z, .nomoveinslot
+	push hl
+	push de
+	push bc
+	call GetMoveTPCost
+	ld [wMoveTPCostBuffer], a
+	pop bc
+	pop hl ; hl = screen position for this row
+	push hl
+	push bc
+	ld de, BattleTPCostText
+	call PlaceString
+	pop bc
+	pop hl
+	push hl
+	push bc
+	ld de, 3
+	add hl, de
+	ld de, wMoveTPCostBuffer
+	lb bc, 1, 3
+	call PrintNumber
+	pop bc
+	pop hl
+	ld d, h
+	ld e, l
+	pop hl
+.nomoveinslot
+	inc hl
+	push hl
+	ld h, d
+	ld l, e
+	ld de, SCREEN_WIDTH
+	add hl, de
+	ld d, h
+	ld e, l
+	pop hl
+	dec c
+	jr nz, .tpcostloop
+	ret
 .mimicmenu
 	ld hl, wEnemyMonMoves
 	call .loadmoves
@@ -2658,14 +2724,15 @@ SelectMenuItem:
 .moveselected
 	pop af
 	ret nz
-	ld hl, wBattleMonPP
+	ld hl, wBattleMonMoves
 	ld a, [wCurrentMenuItem]
 	ld c, a
 	ld b, $0
 	add hl, bc
 	ld a, [hl]
-	and $3f
-	jr z, .noPP
+	ld hl, wBattleMonTP
+	call CanAffordMoveTP
+	jr nc, .noTP
 	ld a, [wPlayerDisabledMove]
 	swap a
 	and $f
@@ -2688,15 +2755,15 @@ SelectMenuItem:
 .disabled
 	ld hl, MoveDisabledText
 	jr .print
-.noPP
-	ld hl, MoveNoPPText
+.noTP
+	ld hl, MoveNoTPText
 .print
 	call PrintText
 	call LoadScreenTilesFromBuffer1
 	jp MoveSelectionMenu
 
-MoveNoPPText:
-	text_far _MoveNoPPText
+MoveNoTPText:
+	text_far _MoveNoTPText
 	text_end
 
 MoveDisabledText:
@@ -2705,6 +2772,9 @@ MoveDisabledText:
 
 WhichTechniqueString:
 	db "WHICH TECHNIQUE?@"
+
+BattleTPCostText:
+	db "TP:@"
 
 SelectMenuItem_CursorUp:
 	ld a, [wCurrentMenuItem]
@@ -2730,46 +2800,95 @@ SelectMenuItem_CursorDown:
 	jp SelectMenuItem
 
 AnyMoveToSelect:
-; return z and Struggle as the selected move if all moves have 0 PP and/or are disabled
+; return z and Struggle as the selected move if the mon can't pay the TP cost
+; of any of its moves (ignoring the disabled one)
 	ld a, STRUGGLE
 	ld [wPlayerSelectedMove], a
+	ld hl, wBattleMonMoves
 	ld a, [wPlayerDisabledMove]
-	and a
-	ld hl, wBattleMonPP
-	jr nz, .handleDisabledMove
-	ld a, [hli]
-	or [hl]
-	inc hl
-	or [hl]
-	inc hl
-	or [hl]
-	and $3f
-	ret nz
-	jr .noMovesLeft
-.handleDisabledMove
 	swap a
-	and $f ; get disabled move
+	and $f ; b = disabled move slot (1-4), 0 if none
 	ld b, a
-	ld d, NUM_MOVES + 1
-	xor a
-.handleDisabledMovePPLoop
-	dec d
-	jr z, .allMovesChecked
-	ld c, [hl] ; get move PP
+	ld c, 0
+.checkMoveLoop
+	ld a, c
+	inc a
+	cp b
+	jr z, .nextMove ; skip the disabled move
+	ld a, [hl]
+	push hl
+	push bc
+	ld hl, wBattleMonTP
+	call CanAffordMoveTP
+	pop bc
+	pop hl
+	jr c, .moveIsSelectable
+.nextMove
 	inc hl
-	dec b ; is this the disabled move?
-	jr z, .handleDisabledMovePPLoop ; if so, ignore its PP value
-	or c
-	jr .handleDisabledMovePPLoop
-.allMovesChecked
-	and a ; any PP left?
-	ret nz ; return if a move has PP left
-.noMovesLeft
+	inc c
+	ld a, c
+	cp NUM_MOVES
+	jr nz, .checkMoveLoop
+; no move can be paid for
 	ld hl, NoMovesLeftText
 	call PrintText
 	ld c, 60
 	call DelayFrames
 	xor a
+	ret
+.moveIsSelectable
+	ld a, $1
+	and a ; clear z
+	ret
+
+; Returns carry if the mon whose current TP is at hl can pay for move a.
+; STRUGGLE is always free; an empty move slot is never selectable.
+; Preserves hl.
+CanAffordMoveTP:
+	push hl
+	push bc
+	and a
+	jr z, .cannotAfford
+	cp STRUGGLE
+	jr z, .canAfford
+	call GetMoveTPCost
+	ld b, a
+	ld a, [hli]
+	and a
+	jr nz, .canAfford ; 256 or more TP always covers a one-byte cost
+	ld a, [hl]
+	cp b
+	jr c, .cannotAfford
+.canAfford
+	pop bc
+	pop hl
+	scf
+	ret
+.cannotAfford
+	pop bc
+	pop hl
+	and a
+	ret
+
+; Counts how many of the player's moves the active mon can pay for.
+; Returns the count in b.
+CountAffordableMoves:
+	ld hl, wBattleMonMoves
+	ld c, NUM_MOVES
+	ld b, 0
+.loop
+	ld a, [hli]
+	push hl
+	push bc
+	ld hl, wBattleMonTP
+	call CanAffordMoveTP
+	pop bc
+	pop hl
+	jr nc, .next
+	inc b
+.next
+	dec c
+	jr nz, .loop
 	ret
 
 NoMovesLeftText:
@@ -2782,8 +2901,6 @@ SwapMovesInMenu:
 	jr z, .noMenuItemSelected
 	ld hl, wBattleMonMoves
 	call .swapBytes ; swap moves
-	ld hl, wBattleMonPP
-	call .swapBytes ; swap move PP
 ; update the index of the disabled move if necessary
 	ld hl, wPlayerDisabledMove
 	ld a, [hl]
@@ -2817,12 +2934,7 @@ SwapMovesInMenu:
 	ld a, [wPlayerMonNumber]
 	ld bc, wPartyMon2 - wPartyMon1
 	call AddNTimes
-	push hl
 	call .swapBytes ; swap moves
-	pop hl
-	ld bc, wPartyMon1PP - wPartyMon1Moves
-	add hl, bc
-	call .swapBytes ; swap move PP
 	xor a
 	ld [wMenuItemToSwap], a ; deselect the item
 	jp MoveSelectionMenu
@@ -2853,26 +2965,8 @@ SwapMovesInMenu:
 	jp MoveSelectionMenu
 
 PrintMenuItem:
-	xor a
-	ldh [hAutoBGTransferEnabled], a
-	hlcoord 0, 8
-	ld b, 3
-	ld c, 9
-	call TextBoxBorder
-	ld a, [wPlayerDisabledMove]
-	and a
-	jr z, .notDisabled
-	swap a
-	and $f
-	ld b, a
-	ld a, [wCurrentMenuItem]
-	cp b
-	jr nz, .notDisabled
-	hlcoord 1, 10
-	ld de, DisabledText
-	call PlaceString
-	jr .moveDisabled
-.notDisabled
+; the move list shows each move's TP cost, so there is no info box to draw;
+; this just keeps the selected move in sync with the cursor
 	ld hl, wCurrentMenuItem
 	dec [hl]
 	xor a
@@ -2885,49 +2979,9 @@ PrintMenuItem:
 	ld a, [hl]
 	ld [wPlayerSelectedMove], a ; update wPlayerSelectedMove even if the move
 	                            ; isn't actually selected (just pointed to by the cursor)
-	ld a, [wPlayerMonNumber]
-	ld [wWhichPokemon], a
-	ld a, BATTLE_MON_DATA
-	ld [wMonDataLocation], a
-	callfar GetMaxPP
 	ld hl, wCurrentMenuItem
-	ld c, [hl]
 	inc [hl]
-	ld b, $0
-	ld hl, wBattleMonPP
-	add hl, bc
-	ld a, [hl]
-	and $3f
-	ld [wcd6d], a
-; print TYPE/<type> and <curPP>/<maxPP>
-	hlcoord 1, 9
-	ld de, TypeText
-	call PlaceString
-	hlcoord 7, 11
-	ld [hl], "/"
-	hlcoord 5, 9
-	ld [hl], "/"
-	hlcoord 5, 11
-	ld de, wcd6d
-	lb bc, 1, 2
-	call PrintNumber
-	hlcoord 8, 11
-	ld de, wMaxPP
-	lb bc, 1, 2
-	call PrintNumber
-	call GetCurrentMove
-	hlcoord 2, 10
-	predef PrintMoveType
-.moveDisabled
-	ld a, $1
-	ldh [hAutoBGTransferEnabled], a
-	jp Delay3
-
-DisabledText:
-	db "disabled!@"
-
-TypeText:
-	db "TYPE@"
+	jp GetCurrentMove
 
 SelectEnemyMove:
 	ld a, [wLinkState]
@@ -2950,7 +3004,7 @@ SelectEnemyMove:
 	ld b, 0
 	add hl, bc
 	ld a, [hl]
-	jr .done
+	jp .done
 .noLinkBattle
 	ld a, [wEnemyBattleStatus2]
 	and (1 << NEEDS_TO_RECHARGE) | (1 << USING_RAGE) ; need to recharge or using rage
@@ -2981,6 +3035,9 @@ SelectEnemyMove:
 	ld a, STRUGGLE ; struggle if the only move is disabled
 	jr nz, .done
 .atLeastTwoMovesAvailable
+	call EnemyHasUsableMove
+	ld a, STRUGGLE
+	jp z, .done ; struggle if no move's TP cost can be paid
 	ld a, [wIsInBattle]
 	dec a
 	jr z, .chooseRandomMove ; wild encounter
@@ -3014,12 +3071,59 @@ SelectEnemyMove:
 	jr z, .chooseRandomMove ; move disabled, try again
 	and a
 	jr z, .chooseRandomMove ; move non-existant, try again
+	ld d, a ; save the chosen move
+	push hl
+	ld hl, wEnemyMonTP
+	call CanAffordMoveTP
+	pop hl
+	ld a, d
+	jr nc, .chooseRandomMove ; not enough TP, try again
 .done
 	ld [wEnemySelectedMove], a
 	ret
 .linkedOpponentUsedStruggle
 	ld a, STRUGGLE
 	jr .done
+
+; Returns z if the enemy mon can't pay the TP cost of any of its moves
+; (ignoring the disabled one). Preserves hl.
+EnemyHasUsableMove:
+	push hl
+	push bc
+	ld hl, wEnemyMonMoves
+	ld a, [wEnemyDisabledMove]
+	swap a
+	and $f
+	ld b, a
+	ld c, 0
+.loop
+	ld a, c
+	inc a
+	cp b
+	jr z, .next ; skip the disabled move
+	ld a, [hl]
+	push hl
+	push bc
+	ld hl, wEnemyMonTP
+	call CanAffordMoveTP
+	pop bc
+	pop hl
+	jr c, .usable
+.next
+	inc hl
+	inc c
+	ld a, c
+	cp NUM_MOVES
+	jr nz, .loop
+	xor a ; set z
+	jr .doneChecking
+.usable
+	ld a, $1
+	and a ; clear z
+.doneChecking
+	pop bc
+	pop hl
+	ret
 
 ; this appears to exchange data with the other gameboy during link battles
 LinkBattleExchangeData:
@@ -3130,10 +3234,11 @@ PlayerCanExecuteChargingMove:
 	                    ; resulting in the Pokemon being invulnerable for the whole battle
 	res INVULNERABLE, [hl]
 PlayerCanExecuteMove:
+	call SubstituteStruggleIfNotEnoughTP
 	call PrintMonName1Text
-	ld hl, DecrementPP
+	ld hl, DecrementTP
 	ld de, wPlayerSelectedMove ; pointer to the move just used
-	ld b, BANK(DecrementPP)
+	ld b, BANK(DecrementTP)
 	call Bankswitch
 	ld a, [wPlayerMoveEffect] ; effect of the move just used
 	ld hl, ResidualEffects1
@@ -4133,35 +4238,11 @@ CheckForDisobedience:
 	ld a, [wPlayerSelectedMove]
 	cp STRUGGLE
 	jr z, .monDoesNothing ; mon will not use move if struggling
-; check if only one move has remaining PP
-	ld hl, wBattleMonPP
-	push hl
-	ld a, [hli]
-	and $3f
-	ld b, a
-	ld a, [hli]
-	and $3f
-	add b
-	ld b, a
-	ld a, [hli]
-	and $3f
-	add b
-	ld b, a
-	ld a, [hl]
-	and $3f
-	add b
-	pop hl
-	push af
-	ld a, [wCurrentMenuItem]
-	ld c, a
-	ld b, $0
-	add hl, bc
-	ld a, [hl]
-	and $3f
-	ld b, a
-	pop af
-	cp b
-	jr z, .monDoesNothing ; mon will not use move if only one move has remaining PP
+; check if only one move can currently be paid for
+	call CountAffordableMoves
+	ld a, b
+	cp 2
+	jr c, .monDoesNothing ; mon will not use move if only one move is affordable
 	ld a, $1
 	ld [wMonIsDisobedient], a
 	ld a, [wMaxMenuItem]
@@ -4176,13 +4257,14 @@ CheckForDisobedience:
 	cp c
 	jr z, .chooseMove ; if the random number matches the move the player selected, choose another
 	ld [wCurrentMenuItem], a
-	ld hl, wBattleMonPP
+	ld hl, wBattleMonMoves
 	ld e, a
 	ld d, $0
 	add hl, de
 	ld a, [hl]
-	and a ; does the move have any PP left?
-	jr z, .chooseMove ; if the move has no PP left, choose another
+	ld hl, wBattleMonTP
+	call CanAffordMoveTP
+	jr nc, .chooseMove ; if the move's TP cost can't be paid, choose another
 	ld a, [wCurrentMenuItem]
 	ld c, a
 	ld b, $0
@@ -4250,7 +4332,7 @@ GetDamageVarsForPlayerAttack:
 	and a ; check for critical hit
 	jr z, .scaleStats
 ; in the case of a critical hit, reset the player's attack and the enemy's defense to their base values
-	ld c, 3 ; defense stat
+	ld c, STAT_DEFENSE + 1 ; defense stat
 	call GetEnemyMonStat
 	ldh a, [hProduct + 2]
 	ld b, a
@@ -4282,7 +4364,7 @@ GetDamageVarsForPlayerAttack:
 	and a ; check for critical hit
 	jr z, .scaleStats
 ; in the case of a critical hit, reset the player's and enemy's specials to their base values
-	ld c, 5 ; special stat
+	ld c, STAT_SPECIAL + 1 ; special stat
 	call GetEnemyMonStat
 	ldh a, [hProduct + 2]
 	ld b, a
@@ -4371,7 +4453,7 @@ GetDamageVarsForEnemyAttack:
 	ld b, a
 	ld c, [hl]
 	push bc
-	ld c, 2 ; attack stat
+	ld c, STAT_ATTACK + 1 ; attack stat
 	call GetEnemyMonStat
 	ld hl, hProduct + 2
 	pop bc
@@ -4403,7 +4485,7 @@ GetDamageVarsForEnemyAttack:
 	ld b, a
 	ld c, [hl]
 	push bc
-	ld c, 5 ; special stat
+	ld c, STAT_SPECIAL + 1 ; special stat
 	call GetEnemyMonStat
 	ld hl, hProduct + 2
 	pop bc
@@ -4447,7 +4529,7 @@ GetDamageVarsForEnemyAttack:
 	ret
 
 ; get stat c of enemy mon
-; c: stat to get (HP=1,Attack=2,Defense=3,Speed=4,Special=5)
+; c: stat to get (HP=1,TP=2,Attack=3,Defense=4,Speed=5,Special=6)
 GetEnemyMonStat:
 	push de
 	push bc
@@ -4484,7 +4566,7 @@ GetEnemyMonStat:
 	ld [de], a
 	pop bc
 	ld b, $0
-	ld hl, wLoadedMonSpeedExp - $b ; this base address makes CalcStat look in [wLoadedMonSpeedExp] for DVs
+	ld hl, wLoadedMonSpeedExp - (wPartyMon1DVs - (wPartyMon1HPExp - 1)) ; this base address makes CalcStat look in [wLoadedMonSpeedExp] for DVs
 	call CalcStat
 	pop de
 	ret
@@ -5194,7 +5276,6 @@ ReloadMoveData:
 	call AddNTimes
 	ld a, BANK(Moves)
 	call FarCopyData ; copy the move's stats
-	call IncrementMovePP
 ; the follow two function calls are used to reload the move name
 	call GetMoveName
 	call CopyToStringBuffer
@@ -5229,40 +5310,6 @@ MetronomePickMove:
 	jr z, .pickMoveLoop
 	ld [hl], a
 	jr ReloadMoveData
-
-; this function increments the current move's PP
-; it's used to prevent moves that run another move within the same turn
-; (like Mirror Move and Metronome) from losing 2 PP
-IncrementMovePP:
-	ldh a, [hWhoseTurn]
-	and a
-; values for player turn
-	ld hl, wBattleMonPP
-	ld de, wPartyMon1PP
-	ld a, [wPlayerMoveListIndex]
-	jr z, .next
-; values for enemy turn
-	ld hl, wEnemyMonPP
-	ld de, wEnemyMon1PP
-	ld a, [wEnemyMoveListIndex]
-.next
-	ld b, $00
-	ld c, a
-	add hl, bc
-	inc [hl] ; increment PP in the currently battling pokemon memory location
-	ld h, d
-	ld l, e
-	add hl, bc
-	ldh a, [hWhoseTurn]
-	and a
-	ld a, [wPlayerMonNumber] ; value for player turn
-	jr z, .updatePP
-	ld a, [wEnemyMonPartyPos] ; value for enemy turn
-.updatePP
-	ld bc, wEnemyMon2 - wEnemyMon1
-	call AddNTimes
-	inc [hl] ; increment PP in the party memory location
-	ret
 
 ; function to adjust the base damage of an attack to account for type effectiveness
 AdjustDamageForMoveType:
@@ -5703,7 +5750,12 @@ EnemyCanExecuteChargingMove:
 EnemyCanExecuteMove:
 	xor a
 	ld [wMonIsDisobedient], a
+	call SubstituteStruggleIfNotEnoughTP
 	call PrintMonName1Text
+	ld hl, DecrementTP
+	ld de, wEnemySelectedMove ; pointer to the move just used
+	ld b, BANK(DecrementTP)
+	call Bankswitch
 	ld a, [wEnemyMoveEffect]
 	ld hl, ResidualEffects1
 	ld de, $1
@@ -6149,6 +6201,41 @@ CheckEnemyStatusConditions:
 	and a ; clear Z flag
 	ret
 
+; If the active mon can't pay the TP cost of the move it's about to use,
+; it uses STRUGGLE instead (and spends no TP).
+SubstituteStruggleIfNotEnoughTP:
+; moves that DecrementTP doesn't charge for can always be used
+	ldh a, [hWhoseTurn]
+	and a
+	ld hl, wPlayerBattleStatus1
+	jr z, .gotBattleStatus
+	ld hl, wEnemyBattleStatus1
+.gotBattleStatus
+	ld a, [hli]
+	and (1 << STORING_ENERGY) | (1 << THRASHING_ABOUT) | (1 << ATTACKING_MULTIPLE_TIMES)
+	ret nz
+	bit USING_RAGE, [hl]
+	ret nz
+	ldh a, [hWhoseTurn]
+	and a
+	ld hl, wPlayerSelectedMove
+	ld de, wBattleMonTP
+	jr z, .gotPointers
+	ld hl, wEnemySelectedMove
+	ld de, wEnemyMonTP
+.gotPointers
+	ld a, [hl]
+	and a
+	ret z
+	push hl
+	ld h, d
+	ld l, e
+	call CanAffordMoveTP
+	pop hl
+	ret c
+	ld [hl], STRUGGLE
+	; fallthrough to reload the move data for STRUGGLE
+
 GetCurrentMove:
 	ldh a, [hWhoseTurn]
 	and a
@@ -6223,10 +6310,14 @@ LoadEnemyMonData:
 	ld a, [wEnemyBattleStatus3]
 	bit TRANSFORMED, a ; is enemy mon transformed?
 	jr nz, .copyTypes ; if transformed, jump
-; if it's a wild mon and not transformed, init the current HP to max HP and the status to 0
+; if it's a wild mon and not transformed, init the current HP/TP to max and the status to 0
 	ld a, [wEnemyMonMaxHP]
 	ld [hli], a
 	ld a, [wEnemyMonMaxHP+1]
+	ld [hli], a
+	ld a, [wEnemyMonMaxTP]
+	ld [hli], a
+	ld a, [wEnemyMonMaxTP+1]
 	ld [hli], a
 	xor a
 	inc hl
@@ -6242,6 +6333,10 @@ LoadEnemyMonData:
 	ld [wEnemyMonHP], a
 	ld a, [hli]
 	ld [wEnemyMonHP + 1], a
+	ld a, [hli]
+	ld [wEnemyMonTP], a
+	ld a, [hli]
+	ld [wEnemyMonTP + 1], a
 	ld a, [wWhichPokemon]
 	ld [wEnemyMonPartyPos], a
 	inc hl
@@ -6270,7 +6365,7 @@ LoadEnemyMonData:
 	call AddNTimes
 	ld bc, NUM_MOVES
 	call CopyData
-	jr .loadMovePPs
+	jr .copyBaseStats
 .copyStandardMoves
 ; for a wild mon, first copy default moves from the mon header
 	ld hl, wMonHMoves
@@ -6291,10 +6386,7 @@ LoadEnemyMonData:
 	xor a
 	ld [wLearningMovesFromDayCare], a
 	predef WriteMonMoves ; get moves based on current level
-.loadMovePPs
-	ld hl, wEnemyMonMoves
-	ld de, wEnemyMonPP - 1
-	predef LoadMovePPs
+.copyBaseStats
 	ld hl, wMonHBaseStats
 	ld de, wEnemyMonBaseStats
 	ld b, NUM_STATS
@@ -6558,7 +6650,7 @@ CalculateModifiedStats:
 	call CalculateModifiedStat
 	inc c
 	ld a, c
-	cp NUM_STATS - 1
+	cp NUM_MODIFIED_STATS
 	jr nz, .loop
 	ret
 
@@ -6930,7 +7022,26 @@ _InitBattleCommon:
 	ld a, [wIsInBattle]
 	dec a ; is it a wild battle?
 	call z, DrawEnemyHUDAndHPBar ; draw enemy HUD and HP bar if it's a wild battle
+	ld a, [wPrebattleAction]
+	cp PREBATTLE_ACTION_DRAW
+	jr z, .calledItADraw
+	cp PREBATTLE_ACTION_GIVE_UP
+	jr z, .playerGaveUp
 	call StartBattle
+	jr .battleOver
+.playerGaveUp
+; giving up counts as a loss, so wipe the party out and black the player out
+; the same way running out of usable mons would
+	call FaintPlayerParty
+	ld a, $1 ; lost
+	ld [wBattleResult], a
+	call HandlePlayerBlackOut
+	jr .battleOver
+.calledItADraw
+; the battle never happens, so no prize money is handed out
+	ld a, $2 ; draw
+	ld [wBattleResult], a
+.battleOver
 	callfar EndOfBattle
 	pop af
 	ld [wLetterPrintingDelayFlags], a

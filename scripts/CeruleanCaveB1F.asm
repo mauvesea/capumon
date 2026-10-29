@@ -20,7 +20,7 @@ CeruleanCaveB1F_TextPointers:
 CeruleanCaveB1FTrainerHeaders:
 	def_trainers
 MewtwoTrainerHeader:
-	trainer EVENT_BEAT_MEWTWO, 0, MewtwoBattleText, MewtwoBattleText, MewtwoBattleText
+	trainer EVENT_BEAT_MEWTWO, 0, MewtwoBattleText, MewtwoBattleText, MewtwoBattleText, CeruleanCaveB1FInBattleScript0
 	db -1 ; end
 
 MewtwoText:
@@ -36,3 +36,7 @@ MewtwoBattleText:
 	call PlayCry
 	call WaitForSoundToFinish
 	jp TextScriptEnd
+
+; Pre-battle TALK scripts. Every trainer gets its own copy of the default
+; placeholder so it can be replaced with something specific to them.
+	default_in_battle_script CeruleanCaveB1FInBattleScript0

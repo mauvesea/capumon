@@ -60,13 +60,13 @@ PokemonTower5F_TextPointers:
 PokemonTower5TrainerHeaders:
 	def_trainers 2
 PokemonTower5TrainerHeader0:
-	trainer EVENT_BEAT_POKEMONTOWER_5_TRAINER_0, 2, PokemonTower5BattleText1, PokemonTower5EndBattleText1, PokemonTower5AfterBattleText1
+	trainer EVENT_BEAT_POKEMONTOWER_5_TRAINER_0, 2, PokemonTower5BattleText1, PokemonTower5EndBattleText1, PokemonTower5AfterBattleText1, PokemonTower5FInBattleScript0
 PokemonTower5TrainerHeader1:
-	trainer EVENT_BEAT_POKEMONTOWER_5_TRAINER_1, 3, PokemonTower5BattleText2, PokemonTower5EndBattleText2, PokemonTower5AfterBattleText2
+	trainer EVENT_BEAT_POKEMONTOWER_5_TRAINER_1, 3, PokemonTower5BattleText2, PokemonTower5EndBattleText2, PokemonTower5AfterBattleText2, PokemonTower5FInBattleScript1
 PokemonTower5TrainerHeader2:
-	trainer EVENT_BEAT_POKEMONTOWER_5_TRAINER_2, 2, PokemonTower5BattleText3, PokemonTower5EndBattleText3, PokemonTower5AfterBattleText3
+	trainer EVENT_BEAT_POKEMONTOWER_5_TRAINER_2, 2, PokemonTower5BattleText3, PokemonTower5EndBattleText3, PokemonTower5AfterBattleText3, PokemonTower5FInBattleScript2
 PokemonTower5TrainerHeader3:
-	trainer EVENT_BEAT_POKEMONTOWER_5_TRAINER_3, 2, PokemonTower5BattleText4, PokemonTower5EndBattleText4, PokemonTower5AfterBattleText4
+	trainer EVENT_BEAT_POKEMONTOWER_5_TRAINER_3, 2, PokemonTower5BattleText4, PokemonTower5EndBattleText4, PokemonTower5AfterBattleText4, PokemonTower5FInBattleScript3
 	db -1 ; end
 
 PokemonTower5Text1:
@@ -148,3 +148,10 @@ PokemonTower5AfterBattleText4:
 PokemonTower5Text7:
 	text_far _PokemonTower5Text7
 	text_end
+
+; Pre-battle TALK scripts. Every trainer gets its own copy of the default
+; placeholder so it can be replaced with something specific to them.
+	default_in_battle_script PokemonTower5FInBattleScript0
+	default_in_battle_script PokemonTower5FInBattleScript1
+	default_in_battle_script PokemonTower5FInBattleScript2
+	default_in_battle_script PokemonTower5FInBattleScript3

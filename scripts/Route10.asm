@@ -27,17 +27,17 @@ Route10_TextPointers:
 Route10TrainerHeaders:
 	def_trainers
 Route10TrainerHeader0:
-	trainer EVENT_BEAT_ROUTE_10_TRAINER_0, 4, Route10BattleText1, Route10EndBattleText1, Route10AfterBattleText1
+	trainer EVENT_BEAT_ROUTE_10_TRAINER_0, 4, Route10BattleText1, Route10EndBattleText1, Route10AfterBattleText1, Route10InBattleScript0
 Route10TrainerHeader1:
-	trainer EVENT_BEAT_ROUTE_10_TRAINER_1, 3, Route10BattleText2, Route10EndBattleText2, Route10AfterBattleText2
+	trainer EVENT_BEAT_ROUTE_10_TRAINER_1, 3, Route10BattleText2, Route10EndBattleText2, Route10AfterBattleText2, Route10InBattleScript1
 Route10TrainerHeader2:
-	trainer EVENT_BEAT_ROUTE_10_TRAINER_2, 4, Route10BattleText3, Route10EndBattleText3, Route10AfterBattleText3
+	trainer EVENT_BEAT_ROUTE_10_TRAINER_2, 4, Route10BattleText3, Route10EndBattleText3, Route10AfterBattleText3, Route10InBattleScript2
 Route10TrainerHeader3:
-	trainer EVENT_BEAT_ROUTE_10_TRAINER_3, 3, Route10BattleText4, Route10EndBattleText4, Route10AfterBattleText4
+	trainer EVENT_BEAT_ROUTE_10_TRAINER_3, 3, Route10BattleText4, Route10EndBattleText4, Route10AfterBattleText4, Route10InBattleScript3
 Route10TrainerHeader4:
-	trainer EVENT_BEAT_ROUTE_10_TRAINER_4, 2, Route10BattleText5, Route10EndBattleText5, Route10AfterBattleText5
+	trainer EVENT_BEAT_ROUTE_10_TRAINER_4, 2, Route10BattleText5, Route10EndBattleText5, Route10AfterBattleText5, Route10InBattleScript4
 Route10TrainerHeader5:
-	trainer EVENT_BEAT_ROUTE_10_TRAINER_5, 2, Route10BattleText6, Route10EndBattleText6, Route10AfterBattleText6
+	trainer EVENT_BEAT_ROUTE_10_TRAINER_5, 2, Route10BattleText6, Route10EndBattleText6, Route10AfterBattleText6, Route10InBattleScript5
 	db -1 ; end
 
 Route10Text1:
@@ -156,3 +156,12 @@ Route10Text7:
 Route10Text10:
 	text_far _Route10Text10
 	text_end
+
+; Pre-battle TALK scripts. Every trainer gets its own copy of the default
+; placeholder so it can be replaced with something specific to them.
+	default_in_battle_script Route10InBattleScript0
+	default_in_battle_script Route10InBattleScript1
+	default_in_battle_script Route10InBattleScript2
+	default_in_battle_script Route10InBattleScript3
+	default_in_battle_script Route10InBattleScript4
+	default_in_battle_script Route10InBattleScript5

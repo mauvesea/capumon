@@ -31,19 +31,19 @@ MtMoon1F_TextPointers:
 MtMoon1TrainerHeaders:
 	def_trainers
 MtMoon1TrainerHeader0:
-	trainer EVENT_BEAT_MT_MOON_1_TRAINER_0, 2, MtMoon1BattleText2, MtMoon1EndBattleText2, MtMoon1AfterBattleText2
+	trainer EVENT_BEAT_MT_MOON_1_TRAINER_0, 2, MtMoon1BattleText2, MtMoon1EndBattleText2, MtMoon1AfterBattleText2, MtMoon1FInBattleScript0
 MtMoon1TrainerHeader1:
-	trainer EVENT_BEAT_MT_MOON_1_TRAINER_1, 3, MtMoon1BattleText3, MtMoon1EndBattleText3, MtMoon1AfterBattleText3
+	trainer EVENT_BEAT_MT_MOON_1_TRAINER_1, 3, MtMoon1BattleText3, MtMoon1EndBattleText3, MtMoon1AfterBattleText3, MtMoon1FInBattleScript1
 MtMoon1TrainerHeader2:
-	trainer EVENT_BEAT_MT_MOON_1_TRAINER_2, 3, MtMoon1BattleText4, MtMoon1EndBattleText4, MtMoon1AfterBattleText4
+	trainer EVENT_BEAT_MT_MOON_1_TRAINER_2, 3, MtMoon1BattleText4, MtMoon1EndBattleText4, MtMoon1AfterBattleText4, MtMoon1FInBattleScript2
 MtMoon1TrainerHeader3:
-	trainer EVENT_BEAT_MT_MOON_1_TRAINER_3, 3, MtMoon1BattleText5, MtMoon1EndBattleText5, MtMoon1AfterBattleText5
+	trainer EVENT_BEAT_MT_MOON_1_TRAINER_3, 3, MtMoon1BattleText5, MtMoon1EndBattleText5, MtMoon1AfterBattleText5, MtMoon1FInBattleScript3
 MtMoon1TrainerHeader4:
-	trainer EVENT_BEAT_MT_MOON_1_TRAINER_4, 3, MtMoon1BattleText6, MtMoon1EndBattleText6, MtMoon1AfterBattleText6
+	trainer EVENT_BEAT_MT_MOON_1_TRAINER_4, 3, MtMoon1BattleText6, MtMoon1EndBattleText6, MtMoon1AfterBattleText6, MtMoon1FInBattleScript4
 MtMoon1TrainerHeader5:
-	trainer EVENT_BEAT_MT_MOON_1_TRAINER_5, 3, MtMoon1BattleText7, MtMoon1EndBattleText7, MtMoon1AfterBattleText7
+	trainer EVENT_BEAT_MT_MOON_1_TRAINER_5, 3, MtMoon1BattleText7, MtMoon1EndBattleText7, MtMoon1AfterBattleText7, MtMoon1FInBattleScript5
 MtMoon1TrainerHeader6:
-	trainer EVENT_BEAT_MT_MOON_1_TRAINER_6, 3, MtMoon1BattleText8, MtMoon1EndBattleText8, MtMoon1AfterBattleText8
+	trainer EVENT_BEAT_MT_MOON_1_TRAINER_6, 3, MtMoon1BattleText8, MtMoon1EndBattleText8, MtMoon1AfterBattleText8, MtMoon1FInBattleScript6
 	db -1 ; end
 
 MtMoon1Text1:
@@ -175,3 +175,13 @@ MtMoon1AfterBattleText8:
 MtMoon1Text14:
 	text_far _MtMoon1Text14
 	text_end
+
+; Pre-battle TALK scripts. Every trainer gets its own copy of the default
+; placeholder so it can be replaced with something specific to them.
+	default_in_battle_script MtMoon1FInBattleScript0
+	default_in_battle_script MtMoon1FInBattleScript1
+	default_in_battle_script MtMoon1FInBattleScript2
+	default_in_battle_script MtMoon1FInBattleScript3
+	default_in_battle_script MtMoon1FInBattleScript4
+	default_in_battle_script MtMoon1FInBattleScript5
+	default_in_battle_script MtMoon1FInBattleScript6

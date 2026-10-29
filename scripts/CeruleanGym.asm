@@ -82,9 +82,9 @@ CeruleanGym_TextPointers:
 CeruleanGymTrainerHeaders:
 	def_trainers 2
 CeruleanGymTrainerHeader0:
-	trainer EVENT_BEAT_CERULEAN_GYM_TRAINER_0, 3, CeruleanGymBattleText1, CeruleanGymEndBattleText1, CeruleanGymAfterBattleText1
+	trainer EVENT_BEAT_CERULEAN_GYM_TRAINER_0, 3, CeruleanGymBattleText1, CeruleanGymEndBattleText1, CeruleanGymAfterBattleText1, CeruleanGymInBattleScript0
 CeruleanGymTrainerHeader1:
-	trainer EVENT_BEAT_CERULEAN_GYM_TRAINER_1, 3, CeruleanGymBattleText2, CeruleanGymEndBattleText2, CeruleanGymAfterBattleText2
+	trainer EVENT_BEAT_CERULEAN_GYM_TRAINER_1, 3, CeruleanGymBattleText2, CeruleanGymEndBattleText2, CeruleanGymAfterBattleText2, CeruleanGymInBattleScript1
 	db -1 ; end
 
 MistyText:
@@ -205,3 +205,8 @@ CeruleanGymGuidePreBattleText:
 CeruleanGymGuidePostBattleText:
 	text_far _CeruleanGymGuidePostBattleText
 	text_end
+
+; Pre-battle TALK scripts. Every trainer gets its own copy of the default
+; placeholder so it can be replaced with something specific to them.
+	default_in_battle_script CeruleanGymInBattleScript0
+	default_in_battle_script CeruleanGymInBattleScript1

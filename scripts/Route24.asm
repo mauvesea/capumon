@@ -89,17 +89,17 @@ Route24_TextPointers:
 Route24TrainerHeaders:
 	def_trainers 2
 Route24TrainerHeader0:
-	trainer EVENT_BEAT_ROUTE_24_TRAINER_0, 4, Route24BattleText1, Route24EndBattleText1, Route24AfterBattleText1
+	trainer EVENT_BEAT_ROUTE_24_TRAINER_0, 4, Route24BattleText1, Route24EndBattleText1, Route24AfterBattleText1, Route24InBattleScript0
 Route24TrainerHeader1:
-	trainer EVENT_BEAT_ROUTE_24_TRAINER_1, 1, Route24BattleText2, Route24EndBattleText2, Route24AfterBattleText2
+	trainer EVENT_BEAT_ROUTE_24_TRAINER_1, 1, Route24BattleText2, Route24EndBattleText2, Route24AfterBattleText2, Route24InBattleScript1
 Route24TrainerHeader2:
-	trainer EVENT_BEAT_ROUTE_24_TRAINER_2, 1, Route24BattleText3, Route24EndBattleText3, Route24AfterBattleText3
+	trainer EVENT_BEAT_ROUTE_24_TRAINER_2, 1, Route24BattleText3, Route24EndBattleText3, Route24AfterBattleText3, Route24InBattleScript2
 Route24TrainerHeader3:
-	trainer EVENT_BEAT_ROUTE_24_TRAINER_3, 1, Route24BattleText4, Route24EndBattleText4, Route24AfterBattleText4
+	trainer EVENT_BEAT_ROUTE_24_TRAINER_3, 1, Route24BattleText4, Route24EndBattleText4, Route24AfterBattleText4, Route24InBattleScript3
 Route24TrainerHeader4:
-	trainer EVENT_BEAT_ROUTE_24_TRAINER_4, 1, Route24BattleText5, Route24EndBattleText5, Route24AfterBattleText5
+	trainer EVENT_BEAT_ROUTE_24_TRAINER_4, 1, Route24BattleText5, Route24EndBattleText5, Route24AfterBattleText5, Route24InBattleScript4
 Route24TrainerHeader5:
-	trainer EVENT_BEAT_ROUTE_24_TRAINER_5, 1, Route24BattleText6, Route24EndBattleText6, Route24AfterBattleText6
+	trainer EVENT_BEAT_ROUTE_24_TRAINER_5, 1, Route24BattleText6, Route24EndBattleText6, Route24AfterBattleText6, Route24InBattleScript5
 	db -1 ; end
 
 Route24Text1:
@@ -278,3 +278,12 @@ Route24EndBattleText6:
 Route24AfterBattleText6:
 	text_far _Route24AfterBattleText6
 	text_end
+
+; Pre-battle TALK scripts. Every trainer gets its own copy of the default
+; placeholder so it can be replaced with something specific to them.
+	default_in_battle_script Route24InBattleScript0
+	default_in_battle_script Route24InBattleScript1
+	default_in_battle_script Route24InBattleScript2
+	default_in_battle_script Route24InBattleScript3
+	default_in_battle_script Route24InBattleScript4
+	default_in_battle_script Route24InBattleScript5

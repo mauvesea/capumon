@@ -83,7 +83,7 @@ TokiwaChampCup_TextPointers:
 TokiwaChampCupDealerHeaders:
 	def_trainers 2
 TokiwaChampCupDealerHeader0:
-	trainer EVENT_BEAT_TOKIWA_CHAMP_CUP_DEALER_0, 0, TokiwaChampCupBattleText1, TokiwaChampCupEndBattleText1, TokiwaChampCupAfterBattleText1
+	trainer EVENT_BEAT_TOKIWA_CHAMP_CUP_DEALER_0, 0, TokiwaChampCupBattleText1, TokiwaChampCupEndBattleText1, TokiwaChampCupAfterBattleText1, TokiwaChampCupInBattleScript0
 	db -1 ; end
 
 
@@ -224,3 +224,7 @@ TokiwaChampCupGuideAfterDoorOpenText:
 TokiwaChampCupGuideChampBeatenText:
 	text_far _TokiwaChampCupGuideChampBeatenText
 	text_end
+
+; Pre-battle TALK scripts. Every trainer gets its own copy of the default
+; placeholder so it can be replaced with something specific to them.
+	default_in_battle_script TokiwaChampCupInBattleScript0

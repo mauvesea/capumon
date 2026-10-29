@@ -361,8 +361,14 @@ DisplayPrebattleMenu:
 	dec a
 	jp nz, .Run
 
-	call PrintInBattleText
-	jp DisplayPrebattleMenu
+;  TALK: run this trainer's in-battle script and do what it asks for
+	xor a ; PREBATTLE_ACTION_MENU
+	ld [wPrebattleAction], a
+	call RunInBattleScript
+	ld a, [wPrebattleAction]
+	and a
+	jp z, DisplayPrebattleMenu ; the script just wants to go back to the menu
+	ret
 
 .Tools ; Can't be used in prebattle
 	ld hl, PreBattleCantUseItemsText
@@ -370,9 +376,21 @@ DisplayPrebattleMenu:
 	jp DisplayPrebattleMenu
 
 .Run
-	jp DisplayPrebattleMenu
+	ld hl, GiveUpText
+	call PrintText
+	call YesNoChoice
+	ld a, [wCurrentMenuItem]
+	and a
+	jp nz, DisplayPrebattleMenu ; the player changed their mind
+	ld a, PREBATTLE_ACTION_GIVE_UP
+	ld [wPrebattleAction], a
+	ret
 
 PreBattleCantUseItemsText::
 	text_far _ItemsCantBeUsedHereText
+	text_end
+
+GiveUpText::
+	text_far _GiveUpText
 	text_end
 

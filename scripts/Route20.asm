@@ -78,25 +78,25 @@ Route20_TextPointers:
 Route20TrainerHeaders:
 	def_trainers
 Route20TrainerHeader0:
-	trainer EVENT_BEAT_ROUTE_20_TRAINER_0, 4, Route20BattleText1, Route20EndBattleText1, Route20AfterBattleText1
+	trainer EVENT_BEAT_ROUTE_20_TRAINER_0, 4, Route20BattleText1, Route20EndBattleText1, Route20AfterBattleText1, Route20InBattleScript0
 Route20TrainerHeader1:
-	trainer EVENT_BEAT_ROUTE_20_TRAINER_1, 4, Route20BattleText2, Route20EndBattleText2, Route20AfterBattleText2
+	trainer EVENT_BEAT_ROUTE_20_TRAINER_1, 4, Route20BattleText2, Route20EndBattleText2, Route20AfterBattleText2, Route20InBattleScript1
 Route20TrainerHeader2:
-	trainer EVENT_BEAT_ROUTE_20_TRAINER_2, 2, Route20BattleText3, Route20EndBattleText3, Route20AfterBattleText3
+	trainer EVENT_BEAT_ROUTE_20_TRAINER_2, 2, Route20BattleText3, Route20EndBattleText3, Route20AfterBattleText3, Route20InBattleScript2
 Route20TrainerHeader3:
-	trainer EVENT_BEAT_ROUTE_20_TRAINER_3, 4, Route20BattleText4, Route20EndBattleText4, Route20AfterBattleText4
+	trainer EVENT_BEAT_ROUTE_20_TRAINER_3, 4, Route20BattleText4, Route20EndBattleText4, Route20AfterBattleText4, Route20InBattleScript3
 Route20TrainerHeader4:
-	trainer EVENT_BEAT_ROUTE_20_TRAINER_4, 3, Route20BattleText5, Route20EndBattleText5, Route20AfterBattleText5
+	trainer EVENT_BEAT_ROUTE_20_TRAINER_4, 3, Route20BattleText5, Route20EndBattleText5, Route20AfterBattleText5, Route20InBattleScript4
 Route20TrainerHeader5:
-	trainer EVENT_BEAT_ROUTE_20_TRAINER_5, 4, Route20BattleText6, Route20EndBattleText6, Route20AfterBattleText6
+	trainer EVENT_BEAT_ROUTE_20_TRAINER_5, 4, Route20BattleText6, Route20EndBattleText6, Route20AfterBattleText6, Route20InBattleScript5
 Route20TrainerHeader6:
-	trainer EVENT_BEAT_ROUTE_20_TRAINER_6, 2, Route20BattleText7, Route20EndBattleText7, Route20AfterBattleText7
+	trainer EVENT_BEAT_ROUTE_20_TRAINER_6, 2, Route20BattleText7, Route20EndBattleText7, Route20AfterBattleText7, Route20InBattleScript6
 Route20TrainerHeader7:
-	trainer EVENT_BEAT_ROUTE_20_TRAINER_7, 4, Route20BattleText8, Route20EndBattleText8, Route20AfterBattleText8
+	trainer EVENT_BEAT_ROUTE_20_TRAINER_7, 4, Route20BattleText8, Route20EndBattleText8, Route20AfterBattleText8, Route20InBattleScript7
 Route20TrainerHeader8:
-	trainer EVENT_BEAT_ROUTE_20_TRAINER_8, 3, Route20BattleText9, Route20EndBattleText9, Route20AfterBattleText9
+	trainer EVENT_BEAT_ROUTE_20_TRAINER_8, 3, Route20BattleText9, Route20EndBattleText9, Route20AfterBattleText9, Route20InBattleScript8
 Route20TrainerHeader9:
-	trainer EVENT_BEAT_ROUTE_20_TRAINER_9, 4, Route20BattleText10, Route20EndBattleText10, Route20AfterBattleText10
+	trainer EVENT_BEAT_ROUTE_20_TRAINER_9, 4, Route20BattleText10, Route20EndBattleText10, Route20AfterBattleText10, Route20InBattleScript9
 	db -1 ; end
 
 Route20Text1:
@@ -283,3 +283,16 @@ Route20Text12:
 Route20Text11:
 	text_far _Route20Text11
 	text_end
+
+; Pre-battle TALK scripts. Every trainer gets its own copy of the default
+; placeholder so it can be replaced with something specific to them.
+	default_in_battle_script Route20InBattleScript0
+	default_in_battle_script Route20InBattleScript1
+	default_in_battle_script Route20InBattleScript2
+	default_in_battle_script Route20InBattleScript3
+	default_in_battle_script Route20InBattleScript4
+	default_in_battle_script Route20InBattleScript5
+	default_in_battle_script Route20InBattleScript6
+	default_in_battle_script Route20InBattleScript7
+	default_in_battle_script Route20InBattleScript8
+	default_in_battle_script Route20InBattleScript9

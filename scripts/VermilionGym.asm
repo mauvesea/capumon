@@ -102,11 +102,11 @@ VermilionGym_TextPointers:
 VermilionGymTrainerHeaders:
 	def_trainers 2
 VermilionGymTrainerHeader0:
-	trainer EVENT_BEAT_VERMILION_GYM_TRAINER_0, 3, VermilionGymBattleText1, VermilionGymEndBattleText1, VermilionGymAfterBattleText1
+	trainer EVENT_BEAT_VERMILION_GYM_TRAINER_0, 3, VermilionGymBattleText1, VermilionGymEndBattleText1, VermilionGymAfterBattleText1, VermilionGymInBattleScript0
 VermilionGymTrainerHeader1:
-	trainer EVENT_BEAT_VERMILION_GYM_TRAINER_1, 2, VermilionGymBattleText2, VermilionGymEndBattleText2, VermilionGymAfterBattleText2
+	trainer EVENT_BEAT_VERMILION_GYM_TRAINER_1, 2, VermilionGymBattleText2, VermilionGymEndBattleText2, VermilionGymAfterBattleText2, VermilionGymInBattleScript1
 VermilionGymTrainerHeader2:
-	trainer EVENT_BEAT_VERMILION_GYM_TRAINER_2, 3, VermilionGymBattleText3, VermilionGymEndBattleText3, VermilionGymAfterBattleText3
+	trainer EVENT_BEAT_VERMILION_GYM_TRAINER_2, 3, VermilionGymBattleText3, VermilionGymEndBattleText3, VermilionGymAfterBattleText3, VermilionGymInBattleScript2
 	db -1 ; end
 
 LTSurgeText:
@@ -246,3 +246,9 @@ VermilionGymGuidePreBattleText:
 VermilionGymGuidePostBattleText:
 	text_far _VermilionGymGuidePostBattleText
 	text_end
+
+; Pre-battle TALK scripts. Every trainer gets its own copy of the default
+; placeholder so it can be replaced with something specific to them.
+	default_in_battle_script VermilionGymInBattleScript0
+	default_in_battle_script VermilionGymInBattleScript1
+	default_in_battle_script VermilionGymInBattleScript2

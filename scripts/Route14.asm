@@ -28,25 +28,25 @@ Route14_TextPointers:
 Route14TrainerHeaders:
 	def_trainers
 Route14TrainerHeader0:
-	trainer EVENT_BEAT_ROUTE_14_TRAINER_0, 2, Route14BattleText1, Route14EndBattleText1, Route14AfterBattleText1
+	trainer EVENT_BEAT_ROUTE_14_TRAINER_0, 2, Route14BattleText1, Route14EndBattleText1, Route14AfterBattleText1, Route14InBattleScript0
 Route14TrainerHeader1:
-	trainer EVENT_BEAT_ROUTE_14_TRAINER_1, 2, Route14BattleText2, Route14EndBattleText2, Route14AfterBattleText2
+	trainer EVENT_BEAT_ROUTE_14_TRAINER_1, 2, Route14BattleText2, Route14EndBattleText2, Route14AfterBattleText2, Route14InBattleScript1
 Route14TrainerHeader2:
-	trainer EVENT_BEAT_ROUTE_14_TRAINER_2, 4, Route14BattleText3, Route14EndBattleText3, Route14AfterBattleText3
+	trainer EVENT_BEAT_ROUTE_14_TRAINER_2, 4, Route14BattleText3, Route14EndBattleText3, Route14AfterBattleText3, Route14InBattleScript2
 Route14TrainerHeader3:
-	trainer EVENT_BEAT_ROUTE_14_TRAINER_3, 3, Route14BattleText4, Route14EndBattleText4, Route14AfterBattleText4
+	trainer EVENT_BEAT_ROUTE_14_TRAINER_3, 3, Route14BattleText4, Route14EndBattleText4, Route14AfterBattleText4, Route14InBattleScript3
 Route14TrainerHeader4:
-	trainer EVENT_BEAT_ROUTE_14_TRAINER_4, 3, Route14BattleText5, Route14EndBattleText5, Route14AfterBattleText5
+	trainer EVENT_BEAT_ROUTE_14_TRAINER_4, 3, Route14BattleText5, Route14EndBattleText5, Route14AfterBattleText5, Route14InBattleScript4
 Route14TrainerHeader5:
-	trainer EVENT_BEAT_ROUTE_14_TRAINER_5, 4, Route14BattleText6, Route14EndBattleText6, Route14AfterBattleText6
+	trainer EVENT_BEAT_ROUTE_14_TRAINER_5, 4, Route14BattleText6, Route14EndBattleText6, Route14AfterBattleText6, Route14InBattleScript5
 Route14TrainerHeader6:
-	trainer EVENT_BEAT_ROUTE_14_TRAINER_6, 4, Route14BattleText7, Route14EndBattleText7, Route14AfterBattleText7
+	trainer EVENT_BEAT_ROUTE_14_TRAINER_6, 4, Route14BattleText7, Route14EndBattleText7, Route14AfterBattleText7, Route14InBattleScript6
 Route14TrainerHeader7:
-	trainer EVENT_BEAT_ROUTE_14_TRAINER_7, 4, Route14BattleText8, Route14EndBattleText8, Route14AfterBattleText8
+	trainer EVENT_BEAT_ROUTE_14_TRAINER_7, 4, Route14BattleText8, Route14EndBattleText8, Route14AfterBattleText8, Route14InBattleScript7
 Route14TrainerHeader8:
-	trainer EVENT_BEAT_ROUTE_14_TRAINER_8, 3, Route14BattleText9, Route14EndBattleText9, Route14AfterBattleText9
+	trainer EVENT_BEAT_ROUTE_14_TRAINER_8, 3, Route14BattleText9, Route14EndBattleText9, Route14AfterBattleText9, Route14InBattleScript8
 Route14TrainerHeader9:
-	trainer EVENT_BEAT_ROUTE_14_TRAINER_9, 4, Route14BattleText10, Route14EndBattleText10, Route14AfterBattleText10
+	trainer EVENT_BEAT_ROUTE_14_TRAINER_9, 4, Route14BattleText10, Route14EndBattleText10, Route14AfterBattleText10, Route14InBattleScript9
 	db -1 ; end
 
 Route14Text1:
@@ -232,3 +232,16 @@ Route14AfterBattleText10:
 Route14Text11:
 	text_far _Route14Text11
 	text_end
+
+; Pre-battle TALK scripts. Every trainer gets its own copy of the default
+; placeholder so it can be replaced with something specific to them.
+	default_in_battle_script Route14InBattleScript0
+	default_in_battle_script Route14InBattleScript1
+	default_in_battle_script Route14InBattleScript2
+	default_in_battle_script Route14InBattleScript3
+	default_in_battle_script Route14InBattleScript4
+	default_in_battle_script Route14InBattleScript5
+	default_in_battle_script Route14InBattleScript6
+	default_in_battle_script Route14InBattleScript7
+	default_in_battle_script Route14InBattleScript8
+	default_in_battle_script Route14InBattleScript9

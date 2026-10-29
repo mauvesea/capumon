@@ -86,19 +86,19 @@ CeladonGym_TextPointers:
 CeladonGymTrainerHeaders:
 	def_trainers 2
 CeladonGymTrainerHeader0:
-	trainer EVENT_BEAT_CELADON_GYM_TRAINER_0, 2, CeladonGymBattleText2, CeladonGymEndBattleText2, CeladonGymAfterBattleText2
+	trainer EVENT_BEAT_CELADON_GYM_TRAINER_0, 2, CeladonGymBattleText2, CeladonGymEndBattleText2, CeladonGymAfterBattleText2, CeladonGymInBattleScript0
 CeladonGymTrainerHeader1:
-	trainer EVENT_BEAT_CELADON_GYM_TRAINER_1, 2, CeladonGymBattleText3, CeladonGymEndBattleText3, CeladonGymAfterBattleText3
+	trainer EVENT_BEAT_CELADON_GYM_TRAINER_1, 2, CeladonGymBattleText3, CeladonGymEndBattleText3, CeladonGymAfterBattleText3, CeladonGymInBattleScript1
 CeladonGymTrainerHeader2:
-	trainer EVENT_BEAT_CELADON_GYM_TRAINER_2, 4, CeladonGymBattleText4, CeladonGymEndBattleText4, CeladonGymAfterBattleText4
+	trainer EVENT_BEAT_CELADON_GYM_TRAINER_2, 4, CeladonGymBattleText4, CeladonGymEndBattleText4, CeladonGymAfterBattleText4, CeladonGymInBattleScript2
 CeladonGymTrainerHeader3:
-	trainer EVENT_BEAT_CELADON_GYM_TRAINER_3, 4, CeladonGymBattleText5, CeladonGymEndBattleText5, CeladonGymAfterBattleText5
+	trainer EVENT_BEAT_CELADON_GYM_TRAINER_3, 4, CeladonGymBattleText5, CeladonGymEndBattleText5, CeladonGymAfterBattleText5, CeladonGymInBattleScript3
 CeladonGymTrainerHeader4:
-	trainer EVENT_BEAT_CELADON_GYM_TRAINER_4, 2, CeladonGymBattleText6, CeladonGymEndBattleText6, CeladonGymAfterBattleText6
+	trainer EVENT_BEAT_CELADON_GYM_TRAINER_4, 2, CeladonGymBattleText6, CeladonGymEndBattleText6, CeladonGymAfterBattleText6, CeladonGymInBattleScript4
 CeladonGymTrainerHeader5:
-	trainer EVENT_BEAT_CELADON_GYM_TRAINER_5, 2, CeladonGymBattleText7, CeladonGymEndBattleText7, CeladonGymAfterBattleText7
+	trainer EVENT_BEAT_CELADON_GYM_TRAINER_5, 2, CeladonGymBattleText7, CeladonGymEndBattleText7, CeladonGymAfterBattleText7, CeladonGymInBattleScript5
 CeladonGymTrainerHeader6:
-	trainer EVENT_BEAT_CELADON_GYM_TRAINER_6, 3, CeladonGymBattleText8, CeladonGymEndBattleText8, CeladonGymAfterBattleText8
+	trainer EVENT_BEAT_CELADON_GYM_TRAINER_6, 3, CeladonGymBattleText8, CeladonGymEndBattleText8, CeladonGymAfterBattleText8, CeladonGymInBattleScript6
 	db -1 ; end
 
 ErikaText:
@@ -286,3 +286,13 @@ CeladonGymEndBattleText8:
 CeladonGymAfterBattleText8:
 	text_far _CeladonGymAfterBattleText8
 	text_end
+
+; Pre-battle TALK scripts. Every trainer gets its own copy of the default
+; placeholder so it can be replaced with something specific to them.
+	default_in_battle_script CeladonGymInBattleScript0
+	default_in_battle_script CeladonGymInBattleScript1
+	default_in_battle_script CeladonGymInBattleScript2
+	default_in_battle_script CeladonGymInBattleScript3
+	default_in_battle_script CeladonGymInBattleScript4
+	default_in_battle_script CeladonGymInBattleScript5
+	default_in_battle_script CeladonGymInBattleScript6

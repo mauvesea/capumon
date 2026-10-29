@@ -1,5 +1,18 @@
 DEF OPP_ID_OFFSET EQU 200
 
+; trainer header members (see the trainer macro in macros/scripts/maps.asm).
+; These are the offsets ReadTrainerHeaderInfo takes in a.
+rsreset
+DEF TRAINER_HEADER_FLAG_BIT    rb
+DEF TRAINER_HEADER_VIEW_RANGE  rb
+DEF TRAINER_HEADER_FLAG_PTR    rw
+DEF TRAINER_HEADER_BEFORE_TEXT rw
+DEF TRAINER_HEADER_AFTER_TEXT  rw
+DEF TRAINER_HEADER_END_TEXT    rw
+DEF TRAINER_HEADER_END_TEXT_2  rw
+DEF TRAINER_HEADER_IN_BATTLE   rw
+DEF TRAINER_HEADER_SIZE EQU _RS
+
 MACRO trainer_const
 	const \1
 	DEF OPP_\1 EQU OPP_ID_OFFSET + \1

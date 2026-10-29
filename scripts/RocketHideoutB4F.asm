@@ -87,11 +87,11 @@ RocketHideoutB4F_TextPointers:
 RocketHideout4TrainerHeaders:
 	def_trainers 2
 RocketHideout4TrainerHeader0:
-	trainer EVENT_BEAT_ROCKET_HIDEOUT_4_TRAINER_0, 0, RocketHideout4BattleText2, RocketHideout4EndBattleText2, RocketHideout4AfterBattleText2
+	trainer EVENT_BEAT_ROCKET_HIDEOUT_4_TRAINER_0, 0, RocketHideout4BattleText2, RocketHideout4EndBattleText2, RocketHideout4AfterBattleText2, RocketHideoutB4FInBattleScript0
 RocketHideout4TrainerHeader1:
-	trainer EVENT_BEAT_ROCKET_HIDEOUT_4_TRAINER_1, 0, RocketHideout4BattleText3, RocketHideout4EndBattleText3, RocketHideout4AfterBattleText3
+	trainer EVENT_BEAT_ROCKET_HIDEOUT_4_TRAINER_1, 0, RocketHideout4BattleText3, RocketHideout4EndBattleText3, RocketHideout4AfterBattleText3, RocketHideoutB4FInBattleScript1
 RocketHideout4TrainerHeader2:
-	trainer EVENT_BEAT_ROCKET_HIDEOUT_4_TRAINER_2, 1, RocketHideout4BattleText4, RocketHideout4EndBattleText4, RocketHideout4AfterBattleText4
+	trainer EVENT_BEAT_ROCKET_HIDEOUT_4_TRAINER_2, 1, RocketHideout4BattleText4, RocketHideout4EndBattleText4, RocketHideout4AfterBattleText4, RocketHideoutB4FInBattleScript2
 	db -1 ; end
 
 RocketHideout4Text1:
@@ -199,3 +199,9 @@ RocketHideout4AfterBattleText4:
 RocketHideout4Text_455ec:
 	text_far _RocketHideout4Text_455ec
 	text_end
+
+; Pre-battle TALK scripts. Every trainer gets its own copy of the default
+; placeholder so it can be replaced with something specific to them.
+	default_in_battle_script RocketHideoutB4FInBattleScript0
+	default_in_battle_script RocketHideoutB4FInBattleScript1
+	default_in_battle_script RocketHideoutB4FInBattleScript2

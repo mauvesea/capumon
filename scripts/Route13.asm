@@ -30,25 +30,25 @@ Route13_TextPointers:
 Route13TrainerHeaders:
 	def_trainers
 Route13TrainerHeader0:
-	trainer EVENT_BEAT_ROUTE_13_TRAINER_0, 2, Route13BattleText2, Route13EndBattleText2, Route13AfterBattleText2
+	trainer EVENT_BEAT_ROUTE_13_TRAINER_0, 2, Route13BattleText2, Route13EndBattleText2, Route13AfterBattleText2, Route13InBattleScript0
 Route13TrainerHeader1:
-	trainer EVENT_BEAT_ROUTE_13_TRAINER_1, 2, Route13BattleText3, Route13EndBattleText3, Route13AfterBattleText3
+	trainer EVENT_BEAT_ROUTE_13_TRAINER_1, 2, Route13BattleText3, Route13EndBattleText3, Route13AfterBattleText3, Route13InBattleScript1
 Route13TrainerHeader2:
-	trainer EVENT_BEAT_ROUTE_13_TRAINER_2, 2, Route13BattleText4, Route13EndBattleText4, Route13AfterBattleText4
+	trainer EVENT_BEAT_ROUTE_13_TRAINER_2, 2, Route13BattleText4, Route13EndBattleText4, Route13AfterBattleText4, Route13InBattleScript2
 Route13TrainerHeader3:
-	trainer EVENT_BEAT_ROUTE_13_TRAINER_3, 2, Route13BattleText5, Route13EndBattleText5, Route13AfterBattleText5
+	trainer EVENT_BEAT_ROUTE_13_TRAINER_3, 2, Route13BattleText5, Route13EndBattleText5, Route13AfterBattleText5, Route13InBattleScript3
 Route13TrainerHeader4:
-	trainer EVENT_BEAT_ROUTE_13_TRAINER_4, 4, Route13BattleText6, Route13EndBattleText6, Route13AfterBattleText6
+	trainer EVENT_BEAT_ROUTE_13_TRAINER_4, 4, Route13BattleText6, Route13EndBattleText6, Route13AfterBattleText6, Route13InBattleScript4
 Route13TrainerHeader5:
-	trainer EVENT_BEAT_ROUTE_13_TRAINER_5, 2, Route13BattleText7, Route13EndBattleText7, Route13AfterBattleText7
+	trainer EVENT_BEAT_ROUTE_13_TRAINER_5, 2, Route13BattleText7, Route13EndBattleText7, Route13AfterBattleText7, Route13InBattleScript5
 Route13TrainerHeader6:
-	trainer EVENT_BEAT_ROUTE_13_TRAINER_6, 4, Route13BattleText8, Route13EndBattleText8, Route13AfterBattleText8
+	trainer EVENT_BEAT_ROUTE_13_TRAINER_6, 4, Route13BattleText8, Route13EndBattleText8, Route13AfterBattleText8, Route13InBattleScript6
 Route13TrainerHeader7:
-	trainer EVENT_BEAT_ROUTE_13_TRAINER_7, 2, Route13BattleText9, Route13EndBattleText9, Route13AfterBattleText9
+	trainer EVENT_BEAT_ROUTE_13_TRAINER_7, 2, Route13BattleText9, Route13EndBattleText9, Route13AfterBattleText9, Route13InBattleScript7
 Route13TrainerHeader8:
-	trainer EVENT_BEAT_ROUTE_13_TRAINER_8, 2, Route13BattleText10, Route13EndBattleText10, Route13AfterBattleText10
+	trainer EVENT_BEAT_ROUTE_13_TRAINER_8, 2, Route13BattleText10, Route13EndBattleText10, Route13AfterBattleText10, Route13InBattleScript8
 Route13TrainerHeader9:
-	trainer EVENT_BEAT_ROUTE_13_TRAINER_9, 4, Route13BattleText11, Route13EndBattleText11, Route13AfterBattleText11
+	trainer EVENT_BEAT_ROUTE_13_TRAINER_9, 4, Route13BattleText11, Route13EndBattleText11, Route13AfterBattleText11, Route13InBattleScript9
 	db -1 ; end
 
 Route13Text1:
@@ -242,3 +242,16 @@ Route13Text12:
 Route13Text13:
 	text_far _Route13Text13
 	text_end
+
+; Pre-battle TALK scripts. Every trainer gets its own copy of the default
+; placeholder so it can be replaced with something specific to them.
+	default_in_battle_script Route13InBattleScript0
+	default_in_battle_script Route13InBattleScript1
+	default_in_battle_script Route13InBattleScript2
+	default_in_battle_script Route13InBattleScript3
+	default_in_battle_script Route13InBattleScript4
+	default_in_battle_script Route13InBattleScript5
+	default_in_battle_script Route13InBattleScript6
+	default_in_battle_script Route13InBattleScript7
+	default_in_battle_script Route13InBattleScript8
+	default_in_battle_script Route13InBattleScript9

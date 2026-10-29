@@ -93,9 +93,9 @@ PokemonMansion3F_TextPointers:
 Mansion3TrainerHeaders:
 	def_trainers
 Mansion3TrainerHeader0:
-	trainer EVENT_BEAT_MANSION_3_TRAINER_0, 0, Mansion3BattleText1, Mansion3EndBattleText1, Mansion3AfterBattleText1
+	trainer EVENT_BEAT_MANSION_3_TRAINER_0, 0, Mansion3BattleText1, Mansion3EndBattleText1, Mansion3AfterBattleText1, PokemonMansion3FInBattleScript0
 Mansion3TrainerHeader1:
-	trainer EVENT_BEAT_MANSION_3_TRAINER_1, 2, Mansion3BattleText2, Mansion3EndBattleText2, Mansion3AfterBattleText2
+	trainer EVENT_BEAT_MANSION_3_TRAINER_1, 2, Mansion3BattleText2, Mansion3EndBattleText2, Mansion3AfterBattleText2, PokemonMansion3FInBattleScript1
 	db -1 ; end
 
 Mansion3Text1:
@@ -137,3 +137,8 @@ Mansion3AfterBattleText2:
 Mansion3Text5:
 	text_far _Mansion3Text5
 	text_end
+
+; Pre-battle TALK scripts. Every trainer gets its own copy of the default
+; placeholder so it can be replaced with something specific to them.
+	default_in_battle_script PokemonMansion3FInBattleScript0
+	default_in_battle_script PokemonMansion3FInBattleScript1

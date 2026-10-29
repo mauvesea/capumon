@@ -23,7 +23,7 @@ Route4_TextPointers:
 Route4TrainerHeaders:
 	def_trainers 2
 Route4TrainerHeader0:
-	trainer EVENT_BEAT_ROUTE_4_TRAINER_0, 3, Route4BattleText1, Route4EndBattleText1, Route4AfterBattleText1
+	trainer EVENT_BEAT_ROUTE_4_TRAINER_0, 3, Route4BattleText1, Route4EndBattleText1, Route4AfterBattleText1, Route4InBattleScript0
 	db -1 ; end
 
 Route4Text1:
@@ -55,3 +55,7 @@ Route4Text5:
 Route4Text6:
 	text_far _Route4Text6
 	text_end
+
+; Pre-battle TALK scripts. Every trainer gets its own copy of the default
+; placeholder so it can be replaced with something specific to them.
+	default_in_battle_script Route4InBattleScript0

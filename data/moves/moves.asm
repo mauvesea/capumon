@@ -4,11 +4,11 @@ MACRO move
 	db \3 ; power
 	db \4 ; type
 	db \5 percent ; accuracy
-	db \6 ; pp
-	assert \6 <= 40, "PP must be 40 or less"
+	db \6 ; tp cost
+	assert \6 <= 255, "TP cost must be 255 or less"
 ENDM
 
-Moves:
+Moves::
 ; Characteristics of each move.
 	table_width MOVE_LENGTH, Moves
 	move POUND,        NO_ADDITIONAL_EFFECT,        40, NORMAL,       100, 35 ; BODY TACKLE
