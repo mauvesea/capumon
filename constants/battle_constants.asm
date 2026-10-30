@@ -70,7 +70,9 @@ DEF NOT_VERY_EFFECTIVE EQU 05
 DEF NO_EFFECT          EQU 00
 
 ; non-volatile statuses
-DEF SLP_MASK EQU %111 ; 0-7 turns
+DEF SLP_MASK EQU 0 ; sleep has been removed
+
+DEF WET EQU 2 ; replaces sleep in the status byte
 	const_def 3
 	const PSN ; 3
 	const BRN ; 4
@@ -107,7 +109,7 @@ DEF SPDSPCDV_TRAINER EQU $88
 
 ; wPlayerBattleStatus3 or wEnemyBattleStatus3 bit flags
 	const_def
-	const BADLY_POISONED      ; 0
+	const DEFENDING            ; 0 ; DEFEND is active this turn
 	const HAS_LIGHT_SCREEN_UP ; 1
 	const HAS_REFLECT_UP      ; 2
 	const TRANSFORMED         ; 3

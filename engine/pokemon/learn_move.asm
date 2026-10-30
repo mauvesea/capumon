@@ -1,3 +1,23 @@
+; Level-up moves stay available through the complete species learnset, even
+; after the four saved slots are full. Announce them without a forget prompt.
+PrintLevelUpMoveLearned:
+	call SaveScreenTilesToBuffer1
+	ld a, [wMoveNum]
+	ld [wd11e], a
+	call GetMoveName
+	ld hl, wcd6d
+	ld de, wStringBuffer
+	ld bc, NAME_BUFFER_LENGTH
+	call CopyData
+	ld a, [wWhichPokemon]
+	ld hl, wPartyMonNicks
+	call GetPartyMonName
+	ld hl, wcd6d
+	ld de, wLearnMoveMonName
+	ld bc, NAME_LENGTH
+	call CopyData
+	jp PrintLearnedMove
+
 LearnMove:
 	call SaveScreenTilesToBuffer1
 	ld a, [wWhichPokemon]

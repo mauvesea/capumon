@@ -7,8 +7,6 @@ DecrementTP:
 	ld a, [de]
 	and a
 	ret z                ; no move, nothing to pay
-	cp STRUGGLE
-	ret z                ; STRUGGLE is always free
 	ldh a, [hWhoseTurn]
 	and a
 	jr nz, .enemyTurn

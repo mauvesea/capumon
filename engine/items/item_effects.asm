@@ -109,10 +109,9 @@ ItemUseBall:
 	jp z, ItemUseNotTime
 
 ; Can't used before getting the Dex
-	push af
 	CheckEvent EVENT_GOT_POKEDEX
 	jp z, ItemHowToUseCapsule
-	pop af
+	ld a, [wIsInBattle]
 
 ; Balls can't catch trainers' Pokémon.
 	dec a
@@ -981,7 +980,7 @@ ItemUseMedicine:
 	lb bc, ICE_HEAL_MSG, 1 << FRZ
 	cp ICE_HEAL
 	jr z, .checkMonStatus
-	lb bc, AWAKENING_MSG, SLP_MASK
+	lb bc, AWAKENING_MSG, 1 << WET
 	cp AWAKENING
 	jr z, .checkMonStatus
 	lb bc, PARALYZ_HEAL_MSG, 1 << PAR
@@ -1003,10 +1002,6 @@ ItemUseMedicine:
 ; if it is active in battle
 	xor a
 	ld [wBattleMonStatus], a ; remove the status ailment in the in-battle pokemon data
-	push hl
-	ld hl, wPlayerBattleStatus3
-	res BADLY_POISONED, [hl] ; heal Toxic status
-	pop hl
 	ld bc, wPartyMon1Stats - wPartyMon1Status
 	add hl, bc ; hl now points to party stats
 	ld de, wBattleMonStats

@@ -33,9 +33,16 @@ EraseType2Text:
 
 PrintMoveType:
 	call GetPredefRegisters
-	push hl
 	ld a, [wPlayerMoveType]
-; fall through
+	and a
+	ld de, .Regular
+	jr z, .printClass
+	ld de, .Special
+.printClass
+	jp PlaceString
+
+.Regular: db "REGULAR@"
+.Special: db "SPECIAL@"
 
 PrintType_:
 	add a

@@ -143,7 +143,7 @@ DrawFrameBlock:
 	cp FRAMEBLOCKMODE_04
 	jr z, .done ; skip cleaning OAM buffer and don't advance the frame block destination address
 	ld a, [wAnimationID]
-	cp GROWL
+	cp BARK
 	jr z, .resetFrameBlockDestAddr
 	call AnimationCleanOAM
 .resetFrameBlockDestAddr
@@ -2247,7 +2247,7 @@ GetMoveSound:
 IsCryMove:
 ; set carry if the move animation involves playing a monster cry
 	ld a, [wAnimationID]
-	cp GROWL
+	cp BARK
 	jr z, .CryMove
 	cp ROAR
 	jr z, .CryMove

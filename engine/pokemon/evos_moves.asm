@@ -388,6 +388,8 @@ LearnMoveFromLevelUp:
 	jr z, .done ; if already known, jump
 	dec b
 	jr nz, .checkCurrentMovesLoop
+	ld a, d
+	ld [wMoveNum], a
 ; Saved slots remain for older mechanics. Fill an empty one, but never ask the
 ; player to forget a move: the complete learnset is available from the table.
 	ld bc, -NUM_MOVES
@@ -400,17 +402,17 @@ LearnMoveFromLevelUp:
 	inc hl
 	dec b
 	jr nz, .findEmptySlot
-	jr .done
+	jr .announceLearned
 .storeMove
 	ld [hl], d
 	ld a, [wIsInBattle]
 	and a
-	jr z, .done
+	jr z, .announceLearned
 	ld a, [wWhichPokemon]
 	ld b, a
 	ld a, [wPlayerMonNumber]
 	cp b
-	jr nz, .done
+	jr nz, .announceLearned
 	ld hl, wPartyMon1Moves
 	ld a, [wWhichPokemon]
 	ld bc, wPartyMon2 - wPartyMon1
@@ -418,6 +420,8 @@ LearnMoveFromLevelUp:
 	ld de, wBattleMonMoves
 	ld bc, NUM_MOVES
 	call CopyData
+.announceLearned
+	callfar PrintLevelUpMoveLearned
 .done
 	ld a, [wcf91]
 	ld [wd11e], a
@@ -520,10 +524,12 @@ WriteMonMoves_ShiftMoveData:
 	jr nz, .loop
 	ret
 
-; Build the level-up move list for species a at level b. The table is kept in
+; Build the level-up move list for species d at level e. The table is kept in
 ; learnset order, so saved four-move slots do not limit battle or status menus.
+; callfar's Bankswitch overwrites a, b, and c, but preserves d and e.
 GetAvailableMoves:
-	ld c, b
+	ld a, d
+	ld c, e
 	dec a
 	ld b, 0
 	add a

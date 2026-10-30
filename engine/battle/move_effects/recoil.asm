@@ -7,19 +7,14 @@ RecoilEffect_:
 	ld a, [wEnemyMoveNum]
 	ld hl, wEnemyMonMaxHP
 .recoilEffect
-	ld d, a
 	ld a, [wDamage]
 	ld b, a
 	ld a, [wDamage + 1]
 	ld c, a
 	srl b
 	rr c
-	ld a, d
-	cp STRUGGLE ; struggle deals 50% recoil damage
-	jr z, .gotRecoilDamage
 	srl b
 	rr c
-.gotRecoilDamage
 	ld a, b
 	or c
 	jr nz, .updateHP

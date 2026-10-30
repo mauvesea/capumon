@@ -8,13 +8,13 @@ PrintStatusAilment::
 	jr nz, .frz
 	bit PAR, a
 	jr nz, .par
-	and SLP_MASK
+	and 1 << WET
 	ret z
-	ld a, "S"
+	ld a, "W"
 	ld [hli], a
-	ld a, "L"
+	ld a, "E"
 	ld [hli], a
-	ld [hl], "P"
+	ld [hl], "T"
 	ret
 .psn
 	ld a, "P"
@@ -40,7 +40,7 @@ PrintStatusAilment::
 .par
 	ld a, "P"
 	ld [hli], a
-	ld a, "A"
+	ld a, "R"
 	ld [hli], a
-	ld [hl], "R"
+	ld [hl], "Z"
 	ret

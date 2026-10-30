@@ -15,7 +15,7 @@ ENDM
 	vc_const "L"
 	vc_const "F"
 	vc_const "X"
-	vc_const MEGA_PUNCH
+	vc_const MEGA_P
 
 ; [FPA 001 End]
 	vc_const EXPLOSION
@@ -23,11 +23,11 @@ ENDM
 ; [FPA 002 Begin]
 	vc_const "U"
 	vc_const "I"
-	vc_const GUILLOTINE
+	vc_const GUILLOT
 
 ; [FPA 002 End]
 	vc_const "K"
-	vc_const MEGA_KICK
+	vc_const MEGA_K
 
 ; [FPA 004 Begin]
 	vc_const "B"
@@ -35,10 +35,10 @@ ENDM
 	vc_const BLIZZARD
 
 ; [FPA 005 Begin]
-	vc_const BUBBLEBEAM
+	vc_const SNOWSTRM
 
 ; [FPA 005 End]
-	vc_const HYPER_BEAM
+	vc_const HYPRBEAM
 
 ; [FPA 006 Begin]
 	vc_const "H"
@@ -47,7 +47,7 @@ ENDM
 ; [FPA 007 Begin]
 	vc_const "T"
 	vc_const "N"
-	vc_const THUNDERBOLT
+	vc_const THNDBOLT
 
 ; [FPA 008 Begin]
 	vc_const "R"

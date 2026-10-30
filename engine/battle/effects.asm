@@ -23,6 +23,219 @@ _JumpMoveEffect:
 
 INCLUDE "data/moves/effects_pointers.asm"
 
+INCLUDE "data/battle/move_effect_chances.asm"
+
+; b = the current move's listed secondary-effect chance, scaled to 256.
+GetMoveEffectChance:
+	push af
+	push hl
+	push de
+	push bc
+	ldh a, [hWhoseTurn]
+	and a
+	ld a, [wPlayerMoveNum]
+	jr z, .gotMove
+	ld a, [wEnemyMoveNum]
+.gotMove
+	dec a
+	ld c, a
+	ld b, 0
+	ld hl, MoveEffectChances
+	add hl, bc
+	ld a, [hl]
+	pop bc
+	ld b, a
+	pop de
+	pop hl
+	pop af
+	ret
+
+ReapplyBadgeBoostToRaisedPlayerStat:
+	ldh a, [hWhoseTurn]
+	and a
+	ret nz
+	jr ReapplyBadgeBoostToStatModC
+
+ReapplyBadgeBoostToLoweredPlayerStat:
+	ldh a, [hWhoseTurn]
+	and a
+	ret z
+
+ReapplyBadgeBoostToStatModC:
+	ld a, [wLinkState]
+	cp LINK_STATE_BATTLING
+	ret z
+	ld a, c
+	cp NUM_MODIFIED_STATS
+	ret nc
+	push hl
+	push bc
+	ld a, 1
+	ld b, c
+	inc b
+.maskLoop
+	dec b
+	jr z, .maskReady
+	sla a
+	sla a
+	jr .maskLoop
+.maskReady
+	ld b, a
+	ld a, [wObtainedBadges]
+	and b
+	jr z, .done
+	ld hl, wBattleMonAttack
+	ld b, 0
+	sla c
+	add hl, bc
+	call ApplyBadgeBoostToStat
+.done
+	pop bc
+	pop hl
+	ret
+
+ReapplyRaisedStatStatusPenalty:
+	ldh a, [hWhoseTurn]
+	xor 1
+	ldh [hWhoseTurn], a
+	call ReapplyStatusPenaltyForStatModC
+	ldh a, [hWhoseTurn]
+	xor 1
+	ldh [hWhoseTurn], a
+	ret
+
+ReapplyStatusPenaltyForStatModC:
+	push bc
+	ld a, c
+	cp MOD_DEFENSE
+	jr nz, .speed
+	call HalveAttackDueToBurn
+	jr .done
+.speed
+	cp MOD_SPEED
+	call z, QuarterSpeedDueToParalysis
+.done
+	pop bc
+	ret
+
+DefendEffect:
+	ldh a, [hWhoseTurn]
+	and a
+	ld hl, wPlayerBattleStatus3
+	ld a, [wBattleMonLevel]
+	jr z, .markProtected
+	ld hl, wEnemyBattleStatus3
+	ld a, [wEnemyMonLevel]
+.markProtected
+	set DEFENDING, [hl]
+	ld c, a
+.roll
+	call BattleRandom
+	cp c
+	jr c, .restoreTP
+	jr nz, .roll
+.restoreTP
+	ld b, a
+	ld a, c
+	srl a
+	add b ; floor(level / 2) through floor(level * 1.5)
+	ld b, a
+	ldh a, [hWhoseTurn]
+	and a
+	ld hl, wBattleMonTP
+	ld de, wBattleMonMaxTP
+	jr z, .addTP
+	ld hl, wEnemyMonTP
+	ld de, wEnemyMonMaxTP
+.addTP
+	ld a, [hli]
+	ld c, a
+	ld a, [hl]
+	add b
+	ld [hld], a
+	ld a, c
+	adc 0
+	ld [hl], a
+	jr c, .capTP
+	ld a, [de]
+	cp [hl]
+	jr c, .capTP
+	jr nz, .done
+	inc hl
+	inc de
+	ld a, [de]
+	cp [hl]
+	jr c, .capTP
+.done
+	jp .syncPartyTP
+.capTP
+	ldh a, [hWhoseTurn]
+	and a
+	ld hl, wBattleMonTP
+	ld de, wBattleMonMaxTP
+	jr z, .copyMax
+	ld hl, wEnemyMonTP
+	ld de, wEnemyMonMaxTP
+.copyMax
+	ld a, [de]
+	ld [hli], a
+	inc de
+	ld a, [de]
+	ld [hl], a
+	; fallthrough
+.syncPartyTP
+	ldh a, [hWhoseTurn]
+	and a
+	jr nz, .enemyParty
+	ld a, [wPlayerBattleStatus3]
+	bit TRANSFORMED, a
+	ret nz
+	ld a, [wPlayerMonNumber]
+	ld hl, wPartyMon1TP
+	ld bc, wPartyMon2 - wPartyMon1
+	call AddNTimes
+	ld de, wBattleMonTP
+	jr .copyPartyTP
+.enemyParty
+	ld a, [wIsInBattle]
+	dec a
+	ret z
+	ld a, [wEnemyBattleStatus3]
+	bit TRANSFORMED, a
+	ret nz
+	ld a, [wEnemyMonPartyPos]
+	ld hl, wEnemyMon1TP
+	ld bc, wEnemyMon2 - wEnemyMon1
+	call AddNTimes
+	ld de, wEnemyMonTP
+.copyPartyTP
+	ld a, [de]
+	ld [hli], a
+	inc de
+	ld a, [de]
+	ld [hl], a
+	ret
+
+WetEffect:
+	call CheckTargetSubstitute
+	ret nz
+	call GetMoveEffectChance
+	call BattleRandom
+	cp b
+	ret nc
+	ldh a, [hWhoseTurn]
+	and a
+	ld hl, wEnemyMonStatus
+	jr z, .target
+	ld hl, wBattleMonStatus
+.target
+	ld a, [hl]
+	and a
+	ret nz
+	set WET, [hl]
+	call QuarterSpeedDueToParalysis
+	ret
+
 SleepEffect:
 	ld de, wEnemyMonStatus
 	ld bc, wEnemyBattleStatus2
@@ -90,12 +303,8 @@ PoisonEffect:
 	ld b, a
 	and a
 	jr nz, .noEffect ; miss if target is already statused
-	ld a, [hli]
-	cp POISON ; can't poison a poison-type target
-	jr z, .noEffect
-	ld a, [hld]
-	cp POISON ; can't poison a poison-type target
-	jr z, .noEffect
+	inc hl
+	dec hl ; attributes grant no status immunity
 	ld a, [de]
 	cp POISON_SIDE_EFFECT1
 	ld b, 20 percent + 1 ; chance of poisoning
@@ -113,6 +322,7 @@ PoisonEffect:
 	jr nz, .didntAffect
 	jr .inflictPoison
 .sideEffectTest
+	call GetMoveEffectChance
 	call BattleRandom
 	cp b ; was side effect successful?
 	ret nc
@@ -132,13 +342,7 @@ PoisonEffect:
 	ld hl, wEnemyBattleStatus3
 	ld de, wEnemyToxicCounter
 .ok
-	cp TOXIC
-	jr nz, .normalPoison ; done if move is not Toxic
-	set BADLY_POISONED, [hl] ; else set Toxic battstatus
-	xor a
-	ld [de], a
-	ld hl, BadlyPoisonedText
-	jr .continue
+	; Poison is always the fixed-damage form.
 .normalPoison
 	ld hl, PoisonedText
 .continue
@@ -201,15 +405,15 @@ FreezeBurnParalyzeEffect:
 	jp nz, .opponentAttacker
 	ld a, [wEnemyMonStatus]
 	and a
-	jp nz, CheckDefrost ; can't inflict status if opponent is already statused
+	ret nz ; target already has a status
 	ld a, [wPlayerMoveType]
 	ld b, a
 	ld a, [wEnemyMonType1]
 	cp b ; do target type 1 and move type match?
-	ret z  ; return if they match (an ice move can't freeze an ice-type, body slam can't paralyze a normal-type, etc.)
+	; No monster type immunities.
 	ld a, [wEnemyMonType2]
 	cp b ; do target type 2 and move type match?
-	ret z  ; return if they match
+	; No monster type immunities.
 	ld a, [wPlayerMoveEffect]
 	cp PARALYZE_SIDE_EFFECT1 + 1
 	ld b, 10 percent + 1
@@ -218,6 +422,7 @@ FreezeBurnParalyzeEffect:
 	ld b, 30 percent + 1
 	sub BURN_SIDE_EFFECT2 - BURN_SIDE_EFFECT1 ; treat extra effective as regular from now on
 .regular_effectiveness
+	call GetMoveEffectChance
 	push af
 	call BattleRandom ; get random 8bit value for probability test
 	cp b
@@ -238,7 +443,7 @@ FreezeBurnParalyzeEffect:
 .burn1
 	ld a, 1 << BRN
 	ld [wEnemyMonStatus], a
-	call HalveAttackDueToBurn ; halve attack of affected mon
+	call HalveAttackDueToBurn ; halve defense of affected mon
 	ld a, ANIM_A9
 	call PlayBattleAnimation
 	ld hl, BurnedText
@@ -247,6 +452,10 @@ FreezeBurnParalyzeEffect:
 	call ClearHyperBeam ; resets hyper beam (recharge) condition from target
 	ld a, 1 << FRZ
 	ld [wEnemyMonStatus], a
+	call BattleRandom
+	and 3
+	add 2
+	ld [wEnemyToxicCounter], a
 	ld a, ANIM_A9
 	call PlayBattleAnimation
 	ld hl, FrozenText
@@ -254,15 +463,15 @@ FreezeBurnParalyzeEffect:
 .opponentAttacker
 	ld a, [wBattleMonStatus] ; mostly same as above with addresses swapped for opponent
 	and a
-	jp nz, CheckDefrost
+	ret nz
 	ld a, [wEnemyMoveType]
 	ld b, a
 	ld a, [wBattleMonType1]
 	cp b
-	ret z
+	; No monster type immunities.
 	ld a, [wBattleMonType2]
 	cp b
-	ret z
+	; No monster type immunities.
 	ld a, [wEnemyMoveEffect]
 	cp PARALYZE_SIDE_EFFECT1 + 1
 	ld b, 10 percent + 1
@@ -271,6 +480,7 @@ FreezeBurnParalyzeEffect:
 	ld b, 30 percent + 1
 	sub BURN_SIDE_EFFECT2 - BURN_SIDE_EFFECT1 ; treat extra effective as regular from now on
 .regular_effectiveness2
+	call GetMoveEffectChance
 	push af
 	call BattleRandom
 	cp b
@@ -296,6 +506,10 @@ FreezeBurnParalyzeEffect:
 ; hyper beam bits aren't reseted for opponent's side
 	ld a, 1 << FRZ
 	ld [wBattleMonStatus], a
+	call BattleRandom
+	and 3
+	add 2
+	ld [wPlayerToxicCounter], a
 	ld hl, FrozenText
 	jp PrintText
 
@@ -305,45 +519,6 @@ BurnedText:
 
 FrozenText:
 	text_far _FrozenText
-	text_end
-
-CheckDefrost:
-; any fire-type move that has a chance inflict burn (all but Fire Spin) will defrost a frozen target
-	and 1 << FRZ ; are they frozen?
-	ret z ; return if so
-	ldh a, [hWhoseTurn]
-	and a
-	jr nz, .opponent
-	;player [attacker]
-	ld a, [wPlayerMoveType]
-	sub FIRE
-	ret nz ; return if type of move used isn't fire
-	ld [wEnemyMonStatus], a ; set opponent status to 00 ["defrost" a frozen monster]
-	ld hl, wEnemyMon1Status
-	ld a, [wEnemyMonPartyPos]
-	ld bc, wEnemyMon2 - wEnemyMon1
-	call AddNTimes
-	xor a
-	ld [hl], a ; clear status in roster
-	ld hl, FireDefrostedText
-	jr .common
-.opponent
-	ld a, [wEnemyMoveType] ; same as above with addresses swapped
-	sub FIRE
-	ret nz
-	ld [wBattleMonStatus], a
-	ld hl, wPartyMon1Status
-	ld a, [wPlayerMonNumber]
-	ld bc, wPartyMon2 - wPartyMon1
-	call AddNTimes
-	xor a
-	ld [hl], a
-	ld hl, FireDefrostedText
-.common
-	jp PrintText
-
-FireDefrostedText:
-	text_far _FireDefrostedText
 	text_end
 
 StatModifierUpEffect:
@@ -366,15 +541,15 @@ StatModifierUpEffect:
 	add hl, bc
 	ld b, [hl]
 	inc b ; increment corresponding stat mod
-	ld a, $d
-	cp b ; can't raise stat past +6 ($d or 13)
+	ld a, 8
+	cp b ; one stage above neutral
 	jp c, PrintNothingHappenedText
 	ld a, [de]
 	cp ATTACK_UP1_EFFECT + $8 ; is it a +2 effect?
 	jr c, .ok
 	inc b ; if so, increment stat mod again
-	ld a, $d
-	cp b ; unless it's already +6
+	ld a, 8
+	cp b
 	jr nc, .ok
 	ld b, a
 .ok
@@ -453,6 +628,8 @@ UpdateStat:
 	ld [hl], a
 	pop hl
 UpdateStatDone:
+	call ReapplyBadgeBoostToRaisedPlayerStat
+	call ReapplyRaisedStatStatusPenalty
 	ld b, c
 	inc b
 	call PrintStatText
@@ -492,16 +669,10 @@ UpdateStatDone:
 	pop af
 	call nz, Bankswitch
 .applyBadgeBoostsAndStatusPenalties
-	ldh a, [hWhoseTurn]
-	and a
-	call z, ApplyBadgeStatBoosts ; whenever the player uses a stat-up move, badge boosts get reapplied again to every stat,
-	                             ; even to those not affected by the stat-up move (will be boosted further)
 	ld hl, MonsStatsRoseText
 	call PrintText
 
-; these shouldn't be here
-	call QuarterSpeedDueToParalysis ; apply speed penalty to the player whose turn is not, if it's paralyzed
-	jp HalveAttackDueToBurn ; apply attack penalty to the player whose turn is not, if it's burned
+	ret
 
 RestoreOriginalStatModifier:
 	pop hl
@@ -556,11 +727,12 @@ StatModifierDownEffect:
 	ld a, [de]
 	cp ATTACK_DOWN_SIDE_EFFECT
 	jr c, .nonSideEffect
+	call GetMoveEffectChance
 	call BattleRandom
-	cp 33 percent + 1 ; chance for side effects
+	cp b ; chance for this move's side effect
 	jp nc, CantLowerAnymore
 	ld a, [de]
-	sub ATTACK_DOWN_SIDE_EFFECT ; map each stat to 0-3
+	sub ATTACK_DOWN_SIDE_EFFECT ; map each stat to 0-4
 	jr .decrementStatMod
 .nonSideEffect ; non-side effects only
 	push hl
@@ -587,15 +759,19 @@ StatModifierDownEffect:
 	add hl, bc
 	ld b, [hl]
 	dec b ; dec corresponding stat mod
-	jp z, CantLowerAnymore ; if stat mod is 1 (-6), can't lower anymore
+	ld a, b
+	cp 6
+	jp c, CantLowerAnymore ; one stage below neutral
 	ld a, [de]
 	cp ATTACK_DOWN2_EFFECT - $16 ; $24
 	jr c, .ok
 	cp EVASION_DOWN2_EFFECT + $5 ; $44
 	jr nc, .ok
 	dec b ; stat down 2 effects only (dec mod again)
-	jr nz, .ok
-	inc b ; increment mod to 1 (-6) if it would become 0 (-7)
+	ld a, b
+	cp 6
+	jr nc, .ok
+	ld b, 6
 .ok
 	ld [hl], b ; save modified mod
 	ld a, c
@@ -672,6 +848,8 @@ UpdateLoweredStat:
 	pop de
 	pop hl
 UpdateLoweredStatDone:
+	call ReapplyBadgeBoostToLoweredPlayerStat
+	call ReapplyStatusPenaltyForStatModC
 	ld b, c
 	inc b
 	push de
@@ -682,18 +860,10 @@ UpdateLoweredStatDone:
 	jr nc, .ApplyBadgeBoostsAndStatusPenalties
 	call PlayCurrentMoveAnimation2
 .ApplyBadgeBoostsAndStatusPenalties
-	ldh a, [hWhoseTurn]
-	and a
-	call nz, ApplyBadgeStatBoosts ; whenever the player uses a stat-down move, badge boosts get reapplied again to every stat,
-	                              ; even to those not affected by the stat-up move (will be boosted further)
 	ld hl, MonsStatsFellText
 	call PrintText
 
-; These where probably added given that a stat-down move affecting speed or attack will override
-; the stat penalties from paralysis and burn respectively.
-; But they are always called regardless of the stat affected by the stat-down move.
-	call QuarterSpeedDueToParalysis
-	jp HalveAttackDueToBurn
+	ret
 
 CantLowerAnymore_Pop:
 	pop de
@@ -1031,9 +1201,6 @@ ChargeMoveEffectText:
 	text_far _ChargeMoveEffectText
 	text_asm
 	ld a, [wChargeMoveNum]
-	cp RAZOR_WIND
-	ld hl, MadeWhirlwindText
-	jr z, .gotText
 	cp SOLARBEAM
 	ld hl, TookInSunlightText
 	jr z, .gotText
@@ -1050,10 +1217,6 @@ ChargeMoveEffectText:
 	ld hl, DugAHoleText
 .gotText
 	ret
-
-MadeWhirlwindText:
-	text_far _MadeWhirlwindText
-	text_end
 
 TookInSunlightText:
 	text_far _TookInSunlightText

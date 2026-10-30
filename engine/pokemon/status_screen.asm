@@ -165,39 +165,8 @@ StatusScreen:
 	ld de, PartyMenuSpecialMoveText
 	call PlaceString
 
-; A mon's signature move is the move whose ID matches its Pokedex number.
-; Show it (and what it costs) only if the mon actually knows it.
-	ld a, [wLoadedMonSpecies]
-	ld [wd11e], a
-	predef IndexToPokedex
-	ld a, [wd11e]
-	push af
-	ld a, [wLoadedMonSpecies]
-	ld b, a
-	ld a, [wLoadedMonLevel]
-	ld c, a
-	ld a, b
-	ld b, c
-	callfar GetAvailableMoves
-	pop af
-	ld b, a
-	ld hl, wAvailableMoves
-	ld a, [wAvailableMoveCount]
-	ld c, a
-	and a
-	jr z, .noSignatureMove
-.findSignatureMove
-	ld a, [hli]
-	cp b
-	jr z, .knowsSignatureMove
-	dec c
-	jr nz, .findSignatureMove
-.noSignatureMove
-	hlcoord 11, 15
-	ld de, NoSignatureMoveText
-	call PlaceString
-	jr .signatureMoveDone
-.knowsSignatureMove
+; Until signature moves are assigned, every mon's SPECIAL is move ID 1.
+	ld a, ATTACK
 	ld [wd11e], a
 	hlcoord 11, 15
 	call GetMoveName ; returns de = wcd6d
@@ -212,7 +181,7 @@ StatusScreen:
 	ld de, wMoveTPCostBuffer
 	lb bc, 1, 3
 	call PrintNumber
-.signatureMoveDone
+
 
 ; what the mon is worth
 	call CalcMonValue
@@ -541,11 +510,9 @@ StatusScreen2:
 	ldh [hTileAnimations], a
 	ldh [hAutoBGTransferEnabled], a
 	ld a, [wLoadedMonSpecies]
-	ld b, a
+	ld d, a
 	ld a, [wLoadedMonLevel]
-	ld c, a
-	ld a, b
-	ld b, c
+	ld e, a
 	callfar GetAvailableMoves
 	xor a
 	ld [wAvailableMoveOffset], a

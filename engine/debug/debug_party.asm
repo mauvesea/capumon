@@ -51,7 +51,7 @@ IF DEF(_DEBUG)
 	ld hl, wPartyMon1Moves
 	ld a, FLY
 	ld [hli], a
-	ld a, CUT
+	ld a, SCRATCH
 	ld [hli], a
 	ld a, SURF
 	ld [hli], a
@@ -60,7 +60,7 @@ IF DEF(_DEBUG)
 
 	; Jolteon gets Thunderbolt.
 	ld hl, wPartyMon3Moves + 3
-	ld a, THUNDERBOLT
+	ld a, THNDBOLT
 	ld [hl], a
 
 	; Articuno gets Fly.

@@ -135,7 +135,7 @@ ReadTrainer:
 	ld b, MEGA_DRAIN
 	jr z, .GiveStarterMove
 	cp STARTER1
-	ld b, FIRE_BLAST
+	ld b, MEGAFIRE
 	jr z, .GiveStarterMove
 	ld b, BLIZZARD ; must be squirtle
 .GiveStarterMove

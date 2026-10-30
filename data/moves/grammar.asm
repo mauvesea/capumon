@@ -1,6 +1,6 @@
 ExclamationPointMoveSets:
 ; set 0
-	db SWORDS_DANCE
+	db SANDSTRM
 	db GROWTH
 	db 0 ; end set
 
@@ -13,7 +13,7 @@ ExclamationPointMoveSets:
 
 ; set 2
 	db MEDITATE
-	db AGILITY
+	db RUSH
 	db TELEPORT
 	db MIMIC
 	db DOUBLE_TEAM
@@ -21,38 +21,38 @@ ExclamationPointMoveSets:
 	db 0 ; end set
 
 ; set 3
-	db POUND
-	db SCRATCH
+	db ATTACK
+	db PUNCH
 	db VICEGRIP
-	db WING_ATTACK
+	db FOCUS
 	db FLY
 	db BIND
-	db SLAM
-	db HORN_ATTACK
-	db BODY_SLAM
+	db TAILSTRK
+	db HEADBUTT
+	db BODYSLAM
 	db WRAP
-	db THRASH
+	db PARASTRK
 	db TAIL_WHIP
 	db LEER
 	db BITE
-	db GROWL
+	db BARK
 	db ROAR
 	db SING
 	db PECK
 	db COUNTER
 	db STRENGTH
 	db ABSORB
-	db STRING_SHOT
+	db STRNSHOT
 	db EARTHQUAKE
 	db FISSURE
 	db DIG
 	db TOXIC
-	db SCREECH
-	db HARDEN
+	db SCARE
+	db WALL
 	db MINIMIZE
 	db WITHDRAW
 	db DEFENSE_CURL
-	db METRONOME
+	db METRNOME
 	db LICK
 	db CLAMP
 	db CONSTRICT

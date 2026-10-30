@@ -13,7 +13,7 @@ ItemNames::
 	li "ANTIDOTE"
 	li "BURN HEAL"
 	li "ICE HEAL"
-	li "SLEEP HEAL"   ;"AWAKENING"
+	li "WET HEAL"     ;"AWAKENING"
 	li "PARA. HEAL"   ;"PARLYZ HEAL"
 	li "FULL RESTORE"	
 	li "MAX POTION"

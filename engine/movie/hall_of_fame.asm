@@ -170,16 +170,10 @@ HoFDisplayMonInfo:
 	hlcoord 8, 7
 	call PrintLevelCommon
 	ld a, [wHoFMonSpecies]
-	ld [wd0b5], a
-	hlcoord 3, 9
-	predef PrintMonType
-	ld a, [wHoFMonSpecies]
 	jp PlayCry
 
 HoFMonInfoText:
-	db   "LEVEL/"
-	next "TYPE1/"
-	next "TYPE2/@"
+	db "LEVEL/@"
 
 HoFLoadPlayerPics:
 	ld de, PlayerMPicFront

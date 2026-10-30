@@ -26,3 +26,7 @@ DEF SPECIAL EQU const_value
 	const DRAGON       ; $1A
 
 DEF NUM_TYPES EQU const_value
+
+; The move class lives in the former type byte. Attributes are looked up by move ID.
+DEF MOVE_REGULAR EQU 0
+DEF MOVE_SPECIAL EQU $80

@@ -1452,7 +1452,7 @@ _IceHealText::
 _AwakeningText::
 	text_ram wcd6d
 	text_start
-	line "woke up!"
+	line "dried off!"
 	done
 
 _FullHealText::
