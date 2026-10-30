@@ -25,17 +25,14 @@ _ReceivingHM01Text::
 	para "I know! You can"
 	line "have this!"
 
-	para "Teach it to your"
-	line "#MON and you"
-	cont "can see it CUT"
-	cont "any time!"
+	para "Please take this"
+	line "treat for your"
+	cont "#MON!"
 	prompt
 
 _ReceivedHM01Text::
-	text "<PLAYER> got"
-	line "@"
-	text_ram wStringBuffer
-	text "!@"
+	text "<PLAYER> received"
+	line "RARE CANDY!@"
 	text_end
 
 _SSAnne7Text_61932::

@@ -22,16 +22,11 @@ _ReceivedHM03Text::
 	text_end
 
 _HM03ExplanationText::
-	text "HM03 is SURF!"
+	text "RAPRUTH GIFT lets"
+	line "you cross water."
 
-	para "#MON will be"
-	line "able to ferry you"
-	cont "across water!"
-
-	para "And, this HM isn't"
-	line "disposable! You"
-	cont "can use it over"
-	cont "and over!"
+	para "You can use it"
+	line "again and again!"
 
 	para "You're super lucky"
 	line "for winning this"

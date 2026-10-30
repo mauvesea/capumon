@@ -31,9 +31,9 @@ PrizeMenuMon2Cost:
 	db "@"
 
 PrizeMenuTMsEntries:
-	db TM_DRAGON_RAGE
-	db TM_HYPER_BEAM
-	db TM_SUBSTITUTE
+	db RARE_CANDY
+	db PP_UP
+	db MAX_REVIVE
 	db "@"
 
 PrizeMenuTMsCost:

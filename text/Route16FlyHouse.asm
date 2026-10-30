@@ -10,13 +10,12 @@ _Route16HouseText3::
 
 _ReceivedHM02Text::
 	text "<PLAYER> received"
-	line "HM02!@"
+	line "OMOM FLIGHT!@"
 	text_end
 
 _HM02ExplanationText::
-	text "HM02 is FLY."
-	line "It will take you"
-	cont "back to any town."
+	text "OMOM FLIGHT takes"
+	line "you to any town."
 
 	para "Put it to good"
 	line "use!"

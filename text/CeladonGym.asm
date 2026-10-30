@@ -63,21 +63,12 @@ _ErikaRainbowBadgeInfoText::
 
 _ReceivedTM21Text::
 	text "<PLAYER> received"
-	line "@"
-	text_ram wStringBuffer
-	text "!@"
+	line "RARE CANDY!@"
 	text_end
 
 _TM21ExplanationText::
-	text_start
-
-	para "TM21 contains"
-	line "MEGA DRAIN."
-
-	para "Half the damage"
-	line "it inflicts is"
-	cont "drained to heal"
-	cont "your #MON!"
+	text "A sweet treat for"
+	line "your #MON!"
 	done
 
 _TM21NoRoomText::

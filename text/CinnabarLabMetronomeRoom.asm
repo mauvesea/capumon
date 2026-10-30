@@ -1,27 +1,19 @@
 _TM35PreReceiveText::
 	text "Tch-tch-tch!"
-	line "I made a cool TM!"
+	line "I found a treat!"
 
-	para "It can cause all"
-	line "kinds of fun!"
+	para "Your #MON will"
+	line "love it!"
 	prompt
 
 _ReceivedTM35Text::
-	text "<PLAYER> received "
-	line "@"
-	text_ram wStringBuffer
-	text "!@"
+	text "<PLAYER> received"
+	line "RARE CANDY!@"
 	text_end
 
 _TM35ExplanationText::
-	text "Tch-tch-tch!"
-	line "That's the sound"
-	cont "of a METRONOME!"
-
-	para "It tweaks your"
-	line "#MON's brain"
-	cont "into using moves"
-	cont "it doesn't know!"
+	text "A sweet treat for"
+	line "your #MON!"
 	done
 
 _TM35NoRoomText::

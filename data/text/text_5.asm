@@ -31,7 +31,7 @@ _CyclingIsFunText::
 	prompt
 
 _FlashLightsAreaText::
-	text "A blinding FLASH"
+	text "The FLASHLIGHT"
 	line "lights the area!"
 	prompt
 

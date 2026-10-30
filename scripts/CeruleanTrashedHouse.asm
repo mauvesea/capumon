@@ -9,7 +9,7 @@ CeruleanTrashedHouse_TextPointers:
 
 CeruleanHouseTrashedText1:
 	text_asm
-	ld b, TM_DIG
+	ld b, ESCAPE_ROPE
 	predef GetQuantityOfItemInBag
 	and b
 	jr z, .no_dig_tm

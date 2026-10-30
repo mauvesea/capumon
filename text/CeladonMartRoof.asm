@@ -26,11 +26,8 @@ _CeladonMartRoofText_484fe::
 
 	para "@"
 	text_ram wStringBuffer
-	text " contains"
-	line "ICE BEAM!"
-
-	para "It can freeze the"
-	line "target sometimes!@"
+	text " is a sweet"
+	line "treat for #MON!@"
 	text_end
 
 _CeladonMartRoofText_48504::
@@ -56,11 +53,8 @@ _CeladonMartRoofText_4850f::
 
 	para "@"
 	text_ram wStringBuffer
-	text " contains"
-	line "ROCK SLIDE!"
-
-	para "It can spook the"
-	line "target sometimes!@"
+	text " is a sweet"
+	line "treat for #MON!@"
 	text_end
 
 _CeladonMartRoofText_48515::
@@ -76,14 +70,14 @@ _CeladonMartRoofText_48515::
 
 _ReceivedTM49Text::
 	text "<PLAYER> received"
-	line "TM49!@"
+	line "RARE CANDY!@"
 	text_end
 
 _CeladonMartRoofText_48520::
 	text_start
 
-	para "TM49 contains"
-	line "TRI ATTACK!@"
+	para "A sweet treat for"
+	line "your #MON!@"
 	text_end
 
 _CeladonMartRoofText_48526::

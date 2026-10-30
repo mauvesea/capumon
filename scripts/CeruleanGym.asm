@@ -47,7 +47,7 @@ CeruleanGymReceiveTM11:
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	SetEvent EVENT_BEAT_MISTY
-	lb bc, TM_BUBBLEBEAM, 1
+	lb bc, RARE_CANDY, 1
 	call GiveItem
 	jr nc, .BagFull
 	ld a, $6

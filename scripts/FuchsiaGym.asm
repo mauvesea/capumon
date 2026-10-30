@@ -49,7 +49,7 @@ FuchsiaGymReceiveTM06:
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	SetEvent EVENT_BEAT_KOGA
-	lb bc, TM_TOXIC, 1
+	lb bc, RARE_CANDY, 1
 	call GiveItem
 	jr nc, .BagFull
 	ld a, $a

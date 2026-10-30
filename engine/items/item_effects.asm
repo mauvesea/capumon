@@ -60,13 +60,13 @@ ItemUsePtrTable:
 	dw UnusableItem      ; DOME_FOSSIL
 	dw UnusableItem      ; HELIX_FOSSIL
 	dw UnusableItem      ; SECRET_KEY
-	dw UnusableItem
+	dw ItemUseOmomWing    ; OMOM_WING
 	dw UnusableItem      ; BIKE_VOUCHER
 	dw ItemUseXAccuracy  ; X_ACCURACY
 	dw ItemUseEvoStone   ; LEAF_STONE
 	dw ItemUseCardKey    ; CARD_KEY
 	dw UnusableItem      ; NUGGET
-	dw UnusableItem      ; ??? PP_UP
+	dw ItemUseFlashlight  ; FLASHLIGHT
 	dw ItemUsePokedoll   ; POKE_DOLL
 	dw ItemUseMedicine   ; FULL_HEAL
 	dw ItemUseMedicine   ; REVIVE
@@ -792,6 +792,44 @@ ItemUseFly:
 .FinishFly:
 ;	call ItemUseReloadOverworldData
 	ret	
+
+ItemUseOmomWing:
+	ld a, [wIsInBattle]
+	and a
+	jp nz, ItemUseNotTime
+	call CheckIfInOutsideMap
+	jp nz, ItemUseNotTime
+	ld hl, OmomWingWarpText
+	call PrintText
+	ld hl, wd732
+	set 3, [hl]
+	set 6, [hl]
+	ld hl, wd72e
+	set 1, [hl]
+	res 4, [hl]
+	call ItemUseReloadOverworldData
+	call RemoveUsedItem
+	ld c, 60
+	call DelayFrames
+	jp GBPalWhiteOutWithDelay3
+
+OmomWingWarpText:
+	text_far _WarpToLastPokemonCenterText
+	text_end
+
+ItemUseFlashlight:
+	ld a, [wIsInBattle]
+	and a
+	jp nz, ItemUseNotTime
+	xor a
+	ld [wMapPalOffset], a
+	ld hl, FlashlightText
+	call PrintText
+	jp GBPalWhiteOutWithDelay3
+
+FlashlightText:
+	text_far _FlashLightsAreaText
+	text_end
 	
 NoFlyingAllowedHereText:
 	text_far _CannotFlyHereText
@@ -2151,6 +2189,9 @@ UnusableItem:
 	jp ItemUseNotTime
 
 ItemUseTMHM:
+	jp ItemUseNotTime
+
+	; Retained for compatibility with the move and learnset tables.
 	ld a, [wIsInBattle]
 	and a
 	jp nz, ItemUseNotTime

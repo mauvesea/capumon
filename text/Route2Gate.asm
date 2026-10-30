@@ -1,12 +1,12 @@
 _Route2GateText_5d616::
-	text "The HM FLASH"
+	text "The FLASHLIGHT"
 	line "lights even the"
 	cont "darkest dungeons."
 	done
 
 _Route2GateText2::
-	text "Once a #MON"
-	line "learns FLASH, you"
+	text "Use the FLASH-"
+	line "LIGHT, and you"
 	cont "can get through"
 	cont "ROCK TUNNEL."
 	done

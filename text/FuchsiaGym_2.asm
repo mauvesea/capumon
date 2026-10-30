@@ -26,19 +26,12 @@ _KogaSoulBadgeInfoText::
 
 _ReceivedTM06Text::
 	text "<PLAYER> received"
-	line "@"
-	text_ram wStringBuffer
-	text "!@"
+	line "RARE CANDY!@"
 	text_end
 
 _TM06ExplanationText::
-	text_start
-	para "TM06 contains"
-	line "TOXIC!"
-
-	para "It is a secret"
-	line "technique over"
-	cont "400 years old!"
+	text "A sweet treat for"
+	line "your #MON!"
 	done
 
 _TM06NoRoomText::

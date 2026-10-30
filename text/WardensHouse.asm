@@ -45,29 +45,12 @@ _WardenThankYouText::
 
 _ReceivedHM04Text::
 	text "<PLAYER> received"
-	line "@"
-	text_ram wStringBuffer
-	text "!@"
+	line "RARE CANDY!@"
 	text_end
 
 _HM04ExplanationText::
-	text "WARDEN: HM04"
-	line "teaches STRENGTH!"
-
-	para "It lets #MON"
-	line "move boulders"
-	cont "when you're out-"
-	cont "side of battle."
-
-	para "Oh yes, did you"
-	line "find SECRET HOUSE"
-	cont "in SAFARI ZONE?"
-
-	para "If you do, you"
-	line "win an HM!"
-
-	para "I hear it's the"
-	line "rare SURF HM."
+	text "A sweet treat for"
+	line "your #MON!"
 	done
 
 _HM04NoRoomText::

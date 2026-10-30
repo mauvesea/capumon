@@ -8,4 +8,6 @@ UsableItems_CloseMenu:
 	db SUPER_ROD
 	db SURFBOARD
 	db SAFARI_BALL
+	db OMOM_WING
+	db FLASHLIGHT
 	db -1 ; end

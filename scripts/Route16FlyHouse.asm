@@ -12,7 +12,7 @@ Route16HouseText1:
 	jr nz, .got_item
 	ld hl, Route16HouseText3
 	call PrintText
-	lb bc, HM_FLY, 1
+	lb bc, SAFARI_BALL, 1
 	call GiveItem
 	jr nc, .bag_full
 	SetEvent EVENT_GOT_HM02

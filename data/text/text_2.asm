@@ -371,8 +371,8 @@ _CinnabarQuizQuestionsText5::
 	done
 
 _CinnabarQuizQuestionsText6::
-	text "TM28 contains"
-	line "TOMBSTONER?"
+	text "Can DIG help you"
+	line "cross water?"
 	done
 
 _CinnabarGymQuizCorrectText::
@@ -478,16 +478,16 @@ _JustAMomentText::
 
 TMNotebookText::
 	text "It's a pamphlet"
-	line "on TMs."
+	line "on field items."
 
 	para "..."
 
-	para "There are 50 TMs"
-	line "in all."
+	para "Use FLASHLIGHT"
+	line "to light caves."
 
-	para "There are also 5"
-	line "HMs that can be"
-	cont "used repeatedly."
+	para "OMOM WING takes"
+	line "you back to the"
+	cont "last #MON CENTER."
 
 	para "SILPH CO.@"
 	text_end

@@ -18,11 +18,8 @@ _MistyPreBattleText::
 	done
 
 _TM11ExplanationText::
-	text "TM11 teaches"
-	line "BUBBLEBEAM!"
-
-	para "Use it on an"
-	line "aquatic #MON!"
+	text "A sweet treat for"
+	line "your #MON!"
 	done
 
 _MistyCascadeBadgeInfoText::
@@ -42,12 +39,12 @@ _MistyCascadeBadgeInfoText::
 	cont "open new paths!"
 
 	para "You can also have"
-	line "my favorite TM!"
+	line "a RARE CANDY!"
 	done
 
 _ReceivedTM11Text::
 	text "<PLAYER> received"
-	line "TM11!@"
+	line "RARE CANDY!@"
 	text_end
 
 _TM11NoRoomText::

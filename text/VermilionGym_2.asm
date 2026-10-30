@@ -24,20 +24,13 @@ _LTSurgeThunderBadgeInfoText::
 	done
 
 _ReceivedTM24Text::
-	text "<PLAYER> received "
-	line "@"
-	text_ram wStringBuffer
-	text "!@"
+	text "<PLAYER> received"
+	line "RARE CANDY!@"
 	text_end
 
 _TM24ExplanationText::
-	text_start
-
-	para "TM24 contains"
-	line "THUNDERBOLT!"
-
-	para "Teach it to an"
-	line "electric #MON!"
+	text "A sweet treat for"
+	line "your #MON!"
 	done
 
 _TM24NoRoomText::

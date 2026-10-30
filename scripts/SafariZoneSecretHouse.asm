@@ -10,7 +10,7 @@ SafariZoneSecretHouseText1:
 	jr nz, .got_item
 	ld hl, SafariZoneSecretHouseText_4a350
 	call PrintText
-	lb bc, HM_SURF, 1
+	lb bc, SURFBOARD, 1
 	call GiveItem
 	jr nc, .bag_full
 	ld hl, ReceivedHM03Text

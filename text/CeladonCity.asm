@@ -41,20 +41,12 @@ _TM41PreText::
 
 _ReceivedTM41Text::
 	text "<PLAYER> received"
-	line "@"
-	text_ram wStringBuffer
-	text "!@"
+	line "RARE CANDY!@"
 	text_end
 
 _TM41ExplanationText::
-	text "TM41 teaches"
-	line "SOFTBOILED!"
-
-	para "Only one #MON"
-	line "can use it!"
-
-	para "That #MON is"
-	line "CHANSEY!"
+	text "A sweet treat for"
+	line "your #MON!"
 	done
 
 _TM41NoRoomText::

@@ -28,33 +28,17 @@ _TM31PreReceiveText::
 
 _ReceivedTM31Text::
 	text "<PLAYER> received"
-	line "@"
-	text_ram wStringBuffer
-	text "!@"
+	line "RARE CANDY!@"
 	text_end
 
 _TM31ExplanationText1::
-	text_start
-
-	para "TM31 contains my"
-	line "favorite, MIMIC!"
-
-	para "Use it on a good"
-	line "#MON!@"
+	text "A sweet treat for"
+	line "your #MON!"
 	text_end
 
 _TM31ExplanationText2::
-	text "<PLAYER>: Hi!"
-	line "Thanks for TM31!"
-
-	para "<PLAYER>: Pardon?"
-
-	para "<PLAYER>: Is it"
-	line "that fun to mimic"
-	cont "my every move?"
-
-	para "COPYCAT: You bet!"
-	line "It's a scream!"
+	text "A sweet treat for"
+	line "your #MON!"
 	done
 
 _TM31NoRoomText::

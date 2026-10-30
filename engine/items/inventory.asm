@@ -5,6 +5,12 @@
 ; [wItemQuantity] = item quantity
 ; sets carry flag if successful, unsets carry flag if unsuccessful
 AddItemToInventory_::
+	ld a, [wcf91]
+	cp HM01
+	jr c, .validItem
+	and a ; TM/HM items are unused
+	ret
+.validItem
 	ld a, [wItemQuantity] ; a = item quantity
 	push af
 	push bc

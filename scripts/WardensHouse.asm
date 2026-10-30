@@ -38,7 +38,7 @@ FuchsiaHouse2Text1:
 .gave_gold_teeth
 	ld hl, WardenThankYouText
 	call PrintText
-	lb bc, HM_STRENGTH, 1
+	lb bc, RARE_CANDY, 1
 	call GiveItem
 	jr nc, .bag_full
 	ld hl, ReceivedHM04Text

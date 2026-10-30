@@ -1,7 +1,7 @@
 _Route14BattleText1::
-	text "You need to use"
-	line "TMs to teach good"
-	cont "moves to #MON!"
+	text "Your #MON need"
+	line "good moves to win"
+	cont "battles!"
 	done
 
 _Route14EndBattleText1::
@@ -10,10 +10,9 @@ _Route14EndBattleText1::
 	prompt
 
 _Route14AfterBattleText1::
-	text "You have some HMs"
-	line "right? #MON"
-	cont "can't ever forget"
-	cont "those moves."
+	text "Your #MON can"
+	line "learn all kinds"
+	cont "of moves."
 	done
 
 _Route14BattleText2::
@@ -33,10 +32,9 @@ _Route14AfterBattleText2::
 	done
 
 _Route14BattleText3::
-	text "TMs are on sale"
-	line "in CELADON!"
-	cont "But, only a few"
-	cont "people have HMs!"
+	text "CELADON sells"
+	line "useful items for"
+	cont "your journey!"
 	done
 
 _Route14EndBattleText3::

@@ -52,21 +52,17 @@ _KogaMarshBadgeInfoText::
 	cont "much!"
 
 	para "Wait, please take"
-	line "this TM with you!"
+	line "this sweet gift!"
 	done
 
 _ReceivedTM46Text::
 	text "<PLAYER> received"
-	line "TM46!@"
+	line "RARE CANDY!@"
 	text_end
 
 _TM46ExplanationText::
-	text_start
-
-	para "TM46 is PSYWAVE!"
-	line "It uses powerful"
-	cont "psychic waves to"
-	cont "inflict damage!"
+	text "A sweet treat for"
+	line "your #MON!"
 	done
 
 _TM46NoRoomText::

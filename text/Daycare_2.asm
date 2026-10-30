@@ -20,7 +20,7 @@ _DayCareOnlyHaveOneMonText::
 _DayCareCantAcceptMonWithHMText::
 	text "I can't accept a"
 	line "#MON that"
-	cont "knows an HM move."
+	cont "can't stay here."
 	done
 
 _DayCareHeresYourMonText::

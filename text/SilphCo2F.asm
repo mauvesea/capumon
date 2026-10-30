@@ -10,20 +10,13 @@ _SilphCo2Text_59ded::
 	prompt
 
 _ReceivedTM36Text::
-	text "<PLAYER> got"
-	line "@"
-	text_ram wStringBuffer
-	text "!@"
+	text "<PLAYER> received"
+	line "RARE CANDY!@"
 	text_end
 
 _TM36ExplanationText::
-	text "TM36 is"
-	line "SELFDESTRUCT!"
-
-	para "It's powerful, but"
-	line "the #MON that"
-	cont "uses it faints!"
-	cont "Be careful."
+	text "A sweet treat for"
+	line "your #MON!"
 	done
 
 _TM36NoRoomText::

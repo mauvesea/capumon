@@ -69,8 +69,8 @@ _CeruleanCityText_196d9::
 	done
 
 _ReceivedTM28Text::
-	text "<PLAYER> recovered"
-	line "TM28!@"
+	text "<PLAYER> received"
+	line "RARE CANDY!@"
 	text_end
 
 _ReceivedTM28Text2::
@@ -96,7 +96,7 @@ _CeruleanCityText_196ee::
 
 _CeruleanCityText_196f3::
 	text "OK! I'll return"
-	line "the TM I stole!"
+	line "the gift I stole!"
 	prompt
 
 _CeruleanCityText3::

@@ -44,23 +44,12 @@ _BlaineVolcanoBadgeInfoText::
 
 _ReceivedTM38Text::
 	text "<PLAYER> received"
-	line "@"
-	text_ram wStringBuffer
-	text "!@"
+	line "RARE CANDY!@"
 	text_end
 
 _TM38ExplanationText::
-	text_start
-
-	para "TM38 contains"
-	line "FIRE BLAST!"
-
-	para "Teach it to fire-"
-	line "type #MON!"
-
-	para "CHARMELEON or"
-	line "PONYTA would be"
-	cont "good bets!"
+	text "A sweet treat for"
+	line "your #MON!"
 	done
 
 _TM38NoRoomText::

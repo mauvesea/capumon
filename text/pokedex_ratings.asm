@@ -23,7 +23,7 @@ _DexRatingText_Own0To9::
 _DexRatingText_Own10To19::
 	text "You're on the"
 	line "right track! "
-	cont "Get a FLASH HM"
+	cont "Get FLASHLIGHT"
 	cont "from my AIDE!"
 	done
 
